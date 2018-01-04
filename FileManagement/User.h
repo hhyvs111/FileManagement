@@ -17,6 +17,6 @@ private:
 	string userName;
 	string userPassword;
 	string userBrithday;
-	
+	int teacherId;
 };
 #endif // USER_H_
