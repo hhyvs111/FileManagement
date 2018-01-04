@@ -1,9 +1,11 @@
-#pragma once
 #include "stdafx.h"
-#ifdef USER_H_
+#pragma once
+#ifndef USER_H_
 class User
 {
 public:
+	User();
+	~User();
 	bool Register(User user);
 	bool deleteUser(int userId);
 	bool updateUser(User user);
@@ -12,9 +14,9 @@ public:
 
 private:
 	int userId;
-	String userName;
-	String userPassword;
-
+	string userName;
+	string userPassword;
+	string userBrithday;
 	
 };
 #endif // USER_H_
