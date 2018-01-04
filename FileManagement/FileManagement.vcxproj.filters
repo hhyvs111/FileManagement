@@ -56,9 +56,15 @@
     <CustomBuild Include="FileManagement.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="Login.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Login.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
