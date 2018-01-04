@@ -111,6 +111,9 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h" />
     <ClInclude Include="GeneratedFiles\ui_Login.h" />
+    <ClInclude Include="Login.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.qrc">
