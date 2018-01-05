@@ -98,10 +98,9 @@
     </CustomBuild>
     <CustomBuild Include="Login.h">
       <Filter>Header Files\QTUI</Filter>
-
+     </CustomBuild>
     <CustomBuild Include="Login.h">
       <Filter>Header Files\Login</Filter>
-
     </CustomBuild>
     <CustomBuild Include="Register.ui">
       <Filter>Form Files</Filter>
