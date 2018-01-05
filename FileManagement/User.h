@@ -9,14 +9,15 @@ public:
 	bool Register(User user);
 	bool deleteUser(int userId);
 	bool updateUser(User user);
-	void setUser();
+	bool findUserById(int userId);
+	bool findUserByName(char* name);
 	void getUser();
 
 private:
 	int userId;
-	string userName;
-	string userPassword;
-	string userBrithday;
-	int teacherId;
+	char* userName;
+	char* userPassword;
+	int phoneNumber;
+
 };
 #endif // USER_H_

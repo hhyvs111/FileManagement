@@ -1,5 +1,25 @@
 #pragma once
-#ifndef LOGIN_H_
-#define LOGIN_H_
 
-#endif // LOGIN_H_
+#include <QtWidgets/QDialog>
+#include "ui_Login.h"
+
+class Login : public QDialog
+{
+	Q_OBJECT
+
+public:
+	Login(QWidget *parent = Q_NULLPTR);
+
+private:
+	Ui::Dialog ui;
+
+//²Ûº¯Êý
+public slots:
+	void Click_Login();
+
+	void Click_Register();
+
+signals:
+	void showMain();
+	void showRegister();
+};

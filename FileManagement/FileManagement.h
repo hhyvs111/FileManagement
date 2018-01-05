@@ -12,4 +12,7 @@ public:
 
 private:
 	Ui::FileManagementClass ui;
+
+public slots:
+void Btn_Click();
 };
