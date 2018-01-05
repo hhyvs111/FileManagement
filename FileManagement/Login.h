@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <QtWidgets/QDialog>
 #include "ui_Login.h"
 
@@ -13,7 +14,7 @@ public:
 private:
 	Ui::Dialog ui;
 
-//²Ûº¯Êý
+//ï¿½Ûºï¿½ï¿½ï¿½
 public slots:
 	void Click_Login();
 
@@ -23,3 +24,9 @@ signals:
 	void showMain();
 	void showRegister();
 };
+
+#ifndef LOGIN_H_
+#define LOGIN_H_
+//132112
+#endif // LOGIN_H_
+
