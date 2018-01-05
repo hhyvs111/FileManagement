@@ -92,11 +92,16 @@
     <CustomBuild Include="Login.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+
     <CustomBuild Include="FileManagement.h">
       <Filter>Header Files\QTUI</Filter>
     </CustomBuild>
     <CustomBuild Include="Login.h">
       <Filter>Header Files\QTUI</Filter>
+
+    <CustomBuild Include="Login.h">
+      <Filter>Header Files\Login</Filter>
+
     </CustomBuild>
     <CustomBuild Include="Register.ui">
       <Filter>Form Files</Filter>
@@ -109,6 +114,11 @@
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+
+    <ClInclude Include="GeneratedFiles\ui_Login.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
