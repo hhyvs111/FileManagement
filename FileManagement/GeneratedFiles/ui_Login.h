@@ -26,8 +26,8 @@ class Ui_Login
 public:
     QLabel *label_2;
     QPushButton *pushButton;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
+    QLineEdit *nameLine;
+    QLineEdit *passwordLine;
     QLabel *label;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
@@ -43,12 +43,12 @@ public:
         pushButton = new QPushButton(Login);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(90, 170, 75, 23));
-        lineEdit = new QLineEdit(Login);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(110, 100, 171, 20));
-        lineEdit_2 = new QLineEdit(Login);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(110, 130, 171, 20));
+        nameLine = new QLineEdit(Login);
+        nameLine->setObjectName(QStringLiteral("nameLine"));
+        nameLine->setGeometry(QRect(110, 100, 171, 20));
+        passwordLine = new QLineEdit(Login);
+        passwordLine->setObjectName(QStringLiteral("passwordLine"));
+        passwordLine->setGeometry(QRect(110, 130, 171, 20));
         label = new QLabel(Login);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(70, 100, 54, 21));

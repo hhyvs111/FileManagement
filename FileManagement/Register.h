@@ -9,12 +9,13 @@ class Register : public QDialog
 
 public:
 	Register(QWidget *parent = Q_NULLPTR);
+	~Register();
 
 private:
-	Ui::Register ui;
+	Ui::Register *ui;
 
 	//²Ûº¯Êý
-	public slots:
+public slots:
 	void Click_Login();
 
 	/*void Click_Register();*/

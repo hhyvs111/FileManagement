@@ -9,10 +9,16 @@ class FileManagement : public QMainWindow
 
 public:
 	FileManagement(QWidget *parent = Q_NULLPTR);
+	~FileManagement();
 
 private:
-	Ui::FileManagementClass ui;
+	Ui::FileManagement *ui;
 
-public slots:
+private slots:
 void Btn_Click();
+
+
+void receiveLogin();
+
+
 };

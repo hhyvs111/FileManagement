@@ -1,11 +1,16 @@
 #include "Register.h"
 #include <QMessageBox> 
+
 Register::Register(QWidget *parent)
-	: QDialog(parent)
+	: QDialog(parent), ui(new Ui::Register)   //这里很重要，要对构造函数初始化！
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
 }
 
+Register::~Register()
+{
+	delete ui;
+}
 //点击注册
 void Register::Click_Login()
 {

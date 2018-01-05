@@ -5,9 +5,9 @@
 TEMPLATE = app
 TARGET = FileManagement
 DESTDIR = ../x64/Debug
-QT += core script scripttools uitools widgets gui websockets
+QT += core sql script scripttools uitools widgets gui websockets
 CONFIG += debug
-DEFINES += _UNICODE WIN64 QT_DLL QT_SCRIPT_LIB QT_SCRIPTTOOLS_LIB QT_UITOOLS_LIB QT_WEBSOCKETS_LIB QT_WIDGETS_LIB
+DEFINES += _UNICODE WIN64 QT_DLL QT_SCRIPT_LIB QT_SCRIPTTOOLS_LIB QT_UITOOLS_LIB QT_WEBSOCKETS_LIB QT_WIDGETS_LIB QT_SQL_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
@@ -16,4 +16,19 @@ MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-include(FileManagement.pri)
+HEADERS += ./stdafx.h \
+    ./FileManagement.h \
+    ./Login.h \
+    ./Register.h \
+    ./User.h \
+    ./Database.h
+SOURCES += ./main.cpp \
+    ./FileManagement.cpp \
+    ./Login.cpp \
+    ./Register.cpp \
+    ./User.cpp \
+    ./Database.cpp
+FORMS += ./FileManagement.ui \
+    ./Login.ui \
+    ./Register.ui
+RESOURCES += FileManagement.qrc

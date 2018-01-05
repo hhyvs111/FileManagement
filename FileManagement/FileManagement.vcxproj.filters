@@ -81,6 +81,9 @@
     <ClCompile Include="Register.cpp">
       <Filter>Source Files\QTUI</Filter>
     </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -92,13 +95,12 @@
     <CustomBuild Include="Login.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-
     <CustomBuild Include="FileManagement.h">
       <Filter>Header Files\QTUI</Filter>
     </CustomBuild>
     <CustomBuild Include="Login.h">
       <Filter>Header Files\QTUI</Filter>
-     </CustomBuild>
+    </CustomBuild>
     <CustomBuild Include="Login.h">
       <Filter>Header Files\Login</Filter>
     </CustomBuild>
@@ -113,11 +115,9 @@
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-
     <ClInclude Include="GeneratedFiles\ui_Login.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -129,6 +129,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_Register.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
