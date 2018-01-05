@@ -11,7 +11,7 @@ void MySql::createtable()
 	query->exec("create table user(name VARCHAR(30) PRIMARY KEY UNIQUE NOT NULL,passward VARCHAR(30))");
 
 	/*创建root用户*/
-	query->exec("insert into user value('root', 'root')");
+	query->exec("insert into user value('root', 'root')"); 
 }
 
 
