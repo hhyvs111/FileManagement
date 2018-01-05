@@ -12,13 +12,13 @@ public:
 	Login(QWidget *parent = Q_NULLPTR);
 
 private:
-	Ui::Dialog ui;
+	Ui::Login ui;
 
 //ï¿½Ûºï¿½ï¿½ï¿½
 public slots:
 	void Click_Login();
 
-	void Click_Register();
+	void Click_Register();  //µã»÷Ìø×ªµ½×¢²á¿ò
 
 signals:
 	void showMain();
