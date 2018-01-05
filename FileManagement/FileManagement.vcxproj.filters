@@ -28,18 +28,24 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Header Files\Login">
-      <UniqueIdentifier>{4fabd05c-b5a3-43c6-bf54-39952bf06ed9}</UniqueIdentifier>
+    <Filter Include="Source Files\QTUI">
+      <UniqueIdentifier>{0b61f865-9a64-4f5f-910b-88e4203d7f34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\User">
+    <Filter Include="Source Files\CFUN">
+      <UniqueIdentifier>{d6530b8a-4f5c-45a6-bdff-827984ecaf8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\QTUI">
+      <UniqueIdentifier>{f4d71823-f627-4c16-96b6-0d16d2e7227d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\C++">
+      <UniqueIdentifier>{2970fbec-152e-4286-8b96-0633da8062cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\C++\User">
       <UniqueIdentifier>{df43b72b-e5bc-46b9-8c5a-cde329d120cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_FileManagement.cpp">
@@ -51,11 +57,23 @@
     <ClCompile Include="GeneratedFiles\qrc_FileManagement.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Login.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Login.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Source Files\QTUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManagement.cpp">
+      <Filter>Source Files\QTUI</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files\CFUN</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="FileManagement.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="FileManagement.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -65,25 +83,35 @@
     <CustomBuild Include="Login.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+
+    <CustomBuild Include="FileManagement.h">
+      <Filter>Header Files\QTUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Login.h">
+      <Filter>Header Files\QTUI</Filter>
+
     <CustomBuild Include="Login.h">
       <Filter>Header Files\Login</Filter>
+
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+
     <ClInclude Include="GeneratedFiles\ui_Login.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
-      <Filter>Header Files\User</Filter>
+      <Filter>Header Files\C++\User</Filter>
     </ClInclude>
-    <ClInclude Include="File.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GeneratedFiles\ui_Login.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
