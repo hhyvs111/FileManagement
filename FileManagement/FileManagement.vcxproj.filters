@@ -72,6 +72,15 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files\CFUN</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Register.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Register.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Register.cpp">
+      <Filter>Source Files\QTUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -89,6 +98,12 @@
     <CustomBuild Include="Login.h">
       <Filter>Header Files\QTUI</Filter>
     </CustomBuild>
+    <CustomBuild Include="Register.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Register.h">
+      <Filter>Header Files\QTUI</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -101,6 +116,9 @@
       <Filter>Header Files\C++\User</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_Login.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Register.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

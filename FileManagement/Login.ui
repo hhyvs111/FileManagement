@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Login</class>
+ <widget class="QDialog" name="Login">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -103,9 +103,9 @@
  <connections>
   <connection>
    <sender>pushButton</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>Dialog</receiver>
-   <slot>Login1()</slot>
+   <signal>clicked()</signal>
+   <receiver>Login</receiver>
+   <slot>Click_Login()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>149</x>
@@ -117,8 +117,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Login</receiver>
+   <slot>Click_Register()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>331</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Login1()</slot>
+  <slot>Click_Register()</slot>
+  <slot>Click_Login()</slot>
  </slots>
 </ui>
