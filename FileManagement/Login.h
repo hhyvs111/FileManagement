@@ -13,11 +13,10 @@ public:
 	
 
 private:
-	Ui::Login *ui;
+	Ui::Login *ui;   //这个里面封装了一系列的输入框之类的，就不用重复定义了
 
 public slots:
 	void Click_Login();  //点击登陆
-
 	void Click_Register();  //点击跳转到注册框
 
 signals:

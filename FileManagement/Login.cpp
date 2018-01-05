@@ -1,4 +1,5 @@
 #include "Login.h"
+#include "Database.h"
 #include <QMessageBox> 
 #include <QDialog>
 Login::Login(QWidget *parent)
@@ -16,29 +17,51 @@ Login::~Login()
 //点击登录
 void Login::Click_Login()
 {
-	if (this->ui->nameLine->text().trimmed() == tr("123") &&
-		this->ui->passwordLine->text().trimmed() == tr("123"))  //去除lineEdit内的用户名和密码进行校验
+	QString name = this->ui->nameLine->text();
+	QString passwd = this->ui->passwordLine->text();
+
+	QString sql = "select userName, userPassword from User where userName = '"
+		+ name + "'and userPassword ='" + passwd + "'";
+	MySql mySql;
+	if (mySql.queryDB(sql))
 	{
-		//登陆成功后显示对话框
-		QMessageBox msg;
-		msg.setText(QString::fromLocal8Bit("登录成功！"));
-		msg.setWindowTitle(QString::fromLocal8Bit("提示"));
-		msg.exec();
+		QMessageBox::information(this, QString::fromLocal8Bit("登录成功"),
+			QString::fromLocal8Bit("登录成功！欢迎进入本系统！"),
+			QMessageBox::Ok);
 		this->hide();
 		emit showMain();
-
 	}
 	else
 	{
-		//用户输入存在错误
-		QMessageBox::warning(this, tr("waring"), tr("your passward is wrong"), QMessageBox::Yes);
-		//ui->nameLine->clear();  //清空姓名nameLine
+		QMessageBox::warning(this, QString::fromLocal8Bit("登录失败"),
+			QString::fromLocal8Bit("用户名或密码错误！是否重新登录？"),
+			QMessageBox::Yes | QMessageBox::No);
 		ui->passwordLine->clear();  //清空密码passwardLine
 		ui->passwordLine->setFocus();  //将鼠标重新定位到nameLine
 	}
 }
 
-
+//	if (this->ui->nameLine->text().trimmed() == tr("123") &&
+//		this->ui->passwordLine->text().trimmed() == tr("123"))  //去除lineEdit内的用户名和密码进行校验
+//	{
+//		//登陆成功后显示对话框
+//		QMessageBox msg;
+//		msg.setText(QString::fromLocal8Bit("登录成功！"));
+//		msg.setWindowTitle(QString::fromLocal8Bit("提示"));
+//		msg.exec();
+//		this->hide();
+//		emit showMain();
+//
+//	}
+//	else
+//	{
+//		//用户输入存在错误
+//		QMessageBox::warning(this, tr("waring"), tr("your passward is wrong"), QMessageBox::Yes);
+//		//ui->nameLine->clear();  //清空姓名nameLine
+//		ui->passwordLine->clear();  //清空密码passwardLine
+//		ui->passwordLine->setFocus();  //将鼠标重新定位到nameLine
+//	}
+//}
 
 //跳转到注册窗口
 void Login::Click_Register()

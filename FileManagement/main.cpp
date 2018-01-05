@@ -11,10 +11,6 @@ int main(int argc, char *argv[])
 	Login L;
 	Register R;
 	L.show();
-	
-	MySql *mysql = new MySql();
-	mysql->initsql();
-
 	QObject::connect(&L, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
 	QObject::connect(&L, SIGNAL(showMain()), &F, SLOT(receiveLogin()));
 	return a.exec();
