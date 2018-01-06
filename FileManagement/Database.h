@@ -13,7 +13,7 @@ public:
 	void initsql()
 	{
 		QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-		db.setHostName("127.0.0.1");
+		db.setHostName("localhost");
 		db.setUserName("root");
 		db.setPassword("123456");
 		db.setDatabaseName("filemanagement");
