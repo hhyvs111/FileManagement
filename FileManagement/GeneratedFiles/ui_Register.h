@@ -25,9 +25,9 @@ class Ui_Register
 {
 public:
     QPushButton *pushButton;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit_3;
+    QLineEdit *userName;
+    QLineEdit *userPassword;
+    QLineEdit *userPassword2;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
     QLabel *label;
@@ -42,15 +42,15 @@ public:
         pushButton = new QPushButton(Register);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(260, 70, 75, 23));
-        lineEdit = new QLineEdit(Register);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(130, 70, 113, 20));
-        lineEdit_2 = new QLineEdit(Register);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(130, 110, 113, 20));
-        lineEdit_3 = new QLineEdit(Register);
-        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
-        lineEdit_3->setGeometry(QRect(130, 160, 113, 20));
+        userName = new QLineEdit(Register);
+        userName->setObjectName(QStringLiteral("userName"));
+        userName->setGeometry(QRect(130, 70, 113, 20));
+        userPassword = new QLineEdit(Register);
+        userPassword->setObjectName(QStringLiteral("userPassword"));
+        userPassword->setGeometry(QRect(130, 110, 113, 20));
+        userPassword2 = new QLineEdit(Register);
+        userPassword2->setObjectName(QStringLiteral("userPassword2"));
+        userPassword2->setGeometry(QRect(130, 160, 113, 20));
         pushButton_2 = new QPushButton(Register);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(110, 210, 75, 23));
@@ -68,6 +68,9 @@ public:
         label_3->setGeometry(QRect(70, 160, 54, 21));
 
         retranslateUi(Register);
+        QObject::connect(pushButton_2, SIGNAL(clicked()), Register, SLOT(Click_Register()));
+        QObject::connect(pushButton, SIGNAL(clicked()), Register, SLOT(Click_CheckUser()));
+        QObject::connect(pushButton_3, SIGNAL(clicked()), Register, SLOT(Click_Reset()));
 
         QMetaObject::connectSlotsByName(Register);
     } // setupUi

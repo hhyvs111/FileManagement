@@ -19,6 +19,8 @@ public:
 	//²éÑ¯Êý¾Ý¿â
 	bool queryDB(const QString &Sql);
 
+	bool insertDB(const QString &Sql);
+
 private:
 	QString dbDriver;
 	QString dbName;

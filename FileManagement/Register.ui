@@ -26,7 +26,7 @@
     <string>检查用户名</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="userName">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -36,7 +36,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="userPassword">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -46,7 +46,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="userPassword2">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -123,5 +123,60 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Register</receiver>
+   <slot>Click_Register()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>247</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Register</receiver>
+   <slot>Click_CheckUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Register</receiver>
+   <slot>Click_Reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>336</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>s()</slot>
+  <slot>Click_Register()</slot>
+  <slot>Click_CheckUser()</slot>
+  <slot>Click_Reset()</slot>
+ </slots>
 </ui>

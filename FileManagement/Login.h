@@ -17,7 +17,9 @@ private:
 
 public slots:
 	void Click_Login();  //点击登陆
-	void Click_Register();  //点击跳转到注册框
+	void Click_Register();  //点击跳转到注册框\
+
+	void receiveRegister();   //接受注册框的信号
 
 signals:
 	void showMain();

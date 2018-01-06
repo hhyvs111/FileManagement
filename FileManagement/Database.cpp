@@ -9,15 +9,19 @@ MySql::MySql(QObject *parent)
 	dbDriver = "QMYSQL";
 	dbName = "filemanagement";
 	userName = "root";
-	userPwd = "123456";
-	hostName = "127.0.0.1";
+	userPwd = "Tanwenbo520";
+	hostName = "rm-wz93ilr9576g645y7yo.mysql.rds.aliyuncs.com";
 	hostPort = 5432;
 	connDB();
 }
 
 bool MySql::connDB()
 {
-		QSqlDatabase db = QSqlDatabase::addDatabase(dbDriver);//添加驱动
+		QSqlDatabase db;
+		if (QSqlDatabase::contains("qt_sql_default_connection"))
+			db = QSqlDatabase::database("qt_sql_default_connection");
+		else
+			db = QSqlDatabase::addDatabase(dbDriver);
 		db.setHostName(hostName);//设置主机名
 		db.setDatabaseName(dbName);//设置数据库名
 		db.setUserName(userName);//设置用户名
@@ -48,41 +52,14 @@ bool MySql::queryDB(const QString &Sql)
 	return false;
 }
 
-
-//void MySql::createtable()
-//{
-//	query = new QSqlQuery;
-//
-//	query->exec("create table user(name VARCHAR(30) PRIMARY KEY UNIQUE NOT NULL,passward VARCHAR(30))");
-//
-//	/*创建root用户*/
-//	query->exec("insert into user value('root', 'root')");
-//}
-//
-//
-//bool MySql::loguser(QString name, QString passward)
-//{
-//	QString str = QString("select * from user where name='%1' and passward='%2'").arg(name).arg(passward);
-//	query = new QSqlQuery;
-//	query->exec(str);
-//	query->last();
-//	int record = query->at() + 1;
-//	if (record == 0)
-//		return false;
-//	return true;
-//}
-//
-//
-//bool MySql::signup(QString name, QString passward)
-//{
-//	QString str = QString("select * from user where name='%1").arg(name);
-//	query = new QSqlQuery;
-//	query->exec(str);
-//	query->last();
-//	int record = query->at() + 1;
-//	if (record != 0)
-//		return false;
-//	str = QString("insert into user value('%1','%2')").arg(name).arg(passward);
-//	bool ret = query->exec(str);
-//	return ret;
-//}
+bool MySql::insertDB(const QString &Sql)
+{
+	QSqlQuery insert;
+	insert.exec(Sql);
+	if (insert.isActive())
+	{
+		qDebug() << Sql;
+		return true;
+	}
+	return false;
+}
