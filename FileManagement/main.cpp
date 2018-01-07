@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 	QString qss;
 	QFile qssFile("mystyle.qss");
 	qssFile.open(QFile::ReadOnly);
+
 	if (qssFile.isOpen())
 	{
 		qss = QLatin1String(qssFile.readAll());
