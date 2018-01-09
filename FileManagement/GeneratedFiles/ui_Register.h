@@ -14,63 +14,160 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_Register
 {
 public:
-    QPushButton *pushButton;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *SignUp;
+    QSpacerItem *horizontalSpacer;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_2;
     QLineEdit *userName;
+    QLabel *userLogo;
+    QLabel *userMessage;
+    QWidget *horizontalLayoutWidget_3;
+    QHBoxLayout *horizontalLayout_3;
     QLineEdit *userPassword;
+    QLabel *passLogo;
+    QWidget *horizontalLayoutWidget_4;
+    QHBoxLayout *horizontalLayout_4;
     QLineEdit *userPassword2;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
-    QLabel *label;
-    QLabel *label_2;
-    QLabel *label_3;
+    QLabel *passLogo2;
+    QLabel *passwordMessage;
+    QLabel *passwordMessage2;
+    QWidget *horizontalLayoutWidget_5;
+    QHBoxLayout *horizontalLayout_5;
+    QPushButton *clickRegister;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *clickCancel;
+    QRadioButton *radioButton;
 
     void setupUi(QDialog *Register)
     {
         if (Register->objectName().isEmpty())
             Register->setObjectName(QStringLiteral("Register"));
-        Register->resize(375, 279);
-        pushButton = new QPushButton(Register);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(260, 70, 75, 23));
-        userName = new QLineEdit(Register);
+        Register->resize(330, 366);
+        horizontalLayoutWidget = new QWidget(Register);
+        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(60, 50, 201, 41));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        SignUp = new QLabel(horizontalLayoutWidget);
+        SignUp->setObjectName(QStringLiteral("SignUp"));
+
+        horizontalLayout->addWidget(SignUp);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        horizontalLayoutWidget_2 = new QWidget(Register);
+        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(60, 110, 231, 41));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        userName = new QLineEdit(horizontalLayoutWidget_2);
         userName->setObjectName(QStringLiteral("userName"));
-        userName->setGeometry(QRect(130, 70, 113, 20));
-        userPassword = new QLineEdit(Register);
+        userName->setMaximumSize(QSize(16777215, 25));
+
+        horizontalLayout_2->addWidget(userName);
+
+        userLogo = new QLabel(horizontalLayoutWidget_2);
+        userLogo->setObjectName(QStringLiteral("userLogo"));
+
+        horizontalLayout_2->addWidget(userLogo);
+
+        userMessage = new QLabel(Register);
+        userMessage->setObjectName(QStringLiteral("userMessage"));
+        userMessage->setGeometry(QRect(60, 150, 231, 21));
+        horizontalLayoutWidget_3 = new QWidget(Register);
+        horizontalLayoutWidget_3->setObjectName(QStringLiteral("horizontalLayoutWidget_3"));
+        horizontalLayoutWidget_3->setGeometry(QRect(60, 170, 231, 41));
+        horizontalLayout_3 = new QHBoxLayout(horizontalLayoutWidget_3);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        userPassword = new QLineEdit(horizontalLayoutWidget_3);
         userPassword->setObjectName(QStringLiteral("userPassword"));
-        userPassword->setGeometry(QRect(130, 110, 113, 20));
-        userPassword2 = new QLineEdit(Register);
+        userPassword->setMaximumSize(QSize(16777215, 25));
+
+        horizontalLayout_3->addWidget(userPassword);
+
+        passLogo = new QLabel(horizontalLayoutWidget_3);
+        passLogo->setObjectName(QStringLiteral("passLogo"));
+
+        horizontalLayout_3->addWidget(passLogo);
+
+        horizontalLayoutWidget_4 = new QWidget(Register);
+        horizontalLayoutWidget_4->setObjectName(QStringLiteral("horizontalLayoutWidget_4"));
+        horizontalLayoutWidget_4->setGeometry(QRect(60, 230, 231, 41));
+        horizontalLayout_4 = new QHBoxLayout(horizontalLayoutWidget_4);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        userPassword2 = new QLineEdit(horizontalLayoutWidget_4);
         userPassword2->setObjectName(QStringLiteral("userPassword2"));
-        userPassword2->setGeometry(QRect(130, 160, 113, 20));
-        pushButton_2 = new QPushButton(Register);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(110, 210, 75, 23));
-        pushButton_3 = new QPushButton(Register);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(220, 210, 75, 23));
-        label = new QLabel(Register);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(70, 72, 54, 20));
-        label_2 = new QLabel(Register);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(70, 112, 54, 20));
-        label_3 = new QLabel(Register);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(70, 160, 54, 21));
+        userPassword2->setMaximumSize(QSize(16777215, 25));
+
+        horizontalLayout_4->addWidget(userPassword2);
+
+        passLogo2 = new QLabel(horizontalLayoutWidget_4);
+        passLogo2->setObjectName(QStringLiteral("passLogo2"));
+
+        horizontalLayout_4->addWidget(passLogo2);
+
+        passwordMessage = new QLabel(Register);
+        passwordMessage->setObjectName(QStringLiteral("passwordMessage"));
+        passwordMessage->setGeometry(QRect(60, 210, 231, 21));
+        passwordMessage2 = new QLabel(Register);
+        passwordMessage2->setObjectName(QStringLiteral("passwordMessage2"));
+        passwordMessage2->setGeometry(QRect(60, 270, 231, 21));
+        horizontalLayoutWidget_5 = new QWidget(Register);
+        horizontalLayoutWidget_5->setObjectName(QStringLiteral("horizontalLayoutWidget_5"));
+        horizontalLayoutWidget_5->setGeometry(QRect(70, 310, 201, 41));
+        horizontalLayout_5 = new QHBoxLayout(horizontalLayoutWidget_5);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        clickRegister = new QPushButton(horizontalLayoutWidget_5);
+        clickRegister->setObjectName(QStringLiteral("clickRegister"));
+        clickRegister->setMaximumSize(QSize(1000, 30));
+
+        horizontalLayout_5->addWidget(clickRegister);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_2);
+
+        clickCancel = new QPushButton(horizontalLayoutWidget_5);
+        clickCancel->setObjectName(QStringLiteral("clickCancel"));
+        clickCancel->setMaximumSize(QSize(16777215, 30));
+
+        horizontalLayout_5->addWidget(clickCancel);
+
+        radioButton = new QRadioButton(Register);
+        radioButton->setObjectName(QStringLiteral("radioButton"));
+        radioButton->setGeometry(QRect(70, 290, 89, 16));
+        QWidget::setTabOrder(userName, userPassword);
+        QWidget::setTabOrder(userPassword, userPassword2);
+        QWidget::setTabOrder(userPassword2, radioButton);
+        QWidget::setTabOrder(radioButton, clickRegister);
+        QWidget::setTabOrder(clickRegister, clickCancel);
 
         retranslateUi(Register);
-        QObject::connect(pushButton_2, SIGNAL(clicked()), Register, SLOT(Click_Register()));
-        QObject::connect(pushButton, SIGNAL(clicked()), Register, SLOT(Click_CheckUser()));
-        QObject::connect(pushButton_3, SIGNAL(clicked()), Register, SLOT(Click_Reset()));
+        QObject::connect(clickRegister, SIGNAL(clicked()), Register, SLOT(Click_Register()));
+        QObject::connect(clickCancel, SIGNAL(clicked()), Register, SLOT(Click_Cancel()));
 
         QMetaObject::connectSlotsByName(Register);
     } // setupUi
@@ -78,12 +175,16 @@ public:
     void retranslateUi(QDialog *Register)
     {
         Register->setWindowTitle(QApplication::translate("Register", "Dialog", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("Register", "\346\243\200\346\237\245\347\224\250\346\210\267\345\220\215", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("Register", "\346\263\250\345\206\214", Q_NULLPTR));
-        pushButton_3->setText(QApplication::translate("Register", "\351\207\215\347\275\256", Q_NULLPTR));
-        label->setText(QApplication::translate("Register", "\347\224\250\346\210\267\345\220\215\357\274\232", Q_NULLPTR));
-        label_2->setText(QApplication::translate("Register", "\345\257\206\347\240\201\357\274\232", Q_NULLPTR));
-        label_3->setText(QApplication::translate("Register", "\347\241\256\350\256\244\345\257\206\347\240\201\357\274\232", Q_NULLPTR));
+        SignUp->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        userLogo->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        userMessage->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        passLogo->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        passLogo2->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        passwordMessage->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        passwordMessage2->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        clickRegister->setText(QApplication::translate("Register", "PushButton", Q_NULLPTR));
+        clickCancel->setText(QApplication::translate("Register", "PushButton", Q_NULLPTR));
+        radioButton->setText(QApplication::translate("Register", "RadioButton", Q_NULLPTR));
     } // retranslateUi
 
 };

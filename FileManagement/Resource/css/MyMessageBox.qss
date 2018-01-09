@@ -1,0 +1,62 @@
+*{font-family:Microsoft YaHei;}
+
+MessageContent
+{
+    font-size:14px;
+}
+
+pButtonOk
+{
+    color:white;
+    background-color:rgb(14 , 150 , 254);
+    border: 1px solid rgb(11 , 137 , 234);
+}
+
+pButtonOk:hover
+{
+    color:white;
+    background-color:rgb(44 , 137 , 255);
+    border: 1px solid rgb(11 , 137 , 234);
+}
+
+pButtonOk:pressed
+{
+    color:black;
+    background-color:rgb(14 , 135 , 228);
+    border: 1px solid rgb(12 , 138 , 235);
+    padding-left:3px;
+    padding-top:3px;
+}
+
+pButtonCancel
+{
+    color:black;
+    background-color:rgb(238 , 238 , 238);
+    border: 1px solid rgb(183 , 183 , 183);
+}
+
+pButtonCancel:hover
+{
+    color:black;
+    background-color:rgb(228 , 240 , 250);
+    border: 1px solid rgb(15 , 150 , 255);
+}
+
+pButtonCancel:pressed
+{
+    color:black;
+    background-color:rgb(204 , 228 , 247);
+    border: 1px solid rgb(1 , 84 , 153);
+    padding-left:3px;
+    padding-top:3px;
+}
+
+inputContent
+{
+    border: 1px solid rgb(195 , 195 , 195);
+}
+
+inputContent:hover
+{
+    border: 1px solid rgb(1 , 186 , 255 );
+}

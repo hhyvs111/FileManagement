@@ -9,5 +9,6 @@
 #include <cctype>
 #include <algorithm>
 #include<ctime>
+#include"tcpclient.h"
 
 using namespace std;
