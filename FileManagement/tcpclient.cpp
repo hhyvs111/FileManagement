@@ -2,8 +2,10 @@
 #include "MyMessageBox.h"
 //#include "ui_tcpclient.h"
 
-#define ip "127.0.0.1"
-#define port 8000
+#define ip "47.100.160.51"
+#define port 3389
+//#define ip "47.100.160.51"
+//#define port 4000
 
 
 
@@ -30,12 +32,16 @@ void TcpClient::init()
 void TcpClient::connectServer()
 {
     tcpSocket->abort();   //取消已有的连接
-    tcpSocket->connectToHost(ip,port);
-
+	tcpSocket->connectToHost(ip, port);
+	connect(tcpSocket, SIGNAL(connected()), this, SLOT(displayError1()));
+	
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessages()));
 }
 
-
+void TcpClient::displayError1()
+{
+	qDebug() << "the server is connected!";
+}
 
 void TcpClient::displayError(QAbstractSocket::SocketError)
 {

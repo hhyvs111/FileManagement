@@ -31,6 +31,7 @@ private slots:
     void displayError(QAbstractSocket::SocketError);
     //void on_signBtn_clicked();
 	//void sendMeggages();  //·¢ËÍÊý¾Ý
+	void displayError1();
 
 signals:
 	void sendDataToLogin(QString);

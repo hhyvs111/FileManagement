@@ -35,9 +35,10 @@ void Login::Click_Login()
 	QString bs = "L";
 	QString data = bs + "#" + sql;
 	
-	tcp->tcpSocket->write(data.toLatin1());//将信息写入socket
-	qDebug() << data;
-
+	if (tcp->tcpSocket->write(data.toLatin1()))//将信息写入socket
+		qDebug() << data;
+	else
+		qDebug() << "write is false";
 	connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
 	//MessageBox();
 }
