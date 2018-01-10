@@ -23,12 +23,24 @@ public:
 private:
 	Ui::Login *ui;   //这个里面封装了一系列的输入框之类的，就不用重复定义了
 
-public slots:
+	QString     username;
+	QString     passwd;
+	QString     AutoLogin;
+	QString     RemeberPasswd;
+
+	bool        remeberPasswd;
+	bool        autologin;
+	void        savecfg();
+	void        loadcfg();
+
+
+	public slots:
 	void Click_Login();  //点击登陆
 	void Click_Register();  //点击跳转到注册框
 	//void MessageBox();
+	void close();//点击退出窗口
 	void receiveRegister();   //接受注册框的信号
-
+	void raise();//勾选记住密码框
 	void receiveDataFromClient(QString data);   //接收从客户端传来的信息
 signals: 
 	void showMain();

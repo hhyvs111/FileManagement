@@ -6,6 +6,7 @@
 #include <MyMessageBox.h>
 #include <QDialog> 
 #include <qdebug.h>
+#include<QCryptographicHash>
 
 //定义一个全局变量
  
@@ -14,6 +15,25 @@ Login::Login(QWidget *parent)
 {
 	tcp = new TcpClient();
 	ui->setupUi(this);
+	QString kk;
+	QString xk;
+	QString md5;
+	QByteArray bb;
+
+	QSettings *getting = new QSettings("E:/test.ini", QSettings::IniFormat);//初始化显示上一次登录账户密码
+	ui->nameLine->setText(getting->value("uname", "20").toString());
+	//kk = getting->value("pws", 1000).toString();
+
+	//bb = QCryptographicHash::hash(kk.toLatin1(), QCryptographicHash::Md5);
+	//md5.append(bb.toHex());
+	//bb.append(kk);
+	//QCryptographicHash hash(QCryptographicHash::Md5);
+	//hash.addData(bb);//添加数据到加密哈希值
+	//QByteArray result = hash.result();//返回最终的哈希值
+	//xk = result.toHex();
+
+	ui->passwordLine->setText(getting->value("pws",20).toString());
+	
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 }
 
@@ -75,4 +95,41 @@ void Login::receiveDataFromClient(QString data)
 	}
 	else
 		return;
+}
+void Login::close()
+{
+	QApplication* app;
+	app->quit();
+}
+
+void Login::raise()//记住密码
+{
+
+	if (ui->rem_pw->isChecked())
+	{
+		remeberPasswd = true;//勾选了记住密码 将密码写入配置文件
+
+
+		QString  md5;
+		QByteArray  ba, bb;
+		QCryptographicHash md(QCryptographicHash::Md5);
+		QSettings *settings = new  QSettings("E:/test.ini", QSettings::IniFormat);
+		username = ui->nameLine->text();
+		passwd = ui->passwordLine->text();
+		//ba.append(passwd);
+		//md.addData(ba);
+		//bb = md.result();
+		//md5.append(bb.toHex());
+
+
+		settings->setValue("uname", username);
+		settings->setValue("pws", passwd);
+		delete settings;
+	}
+	else
+	{
+		ui->passwordLine->clear();
+		remeberPasswd = false;
+	}
+
 }

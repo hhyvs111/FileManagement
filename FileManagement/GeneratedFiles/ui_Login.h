@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -30,6 +31,8 @@ public:
     QLineEdit *passwordLine;
     QLabel *label;
     QPushButton *m_RegisterButton;
+    QPushButton *close;
+    QCheckBox *rem_pw;
 
     void setupUi(QDialog *Login)
     {
@@ -41,7 +44,7 @@ public:
         label_2->setGeometry(QRect(70, 130, 54, 21));
         m_LoginButton = new QPushButton(Login);
         m_LoginButton->setObjectName(QStringLiteral("m_LoginButton"));
-        m_LoginButton->setGeometry(QRect(150, 170, 75, 23));
+        m_LoginButton->setGeometry(QRect(70, 200, 75, 23));
         nameLine = new QLineEdit(Login);
         nameLine->setObjectName(QStringLiteral("nameLine"));
         nameLine->setGeometry(QRect(110, 100, 171, 20));
@@ -54,10 +57,18 @@ public:
         m_RegisterButton = new QPushButton(Login);
         m_RegisterButton->setObjectName(QStringLiteral("m_RegisterButton"));
         m_RegisterButton->setGeometry(QRect(290, 100, 75, 23));
+        close = new QPushButton(Login);
+        close->setObjectName(QStringLiteral("close"));
+        close->setGeometry(QRect(240, 200, 93, 28));
+        rem_pw = new QCheckBox(Login);
+        rem_pw->setObjectName(QStringLiteral("rem_pw"));
+        rem_pw->setGeometry(QRect(150, 170, 83, 18));
 
         retranslateUi(Login);
         QObject::connect(m_LoginButton, SIGNAL(clicked()), Login, SLOT(Click_Login()));
         QObject::connect(m_RegisterButton, SIGNAL(clicked()), Login, SLOT(Click_Register()));
+        QObject::connect(rem_pw, SIGNAL(clicked()), Login, SLOT(raise()));
+        QObject::connect(close, SIGNAL(clicked()), Login, SLOT(close()));
 
         QMetaObject::connectSlotsByName(Login);
     } // setupUi
@@ -69,6 +80,8 @@ public:
         m_LoginButton->setText(QApplication::translate("Login", "\347\231\273\345\275\225", Q_NULLPTR));
         label->setText(QApplication::translate("Login", "\345\270\220\345\217\267\357\274\232", Q_NULLPTR));
         m_RegisterButton->setText(QApplication::translate("Login", "\346\263\250\345\206\214", Q_NULLPTR));
+        close->setText(QApplication::translate("Login", "\345\217\226\346\266\210", Q_NULLPTR));
+        rem_pw->setText(QApplication::translate("Login", "\350\256\260\344\275\217\345\257\206\347\240\201", Q_NULLPTR));
     } // retranslateUi
 
 };
