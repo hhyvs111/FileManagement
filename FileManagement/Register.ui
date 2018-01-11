@@ -26,7 +26,7 @@
     <item>
      <widget class="QLabel" name="SignUp">
       <property name="text">
-       <string>TextLabel</string>
+       <string>注册</string>
       </property>
      </widget>
     </item>
@@ -190,7 +190,7 @@
        </size>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>注册</string>
       </property>
      </widget>
     </item>
@@ -216,7 +216,7 @@
        </size>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>取消</string>
       </property>
      </widget>
     </item>
@@ -227,12 +227,12 @@
     <rect>
      <x>70</x>
      <y>290</y>
-     <width>89</width>
+     <width>211</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>RadioButton</string>
+    <string>同意实验室管理要求</string>
    </property>
   </widget>
  </widget>

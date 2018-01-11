@@ -158,7 +158,7 @@ public:
 
         radioButton = new QRadioButton(Register);
         radioButton->setObjectName(QStringLiteral("radioButton"));
-        radioButton->setGeometry(QRect(70, 290, 89, 16));
+        radioButton->setGeometry(QRect(70, 290, 211, 16));
         QWidget::setTabOrder(userName, userPassword);
         QWidget::setTabOrder(userPassword, userPassword2);
         QWidget::setTabOrder(userPassword2, radioButton);
@@ -175,16 +175,16 @@ public:
     void retranslateUi(QDialog *Register)
     {
         Register->setWindowTitle(QApplication::translate("Register", "Dialog", Q_NULLPTR));
-        SignUp->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
+        SignUp->setText(QApplication::translate("Register", "\346\263\250\345\206\214", Q_NULLPTR));
         userLogo->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
         userMessage->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
         passLogo->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
         passLogo2->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
         passwordMessage->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
         passwordMessage2->setText(QApplication::translate("Register", "TextLabel", Q_NULLPTR));
-        clickRegister->setText(QApplication::translate("Register", "PushButton", Q_NULLPTR));
-        clickCancel->setText(QApplication::translate("Register", "PushButton", Q_NULLPTR));
-        radioButton->setText(QApplication::translate("Register", "RadioButton", Q_NULLPTR));
+        clickRegister->setText(QApplication::translate("Register", "\346\263\250\345\206\214", Q_NULLPTR));
+        clickCancel->setText(QApplication::translate("Register", "\345\217\226\346\266\210", Q_NULLPTR));
+        radioButton->setText(QApplication::translate("Register", "\345\220\214\346\204\217\345\256\236\351\252\214\345\256\244\347\256\241\347\220\206\350\246\201\346\261\202", Q_NULLPTR));
     } // retranslateUi
 
 };
