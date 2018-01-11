@@ -56,7 +56,7 @@ public:
     QPushButton *m_LoginButton;
     QSpacerItem *horizontalSpacer_2;
 
-    void setupUi(QDialog *Login)
+    void setupUi(QWidget *Login)
     {
         if (Login->objectName().isEmpty())
             Login->setObjectName(QStringLiteral("Login"));
@@ -229,7 +229,7 @@ public:
         QMetaObject::connectSlotsByName(Login);
     } // setupUi
 
-    void retranslateUi(QDialog *Login)
+    void retranslateUi(QWidget *Login)
     {
         Login->setWindowTitle(QApplication::translate("Login", "Dialog", Q_NULLPTR));
         label->setText(QApplication::translate("Login", "TextLabel", Q_NULLPTR));

@@ -6,22 +6,26 @@
 #include <QMessageBox>
 //#include"tcpclient.h"
 #include "ui_Login.h"
+#include "BaseWindow.h"
 
 #ifndef LOGIN_H_
 #define LOGIN_H_
 extern TcpClient * tcp;
 //声明一个全局变量
 
-class Login : public QDialog
+class Login : public BaseWindow
 {
 	Q_OBJECT
 
 public:
 	Login(QWidget *parent = Q_NULLPTR);
 	~Login();
+	void setWindowTitle(QString title, int titleFontSize = 10);  //设置标题栏
 
 private:
 	Ui::Login *ui;   //这个里面封装了一系列的输入框之类的，就不用重复定义了
+
+	void initTitleBar();
 
 public slots:
 	void Click_Login();  //点击登陆

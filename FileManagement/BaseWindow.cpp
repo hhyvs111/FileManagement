@@ -14,7 +14,7 @@ BaseWindow::BaseWindow(QWidget *parent)
 	// 设置窗口背景透明;
 	setAttribute(Qt::WA_TranslucentBackground);
 	// 关闭窗口时释放资源;
-	setAttribute(Qt::WA_DeleteOnClose);
+	/*setAttribute(Qt::WA_DeleteOnClose);*/
 	// 初始化标题栏;
 	initTitleBar();
 }

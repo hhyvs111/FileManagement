@@ -11,7 +11,7 @@
 //定义一个全局变量
  
 Login::Login(QWidget *parent)
-	: QDialog(parent), ui(new Ui::Login)
+	: BaseWindow(parent), ui(new Ui::Login)
 {
 	tcp = new TcpClient();
 	ui->setupUi(this);
@@ -21,6 +21,23 @@ Login::Login(QWidget *parent)
 	movie->start();
 	setFixedSize(420, 350);
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
+	initTitleBar();
+	connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
+}
+
+void Login::initTitleBar()
+{
+	m_titleBar->move(1, 2);
+	m_titleBar->raise();
+	m_titleBar->setWindowBorderWidth(2);
+	m_titleBar->setBackgroundColor(255, 255, 255);
+	m_titleBar->setButtonType(MIN_BUTTON);
+	m_titleBar->setTitleWidth(this->width());
+}
+
+void Login::setWindowTitle(QString title, int titleFontSize)
+{
+	m_titleBar->setTitleContent(title, titleFontSize);
 }
 
 Login::~Login()
@@ -45,7 +62,9 @@ void Login::Click_Login()
 		qDebug() << data;
 	else
 		qDebug() << "write is false";
-	connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
+
+	//放在这会多次连接槽函数，然后相应会多次触发
+	//connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
 	//MessageBox();
 }
 

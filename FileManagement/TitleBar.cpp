@@ -187,7 +187,9 @@ void TitleBar::paintEvent(QPaintEvent *event)
 	pathBack.setFillRule(Qt::WindingFill);
 	pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
 	painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-	painter.fillPath(pathBack, QBrush(QColor(m_colorR, m_colorG, m_colorB)));
+
+	painter.fillRect(this->rect(), QColor(0, 0, 255, 0));
+	//painter.fillPath(pathBack, QBrush(QColor(m_colorR, m_colorG, m_colorB)));
 
 	// 当窗口最大化或者还原后，窗口长度变了，标题栏的长度应当一起改变;
 	// 这里减去m_windowBorderWidth ，是因为窗口可能设置了不同宽度的边框;

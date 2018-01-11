@@ -10,7 +10,7 @@ MyMessageBox::MyMessageBox(QWidget *parent)
 	ui.setupUi(this);
 	initWindow();
 }
-
+  
 MyMessageBox::~MyMessageBox()
 {
 
@@ -35,6 +35,7 @@ void MyMessageBox::initWindow()
 void MyMessageBox::initTitleBar()
 {
 	m_titleBar->move(1, 2);
+	
 	m_titleBar->setWindowBorderWidth(2);
 	m_titleBar->setBackgroundColor(255, 255, 255);
 	m_titleBar->setButtonType(ONLY_CLOSE_BUTTON);
