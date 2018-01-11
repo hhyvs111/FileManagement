@@ -6,6 +6,7 @@
 #include <MyMessageBox.h>
 #include <QDialog> 
 #include <qdebug.h>
+#include <QMovie>
 
 //定义一个全局变量
  
@@ -14,6 +15,11 @@ Login::Login(QWidget *parent)
 {
 	tcp = new TcpClient();
 	ui->setupUi(this);
+	setWindowFlags(Qt::FramelessWindowHint);
+	QMovie *movie = new QMovie("C:/Users/44562/Desktop/Login/Login/Resources/timg.gif");
+	ui->label->setMovie(movie);
+	movie->start();
+	setFixedSize(420, 350);
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 }
 

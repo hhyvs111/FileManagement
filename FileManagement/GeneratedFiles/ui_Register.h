@@ -58,7 +58,7 @@ public:
     {
         if (Register->objectName().isEmpty())
             Register->setObjectName(QStringLiteral("Register"));
-        Register->resize(330, 366);
+        Register->resize(336, 369);
         horizontalLayoutWidget = new QWidget(Register);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
         horizontalLayoutWidget->setGeometry(QRect(60, 50, 201, 41));
