@@ -15,10 +15,11 @@ private:
 	Ui::FileManagement *ui;
 
 private slots:
-void Btn_Click();
-
-
-void receiveLogin();
+	void Btn_Click();
+	void ClickUploadFile();
+	void receiveLogin();
+signals:
+	void showUploadFile();
 
 
 };

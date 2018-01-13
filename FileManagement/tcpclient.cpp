@@ -34,18 +34,18 @@ void TcpClient::connectServer()
     tcpSocket->abort();   //取消已有的连接
 	tcpSocket->connectToHost(ip, port);
 	connect(tcpSocket, SIGNAL(connected()), this, SLOT(displayError1()));
-	
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessages()));
 }
 
 void TcpClient::displayError1()
 {
-	qDebug() << "the server is connected!";
+		qDebug() << "the server is connected!";
 }
 
 void TcpClient::displayError(QAbstractSocket::SocketError)
 {
     qDebug()<<tcpSocket->errorString();   //输出出错信息
+	MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("网络连接失败"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 }
 
 

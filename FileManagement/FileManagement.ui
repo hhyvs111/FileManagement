@@ -24,6 +24,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>180</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -39,8 +52,26 @@
  <resources>
   <include location="FileManagement.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileManagement</receiver>
+   <slot>ClickUploadFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>518</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>524</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>Btn_Click()</slot>
+  <slot>ClickUploadFile()</slot>
  </slots>
 </ui>

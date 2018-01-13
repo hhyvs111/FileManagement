@@ -16,6 +16,7 @@
 #include <QtWidgets/QCalendarWidget>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -27,6 +28,7 @@ class Ui_FileManagement
 public:
     QWidget *centralWidget;
     QCalendarWidget *calendarWidget;
+    QPushButton *pushButton;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -40,6 +42,9 @@ public:
         calendarWidget = new QCalendarWidget(centralWidget);
         calendarWidget->setObjectName(QStringLiteral("calendarWidget"));
         calendarWidget->setGeometry(QRect(160, 20, 248, 197));
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(480, 180, 75, 23));
         FileManagement->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(FileManagement);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -49,6 +54,7 @@ public:
         FileManagement->setStatusBar(statusBar);
 
         retranslateUi(FileManagement);
+        QObject::connect(pushButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi
@@ -56,6 +62,7 @@ public:
     void retranslateUi(QMainWindow *FileManagement)
     {
         FileManagement->setWindowTitle(QApplication::translate("FileManagement", "FileManagement", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("FileManagement", "PushButton", Q_NULLPTR));
     } // retranslateUi
 
 };

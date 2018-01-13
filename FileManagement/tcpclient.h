@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QtNetwork>
 #include <QMessageBox>
+#include <QFile>  
+#include <string>  
 
 namespace Ui {
 class TcpClient;

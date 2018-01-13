@@ -3,7 +3,7 @@
 #include "Database.h"
 //#include "tcpclient.h"
 #include <QMessageBox> 
-#include <MyMessageBox.h>
+#include "MyMessageBox.h"
 #include <QDialog> 
 #include <qdebug.h>
 #include <QMovie>
@@ -22,7 +22,11 @@ Login::Login(QWidget *parent)
 	setFixedSize(420, 350);
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 	initTitleBar();
+
+	//TCP相关的信息
 	connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
+	//显示注册框
+	//connect(this, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
 }
 
 void Login::initTitleBar()
