@@ -17,6 +17,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,14 +28,16 @@ public:
     QPushButton *openFileButton;
     QPushButton *sendFileButton;
     QProgressBar *sendProgressBar;
-    QLabel *sendStatusLabel;
     QLabel *progressLabel;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
+    QLabel *sendStatusLabel;
 
     void setupUi(QWidget *UploadFile)
     {
         if (UploadFile->objectName().isEmpty())
             UploadFile->setObjectName(QStringLiteral("UploadFile"));
-        UploadFile->resize(400, 300);
+        UploadFile->resize(698, 468);
         openFileButton = new QPushButton(UploadFile);
         openFileButton->setObjectName(QStringLiteral("openFileButton"));
         openFileButton->setGeometry(QRect(80, 90, 75, 23));
@@ -45,12 +48,20 @@ public:
         sendProgressBar->setObjectName(QStringLiteral("sendProgressBar"));
         sendProgressBar->setGeometry(QRect(120, 170, 191, 23));
         sendProgressBar->setValue(24);
-        sendStatusLabel = new QLabel(UploadFile);
-        sendStatusLabel->setObjectName(QStringLiteral("sendStatusLabel"));
-        sendStatusLabel->setGeometry(QRect(60, 260, 54, 12));
         progressLabel = new QLabel(UploadFile);
         progressLabel->setObjectName(QStringLiteral("progressLabel"));
         progressLabel->setGeometry(QRect(40, 180, 54, 12));
+        verticalLayoutWidget = new QWidget(UploadFile);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(50, 230, 281, 31));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        sendStatusLabel = new QLabel(verticalLayoutWidget);
+        sendStatusLabel->setObjectName(QStringLiteral("sendStatusLabel"));
+
+        verticalLayout->addWidget(sendStatusLabel);
+
 
         retranslateUi(UploadFile);
         QObject::connect(openFileButton, SIGNAL(clicked()), UploadFile, SLOT(ClickOpenButton()));
@@ -64,8 +75,8 @@ public:
         UploadFile->setWindowTitle(QApplication::translate("UploadFile", "Form", Q_NULLPTR));
         openFileButton->setText(QApplication::translate("UploadFile", "\346\211\223\345\274\200\346\226\207\344\273\266", Q_NULLPTR));
         sendFileButton->setText(QApplication::translate("UploadFile", "\345\217\221\351\200\201\346\226\207\344\273\266", Q_NULLPTR));
-        sendStatusLabel->setText(QApplication::translate("UploadFile", "sendStatusLabel", Q_NULLPTR));
         progressLabel->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
+        sendStatusLabel->setText(QApplication::translate("UploadFile", "sendStatusLabel", Q_NULLPTR));
     } // retranslateUi
 
 };

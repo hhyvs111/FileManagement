@@ -14,7 +14,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
-#include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -60,7 +59,7 @@ public:
     {
         if (Login->objectName().isEmpty())
             Login->setObjectName(QStringLiteral("Login"));
-        Login->resize(419, 332);
+        Login->resize(520, 419);
         verticalLayoutWidget = new QWidget(Login);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(0, 0, 420, 321));
@@ -231,7 +230,7 @@ public:
 
     void retranslateUi(QWidget *Login)
     {
-        Login->setWindowTitle(QApplication::translate("Login", "Dialog", Q_NULLPTR));
+        Login->setWindowTitle(QApplication::translate("Login", "Form", Q_NULLPTR));
         label->setText(QApplication::translate("Login", "TextLabel", Q_NULLPTR));
         label_2->setText(QApplication::translate("Login", "\347\224\250\346\210\267\345\220\215\357\274\232", Q_NULLPTR));
         m_RegisterButton->setText(QApplication::translate("Login", "\347\253\213\345\215\263\346\263\250\345\206\214", Q_NULLPTR));

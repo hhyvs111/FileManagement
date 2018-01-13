@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Login</class>
- <widget class="QWidget" name="Login">
+ <widget class="QDialog" name="Login">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>419</height>
+    <width>419</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Dialog</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -420,12 +420,12 @@ border-radius: 3px; color: rgb(255, 255, 255);
    <slot>Click_Login()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>276</x>
-     <y>308</y>
+     <x>233</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
-     <x>243</x>
-     <y>338</y>
+     <x>365</x>
+     <y>276</y>
     </hint>
    </hints>
   </connection>
@@ -436,12 +436,12 @@ border-radius: 3px; color: rgb(255, 255, 255);
    <slot>Click_Register()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>203</y>
+     <x>333</x>
+     <y>178</y>
     </hint>
     <hint type="destinationlabel">
-     <x>469</x>
-     <y>225</y>
+     <x>404</x>
+     <y>194</y>
     </hint>
    </hints>
   </connection>
