@@ -1,10 +1,14 @@
 #include "FileManagement.h"
 #include "UploadFile.h"
 #include <QMessageBox> 
+
+extern QString globalUserName;
 FileManagement::FileManagement(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::FileManagement)
 {
 	ui->setupUi(this);
+
+	qDebug() << globalUserName << " welcome! ";
 	//UploadFile U;
 	//connect(this, SIGNAL(showUploadFile()), &U, SLOT(receiveMainwindow()));
 }
@@ -27,7 +31,7 @@ void FileManagement::Btn_Click()
 
 void FileManagement::ClickUploadFile()
 {
-	/*UploadFile U;
-	U.show();*/
-	emit showUploadFile();
+	UploadFile *U = new UploadFile();
+	U->show();
+	//emit showUploadFile();
 }

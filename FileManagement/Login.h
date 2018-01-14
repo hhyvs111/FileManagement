@@ -11,7 +11,8 @@
 #ifndef LOGIN_H_
 #define LOGIN_H_
 extern TcpClient * tcp;
-//声明一个全局变量
+extern QString globalUserName ;
+//声明一个全局变量,来自stdafx的全局变量，说明login可以使用本变量
 
 class Login : public BaseWindow
 {

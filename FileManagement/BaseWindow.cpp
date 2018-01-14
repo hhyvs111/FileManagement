@@ -51,7 +51,7 @@ void BaseWindow::paintEvent(QPaintEvent* event)
 
 void BaseWindow::loadStyleSheet(const QString &sheetName)
 {
-	QFile file(sheetName + ".qss");
+	QFile file("Recourse/"+sheetName + ".css");
 	qDebug() << sheetName + ".css";
 	file.open(QFile::ReadOnly);
 	if (file.isOpen())

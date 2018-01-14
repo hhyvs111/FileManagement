@@ -2,10 +2,10 @@
 #include "MyMessageBox.h"
 //#include "ui_tcpclient.h"
 //
-#define ip "47.100.160.51"
-#define port 3389
-//#define ip "127.0.0.1"
-//#define port 8000
+//#define ip "47.100.160.51"
+//#define port 3389
+#define ip "127.0.0.1"
+#define port 8000
 
 
 
@@ -54,38 +54,49 @@ void TcpClient::readMessages()
     QString data=tcpSocket->readAll();
 	qDebug() << "it is in client the data from server: " << data;
     QStringList list=data.split("#");
-	if (list[0] == "L" && list[1] == "true")
+
+	//验证登陆是否成功
+	if (list[0] == "L" )
 	{
-		emit sendDataToLogin("T");	//将验证信息发给LOGIN
-		qDebug() << "login is T";
-		//MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("登录成功！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+		if (list[1] == "true")
+		{
+			emit sendDataToLogin("T");	//将验证信息发给LOGIN
+			qDebug() << "login is T";
+		}
+		else
+		{
+			emit sendDataToLogin("F");	//将验证信息发给LOGIN
+			qDebug() << "login is F";
+		}
 	}
-	else if (list[0] == "L" && list[1] == "false")
+	//验证是否注册成功
+	else if (list[0] == "R")
 	{
-		emit sendDataToLogin("F");	//将验证信息发给LOGIN
-		qDebug() << "login is F";
-		//MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("用户名或密码不不正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+		if (list[1] == "true")
+		{
+			emit sendDataToRegister("R_T");
+			qDebug() << "R is T";
+		}
+		else
+		{
+			emit sendDataToRegister("R_F");
+			qDebug() << "R is F";
+		}
 	}
 
-	else if (list[0] == "R" && list[1] == "true")
+	//验证用户名重复
+	else if (list[0] == "RCU" )
 	{
-		emit sendDataToRegister("R_T");
-		qDebug() << "R is T";
-	}
-	else if (list[0] == "R"&& list[1] == "false")
-	{
-		emit sendDataToRegister("R_F");
-		qDebug() << "R is F";
-	}
-	else if (list[0] == "RCU" && list[1] == "true")
-	{
-		emit sendDataToRegister("RCU_T");
-		qDebug() << "RCU is T";
-	}
-	else if (list[0] == "RCU" && list[1] == "false")
-	{
-		emit sendDataToRegister("RCU_F");
-		qDebug() << "RCU is F";
+		if (list[1] == "true")
+		{
+			emit sendDataToRegister("RCU_T");
+			qDebug() << "RCU is T";
+		}
+		else
+		{
+			emit sendDataToRegister("RCU_F");
+			qDebug() << "RCU is F";
+		}
 	}
 
     else

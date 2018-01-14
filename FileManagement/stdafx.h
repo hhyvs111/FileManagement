@@ -9,6 +9,7 @@
 #include <cctype>
 #include <algorithm>
 #include<ctime>
+#include<qdebug.h>
 #include"tcpclient.h"
 
 using namespace std;

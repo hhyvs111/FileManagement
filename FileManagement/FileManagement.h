@@ -1,8 +1,10 @@
 #pragma once
 
+#include "stdafx.h"
 #include <QtWidgets/QMainWindow>
 #include "ui_FileManagement.h"
 
+extern QString globalUserName;
 class FileManagement : public QMainWindow
 {
 	Q_OBJECT

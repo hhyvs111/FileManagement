@@ -35,6 +35,8 @@ private slots:
 	//void sendMeggages();  //·¢ËÍÊı¾İ
 	void displayError1();
 
+
+
 signals:
 	void sendDataToLogin(QString);
 	void sendDataToRegister(QString);

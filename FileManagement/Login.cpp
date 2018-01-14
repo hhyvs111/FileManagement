@@ -1,29 +1,30 @@
 #include "Login.h"
 
-#include "Database.h"
 //#include "tcpclient.h"
 #include <QMessageBox> 
 #include "MyMessageBox.h"
-#include <QDialog> 
-#include <qdebug.h>
 #include <QMovie>
 
 //定义一个全局变量
- 
+
+
+
 Login::Login(QWidget *parent)
 	: BaseWindow(parent), ui(new Ui::Login)
 {
 	tcp = new TcpClient();
 	ui->setupUi(this);
 	setWindowFlags(Qt::FramelessWindowHint);
-	QMovie *movie = new QMovie("C:/Users/44562/Desktop/Login/Login/Resources/timg.gif");
+	
+	QMovie *movie = new QMovie("Resource/Logo.gif");
 	ui->label->setMovie(movie);
 	movie->start();
 	setFixedSize(420, 350);
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 	initTitleBar();
+	
 
-	//TCP相关的信息
+	//TCP相关的信息,若客户端要发送数据给login
 	connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
 	//显示注册框
 	//connect(this, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
@@ -54,9 +55,9 @@ void Login::Click_Login()
 {
 	QString name = this->ui->nameLine->text();
 	QString passwd = this->ui->passwordLine->text();
+	 
 
-
-	QString sql = "select userName, userPassword from user where userName = '"
+	QString sql = "select * from user where userName = '"
 		+ name + "'and userPassword ='" + passwd + "'";
 
 	QString bs = "L";
@@ -92,6 +93,8 @@ void Login::receiveDataFromClient(QString data)
 	//验证成功！
 	if (QString::compare(data, "T") == 0)
 	{
+		//将用户名设置给全局变量用户名
+		globalUserName = this->ui->nameLine->text();
 		//MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("登录成功！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		this->hide();
 		emit showMain();

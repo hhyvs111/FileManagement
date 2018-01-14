@@ -9,6 +9,7 @@
 
 
 extern TcpClient * tcp;
+extern QString globalUserName;
 class UploadFile : public QWidget
 {
 	Q_OBJECT
@@ -36,7 +37,6 @@ private:
 	void goOnSend(qint64);  //传送文件内容  
 	void ClickOpenButton();
 	void ClickSendButton();
-
 	void receiveMainwindow();
 };
 

@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QFile>
 #include <QMouseEvent>
+#include <QDebug>
 
 #define BUTTON_HEIGHT 30        // 按钮高度;
 #define BUTTON_WIDTH 30         // 按钮宽度;
@@ -21,7 +22,7 @@ TitleBar::TitleBar(QWidget *parent)
 	initControl();
 	initConnections();
 	// 加载本地样式 MyTitle.css文件;
-	loadStyleSheet("MyTitle");
+	//loadStyleSheet("MyTitle");
 }
 
 TitleBar::~TitleBar()
@@ -71,6 +72,16 @@ void TitleBar::initControl()
 	m_pTitleContent->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 	this->setFixedHeight(TITLE_HEIGHT);
 	this->setWindowFlags(Qt::FramelessWindowHint);
+
+	QIcon close("Resource/close.png");
+	m_pButtonClose->setIcon(close);
+	m_pButtonClose->setStyleSheet("QPushButton{background: transparent;}");
+	QIcon min("Resource/min.png");
+	m_pButtonMin->setIcon(min);
+	m_pButtonMin->setStyleSheet("QPushButton{background: transparent;}");
+	QIcon max("Resource/max.png");
+	m_pButtonMax->setIcon(max);
+	m_pButtonMax->setStyleSheet("QPushButton{background: transparent;}");
 }
 
 // 信号槽的绑定;
@@ -265,10 +276,11 @@ void TitleBar::mouseReleaseEvent(QMouseEvent *event)
 // 可以将样式直接写在文件中，程序运行时直接加载进来;
 void TitleBar::loadStyleSheet(const QString &sheetName)
 {
-	QFile file(":/Resources/" + sheetName + ".css");
+	QFile file("Resource/" + sheetName + ".css");
 	file.open(QFile::ReadOnly);
 	if (file.isOpen())
 	{
+		qDebug() << "is css";
 		QString styleSheet = this->styleSheet();
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);
