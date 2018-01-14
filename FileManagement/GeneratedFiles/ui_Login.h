@@ -33,6 +33,7 @@ public:
     QPushButton *m_RegisterButton;
     QPushButton *close;
     QCheckBox *rem_pw;
+    QCheckBox *auto_login;
 
     void setupUi(QDialog *Login)
     {
@@ -62,13 +63,17 @@ public:
         close->setGeometry(QRect(240, 200, 93, 28));
         rem_pw = new QCheckBox(Login);
         rem_pw->setObjectName(QStringLiteral("rem_pw"));
-        rem_pw->setGeometry(QRect(150, 170, 83, 18));
+        rem_pw->setGeometry(QRect(120, 170, 83, 18));
+        auto_login = new QCheckBox(Login);
+        auto_login->setObjectName(QStringLiteral("auto_login"));
+        auto_login->setGeometry(QRect(230, 170, 81, 20));
 
         retranslateUi(Login);
         QObject::connect(m_LoginButton, SIGNAL(clicked()), Login, SLOT(Click_Login()));
         QObject::connect(m_RegisterButton, SIGNAL(clicked()), Login, SLOT(Click_Register()));
         QObject::connect(rem_pw, SIGNAL(clicked()), Login, SLOT(raise()));
         QObject::connect(close, SIGNAL(clicked()), Login, SLOT(close()));
+        QObject::connect(auto_login, SIGNAL(clicked()), Login, SLOT(lower()));
 
         QMetaObject::connectSlotsByName(Login);
     } // setupUi
@@ -82,6 +87,7 @@ public:
         m_RegisterButton->setText(QApplication::translate("Login", "\346\263\250\345\206\214", Q_NULLPTR));
         close->setText(QApplication::translate("Login", "\345\217\226\346\266\210", Q_NULLPTR));
         rem_pw->setText(QApplication::translate("Login", "\350\256\260\344\275\217\345\257\206\347\240\201", Q_NULLPTR));
+        auto_login->setText(QApplication::translate("Login", "\350\207\252\345\212\250\347\231\273\345\275\225", Q_NULLPTR));
     } // retranslateUi
 
 };

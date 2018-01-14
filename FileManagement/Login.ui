@@ -101,7 +101,7 @@
   <widget class="QCheckBox" name="rem_pw">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>120</x>
      <y>170</y>
      <width>83</width>
      <height>18</height>
@@ -109,6 +109,19 @@
    </property>
    <property name="text">
     <string>记住密码</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="auto_login">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>170</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>自动登录</string>
    </property>
   </widget>
  </widget>
@@ -171,6 +184,22 @@
     <hint type="sourcelabel">
      <x>306</x>
      <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>124</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>auto_login</sender>
+   <signal>clicked()</signal>
+   <receiver>Login</receiver>
+   <slot>lower()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>180</y>
     </hint>
     <hint type="destinationlabel">
      <x>194</x>

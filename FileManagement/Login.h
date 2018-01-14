@@ -19,12 +19,14 @@ class Login : public QDialog
 public:
 	Login(QWidget *parent = Q_NULLPTR);
 	~Login();
+	
+	
 
 private:
 	Ui::Login *ui;   //这个里面封装了一系列的输入框之类的，就不用重复定义了
 
 	QString     username;
-	QString     passwd;
+    QString    passwd;
 	QString     AutoLogin;
 	QString     RemeberPasswd;
 
@@ -42,6 +44,9 @@ private:
 	void receiveRegister();   //接受注册框的信号
 	void raise();//勾选记住密码框
 	void receiveDataFromClient(QString data);   //接收从客户端传来的信息
+	void lower();//勾选自动登录
+
+
 signals: 
 	void showMain();
 	void showRegister();

@@ -3,38 +3,43 @@
 #include "Database.h"
 //#include "tcpclient.h"
 #include <QMessageBox> 
+#include<Qtcore/QCoreApplication>
 #include <MyMessageBox.h>
 #include <QDialog> 
 #include <qdebug.h>
 #include<QCryptographicHash>
+#include "AesHelper.h"
 
-//定义一个全局变量
+
  
 Login::Login(QWidget *parent)
 	: QDialog(parent), ui(new Ui::Login)
 {
 	tcp = new TcpClient();
 	ui->setupUi(this);
+
+	AesHelper *bbb = new AesHelper;
 	QString kk;
-	QString xk;
-	QString md5;
-	QByteArray bb;
-
 	QSettings *getting = new QSettings("E:/test.ini", QSettings::IniFormat);//初始化显示上一次登录账户密码
-	ui->nameLine->setText(getting->value("uname", "20").toString());
-	//kk = getting->value("pws", 1000).toString();
-
-	//bb = QCryptographicHash::hash(kk.toLatin1(), QCryptographicHash::Md5);
-	//md5.append(bb.toHex());
-	//bb.append(kk);
-	//QCryptographicHash hash(QCryptographicHash::Md5);
-	//hash.addData(bb);//添加数据到加密哈希值
-	//QByteArray result = hash.result();//返回最终的哈希值
-	//xk = result.toHex();
-
-	ui->passwordLine->setText(getting->value("pws",20).toString());
+	ui->nameLine->setText(getting->value("uuu", "").toString());
+	kk = getting->value("ppp","").toString();
+	QString xk = getting->value("position", "").toString();
+	QString xx = getting->value("auto", "").toString();
+	if (xk == "true")
+	{
+		ui->rem_pw->setChecked(true);
+	}
 	
+	
+	QByteArray tempass = QByteArray::fromBase64(kk.toLatin1());
+	ui->passwordLine->setText(tempass); 
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
+	
+	if (xx == "true")
+	{
+		ui->auto_login->setChecked(true);
+		Click_Login();
+	}
 }
 
 Login::~Login()
@@ -102,6 +107,7 @@ void Login::close()
 	app->quit();
 }
 
+
 void Login::raise()//记住密码
 {
 
@@ -109,27 +115,83 @@ void Login::raise()//记住密码
 	{
 		remeberPasswd = true;//勾选了记住密码 将密码写入配置文件
 
-
-		QString  md5;
-		QByteArray  ba, bb;
-		QCryptographicHash md(QCryptographicHash::Md5);
+		AesHelper *aaa = new AesHelper;
+		
 		QSettings *settings = new  QSettings("E:/test.ini", QSettings::IniFormat);
 		username = ui->nameLine->text();
-		passwd = ui->passwordLine->text();
-		//ba.append(passwd);
-		//md.addData(ba);
-		//bb = md.result();
-		//md5.append(bb.toHex());
+		passwd = ui->passwordLine->text().trimmed();
 
+		QByteArray passArray=passwd.toLatin1();
+		
+		QString password ;
+		password.prepend(passArray.toBase64());
 
-		settings->setValue("uname", username);
-		settings->setValue("pws", passwd);
+		settings->setValue("uuu", username);
+		settings->setValue("ppp",password);
+		settings->setValue("position", remeberPasswd);
+		qDebug() << password;
 		delete settings;
 	}
 	else
 	{
-		ui->passwordLine->clear();
+		//ui->passwordLine->clear();
 		remeberPasswd = false;
+		QSettings *setting = new  QSettings("E:/test.ini", QSettings::IniFormat);
+		QString username = ui->nameLine->text();
+		setting->setValue("uuu", username);
+		setting->setValue("ppp", "");
+		setting->setValue("position", remeberPasswd);
 	}
 
+}
+void Login::lower()//自动登录
+{
+	if (ui->auto_login->isChecked())
+	{
+		autologin = true;
+	}
+	else
+	{
+		autologin = false;
+	}
+	QSettings *settingss = new  QSettings("E:/test.ini", QSettings::IniFormat);
+
+	settingss->setValue("auto", autologin);
+}
+
+
+
+
+
+QString AesHelper::aesEncrypt(QString mingwen)
+{
+	QString result = QString("");
+	char ch_mingwen[10240];
+	char ch_miwen[10240];
+	strcpy(ch_mingwen, mingwen.toUtf8().data());
+	aes->Cipher(ch_mingwen, ch_miwen);
+	result = QString(ch_miwen);
+	return result;
+}
+QString AesHelper::aesUncrypt(QString miwen)
+{
+	QString result = QString("");
+	char ch_mingwen[10240];
+	char ch_miwen[10240];
+	strcpy(ch_miwen, miwen.toUtf8().data());
+	aes->InvCipher(ch_miwen, ch_mingwen);
+	result = QString(ch_mingwen);
+
+	return result;
+}
+AesHelper::~AesHelper()
+{
+	delete aes;
+	aes = 0;
+}
+AesHelper::AesHelper()
+{
+	unsigned char key[] = "1p2w3e4r";
+	aes = new AES(key);
+	qDebug() <<"the aes:" << aes;
 }
