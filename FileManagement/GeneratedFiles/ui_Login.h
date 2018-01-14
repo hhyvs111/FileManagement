@@ -46,9 +46,9 @@ public:
     QSpacerItem *horizontalSpacer_5;
     QHBoxLayout *horizontalLayout_3;
     QSpacerItem *horizontalSpacer_4;
-    QCheckBox *checkBox_2;
+    QCheckBox *rem_pw;
     QSpacerItem *horizontalSpacer_9;
-    QCheckBox *checkBox;
+    QCheckBox *auto_login;
     QSpacerItem *horizontalSpacer_8;
     QHBoxLayout *horizontalLayout_4;
     QSpacerItem *horizontalSpacer;
@@ -167,23 +167,23 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_4);
 
-        checkBox_2 = new QCheckBox(verticalLayoutWidget);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
-        checkBox_2->setMinimumSize(QSize(30, 0));
-        checkBox_2->setMaximumSize(QSize(126, 20));
+        rem_pw = new QCheckBox(verticalLayoutWidget);
+        rem_pw->setObjectName(QStringLiteral("rem_pw"));
+        rem_pw->setMinimumSize(QSize(30, 0));
+        rem_pw->setMaximumSize(QSize(126, 20));
 
-        horizontalLayout_3->addWidget(checkBox_2);
+        horizontalLayout_3->addWidget(rem_pw);
 
         horizontalSpacer_9 = new QSpacerItem(30, 10, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_9);
 
-        checkBox = new QCheckBox(verticalLayoutWidget);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        checkBox->setMinimumSize(QSize(50, 0));
-        checkBox->setMaximumSize(QSize(94, 16777215));
+        auto_login = new QCheckBox(verticalLayoutWidget);
+        auto_login->setObjectName(QStringLiteral("auto_login"));
+        auto_login->setMinimumSize(QSize(50, 0));
+        auto_login->setMaximumSize(QSize(94, 16777215));
 
-        horizontalLayout_3->addWidget(checkBox);
+        horizontalLayout_3->addWidget(auto_login);
 
         horizontalSpacer_8 = new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -224,6 +224,8 @@ public:
         retranslateUi(Login);
         QObject::connect(m_LoginButton, SIGNAL(clicked()), Login, SLOT(Click_Login()));
         QObject::connect(m_RegisterButton, SIGNAL(clicked()), Login, SLOT(Click_Register()));
+        QObject::connect(rem_pw, SIGNAL(clicked()), Login, SLOT(raise()));
+        QObject::connect(auto_login, SIGNAL(clicked()), Login, SLOT(lower()));
 
         QMetaObject::connectSlotsByName(Login);
     } // setupUi
@@ -236,8 +238,8 @@ public:
         m_RegisterButton->setText(QApplication::translate("Login", "\347\253\213\345\215\263\346\263\250\345\206\214", Q_NULLPTR));
         label_3->setText(QApplication::translate("Login", "\345\257\206  \347\240\201\357\274\232", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("Login", "\346\211\276\345\233\236\345\257\206\347\240\201", Q_NULLPTR));
-        checkBox_2->setText(QApplication::translate("Login", "\350\256\260\344\275\217\345\257\206\347\240\201", Q_NULLPTR));
-        checkBox->setText(QApplication::translate("Login", "\350\207\252\345\212\250\347\231\273\345\275\225", Q_NULLPTR));
+        rem_pw->setText(QApplication::translate("Login", "\350\256\260\344\275\217\345\257\206\347\240\201", Q_NULLPTR));
+        auto_login->setText(QApplication::translate("Login", "\350\207\252\345\212\250\347\231\273\345\275\225", Q_NULLPTR));
         m_LoginButton->setText(QApplication::translate("Login", "\347\231\273\345\275\225", Q_NULLPTR));
     } // retranslateUi
 

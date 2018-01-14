@@ -266,7 +266,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_2">
+       <widget class="QCheckBox" name="rem_pw">
         <property name="minimumSize">
          <size>
           <width>30</width>
@@ -301,7 +301,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox">
+       <widget class="QCheckBox" name="auto_login">
         <property name="minimumSize">
          <size>
           <width>50</width>
@@ -442,6 +442,38 @@ border-radius: 3px; color: rgb(255, 255, 255);
     <hint type="destinationlabel">
      <x>469</x>
      <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rem_pw</sender>
+   <signal>clicked()</signal>
+   <receiver>Login</receiver>
+   <slot>raise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>auto_login</sender>
+   <signal>clicked()</signal>
+   <receiver>Login</receiver>
+   <slot>lower()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>209</y>
     </hint>
    </hints>
   </connection>

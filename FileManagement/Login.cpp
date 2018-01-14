@@ -4,7 +4,10 @@
 #include <QMessageBox> 
 #include "MyMessageBox.h"
 #include <QMovie>
-
+#include<qdebug.h>
+#include<QDialog>
+#include<QCryptographicHash>
+#include <MyMessageBox.h>
 //定义一个全局变量
 
 
@@ -16,12 +19,33 @@ Login::Login(QWidget *parent)
 	ui->setupUi(this);
 	setWindowFlags(Qt::FramelessWindowHint);
 	
+	QString kk;
+	QSettings *getting = new QSettings("E:/test.ini", QSettings::IniFormat);//初始化显示上一次登录账户密码
+	ui->nameLine->setText(getting->value("uuu", "").toString());
+	kk = getting->value("ppp", "").toString();
+	QString xk = getting->value("position", "").toString();
+	QString xx = getting->value("auto", "").toString();
+	if (xk == "true")
+	{
+		ui->rem_pw->setChecked(true);
+	}
+
+
+	QByteArray tempass = QByteArray::fromBase64(kk.toLatin1());
+	ui->passwordLine->setText(tempass);
+
 	QMovie *movie = new QMovie("Resource/Logo.gif");
 	ui->label->setMovie(movie);
 	movie->start();
 	setFixedSize(420, 350);
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
+	
 	initTitleBar();
+	if (xx == "true")
+	{
+		ui->auto_login->setChecked(true);
+		Click_Login();
+	}
 	
 
 	//TCP相关的信息,若客户端要发送数据给login
@@ -107,4 +131,52 @@ void Login::receiveDataFromClient(QString data)
 	}
 	else
 		return;
+}
+void Login::raise()
+{
+	if (ui->rem_pw->isChecked())
+	{
+		remeberPasswd = true;//勾选了记住密码 将密码写入配置文件
+
+		
+
+		QSettings *settings = new  QSettings("E:/test.ini", QSettings::IniFormat);
+		username = ui->nameLine->text();
+		passwd = ui->passwordLine->text().trimmed();
+
+		QByteArray passArray = passwd.toLatin1();
+
+		QString password;
+		password.prepend(passArray.toBase64());
+
+		settings->setValue("uuu", username);
+		settings->setValue("ppp", password);
+		settings->setValue("position", remeberPasswd);
+		qDebug() << password;
+		delete settings;
+	}
+	else
+	{
+		//ui->passwordLine->clear();
+		remeberPasswd = false;
+		QSettings *setting = new  QSettings("E:/test.ini", QSettings::IniFormat);
+		QString username = ui->nameLine->text();
+		setting->setValue("uuu", username);
+		setting->setValue("ppp", "");
+		setting->setValue("position", remeberPasswd);
+	}
+}
+void Login::lower()//自动登录
+{
+	if (ui->auto_login->isChecked())
+	{
+		autologin = true;
+	}
+	else
+	{
+		autologin = false;
+	}
+	QSettings *settingss = new  QSettings("E:/test.ini", QSettings::IniFormat);
+
+	settingss->setValue("auto", autologin);
 }
