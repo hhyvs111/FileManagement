@@ -12,7 +12,7 @@ class Register : public BaseWindow
 public:
 	Register(QWidget *parent = Q_NULLPTR);
 	~Register();
-	void setWindowTitle(QString title, int titleFontSize = 10);  //设置标题栏
+	//void setWindowTitle(QString title, int titleFontSize = 10);  //设置标题栏
 
 private:
 	Ui::Register *ui;

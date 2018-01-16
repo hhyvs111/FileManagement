@@ -385,5 +385,42 @@ color: rgb(255, 255, 255);</string>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>clickRegister</sender>
+   <signal>clicked()</signal>
+   <receiver>Register</receiver>
+   <slot>Click_Register()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clickCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>Register</receiver>
+   <slot>Click_Cancel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>296</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>Click_Register()</slot>
+  <slot>Click_Cancel()</slot>
+ </slots>
 </ui>

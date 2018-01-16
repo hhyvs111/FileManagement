@@ -9,6 +9,7 @@ MyMessageBox::MyMessageBox(QWidget *parent)
 {
 	ui.setupUi(this);
 	initWindow();
+	setFixedSize(340, 180);
 }
   
 MyMessageBox::~MyMessageBox()

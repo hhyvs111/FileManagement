@@ -46,7 +46,7 @@ public slots:
 	void raise();//记住密码
 	void lower();//自动登录
 
-	void hide();//修改账号框内容
+	void hide1();//修改账号框内容
 	void receiveDataFromClient(QString data);   //接收从客户端传来的信息
 signals: 
 	void showMain();

@@ -133,7 +133,7 @@ void Login::receiveDataFromClient(QString data)
 	else
 		return;
 }
-void Login::hide()
+void Login::hide1()
 {
 	ui->passwordLine->clear();
 	ui->rem_pw->setChecked(false);
@@ -144,13 +144,9 @@ void Login::raise()
 	if (ui->rem_pw->isChecked())
 	{
 		remeberPasswd = true;//勾选了记住密码 将密码写入配置文件
-
-		
-
 		QSettings *settings = new  QSettings("E:/test.ini", QSettings::IniFormat);
 		username = ui->nameLine->text();
 		passwd = ui->passwordLine->text().trimmed();
-
 		QByteArray passArray = passwd.toLatin1();
 
 		QString password;

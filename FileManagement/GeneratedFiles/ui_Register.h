@@ -216,6 +216,8 @@ public:
 
 
         retranslateUi(Register);
+        QObject::connect(clickRegister, SIGNAL(clicked()), Register, SLOT(Click_Register()));
+        QObject::connect(clickCancel, SIGNAL(clicked()), Register, SLOT(Click_Cancel()));
 
         QMetaObject::connectSlotsByName(Register);
     } // setupUi

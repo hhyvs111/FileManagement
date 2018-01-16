@@ -67,6 +67,7 @@ Register::Register(QWidget *parent)
 	ui->passLogo2->hide();
 	ui->passwordMessage->hide();
 	ui->passwordMessage2->hide();
+	initTitleBar();
 	//当用户名输入完后检测是否重复
 	connect(ui->userName, SIGNAL(editingFinished()), this, SLOT(checkIsAvailableUserName()));
 
@@ -91,10 +92,10 @@ void Register::initTitleBar()
 	m_titleBar->setButtonType(MIN_BUTTON);
 	m_titleBar->setTitleWidth(this->width());
 }
-void Register::setWindowTitle(QString title, int titleFontSize)
-{
-	m_titleBar->setTitleContent(title, titleFontSize);
-}
+//void Register::setWindowTitle(QString title, int titleFontSize)
+//{
+//	m_titleBar->setTitleContent(title, titleFontSize);
+//}
 
 //点击注册
 void Register::Click_Register()
