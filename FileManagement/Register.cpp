@@ -7,6 +7,7 @@
 #include <QDialog> 
 #include <QLabel>
 #include<qpixmap.h>
+#include <QCryptographicHash>
 
 
 Register::Register(QWidget *parent)
@@ -118,7 +119,17 @@ void Register::Click_Register()
 		QString name = this->ui->userName->text();
 		QString password = this->ui->userPassword->text();
 		QString password2 = this->ui->userPassword2->text();
-		QString sql = "insert into user (userName,userPassword)values('" + name + "','" + password + "')";
+
+		QString md5;
+		QByteArray qc, cc;
+		QCryptographicHash md(QCryptographicHash::Md5);
+		qc.append(password2);
+		md.addData(qc);
+		cc = md.result();
+		md5.append(cc.toHex());
+
+
+		QString sql = "insert into user (userName,userPassword)values('" + name + "','" + md5+ "')";
 		QString bs = "R";
 		QString data = bs + "#" + sql;
 		tcp->tcpSocket->write(data.toLatin1());//将信息写入socket

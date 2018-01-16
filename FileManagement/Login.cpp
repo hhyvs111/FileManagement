@@ -8,6 +8,7 @@
 #include<QDialog>
 #include<QCryptographicHash>
 #include <MyMessageBox.h>
+#include<QCryptographicHash>
 //定义一个全局变量
 
 
@@ -23,6 +24,9 @@ Login::Login(QWidget *parent)
 	QSettings *getting = new QSettings("E:/test.ini", QSettings::IniFormat);//初始化显示上一次登录账户密码
 	ui->nameLine->setText(getting->value("uuu", "").toString());
 	kk = getting->value("ppp", "").toString();
+
+	
+
 	QString xk = getting->value("position", "").toString();
 	QString xx = getting->value("auto", "").toString();
 
@@ -81,9 +85,17 @@ void Login::Click_Login()
 	QString name = this->ui->nameLine->text();
 	QString passwd = this->ui->passwordLine->text();
 	 
+	QString	md5;
+	QByteArray xk, kk;
+	QCryptographicHash md(QCryptographicHash::Md5);
+	xk.append(passwd);
+	md.addData(xk);
+	kk = md.result();
+	md5.append(kk.toHex());
+ 
 
 	QString sql = "select * from user where userName = '"
-		+ name + "'and userPassword ='" + passwd + "'";
+		+ name + "'and userPassword ='" + md5 + "'";
 
 	QString bs = "L";
 	QString data = bs + "#" + sql;
@@ -139,7 +151,7 @@ void Login::hide1()
 	ui->rem_pw->setChecked(false);
 	ui->auto_login->setChecked(false);
 }
-void Login::raise()
+void Login::raise()//勾选记住密码 将登录框各种信息写入配置文件
 {
 	if (ui->rem_pw->isChecked())
 	{
