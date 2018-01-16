@@ -25,6 +25,7 @@ Login::Login(QWidget *parent)
 	kk = getting->value("ppp", "").toString();
 	QString xk = getting->value("position", "").toString();
 	QString xx = getting->value("auto", "").toString();
+
 	if (xk == "true")
 	{
 		ui->rem_pw->setChecked(true);

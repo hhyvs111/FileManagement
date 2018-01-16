@@ -2,20 +2,24 @@
 #include "stdafx.h"
 #include <QtWidgets/QDialog>
 #include "ui_Register.h"
+#include "BaseWindow.h"
 
 extern TcpClient * tcp;
-class Register : public QDialog
+class Register : public BaseWindow
 {
 	Q_OBJECT
 
 public:
 	Register(QWidget *parent = Q_NULLPTR);
 	~Register();
+	void setWindowTitle(QString title, int titleFontSize = 10);  //设置标题栏
 
 private:
 	Ui::Register *ui;
 	bool isAvailableUserName;
 	bool isAvailablePassword;
+
+	void initTitleBar();  //初始化标题栏
 
 	//槽函数
 public slots:

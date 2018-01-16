@@ -10,14 +10,15 @@
 
 
 Register::Register(QWidget *parent)
-	: QDialog(parent), ui(new Ui::Register)   //这里很重要，要对构造函数初始化！
+	: BaseWindow(parent), ui(new Ui::Register)   //这里很重要，要对构造函数初始化！
 {
 	ui->setupUi(this);
 	this->setStyleSheet("background:#ffff");//背景
 											//this->setStyleSheet("background:D:/FileManagement-master/FileManagement/Resource/back.jpg");
 	isAvailableUserName = false;     //一开始用户名是不可用的
-
 	isAvailablePassword = false;		//密码是否一致
+
+	setWindowFlags(Qt::FramelessWindowHint);
 	ui->userMessage->hide();
 	setFixedSize(340, 350);
 	this->setWindowTitle("LOGIN");
@@ -79,6 +80,20 @@ Register::Register(QWidget *parent)
 Register::~Register()
 {
 	delete ui;
+}
+
+void Register::initTitleBar()
+{
+	m_titleBar->move(1, 2);
+	m_titleBar->raise();
+	m_titleBar->setWindowBorderWidth(2);
+	m_titleBar->setBackgroundColor(255, 255, 255);
+	m_titleBar->setButtonType(MIN_BUTTON);
+	m_titleBar->setTitleWidth(this->width());
+}
+void Register::setWindowTitle(QString title, int titleFontSize)
+{
+	m_titleBar->setTitleContent(title, titleFontSize);
 }
 
 //点击注册
