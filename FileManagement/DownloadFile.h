@@ -5,9 +5,19 @@
 #include "ui_DownloadFile.h"
 #include <QFile>  
 #include <QString> 
+#include <QStandardItemModel>
 extern TcpClient * tcp;
 extern QString globalUserName;
 
+
+struct FileInfo
+{
+	int fileId;
+	QString fileName;
+	QString fileSize;
+	QString fileType;
+	int userId;
+};
 class DownloadFile : public QWidget
 {
 	Q_OBJECT
@@ -30,6 +40,9 @@ private:
 	qint64 RtotalSize;  //总共需要发送的文件大小（文件内容&文件名信息）  
 	qint64 byteReceived;  //已经接收的大小  
 	int receiveTime;	//接受的次数
+	QStandardItemModel *model;
+	QPushButton *mDownloadButton;
+
 
 private slots:
 

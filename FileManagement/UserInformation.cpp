@@ -164,7 +164,6 @@ void UserInformation::showUserInfo()
 	QString data = QString::fromLocal8Bit(dataread);
 	qDebug() << "the data from client: " << data;
 	QStringList list = data.split("#");  //用#分割
-
 	
 	ui->nameLineEdit->setText(list[0]);
 	ui->IDlineEdit->setText(list[2]);

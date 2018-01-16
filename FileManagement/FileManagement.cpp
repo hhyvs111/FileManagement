@@ -38,7 +38,7 @@ FileManagement::FileManagement(QWidget *parent)
 	//ui->photoLabel->setMovie(movie);
 	//	movie->start();
 		setWindowIcon(QIcon("Resource/icon1.png"));//设置窗口左上角图标
-		setFixedSize(550, 480); // 禁止改变窗口大小
+		setFixedSize(700, 600); // 禁止改变窗口大小
 		ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
 		ui->uploadButton->setToolTip(tr("upload"));
 		ui->downloadButton->setToolTip(tr("download"));

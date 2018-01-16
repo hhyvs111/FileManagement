@@ -7,7 +7,21 @@ DownloadFile::DownloadFile(QWidget *parent) :
 	//StotalSize = 0;
 	byteReceived = 0;
 	//ui->progressLabel->hide();
-	
+	//添加表头
+	model = new QStandardItemModel();
+	model->setColumnCount(4);
+	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit("文件名"));
+	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("文件大小"));
+	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("文件类型"));
+	model->setHeaderData(3, Qt::Horizontal, QString::fromLocal8Bit("文件操作"));
+	ui->downloadTable->setModel(model);
+	ui->downloadTable->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
+	//设置列宽不可变 
+	ui->downloadTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
+	ui->downloadTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
+	ui->downloadTable->setColumnWidth(0, 200);
+	ui->downloadTable->setColumnWidth(1, 80);
+
 	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
 }
 
@@ -70,7 +84,7 @@ void DownloadFile::receiveFile()
 
 	if (byteReceived == RtotalSize)
 	{
-		ui->downloadSpeedLabel->setText(QString::fromLocal8Bit("下载完成！ %1MB (%2MB/s) 共%3MB 已用时:%4秒\n估计剩余时间：%5秒"));
+		ui->downloadSpeedLabel->setText(QString::fromLocal8Bit("下载完成！"));
 		qDebug() << "receive is done";
 		/*qDebug() << "the file name:" << file.getFileName();
 		qDebug() << "the userid :" << user.getUserId();
@@ -124,8 +138,45 @@ void DownloadFile::sendFileInfo()
 
 void DownloadFile::showFileInfo()
 {
+
 	QByteArray dataread = tcp->tcpSocket->readAll();
 	QString data = QString::fromLocal8Bit(dataread);
-	qDebug() << "the data from client: " << data;
+	qDebug() << "the data from client: " << dataread;
 
+
+	QStringList listNumber = data.split("$");
+
+	QList<FileInfo> fileInfo;
+	//在这里就要加入到表里去
+	//把数据都放到QList里去！
+	//listNumber[0] 是文件个数
+	for (int i = 1;i <= listNumber[0].toInt();i++)
+	{
+		FileInfo littleFile;
+		QStringList fileList = listNumber[i].split("#");
+		littleFile.fileId = fileList[0].toInt();
+		littleFile.fileName = fileList[1];
+		littleFile.fileSize = fileList[2];
+		littleFile.fileType = fileList[3];
+		littleFile.userId = fileList[4].toInt();
+		qDebug() << littleFile.fileId<<" " << littleFile.fileName << " " <<
+			littleFile.fileSize << " " << littleFile.fileType << " " << littleFile.userId;
+		fileInfo.append(littleFile);
+	}
+
+	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	for (int i = 0; i < listNumber[0].toInt(); i++)
+	{
+		model->setItem(i, 0, new QStandardItem(fileInfo.at(i).fileName));
+		model->setItem(i, 1, new QStandardItem(QString::fromLocal8Bit("%1MB").arg(
+			QString::number(fileInfo.at(i).fileSize.toFloat() / (1024 * 1024), 'f', 2))));
+		model->setItem(i, 2, new QStandardItem(fileInfo.at(i).fileType));
+
+		//mDownloadButton = new QPushButton("下载");
+		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 6), new QPushButton("Download"));
+		//model->setItem(i, 3, mDownloadButton);
+	}
+	//用完后断开
+	connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
+	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showFileInfo()));
 }
