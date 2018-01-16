@@ -49,7 +49,7 @@ Login::Login(QWidget *parent)
 	if (xx == "true")
 	{
 		ui->auto_login->setChecked(true);
-		Click_Login();
+		//Click_Login();
 	}
 	
 
