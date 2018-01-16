@@ -196,7 +196,7 @@ void Register::checkIsokPassword()
 	if (rx.exactMatch(passw) == true)
 	{
 		isokPassword = true;
-		ui->passwordMessage->setText(QString::fromLocal8Bit("密码正确！"));
+		ui->passwordMessage->setText(QString::fromLocal8Bit("密码格式正确！"));
 		ui->passwordMessage->setStyleSheet("color:green;");
 		ui->passwordMessage->show();
 	}
