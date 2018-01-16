@@ -133,6 +133,12 @@ void Login::receiveDataFromClient(QString data)
 	else
 		return;
 }
+void Login::hide()
+{
+	ui->passwordLine->clear();
+	ui->rem_pw->setChecked(false);
+	ui->auto_login->setChecked(false);
+}
 void Login::raise()
 {
 	if (ui->rem_pw->isChecked())
