@@ -34,6 +34,9 @@ private slots:
 	void receiveLogin();
 signals:
 	void showUploadFile();
+	
+	////œ‘ æ∞¥≈•
+	//void showInfo();
 
 
 };

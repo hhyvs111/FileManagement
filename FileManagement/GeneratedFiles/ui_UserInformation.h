@@ -220,7 +220,7 @@ public:
         label->setText(QApplication::translate("UserInformation", "QQ\357\274\232", Q_NULLPTR));
         addressLabel->setText(QApplication::translate("UserInformation", "\351\202\256\347\256\261\357\274\232", Q_NULLPTR));
         phoneLabel->setText(QApplication::translate("UserInformation", "\346\211\213\346\234\272\345\217\267\357\274\232", Q_NULLPTR));
-        nameLabel->setText(QApplication::translate("UserInformation", "\345\247\223\345\220\215\357\274\232", Q_NULLPTR));
+        nameLabel->setText(QApplication::translate("UserInformation", "\347\224\250\346\210\267\345\220\215\357\274\232", Q_NULLPTR));
         alterButton->setText(QApplication::translate("UserInformation", "\344\277\256\346\224\271\344\277\241\346\201\257", Q_NULLPTR));
         confirmButton->setText(QApplication::translate("UserInformation", "\344\277\235\345\255\230\344\277\241\346\201\257", Q_NULLPTR));
         cancelButton->setText(QApplication::translate("UserInformation", "\345\217\226\346\266\210", Q_NULLPTR));

@@ -19,7 +19,9 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -35,6 +37,9 @@ public:
     QLineEdit *downloadFileName;
     QPushButton *downloadButton;
     QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_3;
+    QTableView *downloadTable;
+    QScrollBar *verticalScrollBar;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_3;
     QVBoxLayout *verticalLayout_2;
@@ -76,6 +81,22 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        downloadTable = new QTableView(DownloadFile);
+        downloadTable->setObjectName(QStringLiteral("downloadTable"));
+
+        horizontalLayout_3->addWidget(downloadTable);
+
+        verticalScrollBar = new QScrollBar(DownloadFile);
+        verticalScrollBar->setObjectName(QStringLiteral("verticalScrollBar"));
+        verticalScrollBar->setOrientation(Qt::Vertical);
+
+        horizontalLayout_3->addWidget(verticalScrollBar);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));

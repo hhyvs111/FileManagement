@@ -126,6 +126,8 @@ void UploadFile::ClickSendButton()
 	ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在发送文件 %1").arg(fileName));
 }
 
+
+
 void UploadFile::receiveMainwindow()
 {
 	this->show();

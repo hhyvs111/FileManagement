@@ -151,7 +151,7 @@ color: rgb(255, 255, 255);</string>
         </font>
        </property>
        <property name="text">
-        <string>姓名：</string>
+        <string>用户名：</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

@@ -16,6 +16,9 @@ public:
 	explicit DownloadFile(QWidget *parent = 0);
 	~DownloadFile();
 
+	//发送查看该用户所上传文件的信息给服务器
+	void sendFileInfo();
+
 private:
 	Ui::DownloadFile *ui;
 
@@ -35,6 +38,9 @@ private slots:
 						 //void goOnSend(qint64);  //传送文件内容 
 
 	void ClickDownloadButton();
+
+	void showFileInfo();
+
 	//void ClickSendButton();
 	//void receiveMainwindow();
 

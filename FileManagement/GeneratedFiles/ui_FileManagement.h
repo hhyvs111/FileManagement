@@ -52,7 +52,6 @@ public:
     QVBoxLayout *SubLayout;
     QSpacerItem *verticalSpacer_8;
     QSpacerItem *verticalSpacer_9;
-    QSpacerItem *horizontalSpacer_3;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *FileManagement)
@@ -173,10 +172,6 @@ public:
 
 
         FunctionLayout->addLayout(SubLayout);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        FunctionLayout->addItem(horizontalSpacer_3);
 
 
         verticalLayout_2->addLayout(FunctionLayout);

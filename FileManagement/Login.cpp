@@ -126,7 +126,7 @@ void Login::receiveDataFromClient(QString data)
 	}
 	else if (QString::compare(data, "F") == 0)
 	{
-		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("用户名或密码不不正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("用户名或密码不正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		ui->passwordLine->clear();  //清空密码passwardLine
 		ui->passwordLine->setFocus();  //将鼠标重新定位到password
 	}

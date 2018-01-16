@@ -2,10 +2,10 @@
 #include "MyMessageBox.h"
 //#include "ui_tcpclient.h"
 //
-#define ip "47.100.160.51"
-#define port 3389
-//#define ip "127.0.0.1"
-//#define port 8000
+//#define ip "47.100.160.51"
+//#define port 3389
+#define ip "127.0.0.1"
+#define port 8000
 
 
 
@@ -52,7 +52,7 @@ void TcpClient::displayError1()
 void TcpClient::displayError(QAbstractSocket::SocketError)
 {
     qDebug()<<tcpSocket->errorString();   //输出出错信息
-	MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("网络连接失败"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("网络连接失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 }
 
 
@@ -60,6 +60,7 @@ void TcpClient::readMessages()
 {
     QString data=tcpSocket->readAll();
 	qDebug() << "it is in client the data from server: " << data;
+	
     QStringList list=data.split("#");
 
 	//验证登陆是否成功
@@ -103,6 +104,17 @@ void TcpClient::readMessages()
 		{
 			emit sendDataToRegister("RCU_F");
 			qDebug() << "RCU is F";
+		}
+	}
+	else if (list[0] == "updateUserInfo")
+	{
+		if (list[1] == "true")
+		{
+			MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("修改成功!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+		}
+		else
+		{
+			MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("修改失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		}
 	}
 

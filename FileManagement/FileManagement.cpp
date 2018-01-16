@@ -122,9 +122,13 @@ void FileManagement::ClickUploadFile()
 //点击下载文件按钮显示下载界面
 void FileManagement::ClickDownloadFile()
 {
-	if (downloadFileWindowIsOpen)
-		downloadFile->show();
 
+	//点击显示文件信息
+	if (downloadFileWindowIsOpen)
+	{
+		downloadFile->show();
+		downloadFile->sendFileInfo();
+	}
 	if (userInformationWindowIsOpen)
 		userInformation->hide();
 	if (uploadFileWindowIsOpen)
@@ -132,6 +136,7 @@ void FileManagement::ClickDownloadFile()
 	if (!downloadFileWindowIsOpen)
 	{
 		downloadFile = new DownloadFile(this);  //将指针实例化
+		downloadFile->sendFileInfo();
 		ui->SubLayout->insertWidget(1, downloadFile);
 		downloadFile->show();
 		downloadFileWindowIsOpen = true;
@@ -146,7 +151,10 @@ void FileManagement::ClickDownloadFile()
 void FileManagement::ClickUserInformation()
 {
 	if (userInformationWindowIsOpen)
+	{
 		userInformation->show();
+		userInformation->sendUserInfo();
+	}
 	if (downloadFileWindowIsOpen)
 		downloadFile->hide();
 	if (uploadFileWindowIsOpen)
@@ -154,6 +162,8 @@ void FileManagement::ClickUserInformation()
 	if (!userInformationWindowIsOpen)
 	{
 		userInformation = new UserInformation(this);
+		//调用了发送用户信息
+		userInformation->sendUserInfo();
 		ui->SubLayout->insertWidget(1, userInformation);
 		userInformation->show();
 		userInformationWindowIsOpen = true;

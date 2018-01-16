@@ -19,6 +19,7 @@ class UserInformation : public QWidget
 public:
     explicit  UserInformation(QWidget *parent = 0);
     ~UserInformation();
+	void sendUserInfo();
 
  private slots:
     void on_alterButton_clicked();
@@ -29,6 +30,9 @@ public:
 
     void on_passAlterButton_clicked();
 
+	void showUserInfo();
+
+	
 private:
     Ui::UserInformation *ui;
 	QString userName;
@@ -37,6 +41,8 @@ private:
 	QString phoneNumber;
 	QString qqNumber;
 	QString mail;
+
+
 };
 
 #endif // INFORMATIOM_H

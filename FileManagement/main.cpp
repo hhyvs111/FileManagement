@@ -5,7 +5,7 @@
 #include "Register.h"
 #include "UploadFile.h"
 #include "MyMessageBox.h"
-#include <Qdir.h>
+
 #include <QtWidgets/QApplication>
 #include <qApplication.h>
 
@@ -16,9 +16,6 @@
 int main(int argc, char *argv[])
 {
 
-	QString strLibPath(QDir::toNativeSeparators(QApplication::applicationDirPath()) +
-		QDir::separator() + "plugins");  
-	
 	QApplication a(argc, argv);
 	FileManagement F;
 	Login L;

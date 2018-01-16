@@ -107,6 +107,25 @@ void DownloadFile::ClickDownloadButton()
 	{
 		qDebug() << "send filed :" << data;
 	}
-	
-	
+}
+
+void DownloadFile::sendFileInfo()
+{
+	//每次打开该页面则发查询信息发过去
+	QString data = "findFileByName#" + globalUserName;
+	QByteArray datasend = data.toLocal8Bit();
+	qDebug() << datasend;
+	tcp->tcpSocket->write(datasend);
+
+	//暂时取消TCP原本的验证消息
+	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
+	connect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showFileInfo()));
+}
+
+void DownloadFile::showFileInfo()
+{
+	QByteArray dataread = tcp->tcpSocket->readAll();
+	QString data = QString::fromLocal8Bit(dataread);
+	qDebug() << "the data from client: " << data;
+
 }
