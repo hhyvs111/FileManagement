@@ -31,10 +31,11 @@ private slots:
 	void ClickUserInformation();
 	void ClickUploadFile();
 	void ClickDownloadFile();
+	void ClickReturn();
 	void receiveLogin();
 signals:
 	void showUploadFile();
-	
+	void showLogin();
 	////œ‘ æ∞¥≈•
 	//void showInfo();
 

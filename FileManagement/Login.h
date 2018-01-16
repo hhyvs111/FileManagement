@@ -42,7 +42,7 @@ public slots:
 	void Click_Register();  //点击跳转到注册框
 	//void MessageBox();
 	void receiveRegister();   //接受注册框的信号
-	 
+	void receiveMain();
 	void raise();//记住密码
 	void lower();//自动登录
 
@@ -51,6 +51,7 @@ public slots:
 signals: 
 	void showMain();
 	void showRegister();
+
 };
 
 

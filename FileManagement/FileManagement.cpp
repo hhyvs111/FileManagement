@@ -172,3 +172,9 @@ void FileManagement::ClickUserInformation()
 		qDebug() << "userInformationWindowIsOpen!";
 
 }
+
+void FileManagement::ClickReturn()
+{
+	this->hide();
+	emit showLogin();
+}

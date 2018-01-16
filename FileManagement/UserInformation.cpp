@@ -96,7 +96,7 @@ void UserInformation::on_confirmButton_clicked()
 	QString data = "alterUserInfo#" +  ui->nameLineEdit->text() + "#"+ ui->IDlineEdit->text() 
 		+ "#" + ui->phoneLineEdit->text() + "#" + ui->QQlineEdit->text()
 		+ "#" + ui->addressLineEdit->text();
-	QByteArray datasend = data.toLocal8Bit();
+	QByteArray datasend = data.toUtf8();
 	qDebug() << datasend;
 	tcp->tcpSocket->write(datasend);
 

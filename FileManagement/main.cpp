@@ -26,5 +26,6 @@ int main(int argc, char *argv[])
 	QObject::connect(&L, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
 	QObject::connect(&L, SIGNAL(showMain()), &F, SLOT(receiveLogin()));
 	QObject::connect(&R, SIGNAL(showLogin()), &L, SLOT(receiveRegister()));
+	QObject::connect(&F, SIGNAL(showLogin()), &L, SLOT(receiveMain()));
 	return a.exec();
 }

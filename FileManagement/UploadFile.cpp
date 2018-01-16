@@ -6,7 +6,7 @@
 #include <QIODevice>
 #include <QString>
 #include <Qtime>
-
+#include "MyMessageBox.h"
 
 int sendtimes = 0;
 UploadFile::UploadFile(QWidget *parent) :
@@ -106,6 +106,7 @@ void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容
 
 	if (byteToWrite == 0)  //发送完毕  
 	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK);
 		ui->sendStatusLabel->setText(QString::fromLocal8Bit("文件发送完毕!"));
 		disconnect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 		sendtimes = 0;

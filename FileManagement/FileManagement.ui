@@ -328,10 +328,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>deleteButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileManagement</receiver>
+   <slot>ClickReturn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>37</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>45</x>
+     <y>530</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ClickUploadFile()</slot>
   <slot>ClickDownloadFile()</slot>
   <slot>ClickUserInformation()</slot>
+  <slot>ClickReturn()</slot>
  </slots>
 </ui>

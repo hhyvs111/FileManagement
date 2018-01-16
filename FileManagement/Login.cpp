@@ -124,6 +124,10 @@ void Login::receiveRegister()
 	this->show();  //显示登录窗口
 }
 
+void Login::receiveMain()
+{
+	this->show();
+}
 //验证登录，从服务端得来的数据
 void Login::receiveDataFromClient(QString data)
 {
@@ -132,8 +136,9 @@ void Login::receiveDataFromClient(QString data)
 	{
 		//将用户名设置给全局变量用户名
 		globalUserName = this->ui->nameLine->text();
+		qDebug() << "login success"<<globalUserName;
 		//MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("登录成功！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
-		this->hide();
+		this->close();
 		emit showMain();
 	}
 	else if (QString::compare(data, "F") == 0)

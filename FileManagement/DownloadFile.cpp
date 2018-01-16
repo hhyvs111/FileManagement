@@ -1,4 +1,6 @@
 #include "DownloadFile.h"
+#include <QFileDialog>
+#include "MyMessageBox.h"
 DownloadFile::DownloadFile(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::DownloadFile)
@@ -19,7 +21,7 @@ DownloadFile::DownloadFile(QWidget *parent) :
 	//设置列宽不可变 
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
-	ui->downloadTable->setColumnWidth(0, 200);
+	ui->downloadTable->setColumnWidth(0, 300);
 	ui->downloadTable->setColumnWidth(1, 80);
 
 	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
@@ -37,6 +39,7 @@ void DownloadFile::receiveFile()
 
 	if (byteReceived == 0)  //才刚开始接收数据，此数据为文件信息  
 	{
+ 
 		qDebug() << "receive the file of head";
 		//ui->receivedProgressBar->setValue(0);
 		QDataStream in(tcp->tcpSocket);
@@ -45,13 +48,12 @@ void DownloadFile::receiveFile()
 		//user.queryUserByName(globalUserName);
 		//qDebug() << "the user :" << user.getUserName();
 
-		fileName = "files/" + fileName;
+
 		qDebug() << "the file of head: " << fileName;
 		qDebug() << "totalSize: " << RtotalSize;
 		qDebug() << " first byteReceived: " << byteReceived;
 		newFile = new QFile(fileName);
 		newFile->open(QFile::WriteOnly);
-
 		//开始计时！
 		downloadTime.start();
 
@@ -84,6 +86,7 @@ void DownloadFile::receiveFile()
 
 	if (byteReceived == RtotalSize)
 	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("下载完成!"), MESSAGE_INFORMATION, BUTTON_OK);
 		ui->downloadSpeedLabel->setText(QString::fromLocal8Bit("下载完成！"));
 		qDebug() << "receive is done";
 		/*qDebug() << "the file name:" << file.getFileName();
@@ -104,12 +107,11 @@ void DownloadFile::ClickDownloadButton()
 	QString openFileName;
 	//获取ui输入的信息
 	openFileName = ui->downloadFileName->text();
-
 	QString bs = "downloadFile";
 	QString data = bs + "#" + openFileName;
 
 	//发送中文需要
-	QByteArray datasend = data.toLocal8Bit();
+	QByteArray datasend = data.toUtf8();
 	if (tcp->tcpSocket->write(datasend))
 	{
 		
@@ -127,7 +129,7 @@ void DownloadFile::sendFileInfo()
 {
 	//每次打开该页面则发查询信息发过去
 	QString data = "findFileByName#" + globalUserName;
-	QByteArray datasend = data.toLocal8Bit();
+	QByteArray datasend = data.toUtf8();
 	qDebug() << datasend;
 	tcp->tcpSocket->write(datasend);
 
@@ -140,7 +142,7 @@ void DownloadFile::showFileInfo()
 {
 
 	QByteArray dataread = tcp->tcpSocket->readAll();
-	QString data = QString::fromLocal8Bit(dataread);
+	QString data = QString::fromUtf8(dataread);
 	qDebug() << "the data from client: " << dataread;
 
 
