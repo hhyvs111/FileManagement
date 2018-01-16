@@ -477,6 +477,22 @@ border-radius: 3px; color: rgb(255, 255, 255);
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>nameLine</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Login</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>195</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Click_Login()</slot>

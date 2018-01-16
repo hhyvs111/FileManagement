@@ -121,7 +121,7 @@ public:
         downloadSpeedLabel->setText(QApplication::translate("DownloadFile", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
-}; 
+};
 
 namespace Ui {
     class DownloadFile: public Ui_DownloadFile {};
