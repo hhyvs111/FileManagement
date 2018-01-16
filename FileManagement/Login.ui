@@ -411,6 +411,15 @@ border-radius: 3px; color: rgb(255, 255, 255);
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>nameLine</tabstop>
+  <tabstop>passwordLine</tabstop>
+  <tabstop>m_LoginButton</tabstop>
+  <tabstop>rem_pw</tabstop>
+  <tabstop>auto_login</tabstop>
+  <tabstop>m_RegisterButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

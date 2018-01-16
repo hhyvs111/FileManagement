@@ -220,6 +220,12 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
+        QWidget::setTabOrder(nameLine, passwordLine);
+        QWidget::setTabOrder(passwordLine, m_LoginButton);
+        QWidget::setTabOrder(m_LoginButton, rem_pw);
+        QWidget::setTabOrder(rem_pw, auto_login);
+        QWidget::setTabOrder(auto_login, m_RegisterButton);
+        QWidget::setTabOrder(m_RegisterButton, pushButton_2);
 
         retranslateUi(Login);
         QObject::connect(m_LoginButton, SIGNAL(clicked()), Login, SLOT(Click_Login()));

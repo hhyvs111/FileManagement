@@ -204,6 +204,14 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
+        QWidget::setTabOrder(nameLineEdit, IDlineEdit);
+        QWidget::setTabOrder(IDlineEdit, phoneLineEdit);
+        QWidget::setTabOrder(phoneLineEdit, QQlineEdit);
+        QWidget::setTabOrder(QQlineEdit, addressLineEdit);
+        QWidget::setTabOrder(addressLineEdit, confirmButton);
+        QWidget::setTabOrder(confirmButton, alterButton);
+        QWidget::setTabOrder(alterButton, alterPassword);
+        QWidget::setTabOrder(alterPassword, cancelButton);
 
         retranslateUi(UserInformation);
 

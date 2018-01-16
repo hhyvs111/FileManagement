@@ -255,6 +255,17 @@ color: rgb(255, 255, 255);</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>nameLineEdit</tabstop>
+  <tabstop>IDlineEdit</tabstop>
+  <tabstop>phoneLineEdit</tabstop>
+  <tabstop>QQlineEdit</tabstop>
+  <tabstop>addressLineEdit</tabstop>
+  <tabstop>confirmButton</tabstop>
+  <tabstop>alterButton</tabstop>
+  <tabstop>alterPassword</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
