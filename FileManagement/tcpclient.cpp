@@ -37,6 +37,13 @@ void TcpClient::connectServer()
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessages()));
 }
 
+//void TcpClient::receiveSignalFromDown(QString msg)
+//{
+//	if(msg == "disconnect")
+//		disconnect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessages()));
+//	else
+//		connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readMessages()));
+//}
 void TcpClient::displayError1()
 {
 		qDebug() << "the server is connected!";

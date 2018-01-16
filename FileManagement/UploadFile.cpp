@@ -5,6 +5,7 @@
 #include <QHostAddress>
 #include <QIODevice>
 #include <QString>
+#include <Qtime>
 
 
 int sendtimes = 0;
@@ -13,17 +14,40 @@ UploadFile::UploadFile(QWidget *parent) :
 	ui(new Ui::UploadFile)
 {
 	ui->setupUi(this);
-
+	//ui->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
 	ui->progressLabel->hide();
+	ui->uploadSpeedLabel->hide();
+	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
+}
 
-	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件  
-	
+UploadFile::~UploadFile()
+{
+	delete ui;
+}
+void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）  
+{
+	ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在打开文件..."));
+	ui->sendProgressBar->setValue(0);  //非第一次发送  
 
+									   //告诉服务器，我要发送文件了
+	tcp->tcpSocket->write("uploadFile");
+	qDebug() << globalUserName << " will send a file to server";
+	loadSize = 0;
+	byteToWrite = 0;
+	totalSize = 0;
+	sendtimes = 0;
+	outBlock.clear();
 
+	fileName = QFileDialog::getOpenFileName(this);
+	localFile = new QFile(fileName);
+	localFile->open(QFile::ReadOnly);
+
+	ui->sendStatusLabel->setText(QString::fromLocal8Bit("已打开文件 %1").arg(fileName));
 }
 
 void UploadFile::send()  //发送文件头信息  
 {
+	
 	connect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 	byteToWrite = localFile->size();  //剩余数据的大小  
 	qDebug() << "the file bytetowrite: " << byteToWrite;
@@ -47,7 +71,7 @@ void UploadFile::send()  //发送文件头信息
 	qDebug() << "the file head:" << outBlock;
 	tcp->tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字  
 
-
+	sendTime.start();
 	//UI信息
 	ui->progressLabel->show();
 	ui->sendProgressBar->setMaximum(totalSize);
@@ -65,8 +89,18 @@ void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容
 	outBlock = localFile->read(qMin(byteToWrite, loadSize));   //如果剩余数据比每次发送的小则发送剩余的
 
 	tcp->tcpSocket->write(outBlock);    //将这个信息写入socket
-
+	
 	//qDebug() << "information:" <<outBlock;
+	float useTime = sendTime.elapsed();
+	double speed = (totalSize - byteToWrite) / useTime;
+	ui->uploadSpeedLabel->show();
+	ui->uploadSpeedLabel->setText(QString::fromLocal8Bit("已发送 %1MB (%2MB/s) 共%3MB 已用时:%4秒\n估计剩余时间：%5秒")
+		.arg((totalSize - byteToWrite) / (1024 * 1024))//已接收
+		.arg(speed * 1000 / (1024 * 1024), 0, 'f', 2)//速度
+		.arg(totalSize / (1024 * 1024))//总大小
+		.arg(useTime / 1000, 0, 'f', 0)//用时
+		.arg(totalSize / speed / 1000 - useTime / 1000, 0, 'f', 0));//剩余时间
+
 	ui->sendProgressBar->setMaximum(totalSize);
 	ui->sendProgressBar->setValue(totalSize - byteToWrite);
 
@@ -79,31 +113,9 @@ void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容
 	}
 }
 
-UploadFile::~UploadFile()
-{
-	delete ui;
-}
 
-void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）  
-{
-	ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在打开文件..."));
-	ui->sendProgressBar->setValue(0);  //非第一次发送  
 
-	//告诉服务器，我要发送文件了
-	tcp->tcpSocket->write("uploadFile");
-	qDebug() << globalUserName<<" will send a file to server";
-	loadSize = 0;
-	byteToWrite = 0;
-	totalSize = 0;
-	sendtimes = 0;
-	outBlock.clear();
 
-	fileName = QFileDialog::getOpenFileName(this);
-	localFile = new QFile(fileName);
-	localFile->open(QFile::ReadOnly);
-
-	ui->sendStatusLabel->setText(QString::fromLocal8Bit("已打开文件 %1").arg(fileName));
-}
 
 void UploadFile::ClickSendButton()
 {

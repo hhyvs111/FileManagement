@@ -10,6 +10,9 @@
 #include <algorithm>
 #include<ctime>
 #include<qdebug.h>
+#include <QIODevice>
+#include <QByteArray>
+#include <QDataStream>
 #include"tcpclient.h"
 
 using namespace std;

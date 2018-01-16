@@ -4,8 +4,9 @@
 #include "stdafx.h"
 #include <QWidget>  
 #include <QFile>  
+#include <QTime>
 #include <string>  
-#include "ui_UploadFile.h";
+#include "ui_UploadFile.h"
 
 
 extern TcpClient * tcp;
@@ -22,9 +23,10 @@ private:
 	Ui::UploadFile *ui;
 
 	//QTcpSocket *tcpClient;
+
 	QFile *localFile;
 	QString fileName;  //文件名  
-
+	QTime sendTime;  //发送时间
 	QByteArray outBlock;  //分次传  
 	qint64 loadSize;  //每次发送数据的大小  
 	qint64 byteToWrite;  //剩余数据大小  

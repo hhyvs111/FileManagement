@@ -34,7 +34,7 @@ private slots:
     //void on_signBtn_clicked();
 	//void sendMeggages();  //·¢ËÍÊý¾Ý
 	void displayError1();
-
+	/*void receiveSignalFromDown(QString);*/
 
 
 signals:
