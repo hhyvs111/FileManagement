@@ -99,7 +99,7 @@
      <x>30</x>
      <y>30</y>
      <width>88</width>
-     <height>24</height>
+     <height>28</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -211,7 +211,7 @@
      <x>30</x>
      <y>282</y>
      <width>296</width>
-     <height>25</height>
+     <height>30</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -426,9 +426,26 @@ color: rgb(255, 255, 255);</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>userPassword</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Register</receiver>
+   <slot>checkIsokPassword()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>379</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Click_Register()</slot>
   <slot>Click_Cancel()</slot>
+  <slot>checkIsokPassword()</slot>
  </slots>
 </ui>

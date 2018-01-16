@@ -100,7 +100,7 @@ public:
 
         layoutWidget_2 = new QWidget(Register);
         layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(30, 30, 88, 24));
+        layoutWidget_2->setGeometry(QRect(30, 30, 88, 28));
         horizontalLayout = new QHBoxLayout(layoutWidget_2);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -147,7 +147,7 @@ public:
         radioButton->setGeometry(QRect(30, 260, 131, 16));
         layoutWidget_4 = new QWidget(Register);
         layoutWidget_4->setObjectName(QStringLiteral("layoutWidget_4"));
-        layoutWidget_4->setGeometry(QRect(30, 282, 296, 25));
+        layoutWidget_4->setGeometry(QRect(30, 282, 296, 30));
         horizontalLayout_5 = new QHBoxLayout(layoutWidget_4);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -223,6 +223,7 @@ public:
         retranslateUi(Register);
         QObject::connect(clickRegister, SIGNAL(clicked()), Register, SLOT(Click_Register()));
         QObject::connect(clickCancel, SIGNAL(clicked()), Register, SLOT(Click_Cancel()));
+        QObject::connect(userPassword, SIGNAL(editingFinished()), Register, SLOT(checkIsokPassword()));
 
         QMetaObject::connectSlotsByName(Register);
     } // setupUi

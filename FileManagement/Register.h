@@ -18,7 +18,7 @@ private:
 	Ui::Register *ui;
 	bool isAvailableUserName;
 	bool isAvailablePassword;
-
+	bool isokPassword;
 	void initTitleBar();  //初始化标题栏
 
 	//槽函数
@@ -28,6 +28,8 @@ public slots:
 
 	void checkIsAvailableUserName();		//检查用户名是否重复
 	void checkIsAvailablePassword();			//密码是否一致
+	void checkIsokPassword();//密码格式是否正确
+
 
 	void receiveLogin();  //接收login中发射的信号关联的槽函数
 

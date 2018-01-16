@@ -7,6 +7,8 @@
 #include <QDialog> 
 #include <QLabel>
 #include<qpixmap.h>
+#include<QRegExp>
+#include <QCryptographicHash>
 
 
 Register::Register(QWidget *parent)
@@ -17,6 +19,7 @@ Register::Register(QWidget *parent)
 											//this->setStyleSheet("background:D:/FileManagement-master/FileManagement/Resource/back.jpg");
 	isAvailableUserName = false;     //一开始用户名是不可用的
 	isAvailablePassword = false;		//密码是否一致
+	isokPassword = false;//密码格式是否正确
 
 	setWindowFlags(Qt::FramelessWindowHint);
 	ui->userMessage->hide();
@@ -118,7 +121,17 @@ void Register::Click_Register()
 		QString name = this->ui->userName->text();
 		QString password = this->ui->userPassword->text();
 		QString password2 = this->ui->userPassword2->text();
-		QString sql = "insert into user (userName,userPassword)values('" + name + "','" + password + "')";
+
+		QString md5;
+		QByteArray qc, cc;
+		QCryptographicHash md(QCryptographicHash::Md5);
+		qc.append(password2);
+		md.addData(qc);
+		cc = md.result();
+		md5.append(cc.toHex());
+
+
+		QString sql = "insert into user (userName,userPassword)values('" + name + "','" + md5+ "')";
 		QString bs = "R";
 		QString data = bs + "#" + sql;
 		tcp->tcpSocket->write(data.toLatin1());//将信息写入socket
@@ -169,6 +182,31 @@ void Register::checkIsAvailablePassword()
 		ui->passwordMessage2->show();
 	}
 
+
+}
+
+void Register::checkIsokPassword()
+{
+	QRegExp rx;
+	QString passw=ui->userPassword->text();
+	rx.setPatternSyntax(QRegExp::RegExp);
+	rx.setCaseSensitivity(Qt::CaseInsensitive);//对大小写字母敏感
+	rx.setPattern(QString("^[A-Za-z]+[0-9]+$"));
+	//匹配格式为所有大小写字母和数字组成的字符串，位数不限
+	if (rx.exactMatch(passw) == true)
+	{
+		isokPassword = true;
+		ui->passwordMessage->setText(QString::fromLocal8Bit("密码正确！"));
+		ui->passwordMessage->setStyleSheet("color:green;");
+		ui->passwordMessage->show();
+	}
+	else
+	{
+		isokPassword = false;
+		ui->passwordMessage->setText(QString::fromLocal8Bit("密码必须以字母为首位！"));
+		ui->passwordMessage->setStyleSheet("color:red;");
+		ui->passwordMessage->show();
+	}
 
 }
 
