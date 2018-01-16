@@ -9,15 +9,7 @@ FileManagement::FileManagement(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::FileManagement)
 {
 	ui->setupUi(this);
-	//UploadFile *up = new UploadFile();
-	//DownloadFile *d = new DownloadFile(this);
-	
-	
-	//uploadFile->setLayout(UoloadLayout);
-	
-	
-	
-	//d->show();
+
 	QIcon personico("Resource/person1.png"); //创建QIcon对象
 	ui->personButton->setIcon(personico); //将图片设置到按钮上
 	ui->personButton->setIconSize(QSize(70, 58));//根据实际调整图片大小
@@ -40,13 +32,13 @@ FileManagement::FileManagement(QWidget *parent)
 	ui->deleteButton->setIconSize(QSize(70, 55));//根据实际调整图片大小
 	ui->deleteButton->setStyleSheet("border:none");
 	
-	QMovie *movie = new QMovie("Resource/MainWindow.gif");//加载图片gif
-	ui->photoLabel->setGeometry(500, 20, 200, 0);
-	movie->setScaledSize(QSize(900, 580));//设置图片大小
-	ui->photoLabel->setMovie(movie);
-		movie->start();
+	//QMovie *movie = new QMovie("Resource/MainWindow.gif");//加载图片gif
+	//ui->photoLabel->setGeometry(500, 20, 200, 0);
+	//movie->setScaledSize(QSize(900, 580));//设置图片大小
+	//ui->photoLabel->setMovie(movie);
+	//	movie->start();
 		setWindowIcon(QIcon("Resource/icon1.png"));//设置窗口左上角图标
-		setFixedSize(950, 700); // 禁止改变窗口大小
+		setFixedSize(550, 480); // 禁止改变窗口大小
 		ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
 		ui->uploadButton->setToolTip(tr("upload"));
 		ui->downloadButton->setToolTip(tr("download"));
@@ -71,14 +63,23 @@ FileManagement::FileManagement(QWidget *parent)
 		//
 
 	qDebug() << globalUserName << " welcome! ";
-	//UploadFile U;
-	//connect(this, SIGNAL(showUploadFile()), &U, SLOT(receiveMainwindow()));
+
 }
 
 FileManagement::~FileManagement()
 {
 	delete ui;
 }
+//
+//void FileManagement::initTitleBar()
+//{
+//	m_titleBar->move(1, 2);
+//	m_titleBar->raise();
+//	m_titleBar->setWindowBorderWidth(2);
+//	m_titleBar->setBackgroundColor(255, 255, 255);
+//	m_titleBar->setButtonType(MIN_BUTTON);
+//	m_titleBar->setTitleWidth(this->width());
+//}
 
 void FileManagement::receiveLogin()
 {
@@ -95,11 +96,20 @@ void FileManagement::Btn_Click()
 //点击上传文件按钮显示上传界面
 void FileManagement::ClickUploadFile()
 {
+	//检测自己
+	if (uploadFileWindowIsOpen)
+		uploadFile->show();
+	//检测其他两个
+	if (downloadFileWindowIsOpen)
+		downloadFile->hide();
+	if (userInformationWindowIsOpen)
+		userInformation->hide();
 	if (!uploadFileWindowIsOpen)
 	{
 		uploadFile = new UploadFile(this);  //将指针实例化
 		ui->SubLayout->insertWidget(1, uploadFile);
 		uploadFile->show();
+		
 		uploadFileWindowIsOpen = true;
 	}
 	else
@@ -112,10 +122,17 @@ void FileManagement::ClickUploadFile()
 //点击下载文件按钮显示下载界面
 void FileManagement::ClickDownloadFile()
 {
+	if (downloadFileWindowIsOpen)
+		downloadFile->show();
+
+	if (userInformationWindowIsOpen)
+		userInformation->hide();
+	if (uploadFileWindowIsOpen)
+		uploadFile->hide();
 	if (!downloadFileWindowIsOpen)
 	{
 		downloadFile = new DownloadFile(this);  //将指针实例化
-		ui->SubLayout->insertWidget(2, downloadFile);
+		ui->SubLayout->insertWidget(1, downloadFile);
 		downloadFile->show();
 		downloadFileWindowIsOpen = true;
 	}
@@ -124,4 +141,24 @@ void FileManagement::ClickDownloadFile()
 		qDebug() << "uploadFileWindowIsOpen!";
 	}
 	//emit showUploadFile();
+}
+
+void FileManagement::ClickUserInformation()
+{
+	if (userInformationWindowIsOpen)
+		userInformation->show();
+	if (downloadFileWindowIsOpen)
+		downloadFile->hide();
+	if (uploadFileWindowIsOpen)
+		uploadFile->hide();
+	if (!userInformationWindowIsOpen)
+	{
+		userInformation = new UserInformation(this);
+		ui->SubLayout->insertWidget(1, userInformation);
+		userInformation->show();
+		userInformationWindowIsOpen = true;
+	}
+	else
+		qDebug() << "userInformationWindowIsOpen!";
+
 }

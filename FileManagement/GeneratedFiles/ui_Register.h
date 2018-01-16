@@ -214,6 +214,11 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_10);
 
+        QWidget::setTabOrder(userName, userPassword);
+        QWidget::setTabOrder(userPassword, userPassword2);
+        QWidget::setTabOrder(userPassword2, radioButton);
+        QWidget::setTabOrder(radioButton, clickRegister);
+        QWidget::setTabOrder(clickRegister, clickCancel);
 
         retranslateUi(Register);
         QObject::connect(clickRegister, SIGNAL(clicked()), Register, SLOT(Click_Register()));

@@ -125,7 +125,7 @@ public:
 
         sendProgressBar = new QProgressBar(UploadFile);
         sendProgressBar->setObjectName(QStringLiteral("sendProgressBar"));
-        sendProgressBar->setValue(24);
+        sendProgressBar->setValue(0);
 
         horizontalLayout_2->addWidget(sendProgressBar);
 

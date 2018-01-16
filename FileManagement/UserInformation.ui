@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserInformation</class>
+ <widget class="QWidget" name="UserInformation">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>361</width>
+    <height>370</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>个人信息：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="picLabel">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="alterPassword">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 130, 130);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>修改密码</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="QQlineEdit"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>学号：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>QQ：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="phoneLineEdit"/>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="addressLabel">
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>邮箱：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="nameLineEdit"/>
+     </item>
+     <item row="5" column="2">
+      <widget class="QLineEdit" name="addressLineEdit"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="phoneLabel">
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>手机号：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="nameLabel">
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>姓名：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="IDlineEdit"/>
+     </item>
+     <item row="1" column="0">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="3">
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="alterButton">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);
+color: rgb(255, 255, 255);
+</string>
+       </property>
+       <property name="text">
+        <string>修改信息</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="confirmButton">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);
+color: rgb(27, 27, 27);</string>
+       </property>
+       <property name="text">
+        <string>保存信息</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>取消</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

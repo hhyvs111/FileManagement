@@ -269,11 +269,17 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="photoLabel">
-        <property name="text">
-         <string>TextLabel</string>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-       </widget>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -319,9 +325,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>personButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileManagement</receiver>
+   <slot>ClickUserInformation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>37</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ClickUploadFile()</slot>
   <slot>ClickDownloadFile()</slot>
+  <slot>ClickUserInformation()</slot>
  </slots>
 </ui>

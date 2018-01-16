@@ -481,15 +481,15 @@ border-radius: 3px; color: rgb(255, 255, 255);
    <sender>nameLine</sender>
    <signal>textChanged(QString)</signal>
    <receiver>Login</receiver>
-   <slot>hide()</slot>
+   <slot>hide1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>202</x>
-     <y>195</y>
+     <x>250</x>
+     <y>199</y>
     </hint>
     <hint type="destinationlabel">
-     <x>259</x>
-     <y>209</y>
+     <x>396</x>
+     <y>389</y>
     </hint>
    </hints>
   </connection>
@@ -497,5 +497,6 @@ border-radius: 3px; color: rgb(255, 255, 255);
  <slots>
   <slot>Click_Login()</slot>
   <slot>Click_Register()</slot>
+  <slot>hide1()</slot>
  </slots>
 </ui>

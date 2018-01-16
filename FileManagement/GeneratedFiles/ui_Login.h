@@ -226,7 +226,7 @@ public:
         QObject::connect(m_RegisterButton, SIGNAL(clicked()), Login, SLOT(Click_Register()));
         QObject::connect(rem_pw, SIGNAL(clicked()), Login, SLOT(raise()));
         QObject::connect(auto_login, SIGNAL(clicked()), Login, SLOT(lower()));
-        QObject::connect(nameLine, SIGNAL(textChanged(QString)), Login, SLOT(hide()));
+        QObject::connect(nameLine, SIGNAL(textChanged(QString)), Login, SLOT(hide1()));
 
         QMetaObject::connectSlotsByName(Login);
     } // setupUi

@@ -384,6 +384,14 @@ color: rgb(255, 255, 255);</string>
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>userName</tabstop>
+  <tabstop>userPassword</tabstop>
+  <tabstop>userPassword2</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>clickRegister</tabstop>
+  <tabstop>clickCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

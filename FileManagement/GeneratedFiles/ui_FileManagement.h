@@ -52,7 +52,7 @@ public:
     QVBoxLayout *SubLayout;
     QSpacerItem *verticalSpacer_8;
     QSpacerItem *verticalSpacer_9;
-    QLabel *photoLabel;
+    QSpacerItem *horizontalSpacer_3;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *FileManagement)
@@ -174,10 +174,9 @@ public:
 
         FunctionLayout->addLayout(SubLayout);
 
-        photoLabel = new QLabel(centralWidget);
-        photoLabel->setObjectName(QStringLiteral("photoLabel"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        FunctionLayout->addWidget(photoLabel);
+        FunctionLayout->addItem(horizontalSpacer_3);
 
 
         verticalLayout_2->addLayout(FunctionLayout);
@@ -190,6 +189,7 @@ public:
         retranslateUi(FileManagement);
         QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
         QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
+        QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi
@@ -203,7 +203,6 @@ public:
         downloadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         chatButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         deleteButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
-        photoLabel->setText(QApplication::translate("FileManagement", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };
