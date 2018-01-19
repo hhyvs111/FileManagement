@@ -25,8 +25,6 @@ Login::Login(QWidget *parent)
 	ui->nameLine->setText(getting->value("uuu", "").toString());
 	kk = getting->value("ppp", "").toString();
 
-	
-
 	QString xk = getting->value("position", "").toString();
 	QString xx = getting->value("auto", "").toString();
 

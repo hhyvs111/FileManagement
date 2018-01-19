@@ -32,6 +32,7 @@ void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）
 									   //告诉服务器，我要发送文件了
 	tcp->tcpSocket->write("uploadFile");
 	qDebug() << globalUserName << " will send a file to server";
+	//点击打开按钮的时候初始化数据
 	loadSize = 0;
 	byteToWrite = 0;
 	totalSize = 0;
@@ -47,7 +48,7 @@ void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）
 
 void UploadFile::send()  //发送文件头信息  
 {
-	
+	//第一次发送的时候建立连接
 	connect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 	byteToWrite = localFile->size();  //剩余数据的大小  
 	qDebug() << "the file bytetowrite: " << byteToWrite;
@@ -60,25 +61,27 @@ void UploadFile::send()  //发送文件头信息
 	//获取文件名字
 	QString currentFileName = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1);
 	
-	//前面两个是文件大小和发送文件头的大小，后面是文件名和用户名
+	//前面两个是文件大小和发送文件头的大小（为什么是qint64呢？），后面是文件名和用户名
 	out << qint64(0) << qint64(0) << currentFileName <<globalUserName;
 
 	totalSize += outBlock.size();  //总大小为文件大小加上文件名等信息大小  
 	byteToWrite += outBlock.size();
 	qDebug() << "the total bytetowrite: " << byteToWrite;
 	out.device()->seek(0);  //回到字节流起点来写好前面连个qint64，分别为总大小和文件名等信息大小  
-	out << totalSize << qint64(outBlock.size());
+	out << totalSize << qint64(outBlock.size());   //这个就是对应前面的qint64？
 	qDebug() << "the file head:" << outBlock;
 	tcp->tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字  
 
-	sendTime.start();
+	sendTime.start();  //发送时间开始计时
 	//UI信息
 	ui->progressLabel->show();
 	ui->sendProgressBar->setMaximum(totalSize);
 	ui->sendProgressBar->setValue(totalSize - byteToWrite);
 }
 
-void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容  
+
+//继续发送
+void UploadFile::goOnSend(qint64 numBytes)  
 {
 	sendtimes++;  
 	qDebug() << sendtimes<<" get in goOnSend";
@@ -91,6 +94,8 @@ void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容
 	tcp->tcpSocket->write(outBlock);    //将这个信息写入socket
 	
 	//qDebug() << "information:" <<outBlock;
+
+	//这里是速度处理，显示速度和已下载
 	float useTime = sendTime.elapsed();
 	double speed = (totalSize - byteToWrite) / useTime;
 	ui->uploadSpeedLabel->show();
@@ -101,6 +106,8 @@ void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容
 		.arg(useTime / 1000, 0, 'f', 0)//用时
 		.arg(totalSize / speed / 1000 - useTime / 1000, 0, 'f', 0));//剩余时间
 
+
+	//设置UI的进度条，这个可以考虑影藏起来
 	ui->sendProgressBar->setMaximum(totalSize);
 	ui->sendProgressBar->setValue(totalSize - byteToWrite);
 
@@ -108,14 +115,12 @@ void UploadFile::goOnSend(qint64 numBytes)  //开始发送文件内容
 	{
 		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK);
 		ui->sendStatusLabel->setText(QString::fromLocal8Bit("文件发送完毕!"));
+		//发送完毕就断开这个写字节的槽函数。
 		disconnect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 		sendtimes = 0;
 		qDebug() << "the file had send";
 	}
 }
-
-
-
 
 
 void UploadFile::ClickSendButton()

@@ -37,6 +37,9 @@ private:
 	QFile *newFile;
 	QByteArray inBlock;
 	QString fileName;
+	QString saveFileName;   //这个是路径？？还是直接是文件名？
+
+	QString openFileName;  //直接打开的文件名
 	qint64 RtotalSize;  //总共需要发送的文件大小（文件内容&文件名信息）  
 	qint64 byteReceived;  //已经接收的大小  
 	int receiveTime;	//接受的次数
@@ -51,7 +54,7 @@ private slots:
 						 //void goOnSend(qint64);  //传送文件内容 
 
 	void ClickDownloadButton();
-
+	void saveFilePath(QString);   //选择下载路径
 	void showFileInfo();
 
 	//void ClickSendButton();

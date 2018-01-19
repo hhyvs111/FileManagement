@@ -2,9 +2,9 @@
 #include "MyMessageBox.h"
 //#include "ui_tcpclient.h"
 //
-#define ip "47.100.160.51"
+//#define ip "47.100.160.51"
 //#define port 3389
-//#define ip "127.0.0.1"
+#define ip "127.0.0.1"
 #define port 3389
 
 

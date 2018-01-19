@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 {
 
 	QApplication a(argc, argv);
+	QApplication::addLibraryPath("./plugins");
 	FileManagement F;
 	Login L;
 	Register R;

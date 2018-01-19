@@ -35,7 +35,7 @@ DownloadFile::~DownloadFile()
 void DownloadFile::receiveFile()
 {
 	qDebug() << "get in receiveFile!!!";
-	qDebug() << byteReceived;
+	qDebug() << "the byte has received :" << byteReceived;
 
 	if (byteReceived == 0)  //才刚开始接收数据，此数据为文件信息  
 	{
@@ -52,7 +52,8 @@ void DownloadFile::receiveFile()
 		qDebug() << "the file of head: " << fileName;
 		qDebug() << "totalSize: " << RtotalSize;
 		qDebug() << " first byteReceived: " << byteReceived;
-		newFile = new QFile(fileName);
+		qDebug() << "start saveFileName:" << saveFileName;
+		newFile = new QFile(saveFileName);
 		newFile->open(QFile::WriteOnly);
 		//开始计时！
 		downloadTime.start();
@@ -82,6 +83,7 @@ void DownloadFile::receiveFile()
 		qDebug() << "begin to write";
 		newFile->write(inBlock);
 		newFile->flush();
+		
 	}
 
 	if (byteReceived == RtotalSize)
@@ -96,7 +98,7 @@ void DownloadFile::receiveFile()
 		byteReceived = 0;
 		RtotalSize = 0;
 		receiveTime = 0;
-		
+		newFile->close();
 		disconnect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(receiveFile()));
 		connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
 	}
@@ -104,12 +106,11 @@ void DownloadFile::receiveFile()
 void DownloadFile::ClickDownloadButton()
 {
 	receiveTime = 0;
-	QString openFileName;
 	//获取ui输入的信息
-	openFileName = ui->downloadFileName->text();
+	openFileName = ui->downloadFileName->text();   
 	QString bs = "downloadFile";
 	QString data = bs + "#" + openFileName;
-
+	saveFilePath(openFileName);  //调用一下获取路径函数，其实就是直接获取文件名
 	//发送中文需要
 	QByteArray datasend = data.toUtf8();
 	if (tcp->tcpSocket->write(datasend))
@@ -119,10 +120,14 @@ void DownloadFile::ClickDownloadButton()
 		connect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(receiveFile()));
 		disconnect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
 	}
+	
 	else
 	{
 		qDebug() << "send filed :" << data;
 	}
+
+
+	
 }
 
 void DownloadFile::sendFileInfo()
@@ -181,4 +186,36 @@ void DownloadFile::showFileInfo()
 	//用完后断开
 	connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
 	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showFileInfo()));
+}
+
+
+void DownloadFile::saveFilePath(QString openFileName)
+{
+	QFileDialog m_QFileDialog;   //新建一个对话
+
+
+	//!-- 得到原文件的后缀名  
+	QString suffix_save = QFileInfo(openFileName).suffix();
+	//!--- 设置过滤匹配文件格式  
+	QString setFilter = "office(*.doc *.docx *.xls *.xlsx *.ppt *.pptx);;image(*.jpg *.bmp);;txt(*.xml *.txt *.pdf);;(*.*);;";
+	//!--- selectFilter为弹出对话框中的文件格式，dirString为文件路径，这里显示文件名  
+	QString selectFilter, dirString;
+
+	if (openFileName.isEmpty()) return;
+	else dirString = QFileInfo(openFileName).fileName();
+
+	//!--- 判断文件后缀名以及文件格式，看是否匹配，没有做出相应操作  
+	if (!suffix_save.isEmpty() && setFilter.contains(selectFilter)) selectFilter = suffix_save.insert(0, "*.");
+	if (!suffix_save.isEmpty() && !setFilter.contains(selectFilter)) selectFilter = "*.*";
+
+	 saveFileName = m_QFileDialog.getSaveFileName(this, "保存文件", dirString, setFilter, &selectFilter,
+		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+	
+	 //qDebug() << " saveFileName :"<< saveFileName;  //没问题啊尼玛
+	if (saveFileName.isEmpty()) return;
+
+	//QFile file(saveFileName);
+
+	//if (selectFilter.compare("*.*")) saveFileName = saveFileName + selectFilter.remove(0, 1);
+	//qDebug() << " saveFileName1 :" << saveFileName;  //看看这里
 }
