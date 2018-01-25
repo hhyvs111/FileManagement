@@ -15,63 +15,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>文件名</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="downloadFileName"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="downloadButton">
-       <property name="text">
-        <string>下载</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QTableView" name="downloadTable"/>
-     </item>
-     <item>
-      <widget class="QScrollBar" name="verticalScrollBar">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -126,24 +72,7 @@
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>downloadButton</sender>
-   <signal>clicked()</signal>
-   <receiver>DownloadFile</receiver>
-   <slot>ClickDownloadButton()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>272</x>
-     <y>120</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>302</x>
-     <y>174</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>ClickDownloadButton()</slot>
  </slots>

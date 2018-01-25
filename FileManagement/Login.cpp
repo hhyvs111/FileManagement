@@ -16,7 +16,7 @@
 Login::Login(QWidget *parent)
 	: BaseWindow(parent), ui(new Ui::Login)
 {
-	tcp = new TcpClient();
+	tcp = new TcpClient();  //在这里实例化的？
 	ui->setupUi(this);
 	setWindowFlags(Qt::FramelessWindowHint);
 	

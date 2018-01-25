@@ -40,7 +40,7 @@ public:
 
 public:
 	int static showMyMessageBox(QWidget* parent, const QString &title, const QString &contentText, MessageType messageType, MessageButtonType messageButtonType, bool isModelWindow = false);
-
+	ChosseResult m_chooseResult;
 
 private:
 	void initWindow();
@@ -57,5 +57,5 @@ private:
 private:
 	Ui::MyMessageBox ui;
 	QEventLoop* m_eventLoop;
-	ChosseResult m_chooseResult;
+	
 };

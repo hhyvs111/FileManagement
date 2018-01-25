@@ -54,13 +54,13 @@ void UploadFile::send()  //发送文件头信息
 	qDebug() << "the file bytetowrite: " << byteToWrite;
 	totalSize = localFile->size();
 
-	loadSize = 2 * 1024;  //每次发送数据的大小  
+	loadSize = 4 * 1024;  //每次发送数据的大小  
 
 	QDataStream out(&outBlock, QIODevice::WriteOnly);
 
 	//获取文件名字
 	QString currentFileName = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1);
-	
+	//占位符,这里必须要先这样占位，然后后续读算出整体长度后在插入
 	//前面两个是文件大小和发送文件头的大小（为什么是qint64呢？），后面是文件名和用户名
 	out << qint64(0) << qint64(0) << currentFileName <<globalUserName;
 

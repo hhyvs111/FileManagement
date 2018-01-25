@@ -23,8 +23,9 @@ private:
 	UploadFile *uploadFile;  // 创建上传文件的指针
 	DownloadFile *downloadFile;
 	UserInformation *userInformation; 
-	bool uploadFileWindowIsOpen = false, downloadFileWindowIsOpen = false
-		,userInformationWindowIsOpen = false;
+	bool uploadFileWindowIsOpen = false, 
+		 downloadFileWindowIsOpen = false,
+		 userInformationWindowIsOpen = false;
 
 private slots:
 	void Btn_Click();

@@ -147,6 +147,24 @@
     <ClCompile Include="UserInformation.cpp">
       <Filter>Source Files\QTUI</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ButtonDelegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ButtonDelegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonDelegate.cpp">
+      <Filter>Source Files\QTUI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TableModel.cpp">
+      <Filter>Source Files\QTUI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TableModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TableModel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -205,6 +223,12 @@
     </CustomBuild>
     <CustomBuild Include="UserInformation.h">
       <Filter>Header Files\H_QTUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ButtonDelegate.h">
+      <Filter>Header Files\H_QTUI\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TableModel.h">
+      <Filter>Header Files\H_QTUI\Base</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +324,12 @@
       <Filter>Resource</Filter>
     </Image>
     <Image Include="Resource\ion\user.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\ion\deleteFile.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\ion\downloadFile.png">
       <Filter>Resource</Filter>
     </Image>
   </ItemGroup>

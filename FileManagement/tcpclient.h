@@ -24,7 +24,7 @@ public:
 protected:
     void init();
     void connectServer();
-	public slots:
+public slots:
 
 	//¶ÁÈ¡Êý¾Ý
 	void readMessages(); 
@@ -41,7 +41,7 @@ private slots:
 signals:
 	void sendDataToLogin(QString);
 	void sendDataToRegister(QString);
-    
+	void sendDataToDownload(QString);
 };
 
 #endif // TCPCLIENT_H
