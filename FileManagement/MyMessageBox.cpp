@@ -56,7 +56,7 @@ void MyMessageBox::paintEvent(QPaintEvent *event)
 	// 绘制按钮部分灰色背景;
 	QPainterPath pathButtonBack;
 	pathButtonBack.setFillRule(Qt::WindingFill);
-	pathButtonBack.addRect(QRect(0, 110, this->width(), 48));
+	pathButtonBack.addRect(QRect(0, 130, this->width(), 48));
 	painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 	painter.fillPath(pathButtonBack, QBrush(QColor(247, 247, 247)));
 
@@ -83,6 +83,15 @@ void MyMessageBox::setWindowTitle(QString title, int titleFontSize)
 void MyMessageBox::setContentText(QString contentText)
 {
 	ui.MessageContent->setText(contentText);
+	//QPalette palette = ui.MessageContent->palette();
+	//palette.setBrush(QPalette::Base, QBrush(Qt::NoBrush));
+	//ui.MessageContent->setPalette(palette);
+	//ui.MessageContent->adjustSize();
+	ui.MessageContent->setWordWrap(true);   //设置自动换行
+	//ui.MessageContent->setAlignment(Qt::AlignTop);
+	//
+
+	//ui.MessageContent->setGeometry(QRect(328, 240, 329, 27 * 4));  //四倍行距
 }
 
 void MyMessageBox::setMessageType(MessageType messageType)
@@ -90,13 +99,13 @@ void MyMessageBox::setMessageType(MessageType messageType)
 	switch (messageType)
 	{
 	case MESSAGE_INFORMATION:
-		ui.MessageIcon->setPixmap(QPixmap(":/Resources/MyMessageBox/information.png"));
+		ui.MessageIcon->setPixmap(QPixmap("Resource/ion/message_tips.png"));
 		break;
 	case MESSAGE_WARNNING:
-		ui.MessageIcon->setPixmap(QPixmap(":/Resources/MyMessageBox/warnning.png"));
+		ui.MessageIcon->setPixmap(QPixmap("Resource/ion/message_warnning.png"));
 		break;
 	case MESSAGE_QUESTION:
-		ui.MessageIcon->setPixmap(QPixmap(":/Resources/MyMessageBox/question.png"));
+		ui.MessageIcon->setPixmap(QPixmap("Resource/ion/message_delete.png"));
 		break;
 	case MESSAGE_INPUT:
 		ui.MessageIcon->setVisible(false);
@@ -130,6 +139,10 @@ void MyMessageBox::setButtonType(MessageButtonType buttonType)
 void MyMessageBox::setMessageContent(QString messageContent)
 {
 	ui.MessageContent->setText(messageContent);
+
+	//ui.MessageContent->setWordWrap(true);
+	//
+
 }
 
 // 显示提示框

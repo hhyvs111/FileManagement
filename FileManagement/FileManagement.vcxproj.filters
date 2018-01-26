@@ -332,5 +332,35 @@
     <Image Include="Resource\ion\downloadFile.png">
       <Filter>Resource</Filter>
     </Image>
+    <Image Include="Resource\ion\message_delete.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\ion\message_tips.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\ion\message_warnning.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\doc.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\exe.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\pdf.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\rar.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\txt.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\xls.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resource\fileIcon\zip.png">
+      <Filter>Resource</Filter>
+    </Image>
   </ItemGroup>
 </Project>

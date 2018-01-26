@@ -127,7 +127,7 @@ void TcpClient::readMessages()
 		else
 		{
 			emit sendDataToDownload("delete_F");
-			MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("删除文件失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+			//MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("删除文件失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		}
 	}
 

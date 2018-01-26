@@ -2,6 +2,7 @@
 #include "ButtonDelegate.h"
 #include "TableModel.h"
 #include <QFileDialog>
+#include<QToolTip>
 #include "MyMessageBox.h"
 DownloadFile::DownloadFile(QWidget *parent) :
 	QWidget(parent),
@@ -10,6 +11,7 @@ DownloadFile::DownloadFile(QWidget *parent) :
 	ui->setupUi(this);
 	//StotalSize = 0;
 	byteReceived = 0;
+
 	//ui->progressLabel->hide();
 	//添加表头
 	
@@ -27,7 +29,12 @@ DownloadFile::DownloadFile(QWidget *parent) :
 	//m_buttonDelegate = new ButtonDelegate(this);
 	//ui->downloadTable->setItemDelegateForColumn(3, m_buttonDelegate); //设置按钮？
 	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
-	init();
+	initModel();
+
+	ui->downloadTable->setMouseTracking(true);   //设置鼠标追踪
+
+	connect(ui->downloadTable, SIGNAL(entered(QModelIndex)),
+		this, SLOT(showToolTip(QModelIndex)));
 	connect(tcp, SIGNAL(sendDataToDownload(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
 
@@ -35,26 +42,43 @@ DownloadFile::~DownloadFile()
 {
 	delete ui;
 }
-void  DownloadFile::init()
+void  DownloadFile::initModel()
 {
 	model = new QStandardItemModel();
-	model->setColumnCount(5);
+	model->setColumnCount(6);
 	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit("文件名"));
 	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("文件大小"));
-	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("文件类型"));
-	model->setHeaderData(3, Qt::Horizontal, QString::fromLocal8Bit("文件操作"));
+	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("上传时间"));
+	model->setHeaderData(3, Qt::Horizontal, QString::fromLocal8Bit("上传者"));
+	model->setHeaderData(4, Qt::Horizontal, QString::fromLocal8Bit("下载"));
+	model->setHeaderData(5, Qt::Horizontal, QString::fromLocal8Bit("删除"));
 	ui->downloadTable->setModel(model);
 	ui->downloadTable->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
+	ui->downloadTable->setColumnWidth(0, 300);
+	ui->downloadTable->setColumnWidth(1, 70);
+	ui->downloadTable->setColumnWidth(2, 110);
+	ui->downloadTable->setColumnWidth(3, 70);
+	ui->downloadTable->setColumnWidth(4, 40);
+	ui->downloadTable->setColumnWidth(5, 40);
 	//设置列宽不可变 
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
-	ui->downloadTable->setColumnWidth(0, 300);
-	ui->downloadTable->setColumnWidth(1, 80);
-	ui->downloadTable->setColumnWidth(2, 40);
-	ui->downloadTable->setColumnWidth(3, 40);
-	ui->downloadTable->setColumnWidth(4, 40);
+	ui->downloadTable->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Fixed);
+	ui->downloadTable->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Fixed);
+	ui->downloadTable->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Fixed);
+	ui->downloadTable->horizontalHeader()->setSectionResizeMode(5, QHeaderView::Fixed);
 }
+
+//提示文本追踪
+void DownloadFile::showToolTip(const QModelIndex &index) {
+	if (!index.isValid()) {
+		qDebug() << "Invalid index";
+		return;
+	}
+	QToolTip::showText(QCursor::pos(), index.data().toString());
+}
+
 
 void DownloadFile::receiveFile()
 {
@@ -141,7 +165,7 @@ void DownloadFile::ClickDownloadButton()
 	openFileName = btn->property("fileName").toString();
 	QString bs = "downloadFile";
 	QString data = bs + "#" + openFileName;
-	if (saveFilePath(openFileName))  //调用一下获取路径函数，其实就是直接获取文件名
+	if (saveFilePath(openFileName))  //调用一下获取路径函数，其实就是直接获取文件名,如果返回了真才下一步
 	//发送中文需要
 	{
 		QByteArray datasend = data.toUtf8();  //发送UTF8过去
@@ -161,26 +185,33 @@ void DownloadFile::ClickDeleteButton()
 {
 	QPushButton *btn = (QPushButton *)sender();   //产生事件的对象，按的谁就取谁
 	QString row = btn->property("row").toString();  //取得按钮的row属性
+
+	
 	QString deleteFileName = btn->property("deleteFileName").toString();
 	QString deleteFileId = btn->property("deleteFileId").toString();
-
-	QString bs = "deleteFile";
-	QString data = bs + "#" + deleteFileName + "#" + deleteFileId;
-
-	QByteArray datasend = data.toUtf8();
-	if (tcp->tcpSocket->write(datasend))
+	if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("确定要删除%1吗？").arg(deleteFileName),
+		MESSAGE_QUESTION, BUTTON_OK_AND_CANCEL, true))
 	{
-		qDebug() << "send data to server: " << data;
+		QString bs = "deleteFile";
+		QString data = bs + "#" + deleteFileName + "#" + deleteFileId;
 
+		QByteArray datasend = data.toUtf8();
+		if (tcp->tcpSocket->write(datasend))
+		{
+			qDebug() << "send data to server: " << data;
+
+		}
+		else
+			qDebug() << "send failed!";
 	}
-	else
-		qDebug() << "send failed!";
+
 }
 
 void DownloadFile::sendFileInfo()
 {
 	//每次打开该页面则发查询信息发过去
-	QString data = "findFileByName#" + globalUserName;
+	//QString data = "findFileByName#" + globalUserName;   //查询该用户的文件？
+	QString data = "findAllFile";   //查询所有的文件
 	QByteArray datasend = data.toUtf8();
 	qDebug() << datasend;
 	tcp->tcpSocket->write(datasend);
@@ -198,7 +229,7 @@ void DownloadFile::receiveDataFromClient(QString data)
 
 		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("删除文件成功！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		//实现实时更新
-		init();  //删除后在这里初始化
+		initModel();  //删除后在这里初始化
 		sendFileInfo();  //然后发信息给服务器查询当前文件情况
 		//model.
 	}
@@ -210,7 +241,7 @@ void DownloadFile::receiveDataFromClient(QString data)
 
 void DownloadFile::showFileInfo()
 {
-
+	initModel();
 	QByteArray dataread = tcp->tcpSocket->readAll();
 	QString data = QString::fromUtf8(dataread);
 	qDebug() << "the data from client: " << dataread;
@@ -220,7 +251,6 @@ void DownloadFile::showFileInfo()
 	//在这里就要加入到表里去
 	//把数据都放到QList里去！
 	//listNumber[0] 是文件个数
-	
 	for (int i = 1;i <= listNumber[0].toInt();i++)
 	{
 		FileInfo littleFile;
@@ -229,20 +259,22 @@ void DownloadFile::showFileInfo()
 		littleFile.fileName = fileList[1];
 		littleFile.fileSize = fileList[2];
 		littleFile.fileType = fileList[3];
-		littleFile.userId = fileList[4].toInt();
+		littleFile.fileTime = fileList[4];
+		littleFile.fileUser = fileList[5];
+		littleFile.userId = fileList[6].toInt();
 		qDebug() << littleFile.fileId<<" " << littleFile.fileName << " " <<
-			littleFile.fileSize << " " << littleFile.fileType << " " << littleFile.userId;
+			littleFile.fileSize << " " << littleFile.fileType << " " 
+			<< littleFile.fileTime << " " << littleFile.fileUser << " " << littleFile.userId;
 		fileInfo.append(littleFile);
 	}
-
 	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	for (int i = 0; i < listNumber[0].toInt(); i++)
 	{
 		//设置前三列的数据
 		model->setItem(i, 0, new QStandardItem(fileInfo.at(i).fileName));
-		model->setItem(i, 1, new QStandardItem(QString::fromLocal8Bit("%1MB").arg(
-			QString::number(fileInfo.at(i).fileSize.toFloat() / (1024 * 1024), 'f', 2))));
-		model->setItem(i, 2, new QStandardItem(fileInfo.at(i).fileType));
+		model->setItem(i, 1, new QStandardItem(countFileSize(fileInfo.at(i).fileSize)));  //countFileSize根据大小显示KB还是MB
+		model->setItem(i, 2, new QStandardItem(fileInfo.at(i).fileTime));
+		model->setItem(i, 3, new QStandardItem(fileInfo.at(i).fileUser));
 
 		//为这个第四列添加按钮
 		m_download = new QPushButton();
@@ -252,7 +284,6 @@ void DownloadFile::showFileInfo()
 		m_download->setStyleSheet("border:none");
 
 		m_delete = new QPushButton();
-
 		QIcon deleteFile("Resource/ion/deleteFile.png"); //创建QIcon对象
 		m_delete->setIcon(deleteFile); //将图片设置到按钮上
 		m_delete->setIconSize(QSize(20, 20));//根据实际调整图片大小
@@ -262,14 +293,20 @@ void DownloadFile::showFileInfo()
 		connect(m_download, SIGNAL(clicked(bool)), this, SLOT(ClickDownloadButton()));
 		connect(m_delete, SIGNAL(clicked(bool)), this, SLOT(ClickDeleteButton()));
 		//直接把文件名发给row得了！
+
 		m_download->setProperty("row", i);  //为按钮设置row属性
 		m_download->setProperty("fileName", fileInfo.at(i).fileName);  //为按钮设置filename属性
+
 		m_delete->setProperty("row", i);
 		m_delete->setProperty("deleteFileId", fileInfo.at(i).fileId);
 		m_delete->setProperty("deleteFileName", fileInfo.at(i).fileName);
-		//m_button->setProperty("column", col)
-		 ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 3), m_download);
-		 ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 4), m_delete);
+
+		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 4), m_download);
+		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_delete);
+
+		//设置数据居中
+		for(int j = 1;j < 4;j++)
+		model->item(i, j)->setTextAlignment(Qt::AlignCenter);
 	}
 	//m_model->setData(data);
 	//用完后断开
@@ -278,7 +315,22 @@ void DownloadFile::showFileInfo()
 	
 }
 
+QString DownloadFile::countFileSize(QString fileSize)
+{
+	float floatSize;
+	floatSize = fileSize.toFloat() / 1024;   //先是计算KB？
+	//如果floatSize大于1024KB则输出MB,且保留2位小数
+	if (floatSize > 1024)
+	{
+		return QString::fromLocal8Bit("%1MB").arg(QString::number(fileSize.toFloat() / (1024 * 1024), 'f', 2)); //返回一个QString
+	}
+	else
+	{
+		return QString::fromLocal8Bit("%1KB").arg(QString::number(fileSize.toFloat() / (1024), 'f', 2)); //返回一个QString
+	}
 
+	//QString::number(fileSize.toFloat() / (1024 * 1024), 'f', 2);  //先转换为浮点数。
+}
 bool DownloadFile::saveFilePath(QString openFileName)
 {
 	QFileDialog m_QFileDialog;   //新建一个对话

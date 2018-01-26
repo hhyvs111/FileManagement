@@ -20,6 +20,8 @@ struct FileInfo
 	QString fileName;
 	QString fileSize;
 	QString fileType;
+	QString fileTime;
+	QString fileUser;
 	int userId;
 };
 class DownloadFile : public QWidget
@@ -70,8 +72,11 @@ private slots:
 	bool saveFilePath(QString);   //选择下载路径
 	void showFileInfo();
 
-	void init(); // 初始化qtableview，就是初始化model
+	void initModel(); // 初始化qtableview，就是初始化model
 	void receiveDataFromClient(QString);
+
+	QString countFileSize(QString);   // 计算文件的大小，看情况返回MB或者KB
+	void showToolTip(const QModelIndex &index);
 	//void ClickSendButton();
 	//void receiveMainwindow();
 
