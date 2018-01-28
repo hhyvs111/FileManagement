@@ -361,3 +361,16 @@ bool DownloadFile::saveFilePath(QString openFileName)
 	//if (selectFilter.compare("*.*")) saveFileName = saveFileName + selectFilter.remove(0, 1);
 	//qDebug() << " saveFileName1 :" << saveFileName;  //看看这里
 }
+
+void DownloadFile::loadStyleSheet(const QString &sheetName)
+{
+	QFile file("Resource/MyTitle/" + sheetName + ".css");
+	file.open(QFile::ReadOnly);
+	if (file.isOpen())
+	{
+		//qDebug() << "is qss";
+		QString styleSheet = this->styleSheet();
+		styleSheet += QLatin1String(file.readAll());
+		this->setStyleSheet(styleSheet);
+	}
+}

@@ -27,7 +27,7 @@ void MyMessageBox::initWindow()
 	this->setWindowFlags(flags | Qt::Window);
 
 	ui.inputContent->setVisible(false);
-
+	//ui.pButtonOk->setGeometry(0, 0, 70, 20);
 	connect(ui.pButtonOk, SIGNAL(clicked()), this, SLOT(onOkClicked()));
 	connect(ui.pButtonCancel, SIGNAL(clicked()), this, SLOT(onCancelClicked()));
 }

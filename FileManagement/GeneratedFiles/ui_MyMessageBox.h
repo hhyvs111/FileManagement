@@ -77,18 +77,23 @@ public:
 
         pButtonOk = new QPushButton(MyMessageBox);
         pButtonOk->setObjectName(QStringLiteral("pButtonOk"));
-        pButtonOk->setStyleSheet(QLatin1String("pButtonOk\n"
-"{\n"
-"    color:red;\n"
-"    background-color:rgb(14 , 150 , 254);\n"
-"    border: 1px solid rgb(11 , 137 , 234);\n"
-"}"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pButtonOk->sizePolicy().hasHeightForWidth());
+        pButtonOk->setSizePolicy(sizePolicy1);
+        pButtonOk->setMinimumSize(QSize(70, 20));
+        pButtonOk->setMaximumSize(QSize(70, 30));
+
 
         horizontalLayout_2->addWidget(pButtonOk);
 
         pButtonCancel = new QPushButton(MyMessageBox);
         pButtonCancel->setObjectName(QStringLiteral("pButtonCancel"));
-        pButtonCancel->setStyleSheet(QStringLiteral(""));
+        sizePolicy1.setHeightForWidth(pButtonCancel->sizePolicy().hasHeightForWidth());
+        pButtonCancel->setSizePolicy(sizePolicy1);
+        pButtonCancel->setMinimumSize(QSize(70, 20));
+        pButtonCancel->setMaximumSize(QSize(70, 30));
 
         horizontalLayout_2->addWidget(pButtonCancel);
 

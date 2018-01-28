@@ -58,13 +58,26 @@
      </item>
      <item>
       <widget class="QPushButton" name="pButtonOk">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="styleSheet">
-        <string notr="true">pButtonOk
-{
-    color:red;
-    background-color:rgb(14 , 150 , 254);
-    border: 1px solid rgb(11 , 137 , 234);
-}</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>PushButton</string>
@@ -73,6 +86,24 @@
      </item>
      <item>
       <widget class="QPushButton" name="pButtonCancel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>

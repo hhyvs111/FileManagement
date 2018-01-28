@@ -59,6 +59,10 @@ private:
 	ButtonDelegate *m_buttonDelegate;
 
 
+	// 加载样式文件;
+	void loadStyleSheet(const QString &sheetName);
+
+
 	
 
 private slots:

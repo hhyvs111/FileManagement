@@ -27,10 +27,11 @@ QT_BEGIN_NAMESPACE
 class Ui_UploadFile
 {
 public:
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QLabel *Drag;
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer_11;
-    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_3;
     QLabel *mFileIcon;
     QLabel *mFileName;
     QSpacerItem *horizontalSpacer_12;
@@ -45,9 +46,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer_3;
     QPushButton *selectBtn;
-    QSpacerItem *horizontalSpacer;
     QPushButton *sendBtn;
-    QSpacerItem *horizontalSpacer_2;
     QPushButton *cancelBtn;
     QSpacerItem *horizontalSpacer_4;
 
@@ -57,35 +56,40 @@ public:
             UploadFile->setObjectName(QStringLiteral("UploadFile"));
         UploadFile->resize(529, 421);
         UploadFile->setMinimumSize(QSize(100, 100));
-        verticalLayout_2 = new QVBoxLayout(UploadFile);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout(UploadFile);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        Drag = new QLabel(UploadFile);
+        Drag->setObjectName(QStringLiteral("Drag"));
+
+        verticalLayout->addWidget(Drag);
+
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_11);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         mFileIcon = new QLabel(UploadFile);
         mFileIcon->setObjectName(QStringLiteral("mFileIcon"));
 
-        verticalLayout->addWidget(mFileIcon);
+        horizontalLayout_3->addWidget(mFileIcon);
 
         mFileName = new QLabel(UploadFile);
         mFileName->setObjectName(QStringLiteral("mFileName"));
 
-        verticalLayout->addWidget(mFileName);
+        horizontalLayout_3->addWidget(mFileName);
 
 
-        horizontalLayout_5->addLayout(verticalLayout);
+        horizontalLayout_5->addLayout(horizontalLayout_3);
 
         horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_12);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_5);
+        verticalLayout->addLayout(horizontalLayout_5);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -103,7 +107,7 @@ public:
         horizontalLayout_4->addItem(horizontalSpacer_10);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_4);
+        verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -122,7 +126,7 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer_6);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -132,24 +136,29 @@ public:
 
         selectBtn = new QPushButton(UploadFile);
         selectBtn->setObjectName(QStringLiteral("selectBtn"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(selectBtn->sizePolicy().hasHeightForWidth());
+        selectBtn->setSizePolicy(sizePolicy);
+        selectBtn->setMinimumSize(QSize(80, 30));
+        selectBtn->setMaximumSize(QSize(80, 30));
 
         horizontalLayout->addWidget(selectBtn);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
         sendBtn = new QPushButton(UploadFile);
         sendBtn->setObjectName(QStringLiteral("sendBtn"));
+        sizePolicy.setHeightForWidth(sendBtn->sizePolicy().hasHeightForWidth());
+        sendBtn->setSizePolicy(sizePolicy);
+        sendBtn->setMinimumSize(QSize(80, 30));
+        sendBtn->setMaximumSize(QSize(80, 30));
 
         horizontalLayout->addWidget(sendBtn);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_2);
-
         cancelBtn = new QPushButton(UploadFile);
         cancelBtn->setObjectName(QStringLiteral("cancelBtn"));
+        cancelBtn->setMinimumSize(QSize(80, 30));
+        cancelBtn->setMaximumSize(QSize(80, 30));
 
         horizontalLayout->addWidget(cancelBtn);
 
@@ -158,7 +167,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer_4);
 
 
-        verticalLayout_2->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout);
 
 
         retranslateUi(UploadFile);
@@ -171,6 +180,7 @@ public:
     void retranslateUi(QWidget *UploadFile)
     {
         UploadFile->setWindowTitle(QApplication::translate("UploadFile", "Form", Q_NULLPTR));
+        Drag->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
         mFileIcon->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
         mFileName->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
         uploadSpeedLabel->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));

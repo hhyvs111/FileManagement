@@ -19,8 +19,16 @@ UploadFile::UploadFile(QWidget *parent) :
 	ui->uploadSpeedLabel->hide();
 	ui->mFileIcon->hide();
 	ui->mFileName->hide();
+
 	setAcceptDrops(true);
+
+	QPixmap DragDrop("Resource/Drag-Drop");  //用来放文件的图标
+	//Drag = fil.scaled(QSize(50, 60), Qt::KeepAspectRatio);
+	ui->Drag->setPixmap(DragDrop);
+	//ui->Drag->setAlignment(Qt::AlignCenter);
 	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
+
+	loadStyleSheet("UploadFile");  //
 }
 
 UploadFile::~UploadFile()
@@ -28,6 +36,21 @@ UploadFile::~UploadFile()
 	delete ui;
 }
 
+void UploadFile::loadStyleSheet(const QString &sheetName)
+{
+	QFile file("Resource/qss/" + sheetName + ".qss");
+	qDebug() << sheetName + ".qss";
+	file.open(QFile::ReadOnly);
+	if (file.isOpen())
+	{
+		qDebug() << "is  css";
+		QString styleSheet = this->styleSheet();
+		styleSheet += QLatin1String(file.readAll());
+		this->setStyleSheet(styleSheet);
+	}
+	else
+		qDebug() << "is not css";
+}
 void UploadFile::dragEnterEvent(QDragEnterEvent *event)
 {
 	//如果为文件，则支持拖放
@@ -122,7 +145,7 @@ void UploadFile::send()  //发送文件头信息
 	else
 	{
 		//弹出请先添加文件提示！
-		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先添加文件!"), MESSAGE_INFORMATION, BUTTON_OK);
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先添加文件!"), MESSAGE_INFORMATION, BUTTON_OK,true);
 	}
 
 }
@@ -161,7 +184,12 @@ void UploadFile::goOnSend(qint64 numBytes)
 
 	if (byteToWrite == 0)  //发送完毕  
 	{
-		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK);
+		//发送完毕且点击了点击了确定按钮。
+		if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), 
+			QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK, true))
+		{
+			ui->sendBtn->setEnabled(true);
+		}
 		//ui->sendStatusLabel->setText(QString::fromLocal8Bit("文件发送完毕!"));
 		//发送完毕就断开这个写字节的槽函数。
 		disconnect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
@@ -175,7 +203,7 @@ void UploadFile::ClickSendButton()
 {
 	
 	send();  //第一次发送的时候是由connectToHost出发connect信号才能调用send，第二次之后就需要调用send了  
-	
+	ui->sendBtn->setEnabled(false);
 	//connect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 	//ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在发送文件 %1").arg(fileName));
 }
@@ -188,13 +216,12 @@ void UploadFile::setFileIcon(QString fileName)
 	QString allName = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1); //获取文件名字
 	qDebug() << "the suffix :" << suffix << " and the allName:" << allName;
 	QPixmap fileIcon("Resource/fileIcon/" + suffix);  //用来放文件的图标
-	fileIcon = fileIcon.scaled(QSize(50, 60), Qt::KeepAspectRatio);
+	fileIcon = fileIcon.scaled(QSize(30, 40), Qt::KeepAspectRatio);
 	ui->mFileIcon->setPixmap(fileIcon);
 	ui->mFileIcon->setAlignment(Qt::AlignCenter);
 	ui->mFileName->setText(allName);
 	ui->mFileIcon->show();
 	ui->mFileName->show();
-	
 }
 void UploadFile::receiveMainwindow()
 {

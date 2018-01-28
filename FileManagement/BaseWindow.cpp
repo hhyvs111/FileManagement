@@ -44,25 +44,25 @@ void BaseWindow::paintEvent(QPaintEvent* event)
 	pathBack.setFillRule(Qt::WindingFill);
 	pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
 	painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-	painter.fillPath(pathBack, QBrush(QColor(238, 223, 204)));
+	painter.fillPath(pathBack, QBrush(QColor(255, 255, 255)));
 
 	return QWidget::paintEvent(event);
 }
 
 void BaseWindow::loadStyleSheet(const QString &sheetName)
 {
-	QFile file("Recourse/"+sheetName + ".css");
-	qDebug() << sheetName + ".css";
+	QFile file("Resource/qss/"+sheetName + ".qss");
+	qDebug() << sheetName + ".qss";
 	file.open(QFile::ReadOnly);
 	if (file.isOpen())
 	{
-		qDebug() << "is  css";
+
 		QString styleSheet = this->styleSheet();
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);
 	}
 	else
-		qDebug() << "is not css";
+		qDebug() << "is not qss";
 }
 
 void BaseWindow::onButtonMinClicked()

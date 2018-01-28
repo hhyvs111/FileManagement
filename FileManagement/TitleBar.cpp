@@ -276,11 +276,11 @@ void TitleBar::mouseReleaseEvent(QMouseEvent *event)
 // 可以将样式直接写在文件中，程序运行时直接加载进来;
 void TitleBar::loadStyleSheet(const QString &sheetName)
 {
-	QFile file("Resource/" + sheetName + ".css");
+	QFile file("Resource/MyTitle/" + sheetName + ".css");
 	file.open(QFile::ReadOnly);
 	if (file.isOpen())
 	{
-		qDebug() << "is css";
+		qDebug() << "is qss";
 		QString styleSheet = this->styleSheet();
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);

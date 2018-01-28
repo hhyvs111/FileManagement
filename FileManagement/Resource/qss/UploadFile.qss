@@ -1,0 +1,30 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QLabel#mFileName{
+    font-size: 12px;
+}
+QPushButton#sendBtn {
+    color: white;
+    background-color: rgb(14, 150, 254);
+    border: 1px solid rgb(11, 137, 234);
+
+}
+
+QPushButton#sendBtn:hover {
+        color: white;
+        background-color: rgb(44, 137, 255);
+        border: 1px solid rgb(11, 137, 234);
+}
+QPushButton#sendBtn:pressed {
+        color: white;
+        background-color: rgb(14, 135, 228);
+        border: 1px solid rgb(12, 138, 235);
+        padding-left: 3px;
+        padding-top: 3px;
+}
+QPushButton#sendBtn:!enabled{
+background-color: rgb(100, 100, 100);
+border-style: inset;
+}

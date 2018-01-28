@@ -379,14 +379,10 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-background-color:rgb(85,170,255);
-border-radius: 3px; color: rgb(255, 255, 255); 
-}</string>
+         <string notr="true"/>
         </property>
         <property name="text">
-         <string>登录</string>
+         <string>登 录</string>
         </property>
        </widget>
       </item>

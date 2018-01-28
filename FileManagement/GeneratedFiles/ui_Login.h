@@ -205,11 +205,7 @@ public:
         m_LoginButton->setSizePolicy(sizePolicy2);
         m_LoginButton->setMinimumSize(QSize(180, 30));
         m_LoginButton->setMaximumSize(QSize(50, 20));
-        m_LoginButton->setStyleSheet(QLatin1String("QPushButton\n"
-"{\n"
-"background-color:rgb(85,170,255);\n"
-"border-radius: 3px; color: rgb(255, 255, 255); \n"
-"}"));
+        m_LoginButton->setStyleSheet(QStringLiteral(""));
 
         horizontalLayout_4->addWidget(m_LoginButton);
 
@@ -247,7 +243,7 @@ public:
         pushButton_2->setText(QApplication::translate("Login", "\346\211\276\345\233\236\345\257\206\347\240\201", Q_NULLPTR));
         rem_pw->setText(QApplication::translate("Login", "\350\256\260\344\275\217\345\257\206\347\240\201", Q_NULLPTR));
         auto_login->setText(QApplication::translate("Login", "\350\207\252\345\212\250\347\231\273\345\275\225", Q_NULLPTR));
-        m_LoginButton->setText(QApplication::translate("Login", "\347\231\273\345\275\225", Q_NULLPTR));
+        m_LoginButton->setText(QApplication::translate("Login", "\347\231\273 \345\275\225", Q_NULLPTR));
     } // retranslateUi
 
 };

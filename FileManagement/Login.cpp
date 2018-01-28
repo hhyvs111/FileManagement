@@ -14,7 +14,7 @@
 
 
 Login::Login(QWidget *parent)
-	: BaseWindow(parent), ui(new Ui::Login)
+	: BaseWindow(parent), ui(new Ui::Login) 
 {
 	tcp = new TcpClient();  //在这里实例化的？
 	ui->setupUi(this);
@@ -55,6 +55,7 @@ Login::Login(QWidget *parent)
 	connect(tcp, SIGNAL(sendDataToLogin(QString)), this, SLOT(receiveDataFromClient(QString)));
 	//显示注册框
 	//connect(this, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
+	loadStyleSheet("Login");
 }
 
 void Login::initTitleBar()

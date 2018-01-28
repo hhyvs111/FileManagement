@@ -1,0 +1,20 @@
+QPushButton#m_LoginButton {
+    color: white;
+    background-color: rgb(14, 150, 254);
+    border: 1px solid rgb(11, 137, 234);
+    /*border-width: 10px;
+    border-radius: 5px;*/
+}
+    QPushButton#m_LoginButton:hover {
+        color: white;
+        background-color: rgb(44, 137, 255);
+        border: 1px solid rgb(11, 137, 234);
+    }
+
+ QPushButton#m_LoginButton:pressed {
+        color: white;
+        background-color: rgb(14, 135, 228);
+        border: 1px solid rgb(12, 138, 235);
+        padding-left: 3px;
+        padding-top: 3px;
+    }

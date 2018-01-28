@@ -43,6 +43,12 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{aaf35b80-6f54-4526-9013-23feb144e696}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\CSS">
+      <UniqueIdentifier>{94659328-68ee-4858-912c-29e557e2b347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Icon">
+      <UniqueIdentifier>{b5b6f83b-1978-44cd-bbc6-a2e045d8902c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -173,9 +179,6 @@
     <CustomBuild Include="FileManagement.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Login.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="FileManagement.h">
       <Filter>Header Files\H_QTUI</Filter>
     </CustomBuild>
@@ -230,12 +233,12 @@
     <CustomBuild Include="TableModel.h">
       <Filter>Header Files\H_QTUI\Base</Filter>
     </CustomBuild>
+    <CustomBuild Include="Login.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_Login.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -268,6 +271,9 @@
     <ClInclude Include="GeneratedFiles\ui_UserInformation.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Login.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FileManagement.rc" />
@@ -276,91 +282,103 @@
     <None Include="MyMessageBox.qss">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Login.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\css\UploadFile.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\css\MyMessageBox.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\MyTitle\MyTitle.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resource\Logo.gif">
-      <Filter>Resource</Filter>
+    <Image Include="Resource\chat.png">
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\close.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\max.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\min.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\chat.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\delete.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\download.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\MainWindow.gif">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\person1.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\upload.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\ion\confirm.jpg">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\ion\correct.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
-    <Image Include="Resource\ion\error.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\login.jpg">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\pass.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\user.png">
-      <Filter>Resource</Filter>
+    <Image Include="Resource\delete.png">
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\ion\deleteFile.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\downloadFile.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\message_delete.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\message_tips.png">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="Resource\ion\message_warnning.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\doc.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\download.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\downloadFile.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\error.png">
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\exe.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\login.jpg">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\Logo.gif">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\MainWindow.gif">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\max.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\message_delete.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\message_tips.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\message_warnning.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\min.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\pass.png">
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\pdf.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\person1.png">
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\rar.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\txt.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\upload.png">
+      <Filter>Resource\Icon</Filter>
+    </Image>
+    <Image Include="Resource\ion\user.png">
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\xls.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
     <Image Include="Resource\fileIcon\zip.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Icon</Filter>
     </Image>
   </ItemGroup>
 </Project>
