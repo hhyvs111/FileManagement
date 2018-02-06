@@ -10,23 +10,26 @@ FileManagement::FileManagement(QWidget *parent)
 {
 	ui->setupUi(this);
 
-	QIcon personico("Resource/person1.png"); //创建QIcon对象
+	QIcon personico("Resource/FunIcon/userInfo.png"); //创建QIcon对象
 	ui->personButton->setIcon(personico); //将图片设置到按钮上
-	ui->personButton->setIconSize(QSize(70, 58));//根据实际调整图片大小
+	ui->personButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->personButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
 	//toolbutton添加图片
-	QIcon uploadico("Resource/upload.png"); //创建QIcon对象
+	QIcon uploadico("Resource/FunIcon/upload.png"); //创建QIcon对象
 	ui->uploadButton->setIcon(uploadico); //将图片设置到按钮上
-	ui->uploadButton->setIconSize(QSize(70, 55));//根据实际调整图片大小
+	ui->uploadButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->uploadButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
-	QIcon downloadico("Resource/download.png"); //创建QIcon对象
+
+	QIcon downloadico("Resource/FunIcon/download.png"); //创建QIcon对象
 	ui->downloadButton->setIcon(downloadico); //将图片设置到按钮上
-	ui->downloadButton->setIconSize(QSize(70, 55));//根据实际调整图片大小
+	ui->downloadButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->downloadButton->setStyleSheet("border:none");
-	QIcon chatico("Resource/chat.png"); //创建QIcon对象
-	ui->chatButton->setIcon(chatico); //将图片设置到按钮上
-	ui->chatButton->setIconSize(QSize(70, 55));//根据实际调整图片大小
-	ui->chatButton->setStyleSheet("border:none");
+
+	QIcon chatico("Resource/FunIcon/showFile.png"); //创建QIcon对象
+	ui->showFileButton->setIcon(chatico); //将图片设置到按钮上
+	ui->showFileButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
+	ui->showFileButton->setStyleSheet("border:none");
+
 	QIcon deleteico("Resource/delete.png"); //创建QIcon对象
 	ui->deleteButton->setIcon(deleteico); //将图片设置到按钮上
 	ui->deleteButton->setIconSize(QSize(70, 55));//根据实际调整图片大小
@@ -38,11 +41,11 @@ FileManagement::FileManagement(QWidget *parent)
 	//ui->photoLabel->setMovie(movie);
 	//	movie->start();
 		setWindowIcon(QIcon("Resource/icon1.png"));//设置窗口左上角图标
-		setFixedSize(800, 600); // 禁止改变窗口大小
+		//setFixedSize(800, 600); // 禁止改变窗口大小
 		ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
 		ui->uploadButton->setToolTip(tr("upload"));
 		ui->downloadButton->setToolTip(tr("download"));
-		ui->chatButton->setToolTip(tr("chat"));
+		ui->showFileButton->setToolTip(tr("chat"));
 		ui->deleteButton->setToolTip(tr("delete"));
 		//自定义退出按钮
 		QToolButton *closeButton = new QToolButton(this);

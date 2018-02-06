@@ -8,6 +8,9 @@
 #include <Qtime>
 #include "MyMessageBox.h"
 
+
+//问题1： 用户拖曳了文件但是没有点击发送的话，服务器已经接收了“接收文件”的信号。这个时候
+//就会出问题，服务器不能正常接收常规的命令。
 int sendtimes = 0;
 UploadFile::UploadFile(QWidget *parent) :
 	QWidget(parent),
@@ -16,19 +19,9 @@ UploadFile::UploadFile(QWidget *parent) :
 	ui->setupUi(this);
 	//ui->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
 	//ui->progressLabel->hide();
-	ui->uploadSpeedLabel->hide();
-	ui->mFileIcon->hide();
-	ui->mFileName->hide();
+	init();  //初始化
 
-	setAcceptDrops(true);
-
-	QPixmap DragDrop("Resource/Drag-Drop");  //用来放文件的图标
-	//Drag = fil.scaled(QSize(50, 60), Qt::KeepAspectRatio);
-	ui->Drag->setPixmap(DragDrop);
-	//ui->Drag->setAlignment(Qt::AlignCenter);
-	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
-
-	loadStyleSheet("UploadFile");  //
+	
 }
 
 UploadFile::~UploadFile()
@@ -36,6 +29,26 @@ UploadFile::~UploadFile()
 	delete ui;
 }
 
+void UploadFile::init()
+{
+	//速度啊，标签什么的都先隐藏起来
+	ui->uploadSpeedLabel->hide();
+	ui->mFileIcon->hide();
+	ui->mFileName->hide();
+
+	ui->sendProgressBar->hide();
+	
+
+	setAcceptDrops(true);
+	QPixmap DragDrop("Resource/Drag-Drop");  //用来放文件的图标
+											 //Drag = fil.scaled(QSize(50, 60), Qt::KeepAspectRatio);
+	ui->Drag->setPixmap(DragDrop);
+	//ui->Drag->setAlignment(Qt::AlignCenter);
+	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
+
+	loadStyleSheet("UploadFile");  //
+
+}
 void UploadFile::loadStyleSheet(const QString &sheetName)
 {
 	QFile file("Resource/qss/" + sheetName + ".qss");
@@ -86,12 +99,13 @@ void UploadFile::initFile()
 	byteToWrite = 0;
 	totalSize = 0;
 	sendtimes = 0;
+	ui->sendProgressBar->setValue(0);  //非第一次发送  
 	outBlock.clear();
 }
 void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）  
 {
 	//ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在打开文件..."));
-	ui->sendProgressBar->setValue(0);  //非第一次发送  
+
 
 									   //告诉服务器，我要发送文件了
 	
@@ -178,7 +192,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 		.arg(totalSize / speed / 1000 - useTime / 1000, 0, 'f', 0));//剩余时间
 
 
-	//设置UI的进度条，这个可以考虑影藏起来
+	//设置UI的进度条，这个可以考虑隐藏起来
 	ui->sendProgressBar->setMaximum(totalSize);
 	ui->sendProgressBar->setValue(totalSize - byteToWrite);
 
@@ -203,6 +217,7 @@ void UploadFile::ClickSendButton()
 {
 	
 	send();  //第一次发送的时候是由connectToHost出发connect信号才能调用send，第二次之后就需要调用send了  
+
 	ui->sendBtn->setEnabled(false);
 	//connect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 	//ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在发送文件 %1").arg(fileName));
@@ -222,6 +237,10 @@ void UploadFile::setFileIcon(QString fileName)
 	ui->mFileName->setText(allName);
 	ui->mFileIcon->show();
 	ui->mFileName->show();
+	//放文件的时候重置速度和标签
+
+	ui->uploadSpeedLabel->hide();
+	ui->sendProgressBar->show();
 }
 void UploadFile::receiveMainwindow()
 {

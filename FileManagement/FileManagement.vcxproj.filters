@@ -274,6 +274,9 @@
     <ClInclude Include="GeneratedFiles\ui_Login.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="DownloadManage.h">
+      <Filter>Header Files\H_QTUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FileManagement.rc" />

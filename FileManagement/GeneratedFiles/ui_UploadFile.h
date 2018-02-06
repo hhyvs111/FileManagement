@@ -34,15 +34,13 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QLabel *mFileIcon;
     QLabel *mFileName;
+    QHBoxLayout *horizontalLayout_2;
+    QProgressBar *sendProgressBar;
     QSpacerItem *horizontalSpacer_12;
     QHBoxLayout *horizontalLayout_4;
     QSpacerItem *horizontalSpacer_9;
     QLabel *uploadSpeedLabel;
     QSpacerItem *horizontalSpacer_10;
-    QHBoxLayout *horizontalLayout_2;
-    QSpacerItem *horizontalSpacer_5;
-    QProgressBar *sendProgressBar;
-    QSpacerItem *horizontalSpacer_6;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer_3;
     QPushButton *selectBtn;
@@ -84,6 +82,17 @@ public:
 
         horizontalLayout_5->addLayout(horizontalLayout_3);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        sendProgressBar = new QProgressBar(UploadFile);
+        sendProgressBar->setObjectName(QStringLiteral("sendProgressBar"));
+        sendProgressBar->setValue(0);
+
+        horizontalLayout_2->addWidget(sendProgressBar);
+
+
+        horizontalLayout_5->addLayout(horizontalLayout_2);
+
         horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_12);
@@ -108,25 +117,6 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_4);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_5);
-
-        sendProgressBar = new QProgressBar(UploadFile);
-        sendProgressBar->setObjectName(QStringLiteral("sendProgressBar"));
-        sendProgressBar->setValue(0);
-
-        horizontalLayout_2->addWidget(sendProgressBar);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_6);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));

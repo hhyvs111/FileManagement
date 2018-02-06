@@ -41,7 +41,7 @@ public:
     {
         if (DownloadFile->objectName().isEmpty())
             DownloadFile->setObjectName(QStringLiteral("DownloadFile"));
-        DownloadFile->resize(472, 311);
+        DownloadFile->resize(811, 504);
         verticalLayout = new QVBoxLayout(DownloadFile);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_3 = new QHBoxLayout();

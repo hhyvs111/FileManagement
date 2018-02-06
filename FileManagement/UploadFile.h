@@ -35,7 +35,7 @@ private:
 	qint64 totalSize;  //文件总大小  
 
 
-	
+	void init();
 	int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  
 
 	void initFile();

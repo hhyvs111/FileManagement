@@ -17,7 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolButton>
@@ -35,20 +34,13 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QLabel *titleLabel;
     QSpacerItem *horizontalSpacer;
-    QSpacerItem *verticalSpacer;
     QHBoxLayout *FunctionLayout;
     QVBoxLayout *verticalLayout;
-    QSpacerItem *verticalSpacer_7;
-    QPushButton *personButton;
-    QSpacerItem *verticalSpacer_2;
+    QToolButton *personButton;
+    QToolButton *showFileButton;
     QToolButton *uploadButton;
-    QSpacerItem *verticalSpacer_3;
     QToolButton *downloadButton;
-    QSpacerItem *verticalSpacer_4;
-    QToolButton *chatButton;
-    QSpacerItem *verticalSpacer_5;
     QToolButton *deleteButton;
-    QSpacerItem *verticalSpacer_6;
     QVBoxLayout *SubLayout;
     QSpacerItem *verticalSpacer_8;
     QSpacerItem *verticalSpacer_9;
@@ -90,10 +82,6 @@ public:
 
         verticalLayout_2->addLayout(TitleLayout);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_2->addItem(verticalSpacer);
-
         FunctionLayout = new QHBoxLayout();
         FunctionLayout->setSpacing(6);
         FunctionLayout->setObjectName(QStringLiteral("FunctionLayout"));
@@ -102,20 +90,15 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer_7);
-
-        personButton = new QPushButton(centralWidget);
+        personButton = new QToolButton(centralWidget);
         personButton->setObjectName(QStringLiteral("personButton"));
-        personButton->setMaximumSize(QSize(70, 55));
-        personButton->setStyleSheet(QStringLiteral(""));
 
         verticalLayout->addWidget(personButton);
 
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        showFileButton = new QToolButton(centralWidget);
+        showFileButton->setObjectName(QStringLiteral("showFileButton"));
 
-        verticalLayout->addItem(verticalSpacer_2);
+        verticalLayout->addWidget(showFileButton);
 
         uploadButton = new QToolButton(centralWidget);
         uploadButton->setObjectName(QStringLiteral("uploadButton"));
@@ -124,37 +107,16 @@ public:
 
         verticalLayout->addWidget(uploadButton);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer_3);
-
         downloadButton = new QToolButton(centralWidget);
         downloadButton->setObjectName(QStringLiteral("downloadButton"));
         downloadButton->setFocusPolicy(Qt::NoFocus);
 
         verticalLayout->addWidget(downloadButton);
 
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer_4);
-
-        chatButton = new QToolButton(centralWidget);
-        chatButton->setObjectName(QStringLiteral("chatButton"));
-
-        verticalLayout->addWidget(chatButton);
-
-        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer_5);
-
         deleteButton = new QToolButton(centralWidget);
         deleteButton->setObjectName(QStringLiteral("deleteButton"));
 
         verticalLayout->addWidget(deleteButton);
-
-        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer_6);
 
 
         FunctionLayout->addLayout(verticalLayout);
@@ -194,10 +156,10 @@ public:
     {
         FileManagement->setWindowTitle(QApplication::translate("FileManagement", "mainpage", Q_NULLPTR));
         titleLabel->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\254\242\350\277\216\346\235\245\345\210\260\345\256\236\351\252\214\345\256\244\346\226\207\346\241\243\347\256\241\347\220\206\347\263\273\347\273\237</span></p></body></html>", Q_NULLPTR));
-        personButton->setText(QString());
+        personButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
+        showFileButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         uploadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         downloadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
-        chatButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         deleteButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
     } // retranslateUi
 
