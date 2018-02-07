@@ -62,6 +62,11 @@ private:
 	// 加载样式文件;
 	void loadStyleSheet(const QString &sheetName);
 
+	//获取文件的图标
+	QIcon fileIcon(const QString &extension) const;
+	//获取文件的类型？
+	QString fileType(const QString &extension) const;
+
 
 	
 

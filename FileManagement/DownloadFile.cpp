@@ -3,6 +3,8 @@
 #include "TableModel.h"
 #include <QFileDialog>
 #include<QToolTip>
+#include <QtWin>
+#include <QFileIconProvider>
 #include "MyMessageBox.h"
 DownloadFile::DownloadFile(QWidget *parent) :
 	QWidget(parent),
@@ -12,23 +14,6 @@ DownloadFile::DownloadFile(QWidget *parent) :
 	//StotalSize = 0;
 	byteReceived = 0;
 
-	//ui->progressLabel->hide();
-	//添加表头
-	
-	//初始化？
-	//m_model = new TableModel();
-	// ui->downloadTable->setModel(m_model);  //设置model
-	//
-	////设置文件操作头
-	//QStringList headers;
-	//headers << QString::fromLocal8Bit("文件名") << QString::fromLocal8Bit("文件大小")
-	//	<< QString::fromLocal8Bit("文件类型")<< QString::fromLocal8Bit("文件操作");
-
-	//m_model->setHorizontalHeader(headers);
-
-	//m_buttonDelegate = new ButtonDelegate(this);
-	//ui->downloadTable->setItemDelegateForColumn(3, m_buttonDelegate); //设置按钮？
-	//connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
 	initModel();
 
 	ui->downloadTable->setMouseTracking(true);   //设置鼠标追踪
@@ -45,22 +30,28 @@ DownloadFile::~DownloadFile()
 void  DownloadFile::initModel()
 {
 	model = new QStandardItemModel();
-	model->setColumnCount(6);
-	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit("文件名"));
-	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("文件大小"));
-	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("上传时间"));
-	model->setHeaderData(3, Qt::Horizontal, QString::fromLocal8Bit("上传者"));
-	model->setHeaderData(4, Qt::Horizontal, QString::fromLocal8Bit("下载"));
-	model->setHeaderData(5, Qt::Horizontal, QString::fromLocal8Bit("删除"));
+	model->setColumnCount(7);
+	ui->downloadTable->setShowGrid(false);
+	ui->downloadTable->verticalHeader()->setVisible(false);// 垂直不可见
+	//ui->downloadTable->horizontalHeader()->setVisible(false);// 水平不可见
+	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit(""));
+	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("文件名"));
+	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("文件大小"));
+	model->setHeaderData(3, Qt::Horizontal, QString::fromLocal8Bit("上传时间"));
+	model->setHeaderData(4, Qt::Horizontal, QString::fromLocal8Bit("上传者"));
+	model->setHeaderData(5, Qt::Horizontal, QString::fromLocal8Bit("下载"));
+	model->setHeaderData(6, Qt::Horizontal, QString::fromLocal8Bit("删除"));
+	
 	ui->downloadTable->setModel(model);
 	ui->downloadTable->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
-
-	ui->downloadTable->setColumnWidth(0, 300);
-	ui->downloadTable->setColumnWidth(1, 70);
-	ui->downloadTable->setColumnWidth(2, 110);
-	ui->downloadTable->setColumnWidth(3, 70);
-	ui->downloadTable->setColumnWidth(4, 40);
+	ui->downloadTable->setColumnWidth(0, 30);
+	ui->downloadTable->setColumnWidth(1, 300);
+	ui->downloadTable->setColumnWidth(2, 70);
+	ui->downloadTable->setColumnWidth(3, 110);
+	ui->downloadTable->setColumnWidth(4, 70);
 	ui->downloadTable->setColumnWidth(5, 40);
+	ui->downloadTable->setColumnWidth(6, 40);
+	
 	//设置列宽不可变 
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
@@ -270,13 +261,13 @@ void DownloadFile::showFileInfo()
 	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	for (int i = 0; i < listNumber[0].toInt(); i++)
 	{
-		//设置前三列的数据
-		model->setItem(i, 0, new QStandardItem(fileInfo.at(i).fileName));
-		model->setItem(i, 1, new QStandardItem(countFileSize(fileInfo.at(i).fileSize)));  //countFileSize根据大小显示KB还是MB
-		model->setItem(i, 2, new QStandardItem(fileInfo.at(i).fileTime));
-		model->setItem(i, 3, new QStandardItem(fileInfo.at(i).fileUser));
+		//设置前四列的数据
+		model->setItem(i, 1, new QStandardItem(fileInfo.at(i).fileName));
+		model->setItem(i, 2, new QStandardItem(countFileSize(fileInfo.at(i).fileSize)));  //countFileSize根据大小显示KB还是MB
+		model->setItem(i, 3, new QStandardItem(fileInfo.at(i).fileTime));
+		model->setItem(i, 4, new QStandardItem(fileInfo.at(i).fileUser));
 
-		//为这个第四列添加按钮
+		//为这个第五列添加按钮
 		m_download = new QPushButton();
 		QIcon downloadFile("Resource/ion/downloadFile.png"); //创建QIcon对象
 		m_download->setIcon(downloadFile); //将图片设置到按钮上
@@ -301,11 +292,19 @@ void DownloadFile::showFileInfo()
 		m_delete->setProperty("deleteFileId", fileInfo.at(i).fileId);
 		m_delete->setProperty("deleteFileName", fileInfo.at(i).fileName);
 
-		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 4), m_download);
-		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_delete);
+		
+		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_download);
+		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 6), m_delete);
 
+		//这里设置一下图标？
+		QIcon icon = fileIcon(fileInfo.at(i).fileType);
+		QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(20, 30)));
+		QLabel *fIcon = new QLabel();
+		fIcon->setPixmap(pixmap);
+		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 0), fIcon);
+		
 		//设置数据居中
-		for(int j = 1;j < 4;j++)
+		for(int j = 2;j < 5;j++)
 		model->item(i, j)->setTextAlignment(Qt::AlignCenter);
 	}
 	//m_model->setData(data);
@@ -373,4 +372,51 @@ void DownloadFile::loadStyleSheet(const QString &sheetName)
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);
 	}
+}
+
+QIcon DownloadFile::fileIcon(const QString &extension) const
+{
+	QFileIconProvider provider;
+	QIcon icon;
+	QString strTemplateName = QDir::tempPath() + QDir::separator() +
+		QCoreApplication::applicationName() + "_XXXXXX." + extension;
+	QTemporaryFile tmpFile(strTemplateName);
+	tmpFile.setAutoRemove(false);
+
+	if (tmpFile.open())
+	{
+		QString file_name = tmpFile.fileName();
+		tmpFile.close();
+		icon = provider.icon(QFileInfo(file_name));
+		tmpFile.remove();
+	}
+	else
+	{
+		qDebug() << QString("failed to write temporary file %1").arg(tmpFile.fileName());
+	}
+
+	return icon;
+}
+
+QString DownloadFile::fileType(const QString &extension) const
+{
+	QFileIconProvider provider;
+	QString strType;
+	QString strFileName = QDir::tempPath() + QDir::separator() +
+		QCoreApplication::applicationName() + "_XXXXXX." + extension;
+	QTemporaryFile tmpFile(strFileName);
+	tmpFile.setAutoRemove(false);
+
+	if (tmpFile.open())
+	{
+		tmpFile.close();
+		strType = provider.type(QFileInfo(tmpFile.fileName()));
+		// tmpFile.remove();
+	}
+	else
+	{
+		qCritical() << QString("failed to write temporary file %1").arg(tmpFile.fileName());
+	}
+
+	return strType;
 }

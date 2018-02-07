@@ -35,7 +35,7 @@ public:
     QLabel *titleLabel;
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *FunctionLayout;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *ToolButtonLayout;
     QToolButton *personButton;
     QToolButton *showFileButton;
     QToolButton *uploadButton;
@@ -85,41 +85,48 @@ public:
         FunctionLayout = new QHBoxLayout();
         FunctionLayout->setSpacing(6);
         FunctionLayout->setObjectName(QStringLiteral("FunctionLayout"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        ToolButtonLayout = new QVBoxLayout();
+        ToolButtonLayout->setSpacing(0);
+        ToolButtonLayout->setObjectName(QStringLiteral("ToolButtonLayout"));
+        ToolButtonLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        ToolButtonLayout->setContentsMargins(0, 0, 0, 0);
         personButton = new QToolButton(centralWidget);
         personButton->setObjectName(QStringLiteral("personButton"));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(personButton->sizePolicy().hasHeightForWidth());
+        personButton->setSizePolicy(sizePolicy);
+        personButton->setMinimumSize(QSize(150, 30));
+        personButton->setMaximumSize(QSize(16777215, 16777215));
 
-        verticalLayout->addWidget(personButton);
+        ToolButtonLayout->addWidget(personButton);
 
         showFileButton = new QToolButton(centralWidget);
         showFileButton->setObjectName(QStringLiteral("showFileButton"));
 
-        verticalLayout->addWidget(showFileButton);
+        ToolButtonLayout->addWidget(showFileButton);
 
         uploadButton = new QToolButton(centralWidget);
         uploadButton->setObjectName(QStringLiteral("uploadButton"));
         uploadButton->setFocusPolicy(Qt::NoFocus);
         uploadButton->setStyleSheet(QStringLiteral(""));
 
-        verticalLayout->addWidget(uploadButton);
+        ToolButtonLayout->addWidget(uploadButton);
 
         downloadButton = new QToolButton(centralWidget);
         downloadButton->setObjectName(QStringLiteral("downloadButton"));
         downloadButton->setFocusPolicy(Qt::NoFocus);
 
-        verticalLayout->addWidget(downloadButton);
+        ToolButtonLayout->addWidget(downloadButton);
 
         deleteButton = new QToolButton(centralWidget);
         deleteButton->setObjectName(QStringLiteral("deleteButton"));
 
-        verticalLayout->addWidget(deleteButton);
+        ToolButtonLayout->addWidget(deleteButton);
 
 
-        FunctionLayout->addLayout(verticalLayout);
+        FunctionLayout->addLayout(ToolButtonLayout);
 
         SubLayout = new QVBoxLayout();
         SubLayout->setSpacing(6);
@@ -145,9 +152,9 @@ public:
 
         retranslateUi(FileManagement);
         QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
-        QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
-        QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
         QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
+        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
+        QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi

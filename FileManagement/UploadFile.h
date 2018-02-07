@@ -33,7 +33,11 @@ private:
 	qint64 loadSize;  //每次发送数据的大小  
 	qint64 byteToWrite;  //剩余数据大小  
 	qint64 totalSize;  //文件总大小  
-
+	
+	//获取文件的图标
+	QIcon fileIcon(const QString &extension) const;
+	//获取文件的类型？
+	QString fileType(const QString &extension) const;
 
 	void init();
 	int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  

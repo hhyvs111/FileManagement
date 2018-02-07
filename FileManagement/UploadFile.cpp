@@ -6,6 +6,8 @@
 #include <QIODevice>
 #include <QString>
 #include <Qtime>
+#include <QtWin>
+#include <QFileIconProvider>
 #include "MyMessageBox.h"
 
 
@@ -226,23 +228,78 @@ void UploadFile::ClickSendButton()
 
 void UploadFile::setFileIcon(QString fileName)
 {
-	
+
 	QString suffix = (fileName.right(fileName.size() - fileName.lastIndexOf('.') - 1)).left(3); //获取文件后缀前三个字符
 	QString allName = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1); //获取文件名字
 	qDebug() << "the suffix :" << suffix << " and the allName:" << allName;
-	QPixmap fileIcon("Resource/fileIcon/" + suffix);  //用来放文件的图标
-	fileIcon = fileIcon.scaled(QSize(30, 40), Qt::KeepAspectRatio);
-	ui->mFileIcon->setPixmap(fileIcon);
+		// 获取图标、类型
+	QIcon icon = fileIcon(suffix);
+	QString strType = fileType(suffix);
+	qDebug() << strType;
+	QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(30, 40)));
+	//QPixmap fileIcon(icon.);  //用来放文件的图标
+	//fileIcon = fileIcon.scaled(QSize(30, 40), Qt::KeepAspectRatio);
+	ui->mFileIcon->setPixmap(pixmap);
 	ui->mFileIcon->setAlignment(Qt::AlignCenter);
+	//QPixmap fileIcon("Resource/fileIcon/" + suffix);  //用来放文件的图标
+	//fileIcon = fileIcon.scaled(QSize(30, 40), Qt::KeepAspectRatio);
+	//ui->mFileIcon->setPixmap(fileIcon);
+	//ui->mFileIcon->setAlignment(Qt::AlignCenter);
 	ui->mFileName->setText(allName);
 	ui->mFileIcon->show();
 	ui->mFileName->show();
 	//放文件的时候重置速度和标签
-
 	ui->uploadSpeedLabel->hide();
 	ui->sendProgressBar->show();
 }
+
 void UploadFile::receiveMainwindow()
 {
 	this->show();
+}
+
+QIcon UploadFile::fileIcon(const QString &extension) const
+{
+	QFileIconProvider provider; 
+	QIcon icon;
+	QString strTemplateName = QDir::tempPath() + QDir::separator() +
+		QCoreApplication::applicationName() + "_XXXXXX." + extension;
+	QTemporaryFile tmpFile(strTemplateName);
+	tmpFile.setAutoRemove(false);
+
+	if (tmpFile.open())
+	{
+		tmpFile.close();
+		icon = provider.icon(QFileInfo(fileName));
+		// tmpFile.remove();
+	}
+	else
+	{
+		qDebug() << QString("failed to write temporary file %1").arg(tmpFile.fileName());
+	}
+
+	return icon;
+}
+
+QString UploadFile::fileType(const QString &extension) const
+{
+	QFileIconProvider provider;
+	QString strType;
+	QString strFileName = QDir::tempPath() + QDir::separator() +
+		QCoreApplication::applicationName() + "_XXXXXX." + extension;
+	QTemporaryFile tmpFile(strFileName);
+	tmpFile.setAutoRemove(false);
+
+	if (tmpFile.open())
+	{
+		tmpFile.close();
+		strType = provider.type(QFileInfo(tmpFile.fileName()));
+		// tmpFile.remove();
+	}
+	else
+	{
+		qCritical() << QString("failed to write temporary file %1").arg(tmpFile.fileName());
+	}
+
+	return strType;
 }

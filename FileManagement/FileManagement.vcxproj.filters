@@ -288,13 +288,16 @@
     <None Include="Login.qss">
       <Filter>Resource\CSS</Filter>
     </None>
-    <None Include="Resource\css\UploadFile.qss">
-      <Filter>Resource\CSS</Filter>
-    </None>
-    <None Include="Resource\css\MyMessageBox.qss">
-      <Filter>Resource\CSS</Filter>
-    </None>
     <None Include="Resource\MyTitle\MyTitle.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\qss\MyMessageBox.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\qss\UploadFile.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\qss\mainWindow.qss">
       <Filter>Resource\CSS</Filter>
     </None>
   </ItemGroup>

@@ -26,6 +26,8 @@ private:
 	bool uploadFileWindowIsOpen = false, 
 		 downloadFileWindowIsOpen = false,
 		 userInformationWindowIsOpen = false;
+	
+	void loadStyleSheet(const QString &sheetName);  //º”‘ÿ—˘ Ω
 
 private slots:
 	void Btn_Click();

@@ -10,29 +10,33 @@ FileManagement::FileManagement(QWidget *parent)
 {
 	ui->setupUi(this);
 
-	QIcon personico("Resource/FunIcon/userInfo.png"); //创建QIcon对象
-	ui->personButton->setIcon(personico); //将图片设置到按钮上
-	ui->personButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
-	ui->personButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
+	//QIcon personico("Resource/FunIcon/userInfo.png"); //创建QIcon对象
+	//ui->personButton->setIcon(personico); //将图片设置到按钮上
+	//ui->personButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
+	//ui->personButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
+	ui->personButton->setText("aaaaa");
+	//ui->personButton->setStyleSheet("QToolButton{image-align : left;}");
+	//ui->personButton->setAlignment(Qt::AlignLeft);
+	//ui->personLayout->setAlignment(Qt::AlignLeft);
 	//toolbutton添加图片
 	QIcon uploadico("Resource/FunIcon/upload.png"); //创建QIcon对象
 	ui->uploadButton->setIcon(uploadico); //将图片设置到按钮上
 	ui->uploadButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->uploadButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
-
+	
 	QIcon downloadico("Resource/FunIcon/download.png"); //创建QIcon对象
 	ui->downloadButton->setIcon(downloadico); //将图片设置到按钮上
 	ui->downloadButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->downloadButton->setStyleSheet("border:none");
-
+	
 	QIcon chatico("Resource/FunIcon/showFile.png"); //创建QIcon对象
 	ui->showFileButton->setIcon(chatico); //将图片设置到按钮上
 	ui->showFileButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->showFileButton->setStyleSheet("border:none");
 
-	QIcon deleteico("Resource/delete.png"); //创建QIcon对象
+	QIcon deleteico("Resource/FunIcon/exit.png"); //创建QIcon对象
 	ui->deleteButton->setIcon(deleteico); //将图片设置到按钮上
-	ui->deleteButton->setIconSize(QSize(70, 55));//根据实际调整图片大小
+	ui->deleteButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->deleteButton->setStyleSheet("border:none");
 	
 	//QMovie *movie = new QMovie("Resource/MainWindow.gif");//加载图片gif
@@ -46,7 +50,7 @@ FileManagement::FileManagement(QWidget *parent)
 		ui->uploadButton->setToolTip(tr("upload"));
 		ui->downloadButton->setToolTip(tr("download"));
 		ui->showFileButton->setToolTip(tr("chat"));
-		ui->deleteButton->setToolTip(tr("delete"));
+		ui->deleteButton->setToolTip(tr("退出系统"));
 		//自定义退出按钮
 		QToolButton *closeButton = new QToolButton(this);
 		QPixmap quitPixmap = QPixmap("Resource/icon2.png");
@@ -67,6 +71,8 @@ FileManagement::FileManagement(QWidget *parent)
 
 	qDebug() << globalUserName << " welcome! ";
 
+	loadStyleSheet("mainWindow");
+
 }
 
 FileManagement::~FileManagement()
@@ -75,7 +81,7 @@ FileManagement::~FileManagement()
 }
 //
 //void FileManagement::initTitleBar()
-//{
+//{ 
 //	m_titleBar->move(1, 2);
 //	m_titleBar->raise();
 //	m_titleBar->setWindowBorderWidth(2);
@@ -83,6 +89,22 @@ FileManagement::~FileManagement()
 //	m_titleBar->setButtonType(MIN_BUTTON);
 //	m_titleBar->setTitleWidth(this->width());
 //}
+
+void FileManagement::loadStyleSheet(const QString &sheetName)
+{
+	QFile file("Resource/qss/" + sheetName + ".qss");
+	qDebug() << sheetName + ".qss";
+	file.open(QFile::ReadOnly);
+	if (file.isOpen())
+	{
+
+		QString styleSheet = this->styleSheet();
+		styleSheet += QLatin1String(file.readAll());
+		this->setStyleSheet(styleSheet);
+	}
+	else
+		qDebug() << "is not qss";
+}
 
 void FileManagement::receiveLogin()
 {
@@ -175,6 +197,7 @@ void FileManagement::ClickUserInformation()
 		qDebug() << "userInformationWindowIsOpen!";
 
 }
+
 
 void FileManagement::ClickReturn()
 {
