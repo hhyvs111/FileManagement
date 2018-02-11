@@ -5,6 +5,7 @@
 #include "UploadFile.h"
 #include "DownloadFile.h"
 #include "UserInformation.h"
+#include "ReportEdit.h"
 #include "ui_FileManagement.h"
 
 extern QString globalUserName;
@@ -23,9 +24,12 @@ private:
 	UploadFile *uploadFile;  // 创建上传文件的指针
 	DownloadFile *downloadFile;
 	UserInformation *userInformation; 
-	bool uploadFileWindowIsOpen = false, 
-		 downloadFileWindowIsOpen = false,
-		 userInformationWindowIsOpen = false;
+	ReportEdit *reportEdit;
+	bool uploadFileWindowIsOpen = false,
+		downloadFileWindowIsOpen = false,
+		userInformationWindowIsOpen = false,
+		reportEditWindowIsOpen = false;
+		
 	
 	void loadStyleSheet(const QString &sheetName);  //加载样式
 
@@ -34,6 +38,9 @@ private slots:
 	void ClickUserInformation();
 	void ClickUploadFile();
 	void ClickDownloadFile();
+
+	void ClickReportEdit();
+	//void ClickReportLook();
 	void ClickReturn();
 	void receiveLogin();
 signals:

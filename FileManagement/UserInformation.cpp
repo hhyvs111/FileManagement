@@ -33,6 +33,7 @@ UserInformation::UserInformation(QWidget *parent) :
    //    this->setStyleSheet("background:gray");
    //    name = "abc";
    //    ui->nameLineEdit->setText(name);
+
 }
 
 UserInformation::~UserInformation()

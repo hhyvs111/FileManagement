@@ -6,46 +6,20 @@ QLabel#mFileName {
     font-size: 14px;
 }
 
-QToolButton#personButton {
-margin-right:24px;
-	text-align: left center;
+QToolButton {
     border: 1px solid rgb(11, 137, 234);
 }
 
-QToolButton#personButton:hover {
+QToolButton:hover {
+	background-color: rgb(190, 190, 190);
         color: white;
-              
 }
 
-QToolButton#personButton:pressed {
-		background-color: rgb(44, 137, 255);
+QToolButton:pressed {
+		background-color: rgb(0, 255, 255);
         border: 1px solid rgb(11, 137, 234);
 }
-
-QPushButton#pButtonCancel {
-    color: black;
-    background-color: rgb(238, 238, 238);
-    border: 1px solid rgb(183, 183, 183);
+QToolButton:checked {
+		background-color: rgb(0, 255, 255);
+        border: 1px solid rgb(11, 137, 234);
 }
-
- QPushButton#pButtonCancel:hover {
-        color: black;
-        background-color: rgb(228, 240, 250);
-        border: 1px solid rgb(15, 150, 255);
-}
-
-    QPushButton#pButtonCancel:pressed {
-        color: black;
-        background-color: rgb(204, 228, 247);
-        border: 1px solid rgb(1, 84, 153);
-        padding-left: 3px;
-        padding-top: 3px;
-    }
-
-QLineEdit#inputContent {
-    border: 1px solid rgb(195, 195, 195);
-}
-
-    QLineEdit#inputContent:hover {
-        border: 1px solid rgb(1, 186, 255 );
-    }

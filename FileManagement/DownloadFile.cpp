@@ -20,6 +20,8 @@ DownloadFile::DownloadFile(QWidget *parent) :
 
 	connect(ui->downloadTable, SIGNAL(entered(QModelIndex)),
 		this, SLOT(showToolTip(QModelIndex)));
+
+	//从客户端处理得到的数据
 	connect(tcp, SIGNAL(sendDataToDownload(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
 

@@ -1,0 +1,7 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QLabel {
+    font-size: 14px;
+}

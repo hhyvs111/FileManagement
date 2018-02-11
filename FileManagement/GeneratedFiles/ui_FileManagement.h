@@ -35,12 +35,19 @@ public:
     QLabel *titleLabel;
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *FunctionLayout;
+    QWidget *ToolButtonWidget;
     QVBoxLayout *ToolButtonLayout;
+    QSpacerItem *verticalSpacer_4;
     QToolButton *personButton;
+    QSpacerItem *verticalSpacer_3;
+    QToolButton *reportEditButton;
+    QToolButton *reportLookButton;
+    QSpacerItem *verticalSpacer;
     QToolButton *showFileButton;
     QToolButton *uploadButton;
     QToolButton *downloadButton;
     QToolButton *deleteButton;
+    QSpacerItem *verticalSpacer_2;
     QVBoxLayout *SubLayout;
     QSpacerItem *verticalSpacer_8;
     QSpacerItem *verticalSpacer_9;
@@ -50,7 +57,7 @@ public:
     {
         if (FileManagement->objectName().isEmpty())
             FileManagement->setObjectName(QStringLiteral("FileManagement"));
-        FileManagement->resize(824, 576);
+        FileManagement->resize(843, 539);
         centralWidget = new QWidget(FileManagement);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setLayoutDirection(Qt::LeftToRight);
@@ -58,6 +65,7 @@ public:
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 9, -1, -1);
         TitleLayout = new QHBoxLayout();
         TitleLayout->setSpacing(0);
         TitleLayout->setObjectName(QStringLiteral("TitleLayout"));
@@ -85,12 +93,19 @@ public:
         FunctionLayout = new QHBoxLayout();
         FunctionLayout->setSpacing(6);
         FunctionLayout->setObjectName(QStringLiteral("FunctionLayout"));
-        ToolButtonLayout = new QVBoxLayout();
+        ToolButtonWidget = new QWidget(centralWidget);
+        ToolButtonWidget->setObjectName(QStringLiteral("ToolButtonWidget"));
+        ToolButtonLayout = new QVBoxLayout(ToolButtonWidget);
         ToolButtonLayout->setSpacing(0);
+        ToolButtonLayout->setContentsMargins(11, 11, 11, 11);
         ToolButtonLayout->setObjectName(QStringLiteral("ToolButtonLayout"));
         ToolButtonLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        ToolButtonLayout->setContentsMargins(0, 0, 0, 0);
-        personButton = new QToolButton(centralWidget);
+        ToolButtonLayout->setContentsMargins(1, 1, 1, 1);
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        ToolButtonLayout->addItem(verticalSpacer_4);
+
+        personButton = new QToolButton(ToolButtonWidget);
         personButton->setObjectName(QStringLiteral("personButton"));
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
@@ -102,31 +117,71 @@ public:
 
         ToolButtonLayout->addWidget(personButton);
 
-        showFileButton = new QToolButton(centralWidget);
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        ToolButtonLayout->addItem(verticalSpacer_3);
+
+        reportEditButton = new QToolButton(ToolButtonWidget);
+        reportEditButton->setObjectName(QStringLiteral("reportEditButton"));
+        sizePolicy.setHeightForWidth(reportEditButton->sizePolicy().hasHeightForWidth());
+        reportEditButton->setSizePolicy(sizePolicy);
+        reportEditButton->setMinimumSize(QSize(150, 30));
+
+        ToolButtonLayout->addWidget(reportEditButton);
+
+        reportLookButton = new QToolButton(ToolButtonWidget);
+        reportLookButton->setObjectName(QStringLiteral("reportLookButton"));
+        sizePolicy.setHeightForWidth(reportLookButton->sizePolicy().hasHeightForWidth());
+        reportLookButton->setSizePolicy(sizePolicy);
+        reportLookButton->setMinimumSize(QSize(150, 30));
+
+        ToolButtonLayout->addWidget(reportLookButton);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        ToolButtonLayout->addItem(verticalSpacer);
+
+        showFileButton = new QToolButton(ToolButtonWidget);
         showFileButton->setObjectName(QStringLiteral("showFileButton"));
+        sizePolicy.setHeightForWidth(showFileButton->sizePolicy().hasHeightForWidth());
+        showFileButton->setSizePolicy(sizePolicy);
+        showFileButton->setMinimumSize(QSize(150, 30));
 
         ToolButtonLayout->addWidget(showFileButton);
 
-        uploadButton = new QToolButton(centralWidget);
+        uploadButton = new QToolButton(ToolButtonWidget);
         uploadButton->setObjectName(QStringLiteral("uploadButton"));
+        sizePolicy.setHeightForWidth(uploadButton->sizePolicy().hasHeightForWidth());
+        uploadButton->setSizePolicy(sizePolicy);
+        uploadButton->setMinimumSize(QSize(150, 30));
         uploadButton->setFocusPolicy(Qt::NoFocus);
         uploadButton->setStyleSheet(QStringLiteral(""));
 
         ToolButtonLayout->addWidget(uploadButton);
 
-        downloadButton = new QToolButton(centralWidget);
+        downloadButton = new QToolButton(ToolButtonWidget);
         downloadButton->setObjectName(QStringLiteral("downloadButton"));
+        sizePolicy.setHeightForWidth(downloadButton->sizePolicy().hasHeightForWidth());
+        downloadButton->setSizePolicy(sizePolicy);
+        downloadButton->setMinimumSize(QSize(150, 30));
         downloadButton->setFocusPolicy(Qt::NoFocus);
 
         ToolButtonLayout->addWidget(downloadButton);
 
-        deleteButton = new QToolButton(centralWidget);
+        deleteButton = new QToolButton(ToolButtonWidget);
         deleteButton->setObjectName(QStringLiteral("deleteButton"));
+        sizePolicy.setHeightForWidth(deleteButton->sizePolicy().hasHeightForWidth());
+        deleteButton->setSizePolicy(sizePolicy);
+        deleteButton->setMinimumSize(QSize(150, 30));
 
         ToolButtonLayout->addWidget(deleteButton);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        FunctionLayout->addLayout(ToolButtonLayout);
+        ToolButtonLayout->addItem(verticalSpacer_2);
+
+
+        FunctionLayout->addWidget(ToolButtonWidget);
 
         SubLayout = new QVBoxLayout();
         SubLayout->setSpacing(6);
@@ -151,10 +206,11 @@ public:
         FileManagement->setStatusBar(statusBar);
 
         retranslateUi(FileManagement);
+        QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
+        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
         QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
         QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
-        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
-        QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
+        QObject::connect(reportEditButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReportEdit()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi
@@ -164,6 +220,8 @@ public:
         FileManagement->setWindowTitle(QApplication::translate("FileManagement", "mainpage", Q_NULLPTR));
         titleLabel->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\254\242\350\277\216\346\235\245\345\210\260\345\256\236\351\252\214\345\256\244\346\226\207\346\241\243\347\256\241\347\220\206\347\263\273\347\273\237</span></p></body></html>", Q_NULLPTR));
         personButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
+        reportEditButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
+        reportLookButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         showFileButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         uploadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         downloadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));

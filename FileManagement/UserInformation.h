@@ -21,6 +21,8 @@ public:
     ~UserInformation();
 	void sendUserInfo();
 
+	void firstLogin();
+
  private slots:
     void on_alterButton_clicked();
 
@@ -41,6 +43,10 @@ private:
 	QString phoneNumber;
 	QString qqNumber;
 	QString mail;
+	QString trueName;
+	QString term;
+	QString level;
+	QString teacher;
 
 
 };

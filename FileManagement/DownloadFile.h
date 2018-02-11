@@ -82,6 +82,7 @@ private slots:
 	void showFileInfo();
 
 	void initModel(); // 初始化qtableview，就是初始化model
+
 	void receiveDataFromClient(QString);
 
 	QString countFileSize(QString);   // 计算文件的大小，看情况返回MB或者KB
@@ -90,7 +91,7 @@ private slots:
 	//void receiveMainwindow();
 
 signals:
-	void sendDisconnect(QString);
+	//void sendDisconnect(QString);  //这是什么
 
 };
 #endif // !DOWNLOADFILE_H_
