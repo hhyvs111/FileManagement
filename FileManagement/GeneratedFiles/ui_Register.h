@@ -53,15 +53,21 @@ public:
     QLineEdit *userPassword2;
     QLabel *passLogo2;
     QSpacerItem *horizontalSpacer_6;
+    QGridLayout *gridLayout_6;
+    QSpacerItem *horizontalSpacer_21;
+    QLabel *studentIdLabel;
+    QLabel *studentIdLogo;
+    QLineEdit *studentId;
+    QSpacerItem *horizontalSpacer_22;
     QGridLayout *gridLayout_4;
     QSpacerItem *horizontalSpacer_13;
     QLabel *trueNameLogo;
     QLineEdit *trueName;
-    QLabel *label_2;
+    QLabel *trueNameLabel;
     QSpacerItem *horizontalSpacer_5;
     QGridLayout *gridLayout_5;
     QSpacerItem *horizontalSpacer_14;
-    QLabel *label_3;
+    QLabel *teacherLabel;
     QLabel *teacherLogo;
     QLineEdit *teacher;
     QSpacerItem *horizontalSpacer_7;
@@ -89,7 +95,7 @@ public:
     {
         if (Register->objectName().isEmpty())
             Register->setObjectName(QStringLiteral("Register"));
-        Register->resize(335, 491);
+        Register->resize(331, 491);
         verticalLayout = new QVBoxLayout(Register);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -221,6 +227,40 @@ public:
 
         verticalLayout->addLayout(gridLayout_3);
 
+        gridLayout_6 = new QGridLayout();
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
+        horizontalSpacer_21 = new QSpacerItem(40, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        gridLayout_6->addItem(horizontalSpacer_21, 0, 0, 1, 1);
+
+        studentIdLabel = new QLabel(Register);
+        studentIdLabel->setObjectName(QStringLiteral("studentIdLabel"));
+        sizePolicy.setHeightForWidth(studentIdLabel->sizePolicy().hasHeightForWidth());
+        studentIdLabel->setSizePolicy(sizePolicy);
+        studentIdLabel->setMinimumSize(QSize(0, 15));
+
+        gridLayout_6->addWidget(studentIdLabel, 1, 1, 1, 1);
+
+        studentIdLogo = new QLabel(Register);
+        studentIdLogo->setObjectName(QStringLiteral("studentIdLogo"));
+
+        gridLayout_6->addWidget(studentIdLogo, 0, 2, 1, 1);
+
+        studentId = new QLineEdit(Register);
+        studentId->setObjectName(QStringLiteral("studentId"));
+        sizePolicy1.setHeightForWidth(studentId->sizePolicy().hasHeightForWidth());
+        studentId->setSizePolicy(sizePolicy1);
+        studentId->setMinimumSize(QSize(220, 25));
+
+        gridLayout_6->addWidget(studentId, 0, 1, 1, 1);
+
+        horizontalSpacer_22 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_6->addItem(horizontalSpacer_22, 0, 3, 1, 1);
+
+
+        verticalLayout->addLayout(gridLayout_6);
+
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         horizontalSpacer_13 = new QSpacerItem(40, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
@@ -240,13 +280,13 @@ public:
 
         gridLayout_4->addWidget(trueName, 0, 1, 1, 1);
 
-        label_2 = new QLabel(Register);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy);
-        label_2->setMinimumSize(QSize(0, 15));
+        trueNameLabel = new QLabel(Register);
+        trueNameLabel->setObjectName(QStringLiteral("trueNameLabel"));
+        sizePolicy.setHeightForWidth(trueNameLabel->sizePolicy().hasHeightForWidth());
+        trueNameLabel->setSizePolicy(sizePolicy);
+        trueNameLabel->setMinimumSize(QSize(0, 15));
 
-        gridLayout_4->addWidget(label_2, 1, 1, 1, 1);
+        gridLayout_4->addWidget(trueNameLabel, 1, 1, 1, 1);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -261,13 +301,13 @@ public:
 
         gridLayout_5->addItem(horizontalSpacer_14, 0, 0, 1, 1);
 
-        label_3 = new QLabel(Register);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
-        label_3->setSizePolicy(sizePolicy);
-        label_3->setMinimumSize(QSize(0, 15));
+        teacherLabel = new QLabel(Register);
+        teacherLabel->setObjectName(QStringLiteral("teacherLabel"));
+        sizePolicy.setHeightForWidth(teacherLabel->sizePolicy().hasHeightForWidth());
+        teacherLabel->setSizePolicy(sizePolicy);
+        teacherLabel->setMinimumSize(QSize(0, 15));
 
-        gridLayout_5->addWidget(label_3, 1, 1, 1, 1);
+        gridLayout_5->addWidget(teacherLabel, 1, 1, 1, 1);
 
         teacherLogo = new QLabel(Register);
         teacherLogo->setObjectName(QStringLiteral("teacherLogo"));
@@ -383,7 +423,8 @@ public:
 
         QWidget::setTabOrder(userName, userPassword);
         QWidget::setTabOrder(userPassword, userPassword2);
-        QWidget::setTabOrder(userPassword2, trueName);
+        QWidget::setTabOrder(userPassword2, studentId);
+        QWidget::setTabOrder(studentId, trueName);
         QWidget::setTabOrder(trueName, teacher);
         QWidget::setTabOrder(teacher, level);
         QWidget::setTabOrder(level, term);
@@ -409,9 +450,11 @@ public:
         passLogo->setText(QApplication::translate("Register", "1", Q_NULLPTR));
         passwordMessage2->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">* \347\241\256\350\256\244\345\257\206\347\240\201\344\273\245\351\230\262\345\207\272\351\224\231\343\200\202</span></p></body></html>", Q_NULLPTR));
         passLogo2->setText(QApplication::translate("Register", "1", Q_NULLPTR));
+        studentIdLabel->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">* \345\255\246\347\224\237\345\224\257\344\270\200\346\240\207\350\257\206\357\274\214\344\270\200\347\273\217\346\263\250\345\206\214\344\270\215\345\217\257\344\277\256\346\224\271\343\200\202</span></p></body></html>", Q_NULLPTR));
+        studentIdLogo->setText(QApplication::translate("Register", "1", Q_NULLPTR));
         trueNameLogo->setText(QApplication::translate("Register", "1", Q_NULLPTR));
-        label_2->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">* \345\256\236\345\220\215\345\210\266\347\256\241\347\220\206\357\274\214\344\270\200\347\273\217\346\263\250\345\206\214\344\270\215\345\217\257\344\277\256\346\224\271\343\200\202</span></p></body></html>", Q_NULLPTR));
-        label_3->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">* \345\275\223\345\211\215\345\257\274\345\270\210\345\247\223\345\220\215\357\274\214\344\270\200\347\273\217\346\263\250\345\206\214\344\270\215\345\217\257\344\277\256\346\224\271\343\200\202</span></p></body></html>", Q_NULLPTR));
+        trueNameLabel->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">* \345\256\236\345\220\215\345\210\266\347\256\241\347\220\206\357\274\214\344\270\200\347\273\217\346\263\250\345\206\214\344\270\215\345\217\257\344\277\256\346\224\271\343\200\202</span></p></body></html>", Q_NULLPTR));
+        teacherLabel->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">* \345\275\223\345\211\215\345\257\274\345\270\210\345\247\223\345\220\215\357\274\214\344\270\200\347\273\217\346\263\250\345\206\214\344\270\215\345\217\257\344\277\256\346\224\271\343\200\202</span></p></body></html>", Q_NULLPTR));
         teacherLogo->setText(QApplication::translate("Register", "1", Q_NULLPTR));
         label_4->setText(QApplication::translate("Register", "<html><head/><body><p><span style=\" font-size:9pt;\">\345\271\264\347\272\247\357\274\232</span></p></body></html>", Q_NULLPTR));
         level->clear();

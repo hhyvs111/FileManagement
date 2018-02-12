@@ -113,40 +113,40 @@ void ReportEdit::receiveDataFromClient(QString data)
 void ReportEdit::ClickSubmit()
 {
 	//ui->reportMainPlainTextEdit->toPlainText()这个就是QString类型的
-	if (ui->reportMainPlainTextEdit->toPlainText().isNull()
-		|| ui->reportQuestionForSolve->toPlainText().isNull()
-		|| ui->reportQuestionFromLastWeek->toPlainText().isNull()
-		|| ui->reportQuestionHasSolved->toPlainText().isNull()
-		|| ui->reportYourGet->toPlainText().isNull())
+	if (ui->reportMainPlainTextEdit->toPlainText().isEmpty()
+		|| ui->reportQuestionForSolve->toPlainText().isEmpty()
+		|| ui->reportQuestionFromLastWeek->toPlainText().isEmpty()
+		|| ui->reportQuestionHasSolved->toPlainText().isEmpty()
+		|| ui->reportYourGet->toPlainText().isEmpty())
 	{
 		qDebug() << "there are some null";
 		//如果有为空则提醒
 		QString messageReminder;
-		if (ui->reportMainPlainTextEdit->toPlainText().isNull())
+		if (ui->reportMainPlainTextEdit->toPlainText().isEmpty())
 		{
 			messageReminder = QString::fromLocal8Bit("学习内容");
 			ui->reportMainPlainTextEdit->setFocus();
 
 		}
-		if (ui->reportQuestionForSolve->toPlainText().isNull())
+		if (ui->reportQuestionForSolve->toPlainText().isEmpty())
 		{
 			messageReminder = QString::fromLocal8Bit("遇到的问题");
 			ui->reportQuestionForSolve->setFocus();
 
 		}
-		if (ui->reportQuestionFromLastWeek->toPlainText().isNull())
+		if (ui->reportQuestionFromLastWeek->toPlainText().isEmpty())
 		{
 			messageReminder = QString::fromLocal8Bit("上周的问题");
 			ui->reportQuestionFromLastWeek->setFocus();
 
 		}
-		if (ui->reportQuestionHasSolved->toPlainText().isNull())
+		if (ui->reportQuestionHasSolved->toPlainText().isEmpty())
 		{
 			messageReminder = QString::fromLocal8Bit("解决的问题");
 			ui->reportQuestionHasSolved->setFocus();
 
 		}
-		if (ui->reportYourGet->toPlainText().isNull())
+		if (ui->reportYourGet->toPlainText().isEmpty())
 		{
 			messageReminder = QString::fromLocal8Bit("学习心得");
 			ui->reportYourGet->setFocus();

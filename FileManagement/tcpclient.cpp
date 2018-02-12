@@ -106,6 +106,19 @@ void TcpClient::readMessages()
 			qDebug() << "RCU is F";
 		}
 	}
+	else if (list[0] == "RCS")
+	{
+		if (list[1] == "true")
+		{
+			emit sendDataToRegister("RCS_T");
+			qDebug() << "RCS is T";
+		}
+		else
+		{
+			emit sendDataToRegister("RCS_F");
+			qDebug() << "RCS is F";
+		}
+	}
 	else if (list[0] == "updateUserInfo")
 	{
 		if (list[1] == "true")

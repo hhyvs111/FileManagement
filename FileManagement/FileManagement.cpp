@@ -9,8 +9,8 @@ FileManagement::FileManagement(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::FileManagement)
 {
 	ui->setupUi(this);
-	QPalette Pal(palette());
 
+	QPalette Pal(palette());
 	// set black background
 	Pal.setColor(QPalette::Background, Qt::gray);
 	ui->ToolButtonWidget->setAutoFillBackground(true);
@@ -168,14 +168,13 @@ void FileManagement::ClickUploadFile()
 	//检测其他两个
 
 	if (reportEditWindowIsOpen)
-	{
 		reportEdit->hide();
-	}
-
 	if (downloadFileWindowIsOpen)
 		downloadFile->hide();
 	if (userInformationWindowIsOpen)
 		userInformation->hide();
+	if (reportLookWindowIsOpen)
+		reportLook->hide();
 	if (!uploadFileWindowIsOpen)
 	{
 		uploadFile = new UploadFile(this);  //将指针实例化
@@ -211,6 +210,8 @@ void FileManagement::ClickDownloadFile()
 		userInformation->hide();
 	if (uploadFileWindowIsOpen)
 		uploadFile->hide();
+	if (reportLookWindowIsOpen)
+		reportLook->hide();
 	if (!downloadFileWindowIsOpen)
 	{
 		downloadFile = new DownloadFile(this);  //将指针实例化
@@ -243,6 +244,9 @@ void FileManagement::ClickUserInformation()
 		downloadFile->hide();
 	if (uploadFileWindowIsOpen)
 		uploadFile->hide();
+
+	if (reportLookWindowIsOpen)
+		reportLook->hide();
 	if (!userInformationWindowIsOpen)
 	{
 		userInformation = new UserInformation(this);
@@ -273,6 +277,10 @@ void FileManagement::ClickReportEdit()
 		downloadFile->hide();
 	if (uploadFileWindowIsOpen)
 		uploadFile->hide();
+
+	if (reportLookWindowIsOpen)
+		reportLook->hide();
+
 	if (!reportEditWindowIsOpen)
 	{
 		reportEdit = new ReportEdit(this);
@@ -284,6 +292,39 @@ void FileManagement::ClickReportEdit()
 	}
 	else
 		qDebug() << "reportEditWindowIsOpen!";
+}
+
+void FileManagement::ClickReportLook()
+{
+	if (reportLookWindowIsOpen)
+	{
+		reportLook->show();
+		reportLook->sendReportLook();
+	}
+
+	if (userInformationWindowIsOpen)
+		userInformation->hide();
+
+	if (downloadFileWindowIsOpen)
+		downloadFile->hide();
+
+	if (uploadFileWindowIsOpen)
+		uploadFile->hide();
+
+	if (reportEditWindowIsOpen)
+		reportEdit->hide();
+
+	if (!reportLookWindowIsOpen)
+	{
+		reportLook = new ReportLook(this);
+		//调用了发送用户信息
+		reportLook->sendReportLook();
+		ui->SubLayout->insertWidget(1, reportLook);
+		reportLook->show();
+		reportLookWindowIsOpen = true;
+	}
+	else
+		qDebug() << "reportLookWindowIsOpen!";
 }
 
 void FileManagement::ClickReturn()

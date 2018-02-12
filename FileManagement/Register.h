@@ -18,7 +18,10 @@ private:
 	Ui::Register *ui;
 	bool isAvailableUserName;
 	bool isAvailablePassword;
+	bool isAvailableStudentId;
 	bool isokPassword;
+	bool isOkTrueName;
+	bool isOkTeacher;
 	void initTitleBar();  //初始化标题栏
 	void init();
 
@@ -28,8 +31,11 @@ public slots:
 	void Click_Cancel();
 
 	void checkIsAvailableUserName();		//检查用户名是否重复
+	void checkIsAvailableStudentId();    //检查学号是否重复
 	void checkIsAvailablePassword();			//密码是否一致
 	void checkIsokPassword();//密码格式是否正确
+
+
 	void checkIsOkTrueName();
 	void checkIsOkTeacher();
 

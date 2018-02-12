@@ -49,6 +49,18 @@
     <Filter Include="Resource\Icon">
       <UniqueIdentifier>{b5b6f83b-1978-44cd-bbc6-a2e045d8902c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\H_QTUI\FileFunction">
+      <UniqueIdentifier>{eda6843d-11a0-4c72-834a-8a676a8dd365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\H_QTUI\ReportFunction">
+      <UniqueIdentifier>{11cc2967-bd50-4297-866d-4221cf56f41a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\File">
+      <UniqueIdentifier>{6c18c356-d8ef-4375-86da-e91e0479b5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\Report">
+      <UniqueIdentifier>{403485c8-5375-4b5b-8668-087fc36faa88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -129,9 +141,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_UploadFile.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="UploadFile.cpp">
-      <Filter>Source Files\QTUI</Filter>
-    </ClCompile>
     <ClCompile Include="Taes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -140,9 +149,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_DownloadFile.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DownloadFile.cpp">
-      <Filter>Source Files\QTUI</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_UserInformation.cpp">
       <Filter>Generated Files</Filter>
@@ -177,8 +183,32 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ReportEdit.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ReportLook.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ReportLook.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ReportDetail.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ReportDetail.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DownloadFile.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
+    <ClCompile Include="UploadFile.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportDetail.cpp">
+      <Filter>Source Files\QTUI\Report</Filter>
+    </ClCompile>
     <ClCompile Include="ReportEdit.cpp">
-      <Filter>Source Files\QTUI</Filter>
+      <Filter>Source Files\QTUI\Report</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportLook.cpp">
+      <Filter>Source Files\QTUI\Report</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,12 +251,6 @@
     <CustomBuild Include="UploadFile.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="UploadFile.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DownloadFile.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </CustomBuild>
     <CustomBuild Include="DownloadFile.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -248,8 +272,26 @@
     <CustomBuild Include="ReportEdit.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="ReportLook.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ReportDetail.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DownloadFile.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UploadFile.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
     <CustomBuild Include="ReportEdit.h">
-      <Filter>Header Files\H_QTUI</Filter>
+      <Filter>Header Files\H_QTUI\ReportFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ReportLook.h">
+      <Filter>Header Files\H_QTUI\ReportFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ReportDetail.h">
+      <Filter>Header Files\H_QTUI\ReportFunction</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -289,11 +331,20 @@
     <ClInclude Include="GeneratedFiles\ui_Login.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="DownloadManage.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ReportEdit.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_ReportLook.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_ReportDetail.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DownloadManage.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="Report.h">
+      <Filter>Header Files\H_QTUI\ReportFunction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,7 +369,10 @@
     <None Include="Resource\qss\mainWindow.qss">
       <Filter>Resource\CSS</Filter>
     </None>
-    <None Include="Register.qss">
+    <None Include="Resource\qss\Register.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\qss\ReportDetail.qss">
       <Filter>Resource\CSS</Filter>
     </None>
   </ItemGroup>

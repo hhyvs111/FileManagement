@@ -34,7 +34,16 @@ public:
 
 	//发送查看该用户所上传文件的信息给服务器
 	void sendFileInfo();
+	// 加载样式文件;
+	void loadStyleSheet(const QString &sheetName);
 
+	//获取文件的图标
+	QIcon fileIcon(const QString &extension) const;
+	//获取文件的类型？
+	QString fileType(const QString &extension) const;
+
+	// 计算文件的大小，看情况返回MB或者KB
+	QString countFileSize(QString);   
 private:
 	Ui::DownloadFile *ui;
 
@@ -58,18 +67,6 @@ private:
 	//TableModel *m_model;
 	ButtonDelegate *m_buttonDelegate;
 
-
-	// 加载样式文件;
-	void loadStyleSheet(const QString &sheetName);
-
-	//获取文件的图标
-	QIcon fileIcon(const QString &extension) const;
-	//获取文件的类型？
-	QString fileType(const QString &extension) const;
-
-
-	
-
 private slots:
 
 	void receiveFile();  //从服务器下载文件到本地。
@@ -85,7 +82,7 @@ private slots:
 
 	void receiveDataFromClient(QString);
 
-	QString countFileSize(QString);   // 计算文件的大小，看情况返回MB或者KB
+	
 	void showToolTip(const QModelIndex &index);
 	//void ClickSendButton();
 	//void receiveMainwindow();

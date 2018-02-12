@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "Report.h"
 #include"ui_ReportEdit.h"
 
 #ifndef REPORTEDIT_H_
@@ -7,24 +8,6 @@
 
 extern TcpClient * tcp;    //全局变量，TCP 长连接
 extern QString globalUserName;
-
-struct ReportInfo
-{
-	QString reportId;
-	QString reportName;
-	QString reportNumber;
-	QString reportLevel;
-	QString reportTeacher;
-	QString reportTerm;
-	QString reportWeek;
-	QString reportTime;
-	QString reportMain;
-	QString reportQuestionForSolve;
-	QString reportQuestionHasSolved;
-	QString reportQuestionFromLastWeek;
-	QString reportYourGet;
-	QString reportUserId;
-};
 
 class ReportEdit : public QWidget
 {

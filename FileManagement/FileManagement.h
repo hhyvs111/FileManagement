@@ -6,6 +6,7 @@
 #include "DownloadFile.h"
 #include "UserInformation.h"
 #include "ReportEdit.h"
+#include "ReportLook.h"
 #include "ui_FileManagement.h"
 
 extern QString globalUserName;
@@ -25,10 +26,13 @@ private:
 	DownloadFile *downloadFile;
 	UserInformation *userInformation; 
 	ReportEdit *reportEdit;
+	ReportLook *reportLook;
+
 	bool uploadFileWindowIsOpen = false,
 		downloadFileWindowIsOpen = false,
 		userInformationWindowIsOpen = false,
-		reportEditWindowIsOpen = false;
+		reportEditWindowIsOpen = false,
+		reportLookWindowIsOpen = false;
 		
 	
 	void loadStyleSheet(const QString &sheetName);  //º”‘ÿ—˘ Ω
@@ -40,7 +44,7 @@ private slots:
 	void ClickDownloadFile();
 
 	void ClickReportEdit();
-	//void ClickReportLook();
+	void ClickReportLook();
 	void ClickReturn();
 	void receiveLogin();
 signals:

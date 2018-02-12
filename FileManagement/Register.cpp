@@ -19,8 +19,10 @@ Register::Register(QWidget *parent)
 											//this->setStyleSheet("background:D:/FileManagement-master/FileManagement/Resource/back.jpg");
 	isAvailableUserName = false;     //一开始用户名是不可用的
 	isAvailablePassword = false;		//密码是否一致
-	isokPassword = false;//密码格式是否正确
-
+	isokPassword = false;    //密码格式是否正确
+	isAvailableStudentId = false;    //一开始学号是不可用的
+	isOkTeacher = false;
+	isOkTrueName = false;
 	setWindowFlags(Qt::FramelessWindowHint);
 
 	//setFixedSize(340, 350);
@@ -35,6 +37,7 @@ Register::Register(QWidget *parent)
 	//当用户名输入完后检测是否重复
 	connect(ui->userName, SIGNAL(editingFinished()), this, SLOT(checkIsAvailableUserName()));
 
+	connect(ui->studentId, SIGNAL(editingFinished()), this, SLOT(checkIsAvailableStudentId()));
 	//检测密码是否符合要求
 	connect(ui->userPassword2, SIGNAL(editingFinished()), this, SLOT(checkIsAvailablePassword()));
 	connect(ui->trueName, SIGNAL(editingFinished()), this, SLOT(checkIsOkTrueName()));
@@ -156,12 +159,30 @@ void Register::init()
 	editLayout5->addSpacerItem(spaceItem5);
 	ui->teacher->setLayout(editLayout5);
 
+	//设置学号输入栏
+	ui->studentId->setMinimumHeight(30);
+	ui->studentId->setTextMargins(22, 0, 0, 0);
+
+	ui->studentId->setPlaceholderText(QString::fromLocal8Bit("请输入学号"));
+	QLabel *stuIdLogo = new QLabel(this);
+	stuIdLogo->setMaximumSize(21, 21);
+	stuIdLogo->setCursor(QCursor(Qt::ArrowCursor));
+	stuIdLogo->setPixmap(QPixmap("Resource/ion/studentId.png"));
+
+	QSpacerItem *spaceItem6 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
+	QHBoxLayout *editLayout6 = new QHBoxLayout();
+	editLayout6->setContentsMargins(1, 0, 1, 0);
+	editLayout6->addWidget(stuIdLogo);
+	editLayout6->addSpacerItem(spaceItem6);
+	ui->studentId->setLayout(editLayout6);
+
 
 	ui->userLogo->hide();
 	ui->passLogo->hide();
 	ui->passLogo2->hide();
 	ui->trueNameLogo->hide();
 	ui->teacherLogo->hide();
+	ui->studentIdLogo->hide();
 }
 //点击注册
 void Register::Click_Register()
@@ -174,16 +195,38 @@ void Register::Click_Register()
 	//m
 	else if (!isAvailablePassword)
 	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先检查密码是否一致！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		qDebug() << "the password is not same";
+	}
+	else if (!isAvailableStudentId)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先检查学号是否正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+		qDebug() << "studentId is not correct";
+	}
+	else if (!isokPassword)
+	{
+		qDebug() << "Password is not correct geshi";
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先检查密码格式是否正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else if (!isOkTrueName)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先检查姓名是否正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else if (!isOkTeacher)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请先检查导师姓名是否正确！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 	}
 
 	//如果密码和用户的验证都通过则进入注册
-	else if (isAvailableUserName && isAvailablePassword)
+
+	else if (isAvailableUserName && isAvailablePassword && isAvailableStudentId && 
+		isokPassword && isOkTrueName && isOkTeacher)
 	{
 		qDebug() << "get into the register";
 		QString name = this->ui->userName->text();
 		QString password = this->ui->userPassword->text();
 		QString password2 = this->ui->userPassword2->text();
+		QString stuId = this->ui->studentId->text();
 		QString trueName = this->ui->trueName->text();
 		QString teacher = this->ui->teacher->text();
 		QString level = this->ui->level->currentText();
@@ -198,12 +241,13 @@ void Register::Click_Register()
 		md5.append(cc.toHex());
 
 
-		QString sql = "insert into user (userName,userPassword,trueName,term,level,teacher)values('" + name + "','" +
-			md5+ "','" + trueName + "','" + term + "','" + level + "','" + teacher + "')";
+		QString sql = "insert into user (userName,userPassword,studentId,trueName,term,level,teacher)values('" + name + "','" +
+			md5+ "','" + stuId+ "','" + trueName + "','" + term + "','" + level + "','" + teacher + "')";
 		QString bs = "R";
 		QString data = bs + "#" + sql;
 		tcp->tcpSocket->write(data.toUtf8());//将信息写入socket
 		qDebug() << data;
+		return;
 	}
 	else
 		return;
@@ -225,13 +269,24 @@ void Register::checkIsAvailableUserName()
 	qDebug() << data;
 }
 
+void Register::checkIsAvailableStudentId()
+{
+	QString stuId = this->ui->studentId->text();
+	QString sql = "select userName, userPassword from user where studentId = '"
+		+ stuId + "'";
+	QString bs = "RCS";   //rigister check studentId
+	QString data = bs + "#" + sql;
+	tcp->tcpSocket->write(data.toLatin1());//将信息写入socket
+	qDebug() << data;
+}
+
 void Register::checkIsAvailablePassword()
 {
 	QString password = this->ui->userPassword->text();
 	QString password2 = this->ui->userPassword2->text();
 
 
-	if (QString::compare(password, password2) == 0)
+	if (QString::compare(password, password2) == 0 && isokPassword)
 	{
 		isAvailablePassword = true;
 		qDebug() << "the password is equal";
@@ -245,7 +300,7 @@ void Register::checkIsAvailablePassword()
 		ui->passLogo2->setPixmap(Pix);
 		ui->passLogo2->show();
 	}
-	else
+	else if(isokPassword)
 	{
 		
 		qDebug() << "the password is not equal";
@@ -256,8 +311,6 @@ void Register::checkIsAvailablePassword()
 		ui->passLogo2->setPixmap(Pix);
 		ui->passLogo2->show();
 	}
-
-
 }
 
 void Register::checkIsokPassword()
@@ -295,18 +348,56 @@ void Register::checkIsokPassword()
 
 void Register::checkIsOkTrueName()
 {
-
+	QString name = ui->trueName->text();
 	//暂时不做中文校验了
+	if (name == "")
+	{
+		ui->trueNameLabel->setText(QString::fromLocal8Bit("姓名不能为空！"));
+		ui->trueNameLabel->setStyleSheet("color:red;");
+		ui->trueNameLabel->show();
 
-	QPixmap Pix("Resource/ion/correct.png");
-	ui->trueNameLogo->setPixmap(Pix);
-	ui->trueNameLogo->show();
+		QPixmap Pix("Resource/ion/error.png");
+		ui->trueNameLogo->setPixmap(Pix);
+		ui->trueNameLogo->show();
+
+	}
+	else
+	{
+		isOkTrueName = true;
+		ui->trueNameLabel->setText(QString::fromLocal8Bit("天将降大任于%1也！").arg(name));
+		ui->trueNameLabel->setStyleSheet("color:green;");
+		ui->trueNameLabel->show();
+		QPixmap Pix("Resource/ion/correct.png");
+		ui->trueNameLogo->setPixmap(Pix);
+		ui->trueNameLogo->show();
+	}
+
 }
 void Register::checkIsOkTeacher()
 {
-	QPixmap Pix("Resource/ion/correct.png");
-	ui->teacherLogo->setPixmap(Pix);
-	ui->teacherLogo->show();
+	QString name = ui->teacher->text();
+	//暂时不做中文校验了
+	if (name == "")
+	{
+		ui->teacherLabel->setText(QString::fromLocal8Bit("姓名不能为空！"));
+		ui->teacherLabel->setStyleSheet("color:red;");
+		ui->teacherLabel->show();
+
+		QPixmap Pix("Resource/ion/error.png");
+		ui->teacherLogo->setPixmap(Pix);
+		ui->teacherLogo->show();
+
+	}
+	else
+	{
+		isOkTeacher = true;
+		ui->teacherLabel->setText(QString::fromLocal8Bit("著名的%1老师！").arg(name));
+		ui->teacherLabel->setStyleSheet("color:green;");
+		ui->teacherLabel->show();
+		QPixmap Pix("Resource/ion/correct.png");
+		ui->teacherLogo->setPixmap(Pix);
+		ui->teacherLogo->show();
+	}
 }
 
 void Register::receiveDataFromServer(QString data)
@@ -331,6 +422,8 @@ void Register::receiveDataFromServer(QString data)
 		qDebug() << "it is a same username";
 		//唤醒UI显示用户名重复
 		ui->userMessage->setText(QString::fromLocal8Bit("该用户名已存在！"));
+		ui->userMessage->setStyleSheet("color:red;");
+		ui->userMessage->show();
 
 		//设置错误图片
 		QPixmap Pix("Resource/ion/error.png");
@@ -338,8 +431,6 @@ void Register::receiveDataFromServer(QString data)
 		ui->userLogo->show();
 
 
-		ui->userMessage->setStyleSheet("color:red;");
-		ui->userMessage->show();
 		
 	}
 	else if (QString::compare(data, "RCU_F") == 0)
@@ -349,13 +440,40 @@ void Register::receiveDataFromServer(QString data)
 		ui->userMessage->setText(QString::fromLocal8Bit("该用户名可用！"));
 		ui->userMessage->setStyleSheet("color:green;");
 		ui->userMessage->show();
-		ui->userLogo->show();
 		////唤醒UI显示用户名可用！
 
 		//设置图标
 		QPixmap Pix("Resource/ion/correct.png");
 		ui->userLogo->setPixmap(Pix);
 		ui->userLogo->show();
+	}
+	else if (QString::compare(data, "RCS_F") == 0)
+	{
+		qDebug() << "this studentId is ok";
+		isAvailableStudentId = true;
+		ui->studentIdLabel->setText(QString::fromLocal8Bit("该学号尚未注册！"));
+		ui->studentIdLabel->setStyleSheet("color:green;");
+		ui->studentIdLabel->show();
+		////唤醒UI显示用户名可用！
+
+		//设置图标
+		QPixmap Pix("Resource/ion/correct.png");
+		ui->studentIdLogo->setPixmap(Pix);
+		ui->studentIdLogo->show();
+	}
+	else if (QString::compare(data, "RCS_T") == 0)
+	{
+		qDebug() << "this studentId is not ok";
+
+		ui->studentIdLabel->setText(QString::fromLocal8Bit("该学号已经注册！"));
+		ui->studentIdLabel->setStyleSheet("color:red;");
+		ui->studentIdLabel->show();
+		////唤醒UI显示用户名可用！
+
+		//设置图标
+		QPixmap Pix("Resource/ion/error.png");
+		ui->studentIdLogo->setPixmap(Pix);
+		ui->studentIdLogo->show();
 	}
 }
 

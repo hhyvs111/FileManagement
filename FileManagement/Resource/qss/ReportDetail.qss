@@ -1,0 +1,20 @@
+* {
+    font-family: Microsoft YaHei;
+}
+QPlainTextEdit
+{
+	font-size: 14px;
+	background:transparent;
+	border-width:0;
+	border-style:outset;
+	color:black;
+}
+
+QLabel#reporterDetail
+{
+	font-size: 16px;
+}
+QLabel#reportTime
+{
+	font-size: 14px;
+}
