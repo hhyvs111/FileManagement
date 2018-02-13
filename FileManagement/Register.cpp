@@ -30,7 +30,7 @@ Register::Register(QWidget *parent)
 	ui->userPassword->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 	ui->userPassword2->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 
-	initTitleBar();
+	//initTitleBar();
 	init();
 
 	loadStyleSheet("Register");
@@ -52,15 +52,15 @@ Register::~Register()
 	delete ui;
 }
 
-void Register::initTitleBar()
-{
-	m_titleBar->move(1, 2);
-	m_titleBar->raise();
-	m_titleBar->setWindowBorderWidth(2);
-	m_titleBar->setBackgroundColor(255, 255, 255);
-	m_titleBar->setButtonType(MIN_BUTTON);
-	m_titleBar->setTitleWidth(this->width());
-}
+//void Register::initTitleBar()
+//{
+//	//m_titleBar->move(1, 2);
+//	//m_titleBar->raise();
+//	//m_titleBar->setWindowBorderWidth(2);
+//	//m_titleBar->setBackgroundColor(255, 255, 255);
+//	//m_titleBar->setButtonType(MIN_BUTTON);
+//	//m_titleBar->setTitleWidth(this->width());
+//}
 //void Register::setWindowTitle(QString title, int titleFontSize)
 //{
 //	m_titleBar->setTitleContent(title, titleFontSize);

@@ -1,6 +1,8 @@
 #include "ReportLook.h"
 #include "MyMessageBox.h"
 #include "ReportDetail.h"
+#include <QToolTip>
+
 
 ReportLook::ReportLook(QWidget *parent) :
 	QWidget(parent),
@@ -59,6 +61,14 @@ void ReportLook::initModel()
 	ui->tableView->horizontalHeader()->setSectionResizeMode(6, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(7, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(8, QHeaderView::Fixed);
+}
+
+void ReportLook::showToolTip(const QModelIndex &index) {
+	if (!index.isValid()) {
+		qDebug() << "Invalid index";
+		return;
+	}
+	QToolTip::showText(QCursor::pos(), index.data().toString());
 }
 
 void ReportLook::sendReportLook(QString condition)

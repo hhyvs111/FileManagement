@@ -11,10 +11,13 @@ ReportDetail::ReportDetail(QString reportId,QWidget *parent) :
 	
 	connect(tcp, SIGNAL(sendDataToReportDetail(QString)), this, SLOT(receiveDataFromClient(QString)));
 	
+
+
 	//刚打开的时候要选点击按钮时候所在行的ID的报告
 	sendReportDetail(reportId);
 	init();
-	initTitleBar();
+	//setFixedSize(700, 500); // 禁止改变窗口大小
+	//initTitleBar();
 }
 
 ReportDetail::~ReportDetail()
@@ -25,12 +28,12 @@ ReportDetail::~ReportDetail()
 void ReportDetail::init()
 {
 	loadStyleSheet("ReportDetail");
-	//设置不可编辑
-	ui->reportMainPlainTextEdit->setEnabled(false);
-	ui->reportQuestionForSolve->setEnabled(false);
-	ui->reportQuestionFromLastWeek->setEnabled(false);
-	ui->reportQuestionHasSolved->setEnabled(false);
-	ui->reportYourGet->setEnabled(false);
+	//设置为只读模式
+	ui->reportMainPlainTextEdit->setReadOnly(true);
+	ui->reportQuestionForSolve->setReadOnly(true);
+	ui->reportQuestionFromLastWeek->setReadOnly(true);
+	ui->reportQuestionHasSolved->setReadOnly(true);
+	ui->reportYourGet->setReadOnly(true);
 
 	QPalette Pal(palette());
 	// set black background
@@ -40,16 +43,18 @@ void ReportDetail::init()
 	this->raise();
 
 }
+//
+//void ReportDetail::initTitleBar()
+//{
+//	m_titleBar->move(1, 2);
+//	m_titleBar->raise();
+//	m_titleBar->setWindowBorderWidth(2);
+//	m_titleBar->setBackgroundColor(138, 109, 53);
+//	m_titleBar->setButtonType(MIN_BUTTON);
+//	m_titleBar->setTitleWidth(this->width());
+//}
 
-void ReportDetail::initTitleBar()
-{
-	m_titleBar->move(1, 2);
-	m_titleBar->raise();
-	m_titleBar->setWindowBorderWidth(2);
-	m_titleBar->setBackgroundColor(138, 109, 53);
-	m_titleBar->setButtonType(MIN_BUTTON);
-	m_titleBar->setTitleWidth(this->width());
-}
+
 void ReportDetail::sendReportDetail(QString reportId)
 {
 	//每次打开该页面则发查询信息发过去
@@ -95,7 +100,7 @@ void ReportDetail::showReport()
 
 	ui->reportMainPlainTextEdit->setPlainText(reportInfo.reportMain);
 	ui->reportQuestionForSolve->setPlainText(reportInfo.reportQuestionForSolve);
-	ui->reportQuestionFromLastWeek->setPlainText(reportInfo.reportQuestionForSolve);
+	ui->reportQuestionFromLastWeek->setPlainText(reportInfo.reportQuestionFromLastWeek);
 	ui->reportQuestionHasSolved->setPlainText(reportInfo.reportQuestionHasSolved);
 	ui->reportYourGet->setPlainText(reportInfo.reportYourGet);
 	

@@ -16,9 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QMainWindow>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -28,8 +26,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FileManagement
 {
 public:
-    QWidget *centralWidget;
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *TitleLayout;
     QSpacerItem *horizontalSpacer_2;
     QLabel *titleLabel;
@@ -38,11 +35,14 @@ public:
     QWidget *ToolButtonWidget;
     QVBoxLayout *ToolButtonLayout;
     QSpacerItem *verticalSpacer_4;
+    QLabel *label_3;
     QToolButton *personButton;
     QSpacerItem *verticalSpacer_3;
+    QLabel *label_2;
     QToolButton *reportEditButton;
     QToolButton *reportLookButton;
     QSpacerItem *verticalSpacer;
+    QLabel *label;
     QToolButton *showFileButton;
     QToolButton *uploadButton;
     QToolButton *downloadButton;
@@ -51,21 +51,15 @@ public:
     QVBoxLayout *SubLayout;
     QSpacerItem *verticalSpacer_8;
     QSpacerItem *verticalSpacer_9;
-    QStatusBar *statusBar;
 
-    void setupUi(QMainWindow *FileManagement)
+    void setupUi(QWidget *FileManagement)
     {
         if (FileManagement->objectName().isEmpty())
             FileManagement->setObjectName(QStringLiteral("FileManagement"));
-        FileManagement->resize(843, 539);
-        centralWidget = new QWidget(FileManagement);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        centralWidget->setLayoutDirection(Qt::LeftToRight);
-        verticalLayout_2 = new QVBoxLayout(centralWidget);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 9, -1, -1);
+        FileManagement->resize(831, 486);
+        verticalLayout = new QVBoxLayout(FileManagement);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(10, 20, 10, 10);
         TitleLayout = new QHBoxLayout();
         TitleLayout->setSpacing(0);
         TitleLayout->setObjectName(QStringLiteral("TitleLayout"));
@@ -74,7 +68,7 @@ public:
 
         TitleLayout->addItem(horizontalSpacer_2);
 
-        titleLabel = new QLabel(centralWidget);
+        titleLabel = new QLabel(FileManagement);
         titleLabel->setObjectName(QStringLiteral("titleLabel"));
         QFont font;
         font.setFamily(QStringLiteral("04b_21"));
@@ -88,22 +82,26 @@ public:
         TitleLayout->addItem(horizontalSpacer);
 
 
-        verticalLayout_2->addLayout(TitleLayout);
+        verticalLayout->addLayout(TitleLayout);
 
         FunctionLayout = new QHBoxLayout();
-        FunctionLayout->setSpacing(6);
+        FunctionLayout->setSpacing(0);
         FunctionLayout->setObjectName(QStringLiteral("FunctionLayout"));
-        ToolButtonWidget = new QWidget(centralWidget);
+        ToolButtonWidget = new QWidget(FileManagement);
         ToolButtonWidget->setObjectName(QStringLiteral("ToolButtonWidget"));
         ToolButtonLayout = new QVBoxLayout(ToolButtonWidget);
         ToolButtonLayout->setSpacing(0);
-        ToolButtonLayout->setContentsMargins(11, 11, 11, 11);
         ToolButtonLayout->setObjectName(QStringLiteral("ToolButtonLayout"));
         ToolButtonLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         ToolButtonLayout->setContentsMargins(1, 1, 1, 1);
         verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         ToolButtonLayout->addItem(verticalSpacer_4);
+
+        label_3 = new QLabel(ToolButtonWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        ToolButtonLayout->addWidget(label_3);
 
         personButton = new QToolButton(ToolButtonWidget);
         personButton->setObjectName(QStringLiteral("personButton"));
@@ -120,6 +118,11 @@ public:
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         ToolButtonLayout->addItem(verticalSpacer_3);
+
+        label_2 = new QLabel(ToolButtonWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        ToolButtonLayout->addWidget(label_2);
 
         reportEditButton = new QToolButton(ToolButtonWidget);
         reportEditButton->setObjectName(QStringLiteral("reportEditButton"));
@@ -140,6 +143,11 @@ public:
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         ToolButtonLayout->addItem(verticalSpacer);
+
+        label = new QLabel(ToolButtonWidget);
+        label->setObjectName(QStringLiteral("label"));
+
+        ToolButtonLayout->addWidget(label);
 
         showFileButton = new QToolButton(ToolButtonWidget);
         showFileButton->setObjectName(QStringLiteral("showFileButton"));
@@ -184,7 +192,7 @@ public:
         FunctionLayout->addWidget(ToolButtonWidget);
 
         SubLayout = new QVBoxLayout();
-        SubLayout->setSpacing(6);
+        SubLayout->setSpacing(0);
         SubLayout->setObjectName(QStringLiteral("SubLayout"));
         verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -198,31 +206,31 @@ public:
         FunctionLayout->addLayout(SubLayout);
 
 
-        verticalLayout_2->addLayout(FunctionLayout);
+        verticalLayout->addLayout(FunctionLayout);
 
-        FileManagement->setCentralWidget(centralWidget);
-        statusBar = new QStatusBar(FileManagement);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        FileManagement->setStatusBar(statusBar);
 
         retranslateUi(FileManagement);
         QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
-        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
-        QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
-        QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
         QObject::connect(reportEditButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReportEdit()));
         QObject::connect(reportLookButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReportLook()));
+        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
+        QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
+        QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
+        QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi
 
-    void retranslateUi(QMainWindow *FileManagement)
+    void retranslateUi(QWidget *FileManagement)
     {
-        FileManagement->setWindowTitle(QApplication::translate("FileManagement", "mainpage", Q_NULLPTR));
+        FileManagement->setWindowTitle(QApplication::translate("FileManagement", "Form", Q_NULLPTR));
         titleLabel->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\254\242\350\277\216\346\235\245\345\210\260\345\256\236\351\252\214\345\256\244\346\226\207\346\241\243\347\256\241\347\220\206\347\263\273\347\273\237</span></p></body></html>", Q_NULLPTR));
+        label_3->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\210\221\347\232\204</span></p></body></html>", Q_NULLPTR));
         personButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
+        label_2->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\345\221\250\346\212\245</span></p></body></html>", Q_NULLPTR));
         reportEditButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         reportLookButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
+        label->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\226\207\346\241\243</span></p></body></html>", Q_NULLPTR));
         showFileButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         uploadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         downloadButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));

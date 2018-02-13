@@ -351,9 +351,6 @@
     <ResourceCompile Include="FileManagement.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MyMessageBox.qss">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="Login.qss">
       <Filter>Resource\CSS</Filter>
     </None>

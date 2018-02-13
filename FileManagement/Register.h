@@ -22,7 +22,7 @@ private:
 	bool isokPassword;
 	bool isOkTrueName;
 	bool isOkTeacher;
-	void initTitleBar();  //初始化标题栏
+	//void initTitleBar();  //初始化标题栏
 	void init();
 
 	//槽函数

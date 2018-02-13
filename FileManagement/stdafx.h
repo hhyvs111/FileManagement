@@ -13,6 +13,8 @@
 #include <QIODevice>
 #include <QByteArray>
 #include <QDataStream>
+#include <QGraphicsDropShadowEffect>
+#include <algorithm>
 #include"tcpclient.h"
 
 using namespace std;

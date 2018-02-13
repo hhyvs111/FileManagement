@@ -40,7 +40,7 @@ Login::Login(QWidget *parent)
 	QMovie *movie = new QMovie("Resource/Logo.gif");
 	ui->label->setMovie(movie);
 	movie->start();
-	setFixedSize(420, 350);
+	setFixedSize(500, 400);
 	ui->passwordLine->setEchoMode(QLineEdit::Password);//当输入密码时，显示为*******
 	
 	initTitleBar();
@@ -60,7 +60,7 @@ Login::Login(QWidget *parent)
 
 void Login::initTitleBar()
 {
-	m_titleBar->move(1, 2);
+	m_titleBar->move(-5, 10);
 	m_titleBar->raise();
 	m_titleBar->setWindowBorderWidth(2);
 	m_titleBar->setBackgroundColor(255, 255, 255);

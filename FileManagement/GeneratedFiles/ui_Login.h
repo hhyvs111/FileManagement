@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -28,67 +29,111 @@ QT_BEGIN_NAMESPACE
 class Ui_Login
 {
 public:
-    QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QSpacerItem *verticalSpacer;
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout_5;
+    QCheckBox *rem_pw;
+    QSpacerItem *horizontalSpacer_10;
+    QCheckBox *auto_login;
     QSpacerItem *horizontalSpacer_6;
-    QLabel *label_2;
-    QLineEdit *nameLine;
-    QPushButton *m_RegisterButton;
-    QSpacerItem *horizontalSpacer_7;
-    QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_3;
-    QLabel *label_3;
+    QSpacerItem *horizontalSpacer_5;
+    QSpacerItem *horizontalSpacer_7;
+    QPushButton *m_RegisterButton;
     QLineEdit *passwordLine;
     QPushButton *pushButton_2;
-    QSpacerItem *horizontalSpacer_5;
-    QHBoxLayout *horizontalLayout_3;
-    QSpacerItem *horizontalSpacer_4;
-    QCheckBox *rem_pw;
-    QSpacerItem *horizontalSpacer_9;
-    QCheckBox *auto_login;
-    QSpacerItem *horizontalSpacer_8;
-    QHBoxLayout *horizontalLayout_4;
-    QSpacerItem *horizontalSpacer;
+    QLabel *label_2;
+    QLabel *label_3;
+    QLineEdit *nameLine;
     QPushButton *m_LoginButton;
-    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *Login)
     {
         if (Login->objectName().isEmpty())
             Login->setObjectName(QStringLiteral("Login"));
-        Login->resize(520, 419);
-        verticalLayoutWidget = new QWidget(Login);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(0, 0, 420, 321));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setSpacing(5);
+        Login->resize(482, 379);
+        verticalLayout = new QVBoxLayout(Login);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(verticalLayoutWidget);
+        label = new QLabel(Login);
         label->setObjectName(QStringLiteral("label"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy);
-        label->setMinimumSize(QSize(200, 150));
+        label->setMinimumSize(QSize(200, 200));
 
         verticalLayout->addWidget(label);
 
-        verticalSpacer = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        rem_pw = new QCheckBox(Login);
+        rem_pw->setObjectName(QStringLiteral("rem_pw"));
+        rem_pw->setMinimumSize(QSize(30, 0));
+        rem_pw->setMaximumSize(QSize(126, 20));
 
-        verticalLayout->addItem(verticalSpacer);
+        horizontalLayout_5->addWidget(rem_pw);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_10);
+
+        auto_login = new QCheckBox(Login);
+        auto_login->setObjectName(QStringLiteral("auto_login"));
+        auto_login->setMinimumSize(QSize(50, 0));
+        auto_login->setMaximumSize(QSize(94, 16777215));
+
+        horizontalLayout_5->addWidget(auto_login);
+
+
+        gridLayout->addLayout(horizontalLayout_5, 2, 2, 1, 1);
+
         horizontalSpacer_6 = new QSpacerItem(30, 25, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout->addItem(horizontalSpacer_6);
+        gridLayout->addItem(horizontalSpacer_6, 0, 0, 1, 1);
 
-        label_2 = new QLabel(verticalLayoutWidget);
+        horizontalSpacer_3 = new QSpacerItem(30, 25, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
+
+        horizontalSpacer_5 = new QSpacerItem(45, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_5, 1, 4, 1, 1);
+
+        horizontalSpacer_7 = new QSpacerItem(45, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_7, 0, 4, 1, 1);
+
+        m_RegisterButton = new QPushButton(Login);
+        m_RegisterButton->setObjectName(QStringLiteral("m_RegisterButton"));
+        m_RegisterButton->setMinimumSize(QSize(59, 0));
+        m_RegisterButton->setMaximumSize(QSize(80, 20));
+        m_RegisterButton->setStyleSheet(QStringLiteral("QPushButton { border-radius: 3px; color: rgb(85, 85, 255); }"));
+
+        gridLayout->addWidget(m_RegisterButton, 0, 3, 1, 1);
+
+        passwordLine = new QLineEdit(Login);
+        passwordLine->setObjectName(QStringLiteral("passwordLine"));
+        sizePolicy.setHeightForWidth(passwordLine->sizePolicy().hasHeightForWidth());
+        passwordLine->setSizePolicy(sizePolicy);
+        passwordLine->setMinimumSize(QSize(180, 20));
+        passwordLine->setMaximumSize(QSize(16777215, 25));
+
+        gridLayout->addWidget(passwordLine, 1, 2, 1, 1);
+
+        pushButton_2 = new QPushButton(Login);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setMinimumSize(QSize(59, 0));
+        pushButton_2->setMaximumSize(QSize(80, 20));
+        pushButton_2->setStyleSheet(QStringLiteral("QPushButton { border-radius: 3px; color: rgb(85, 85, 255); }"));
+
+        gridLayout->addWidget(pushButton_2, 1, 3, 1, 1);
+
+        label_2 = new QLabel(Login);
         label_2->setObjectName(QStringLiteral("label_2"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
@@ -97,131 +142,42 @@ public:
         label_2->setSizePolicy(sizePolicy1);
         label_2->setMaximumSize(QSize(200, 20));
 
-        horizontalLayout->addWidget(label_2);
+        gridLayout->addWidget(label_2, 0, 1, 1, 1);
 
-        nameLine = new QLineEdit(verticalLayoutWidget);
+        label_3 = new QLabel(Login);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout->addWidget(label_3, 1, 1, 1, 1);
+
+        nameLine = new QLineEdit(Login);
         nameLine->setObjectName(QStringLiteral("nameLine"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(nameLine->sizePolicy().hasHeightForWidth());
-        nameLine->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(nameLine->sizePolicy().hasHeightForWidth());
+        nameLine->setSizePolicy(sizePolicy);
         nameLine->setMinimumSize(QSize(180, 20));
         nameLine->setMaximumSize(QSize(500, 25));
 
-        horizontalLayout->addWidget(nameLine);
+        gridLayout->addWidget(nameLine, 0, 2, 1, 1);
 
-        m_RegisterButton = new QPushButton(verticalLayoutWidget);
-        m_RegisterButton->setObjectName(QStringLiteral("m_RegisterButton"));
-        m_RegisterButton->setMinimumSize(QSize(59, 0));
-        m_RegisterButton->setMaximumSize(QSize(80, 20));
-        m_RegisterButton->setStyleSheet(QStringLiteral("QPushButton { border-radius: 3px; color: rgb(85, 85, 255); }"));
-
-        horizontalLayout->addWidget(m_RegisterButton);
-
-        horizontalSpacer_7 = new QSpacerItem(45, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_7);
-
-
-        verticalLayout->addLayout(horizontalLayout);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalSpacer_3 = new QSpacerItem(30, 25, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_3);
-
-        label_3 = new QLabel(verticalLayoutWidget);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        horizontalLayout_2->addWidget(label_3);
-
-        passwordLine = new QLineEdit(verticalLayoutWidget);
-        passwordLine->setObjectName(QStringLiteral("passwordLine"));
-        sizePolicy2.setHeightForWidth(passwordLine->sizePolicy().hasHeightForWidth());
-        passwordLine->setSizePolicy(sizePolicy2);
-        passwordLine->setMinimumSize(QSize(180, 20));
-        passwordLine->setMaximumSize(QSize(16777215, 25));
-
-        horizontalLayout_2->addWidget(passwordLine);
-
-        pushButton_2 = new QPushButton(verticalLayoutWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setMinimumSize(QSize(59, 0));
-        pushButton_2->setMaximumSize(QSize(80, 20));
-        pushButton_2->setStyleSheet(QStringLiteral("QPushButton { border-radius: 3px; color: rgb(85, 85, 255); }"));
-
-        horizontalLayout_2->addWidget(pushButton_2);
-
-        horizontalSpacer_5 = new QSpacerItem(45, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_5);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalSpacer_4 = new QSpacerItem(110, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_4);
-
-        rem_pw = new QCheckBox(verticalLayoutWidget);
-        rem_pw->setObjectName(QStringLiteral("rem_pw"));
-        rem_pw->setMinimumSize(QSize(30, 0));
-        rem_pw->setMaximumSize(QSize(126, 20));
-
-        horizontalLayout_3->addWidget(rem_pw);
-
-        horizontalSpacer_9 = new QSpacerItem(30, 10, QSizePolicy::Minimum, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_9);
-
-        auto_login = new QCheckBox(verticalLayoutWidget);
-        auto_login->setObjectName(QStringLiteral("auto_login"));
-        auto_login->setMinimumSize(QSize(50, 0));
-        auto_login->setMaximumSize(QSize(94, 16777215));
-
-        horizontalLayout_3->addWidget(auto_login);
-
-        horizontalSpacer_8 = new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_8);
-
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalSpacer = new QSpacerItem(115, 10, QSizePolicy::Minimum, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer);
-
-        m_LoginButton = new QPushButton(verticalLayoutWidget);
+        m_LoginButton = new QPushButton(Login);
         m_LoginButton->setObjectName(QStringLiteral("m_LoginButton"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(m_LoginButton->sizePolicy().hasHeightForWidth());
         m_LoginButton->setSizePolicy(sizePolicy2);
         m_LoginButton->setMinimumSize(QSize(180, 30));
-        m_LoginButton->setMaximumSize(QSize(50, 20));
+        m_LoginButton->setMaximumSize(QSize(16777215, 16777215));
         m_LoginButton->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_4->addWidget(m_LoginButton);
+        gridLayout->addWidget(m_LoginButton, 3, 2, 1, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(75, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
-        horizontalLayout_4->addItem(horizontalSpacer_2);
+        gridLayout->addItem(verticalSpacer, 4, 2, 1, 1);
 
 
-        verticalLayout->addLayout(horizontalLayout_4);
+        verticalLayout->addLayout(gridLayout);
 
-        QWidget::setTabOrder(nameLine, passwordLine);
-        QWidget::setTabOrder(passwordLine, m_LoginButton);
-        QWidget::setTabOrder(m_LoginButton, rem_pw);
-        QWidget::setTabOrder(rem_pw, auto_login);
-        QWidget::setTabOrder(auto_login, m_RegisterButton);
-        QWidget::setTabOrder(m_RegisterButton, pushButton_2);
 
         retranslateUi(Login);
         QObject::connect(m_LoginButton, SIGNAL(clicked()), Login, SLOT(Click_Login()));
@@ -237,12 +193,12 @@ public:
     {
         Login->setWindowTitle(QApplication::translate("Login", "Form", Q_NULLPTR));
         label->setText(QApplication::translate("Login", "TextLabel", Q_NULLPTR));
-        label_2->setText(QApplication::translate("Login", "\347\224\250\346\210\267\345\220\215\357\274\232", Q_NULLPTR));
-        m_RegisterButton->setText(QApplication::translate("Login", "\347\253\213\345\215\263\346\263\250\345\206\214", Q_NULLPTR));
-        label_3->setText(QApplication::translate("Login", "\345\257\206  \347\240\201\357\274\232", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("Login", "\346\211\276\345\233\236\345\257\206\347\240\201", Q_NULLPTR));
         rem_pw->setText(QApplication::translate("Login", "\350\256\260\344\275\217\345\257\206\347\240\201", Q_NULLPTR));
         auto_login->setText(QApplication::translate("Login", "\350\207\252\345\212\250\347\231\273\345\275\225", Q_NULLPTR));
+        m_RegisterButton->setText(QApplication::translate("Login", "\347\253\213\345\215\263\346\263\250\345\206\214", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("Login", "\346\211\276\345\233\236\345\257\206\347\240\201", Q_NULLPTR));
+        label_2->setText(QApplication::translate("Login", "\347\224\250\346\210\267\345\220\215\357\274\232", Q_NULLPTR));
+        label_3->setText(QApplication::translate("Login", "\345\257\206  \347\240\201\357\274\232", Q_NULLPTR));
         m_LoginButton->setText(QApplication::translate("Login", "\347\231\273 \345\275\225", Q_NULLPTR));
     } // retranslateUi
 

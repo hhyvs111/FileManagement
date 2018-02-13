@@ -12,7 +12,7 @@ QPlainTextEdit
 
 QLabel#reporterDetail
 {
-	font-size: 16px;
+	font-size: 20px;
 }
 QLabel#reportTime
 {

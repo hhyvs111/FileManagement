@@ -7,10 +7,11 @@
 #include "UserInformation.h"
 #include "ReportEdit.h"
 #include "ReportLook.h"
+#include "BaseWindow.h"
 #include "ui_FileManagement.h"
 
 extern QString globalUserName;
-class FileManagement : public QMainWindow
+class FileManagement : public BaseWindow
 {
 	Q_OBJECT
 
@@ -33,10 +34,13 @@ private:
 		userInformationWindowIsOpen = false,
 		reportEditWindowIsOpen = false,
 		reportLookWindowIsOpen = false;
-		
-	
-	void loadStyleSheet(const QString &sheetName);  //加载样式
 
+	//初始化界面
+	void init();
+
+	//初始化标题栏
+	//void initTitleBar();
+	
 private slots:
 	void Btn_Click();
 	void ClickUserInformation();

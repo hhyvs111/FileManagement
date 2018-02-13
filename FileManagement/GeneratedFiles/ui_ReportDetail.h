@@ -29,6 +29,7 @@ class Ui_ReportDetail
 {
 public:
     QVBoxLayout *verticalLayout_3;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QLabel *reporterDetail;
     QSpacerItem *horizontalSpacer_6;
@@ -43,10 +44,11 @@ public:
     QLabel *LQuestionForSolve;
     QPlainTextEdit *reportQuestionForSolve;
     QGridLayout *gridLayout_2;
-    QPlainTextEdit *reportQuestionHasSolved;
-    QLabel *LQuestionForSolved;
     QLabel *LQuestionFromLastWeek;
     QPlainTextEdit *reportQuestionFromLastWeek;
+    QGridLayout *gridLayout_3;
+    QLabel *LQuestionForSolved;
+    QPlainTextEdit *reportQuestionHasSolved;
     QVBoxLayout *verticalLayout_2;
     QLabel *LYourGet;
     QPlainTextEdit *reportYourGet;
@@ -59,9 +61,14 @@ public:
     {
         if (ReportDetail->objectName().isEmpty())
             ReportDetail->setObjectName(QStringLiteral("ReportDetail"));
-        ReportDetail->resize(554, 521);
+        ReportDetail->resize(870, 657);
         verticalLayout_3 = new QVBoxLayout(ReportDetail);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(20, 20, 20, 20);
+        verticalSpacer = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        verticalLayout_3->addItem(verticalSpacer);
+
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         reporterDetail = new QLabel(ReportDetail);
@@ -128,16 +135,6 @@ public:
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        reportQuestionHasSolved = new QPlainTextEdit(ReportDetail);
-        reportQuestionHasSolved->setObjectName(QStringLiteral("reportQuestionHasSolved"));
-
-        gridLayout_2->addWidget(reportQuestionHasSolved, 1, 1, 1, 1);
-
-        LQuestionForSolved = new QLabel(ReportDetail);
-        LQuestionForSolved->setObjectName(QStringLiteral("LQuestionForSolved"));
-
-        gridLayout_2->addWidget(LQuestionForSolved, 0, 1, 1, 1);
-
         LQuestionFromLastWeek = new QLabel(ReportDetail);
         LQuestionFromLastWeek->setObjectName(QStringLiteral("LQuestionFromLastWeek"));
 
@@ -150,6 +147,21 @@ public:
 
 
         verticalLayout_3->addLayout(gridLayout_2);
+
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        LQuestionForSolved = new QLabel(ReportDetail);
+        LQuestionForSolved->setObjectName(QStringLiteral("LQuestionForSolved"));
+
+        gridLayout_3->addWidget(LQuestionForSolved, 0, 0, 1, 1);
+
+        reportQuestionHasSolved = new QPlainTextEdit(ReportDetail);
+        reportQuestionHasSolved->setObjectName(QStringLiteral("reportQuestionHasSolved"));
+
+        gridLayout_3->addWidget(reportQuestionHasSolved, 1, 0, 1, 1);
+
+
+        verticalLayout_3->addLayout(gridLayout_3);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
@@ -197,11 +209,11 @@ public:
         reporterDetail->setText(QApplication::translate("ReportDetail", "TextLabel", Q_NULLPTR));
         reportTime->setText(QApplication::translate("ReportDetail", "TextLabel", Q_NULLPTR));
         label->setText(QApplication::translate("ReportDetail", "-----------------------------------------------------------------------------------------", Q_NULLPTR));
-        LMain->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:12pt;\">\346\234\254\345\221\250\345\255\246\344\271\240\345\206\205\345\256\271</span></p></body></html>", Q_NULLPTR));
-        LQuestionForSolve->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:12pt;\">\346\234\254\345\221\250\351\201\207\345\210\260\347\232\204\351\227\256\351\242\230</span></p></body></html>", Q_NULLPTR));
-        LQuestionForSolved->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:12pt;\">\350\247\243\345\206\263\346\226\271\346\263\225</span></p></body></html>", Q_NULLPTR));
-        LQuestionFromLastWeek->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:12pt;\">\344\270\212\345\221\250\347\232\204\351\227\256\351\242\230</span></p></body></html>", Q_NULLPTR));
-        LYourGet->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:12pt;\">\345\255\246\344\271\240\345\277\203\345\276\227\344\270\216\344\275\223\344\274\232</span></p></body></html>", Q_NULLPTR));
+        LMain->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\234\254\345\221\250\345\255\246\344\271\240\345\206\205\345\256\271</span></p></body></html>", Q_NULLPTR));
+        LQuestionForSolve->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\234\254\345\221\250\351\201\207\345\210\260\347\232\204\351\227\256\351\242\230</span></p></body></html>", Q_NULLPTR));
+        LQuestionFromLastWeek->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:14pt;\">\344\270\212\345\221\250\347\232\204\351\227\256\351\242\230</span></p></body></html>", Q_NULLPTR));
+        LQuestionForSolved->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:14pt;\">\350\247\243\345\206\263\346\226\271\346\263\225</span></p></body></html>", Q_NULLPTR));
+        LYourGet->setText(QApplication::translate("ReportDetail", "<html><head/><body><p><span style=\" font-size:14pt;\">\345\255\246\344\271\240\345\277\203\345\276\227\344\270\216\344\275\223\344\274\232</span></p></body></html>", Q_NULLPTR));
         updateButton->setText(QApplication::translate("ReportDetail", "\344\277\256\346\224\271", Q_NULLPTR));
         deleteButton->setText(QApplication::translate("ReportDetail", "\345\210\240\351\231\244", Q_NULLPTR));
     } // retranslateUi

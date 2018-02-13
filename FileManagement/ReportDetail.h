@@ -26,7 +26,7 @@ private:
 	Ui::ReportDetail *ui;
 	ReportInfo reportInfo;
 	void init();
-	void initTitleBar();
+	//void initTitleBar();
 
 
 

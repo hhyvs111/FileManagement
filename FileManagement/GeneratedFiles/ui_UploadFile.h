@@ -28,7 +28,10 @@ class Ui_UploadFile
 {
 public:
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_6;
+    QSpacerItem *horizontalSpacer;
     QLabel *Drag;
+    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer_11;
     QHBoxLayout *horizontalLayout_3;
@@ -52,14 +55,27 @@ public:
     {
         if (UploadFile->objectName().isEmpty())
             UploadFile->setObjectName(QStringLiteral("UploadFile"));
-        UploadFile->resize(529, 421);
+        UploadFile->resize(580, 458);
         UploadFile->setMinimumSize(QSize(100, 100));
         verticalLayout = new QVBoxLayout(UploadFile);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer);
+
         Drag = new QLabel(UploadFile);
         Drag->setObjectName(QStringLiteral("Drag"));
 
-        verticalLayout->addWidget(Drag);
+        horizontalLayout_6->addWidget(Drag);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer_2);
+
+
+        verticalLayout->addLayout(horizontalLayout_6);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));

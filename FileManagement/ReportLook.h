@@ -25,7 +25,7 @@ public:
 	void loadStyleSheet(const QString &sheetName);
 
 	//提示文本
-	void showToolTip(const QModelIndex &index);
+	
 
 private:
 	Ui::ReportLook *ui;
@@ -41,6 +41,7 @@ private slots:
 	//void receiveDataFromClient(QString);
 	// 初始化qtableview，就是初始化model
 	void initModel(); 
+	void showToolTip(const QModelIndex &index);
 
 	//点击条件查询按钮
 	void ClickFindButton();

@@ -1,4 +1,5 @@
 #include "BaseWindow.h"
+#include "stdafx.h"
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QPainter>
@@ -27,7 +28,12 @@ BaseWindow::~BaseWindow()
 void BaseWindow::initTitleBar()
 {
 	m_titleBar = new TitleBar(this);
-	m_titleBar->move(0, 0);
+	m_titleBar->move(-5, 10);
+	m_titleBar->raise();
+	m_titleBar->setWindowBorderWidth(2);
+	//m_titleBar->setBackgroundColor(255, 255, 255);
+	m_titleBar->setButtonType(MIN_BUTTON);
+	//m_titleBar->setTitleWidth(this->width());
 	 
 	connect(m_titleBar, SIGNAL(signalButtonMinClicked()), this, SLOT(onButtonMinClicked()));
 	connect(m_titleBar, SIGNAL(signalButtonRestoreClicked()), this, SLOT(onButtonRestoreClicked()));
@@ -39,12 +45,32 @@ void BaseWindow::initTitleBar()
 void BaseWindow::paintEvent(QPaintEvent* event)
 {
 	//设置背景色;
-	QPainter painter(this);
-	QPainterPath pathBack;
-	pathBack.setFillRule(Qt::WindingFill);
-	pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
-	painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-	painter.fillPath(pathBack, QBrush(QColor(247, 238, 214)));
+	//QPainter painter(this);
+	//QPainterPath pathBack;
+	//pathBack.setFillRule(Qt::WindingFill);
+	//pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
+	//painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+	//painter.fillPath(pathBack, QBrush(QColor(247, 238, 214)));
+
+	//设置窗口阴影
+	QPainterPath path;
+	path.setFillRule(Qt::WindingFill);
+	path.addRect(10, 10, this->width() - 20, this->height() - 20);
+
+	QPainter painter1(this);
+	painter1.setRenderHint(QPainter::Antialiasing, true);
+	painter1.fillPath(path, QBrush(QColor(247, 238, 214)));
+
+	QColor color(0, 0, 0, 50);
+	for (int i = 0; i<10; i++)
+	{
+		QPainterPath path;
+		path.setFillRule(Qt::WindingFill);
+		path.addRect(10 - i, 10 - i, this->width() - (10 - i) * 2, this->height() - (10 - i) * 2);
+		color.setAlpha(150 - qSqrt(i) * 50);
+		painter1.setPen(color);
+		painter1.drawPath(path);
+	}
 
 	return QWidget::paintEvent(event);
 }

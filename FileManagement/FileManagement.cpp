@@ -6,10 +6,24 @@
 #include <QMovie>
 extern QString globalUserName;
 FileManagement::FileManagement(QWidget *parent)
-	: QMainWindow(parent), ui(new Ui::FileManagement)
+	: BaseWindow(parent), ui(new Ui::FileManagement)
 {
 	ui->setupUi(this);
+	init();
+	//initTitleBar();
+	loadStyleSheet("mainWindow");
 
+}
+
+FileManagement::~FileManagement()
+{
+	delete ui;
+}
+
+void FileManagement::init()
+{
+	ui->titleLabel->setStyleSheet("background:transparent");//设置label透明色
+	ui->titleLabel->setStyleSheet("color:rgb(27, 41, 234)");//label字体颜色为蓝色
 	QPalette Pal(palette());
 	// set black background
 	Pal.setColor(QPalette::Background, Qt::gray);
@@ -21,7 +35,7 @@ FileManagement::FileManagement(QWidget *parent)
 	ui->personButton->setIcon(personico); //将图片设置到按钮上
 	ui->personButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->personButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
-	//ui->personButton->setStyleSheet("QToolButton{image-align : left;}");
+													  //ui->personButton->setStyleSheet("QToolButton{image-align : left;}");
 
 	ui->personButton->setCheckable(true);
 
@@ -81,71 +95,54 @@ FileManagement::FileManagement(QWidget *parent)
 	//movie->setScaledSize(QSize(900, 580));//设置图片大小
 	//ui->photoLabel->setMovie(movie);
 	//	movie->start();
-		setWindowIcon(QIcon("Resource/icon1.png"));//设置窗口左上角图标
-		setFixedSize(800, 600); // 禁止改变窗口大小
-		ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
-		ui->uploadButton->setToolTip(tr("upload"));
-		ui->downloadButton->setToolTip(tr("download"));
-		ui->showFileButton->setToolTip(tr("chat"));
-		ui->deleteButton->setToolTip(tr("退出系统"));
+	setWindowIcon(QIcon("Resource/icon1.png"));//设置窗口左上角图标
+	setFixedSize(800, 600); // 禁止改变窗口大小
+	ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
+	ui->uploadButton->setToolTip(tr("upload"));
+	ui->downloadButton->setToolTip(tr("download"));
+	ui->showFileButton->setToolTip(tr("chat"));
+	ui->deleteButton->setToolTip(tr("退出系统"));
 
 
-		////自定义退出按钮
-		//QToolButton *closeButton = new QToolButton(this);
-		//QPixmap quitPixmap = QPixmap("Resource/icon2.png");
-		//closeButton->setStyleSheet("QToolButton{border:none}");
-		//closeButton->setFixedSize(QSize(20, 20));
-		//closeButton->setIcon(quitPixmap);
-		//closeButton->setGeometry(this->width() - 20, 0, 20, 20);
-		//connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
+	////自定义退出按钮
+	//QToolButton *closeButton = new QToolButton(this);
+	//QPixmap quitPixmap = QPixmap("Resource/icon2.png");
+	//closeButton->setStyleSheet("QToolButton{border:none}");
+	//closeButton->setFixedSize(QSize(20, 20));
+	//closeButton->setIcon(quitPixmap);
+	//closeButton->setGeometry(this->width() - 20, 0, 20, 20);
+	//connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
 
-		//设置窗口背景色
-		QPalette  palette(this->palette());
-		palette.setColor(QPalette:: Background, QColor(255, 255,255, 255));
-		this->setPalette(palette);
-	    //设置标题label字体颜色
-		ui->titleLabel->setStyleSheet("background:transparent");//设置label透明色
-		//ui.titleLabel->setStyleSheet("background-color:rgb(255, 255, 255)");//label背景颜色为白色
-		ui->titleLabel->setStyleSheet("color:rgb(27, 41, 234)");//label字体颜色为蓝色
-		//
+	//设置窗口背景色
+	/*QPalette  palette(this->palette());
+	palette.setColor(QPalette:: Background, QColor(255, 255,255, 255));
+	this->setPalette(palette);*/
+	//设置标题label字体颜色
+	//ui.titleLabel->setStyleSheet("background-color:rgb(255, 255, 255)");//label背景颜色为白色
+	//
 
-	qDebug() << globalUserName << " welcome! ";
-
-	loadStyleSheet("mainWindow");
-
-}
-
-FileManagement::~FileManagement()
-{
-	delete ui;
+	this->setAttribute(Qt::WA_TranslucentBackground);
+	//边框阴影效果
+	QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect;
+	effect->setBlurRadius(6);
+	effect->setColor(Qt::black);
+	effect->setOffset(0, 0);
+	this->setGraphicsEffect(effect);
+	this->update();
 }
 //
 //void FileManagement::initTitleBar()
 //{ 
-//	m_titleBar->move(1, 2);
-//	m_titleBar->raise();
-//	m_titleBar->setWindowBorderWidth(2);
-//	m_titleBar->setBackgroundColor(255, 255, 255);
-//	m_titleBar->setButtonType(MIN_BUTTON);
-//	m_titleBar->setTitleWidth(this->width());
+//	//m_titleBar->move(1, 2);
+//	//m_titleBar->raise();
+//	//m_titleBar->setWindowBorderWidth(2);
+//	//m_titleBar->setBackgroundColor(255, 255, 255);
+//	//m_titleBar->setButtonType(MIN_BUTTON);
+//	//m_titleBar->setTitleWidth(this->width());
 //}
 
-void FileManagement::loadStyleSheet(const QString &sheetName)
-{
-	QFile file("Resource/qss/" + sheetName + ".qss");
-	qDebug() << sheetName + ".qss";
-	file.open(QFile::ReadOnly);
-	if (file.isOpen())
-	{
 
-		QString styleSheet = this->styleSheet();
-		styleSheet += QLatin1String(file.readAll());
-		this->setStyleSheet(styleSheet);
-	}
-	else
-		qDebug() << "is not qss";
-}
 
 void FileManagement::receiveLogin()
 {
