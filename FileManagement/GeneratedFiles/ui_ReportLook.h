@@ -92,7 +92,7 @@ public:
 
         tableView = new QTableView(ReportLook);
         tableView->setObjectName(QStringLiteral("tableView"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());

@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include<QToolTip>
 #include <QtWin>
+#include <QToolButton>
 #include <QFileIconProvider>
 #include "MyMessageBox.h"
 DownloadFile::DownloadFile(QWidget *parent) :
@@ -15,6 +16,7 @@ DownloadFile::DownloadFile(QWidget *parent) :
 	byteReceived = 0;
 
 	initModel();
+	init();
 
 	ui->downloadTable->setMouseTracking(true);   //设置鼠标追踪
 
@@ -47,7 +49,7 @@ void  DownloadFile::initModel()
 	ui->downloadTable->setModel(model);
 	ui->downloadTable->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 	ui->downloadTable->setColumnWidth(0, 30);
-	ui->downloadTable->setColumnWidth(1, 300);
+	ui->downloadTable->setColumnWidth(1, 240);
 	ui->downloadTable->setColumnWidth(2, 70);
 	ui->downloadTable->setColumnWidth(3, 110);
 	ui->downloadTable->setColumnWidth(4, 70);
@@ -63,6 +65,29 @@ void  DownloadFile::initModel()
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(5, QHeaderView::Fixed);
 }
 
+//初始化界面
+void DownloadFile::init()
+{
+	//给输入框加个按钮
+	ui->condition->setMinimumHeight(30);
+	ui->condition->setTextMargins(0, 0, 30, 0);
+	//ui->condition->setPlaceholderText(QString::fromLocal8Bit("请输入用户名"));
+
+	QToolButton *find = new QToolButton();
+	find->setMaximumSize(40, 40);
+	find->setCursor(Qt::PointingHandCursor);
+	find->setIcon(QIcon("Resource/ion/lookReport.png"));
+	find->setIconSize(QSize(20, 20));//根据实际调整图片大小
+	find->setStyleSheet("border:none");
+
+	QSpacerItem *spaceItem1 = new QSpacerItem(150, 40, QSizePolicy::Expanding);
+	QHBoxLayout *editLayout1 = new QHBoxLayout();
+	editLayout1->setContentsMargins(1, 0, 1, 0);
+	editLayout1->addSpacerItem(spaceItem1);
+	editLayout1->addWidget(find);
+	ui->condition->setLayout(editLayout1);
+	connect(find, SIGNAL(clicked()), this, SLOT(ClickFindButton()));
+}
 //提示文本追踪
 void DownloadFile::showToolTip(const QModelIndex &index) {
 	if (!index.isValid()) {
@@ -200,11 +225,13 @@ void DownloadFile::ClickDeleteButton()
 
 }
 
-void DownloadFile::sendFileInfo()
+void DownloadFile::sendFileInfo(QString condition)
 {
 	//每次打开该页面则发查询信息发过去
 	//QString data = "findFileByName#" + globalUserName;   //查询该用户的文件？
-	QString data = "findAllFile";   //查询所有的文件
+	QString data = "findFile#";   //查询文件，默认为all
+	data += condition;
+
 	QByteArray datasend = data.toUtf8();
 	qDebug() << datasend;
 	tcp->tcpSocket->write(datasend);
@@ -247,7 +274,7 @@ void DownloadFile::showFileInfo()
 	for (int i = 1;i <= listNumber[0].toInt();i++)
 	{
 		FileInfo littleFile;
-		QStringList fileList = listNumber[i].split("#");
+		QStringList fileList = listNumber[i].split("^");
 		littleFile.fileId = fileList[0].toInt();
 		littleFile.fileName = fileList[1];
 		littleFile.fileSize = fileList[2];
@@ -270,18 +297,18 @@ void DownloadFile::showFileInfo()
 		model->setItem(i, 4, new QStandardItem(fileInfo.at(i).fileUser));
 
 		//为这个第五列添加按钮
-		m_download = new QPushButton();
+		m_download = new QToolButton();
 		QIcon downloadFile("Resource/ion/downloadFile.png"); //创建QIcon对象
 		m_download->setIcon(downloadFile); //将图片设置到按钮上
 		m_download->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_download->setStyleSheet("border:none");
-
-		m_delete = new QPushButton();
+		m_download->setCursor(Qt::PointingHandCursor);
+		m_delete = new QToolButton(); 
 		QIcon deleteFile("Resource/ion/deleteFile.png"); //创建QIcon对象
 		m_delete->setIcon(deleteFile); //将图片设置到按钮上
 		m_delete->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_delete->setStyleSheet("border:none");
-
+		m_delete->setCursor(Qt::PointingHandCursor);
 		//触发下载按钮的槽函数
 		connect(m_download, SIGNAL(clicked(bool)), this, SLOT(ClickDownloadButton()));
 		connect(m_delete, SIGNAL(clicked(bool)), this, SLOT(ClickDeleteButton()));
@@ -421,4 +448,19 @@ QString DownloadFile::fileType(const QString &extension) const
 	}
 
 	return strType;
+}
+
+//条件查询，若输入为空则默认为all，主要是查询文件名字
+void DownloadFile::ClickFindButton()
+{
+	//这个是输入框的值
+	QString condition = ui->condition->text();
+	if (condition.isEmpty())
+	{
+		sendFileInfo();
+	}
+	else
+	{
+		sendFileInfo(condition);
+	}
 }

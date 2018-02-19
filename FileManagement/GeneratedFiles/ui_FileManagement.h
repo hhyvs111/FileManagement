@@ -59,7 +59,7 @@ public:
         FileManagement->resize(831, 486);
         verticalLayout = new QVBoxLayout(FileManagement);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(10, 20, 10, 10);
+        verticalLayout->setContentsMargins(15, 20, 15, 15);
         TitleLayout = new QHBoxLayout();
         TitleLayout->setSpacing(0);
         TitleLayout->setObjectName(QStringLiteral("TitleLayout"));

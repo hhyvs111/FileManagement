@@ -33,7 +33,7 @@ public:
 	~DownloadFile();
 
 	//发送查看该用户所上传文件的信息给服务器
-	void sendFileInfo();
+	void sendFileInfo(QString condition = "all");
 	// 加载样式文件;
 	void loadStyleSheet(const QString &sheetName);
 
@@ -61,12 +61,14 @@ private:
 	int receiveTime;	//接受的次数
 
 	QStandardItemModel *model;
-	QPushButton *m_download;
-	QPushButton *m_delete;
+	QToolButton *m_download;
+	QToolButton *m_delete;
 	
 	//TableModel *m_model;
 	ButtonDelegate *m_buttonDelegate;
 
+
+	void init();
 private slots:
 
 	void receiveFile();  //从服务器下载文件到本地。
@@ -86,6 +88,9 @@ private slots:
 	void showToolTip(const QModelIndex &index);
 	//void ClickSendButton();
 	//void receiveMainwindow();
+
+	//点击条件查询按钮
+	void ClickFindButton();
 
 signals:
 	//void sendDisconnect(QString);  //这是什么

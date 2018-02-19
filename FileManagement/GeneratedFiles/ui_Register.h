@@ -95,10 +95,10 @@ public:
     {
         if (Register->objectName().isEmpty())
             Register->setObjectName(QStringLiteral("Register"));
-        Register->resize(331, 491);
+        Register->resize(331, 501);
         verticalLayout = new QVBoxLayout(Register);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(9, 20, -1, 20);
+        verticalLayout->setContentsMargins(15, 20, 15, 20);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer_20 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);

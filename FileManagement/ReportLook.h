@@ -48,7 +48,7 @@ private slots:
 	//显示从服务器接收的list
 	void showReportList();
 
-	//void receiveDataFromClient(QString);
+	void receiveDataFromClient(QString);
 	// 初始化qtableview，就是初始化model
 	void initModel(); 
 
@@ -67,6 +67,8 @@ private slots:
 	//查看报告按钮
 	void ClickLookReportButton();
 
+	//删除报告按钮
+	void ClickDeleteButton();
 
 
 };

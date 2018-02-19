@@ -156,6 +156,17 @@ void TcpClient::readMessages()
 		else
 			emit sendDataToReportEdit("submit_F");
 	}
+	else if (list[0] == "deleteReport")
+	{
+		if (list[1] == "true")
+		{
+			emit sendDataToReportLook("delete_T");
+		}
+		else
+		{
+			emit sendDataToReportLook("delete_F");
+		}
+	}
 
     else
         return ;

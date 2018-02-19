@@ -22,6 +22,7 @@ FileManagement::~FileManagement()
 
 void FileManagement::init()
 {
+
 	ui->titleLabel->setStyleSheet("background:transparent");//设置label透明色
 	ui->titleLabel->setStyleSheet("color:rgb(27, 41, 234)");//label字体颜色为蓝色
 	QPalette Pal(palette());

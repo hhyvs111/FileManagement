@@ -19,10 +19,9 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	QApplication::addLibraryPath("./plugins");
 	FileManagement F;
-	Login L;
 	Register R;
+	Login L;
 	L.show();
-
 	//槽函数，实现跳转
 	QObject::connect(&L, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
 	QObject::connect(&L, SIGNAL(showMain()), &F, SLOT(receiveLogin()));

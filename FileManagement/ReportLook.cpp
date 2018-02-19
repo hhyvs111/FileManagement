@@ -17,6 +17,7 @@ ReportLook::ReportLook(QWidget *parent) :
 		this, SLOT(showToolTip(QModelIndex)));
 	//连接
 	connect(ui->selectcomboBox, SIGNAL(activated(int)), this, SLOT(insertTermComboBox(int)));
+	connect(tcp, SIGNAL(sendDataToReportLook(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
 ReportLook::~ReportLook()
 {
@@ -222,7 +223,7 @@ void ReportLook::showReportList()
 
 		//触发下载按钮的槽函数
 		connect(m_look, SIGNAL(clicked(bool)), this, SLOT(ClickLookReportButton()));
-		//connect(m_delete, SIGNAL(clicked(bool)), this, SLOT(ClickDeleteButton()));
+		connect(m_delete, SIGNAL(clicked(bool)), this, SLOT(ClickDeleteButton()));
 		//直接把文件名发给row得了！
 
 		m_look->setProperty("row", i);  //为按钮设置row属性
@@ -274,9 +275,35 @@ void ReportLook::ClickLookReportButton()
 	//reportDetail->setPalette(Pal);
 	//reportDetail->raise();
 	reportDetail->show();
-
 }
 
+void ReportLook::ClickDeleteButton()
+{
+	QPushButton *btn = (QPushButton *)sender();   //产生事件的对象，按的谁就取谁
+	QString row = btn->property("row").toString();  //取得按钮的row属性
+	qDebug() << "the row is: " << row;
+
+	QString ReportId = btn->property("deleteReportId").toString();  //获取按钮的id属性
+	qDebug() << "the ReportId is: " << ReportId;
+
+	if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("确定要删除该报告吗？"),
+		MESSAGE_QUESTION, BUTTON_OK_AND_CANCEL, true))
+	{
+		QString bs = "deleteReport";
+		QString data = bs + "#" + ReportId;
+
+		QByteArray datasend = data.toUtf8();
+		if (tcp->tcpSocket->write(datasend))
+		{
+			qDebug() << "send data to server: " << data;
+
+		}
+		else
+			qDebug() << "send failed!";
+	}
+
+}
+ 
 //查看我的报告
 void ReportLook::ClickLookMyReportButton()
 {
@@ -290,7 +317,6 @@ void ReportLook::ClickFindButton()
 	QString condition = ui->condition->text();
 	QString data = "";
 
-	
 	bool WeekIsAll = true;
 	//如果周数选择的是ALL则为真
 	if (isWeekCombox)
@@ -364,4 +390,22 @@ void ReportLook::ClickFindButton()
 	sendReportLook(data);
 
 	//这里要判断一下combox里的是什么值！
+}
+
+void ReportLook::receiveDataFromClient(QString data)
+{
+	if (QString::compare(data, "delete_T") == 0)
+	{
+		//ui->downloadTable->clearn
+
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("删除报告成功！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+		//实现实时更新
+		initModel();  //删除后在这里初始化
+		sendReportLook();  //然后发信息给服务器查询当前文件情况
+						 //model.
+	}
+	else if (QString::compare(data, "delete_F") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("删除文件失败！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
 }

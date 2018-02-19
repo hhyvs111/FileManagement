@@ -16,6 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
@@ -28,6 +29,11 @@ class Ui_DownloadFile
 {
 public:
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
+    QLabel *label;
+    QLineEdit *condition;
+    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_3;
     QTableView *downloadTable;
     QHBoxLayout *horizontalLayout_2;
@@ -35,7 +41,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QProgressBar *progressBar;
     QLabel *downloadSpeedLabel;
-    QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *horizontalSpacer_4; 
 
     void setupUi(QWidget *DownloadFile)
     {
@@ -44,10 +50,34 @@ public:
         DownloadFile->resize(811, 504);
         verticalLayout = new QVBoxLayout(DownloadFile);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        label = new QLabel(DownloadFile);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout->addWidget(label);
+
+        condition = new QLineEdit(DownloadFile);
+        condition->setObjectName(QStringLiteral("condition"));
+
+        horizontalLayout->addWidget(condition);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         downloadTable = new QTableView(DownloadFile);
         downloadTable->setObjectName(QStringLiteral("downloadTable"));
+        downloadTable->setMinimumSize(QSize(600, 400));
 
         horizontalLayout_3->addWidget(downloadTable);
 
@@ -92,6 +122,7 @@ public:
     void retranslateUi(QWidget *DownloadFile)
     {
         DownloadFile->setWindowTitle(QApplication::translate("DownloadFile", "Form", Q_NULLPTR));
+        label->setText(QApplication::translate("DownloadFile", "\346\226\207\344\273\266\345\220\215\357\274\232", Q_NULLPTR));
         downloadSpeedLabel->setText(QApplication::translate("DownloadFile", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
