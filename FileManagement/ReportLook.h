@@ -3,6 +3,7 @@
 #include "Report.h"
 #include "ui_ReportLook.h"
 #include <QStandardItemModel>
+#include <qtoolbutton.h>
 #ifndef REPORTLOOK_H_
 #define REPORTLOOK_H_
 
@@ -31,8 +32,17 @@ private:
 	Ui::ReportLook *ui;
 
 	QStandardItemModel *model;
-	QPushButton *m_look;
-	QPushButton *m_delete;
+	QToolButton *m_look;
+	QToolButton *m_delete;
+
+	QComboBox *TermComboBox;
+	QComboBox *WeekComboBox;
+
+
+
+	//判断这两个combox是否已经插入了
+	bool isWeekCombox = false,
+		isTermCombox = false;
 
 private slots:
 	//显示从服务器接收的list
@@ -41,11 +51,16 @@ private slots:
 	//void receiveDataFromClient(QString);
 	// 初始化qtableview，就是初始化model
 	void initModel(); 
+
+	void init();
 	void showToolTip(const QModelIndex &index);
 
 	//点击条件查询按钮
 	void ClickFindButton();
 
+	//点击学期后插入周数的combobox
+	void insertWeekComboBox(int);
+	void insertTermComboBox(int);
 	//查看我的报告的按钮
 	void ClickLookMyReportButton();
 

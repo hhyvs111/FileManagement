@@ -149,6 +149,10 @@ void TcpClient::readMessages()
 		{
 			emit sendDataToReportEdit("submit_T");
 		}
+		else if (list[1] == "repeatTrue")
+		{
+			emit sendDataToReportEdit("repeat");
+		}
 		else
 			emit sendDataToReportEdit("submit_F");
 	}

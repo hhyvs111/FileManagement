@@ -103,6 +103,10 @@ void ReportEdit::receiveDataFromClient(QString data)
 		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("提交周报成功！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 
 	}
+	else if (QString::compare(data, "repeat") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("该周已提交周报，请勿重复提交！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
 	else if (QString::compare(data, "submit_F") == 0)
 	{
 		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("提交周报失败！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);

@@ -10,17 +10,44 @@ ReportLook::ReportLook(QWidget *parent) :
 {
 	ui->setupUi(this);
 	initModel();
-
+	init();
 	ui->tableView->setMouseTracking(true);   //设置鼠标追踪
 
 	connect(ui->tableView, SIGNAL(entered(QModelIndex)),
 		this, SLOT(showToolTip(QModelIndex)));
+	//连接
+	connect(ui->selectcomboBox, SIGNAL(activated(int)), this, SLOT(insertTermComboBox(int)));
 }
 ReportLook::~ReportLook()
 {
 	delete ui;
 }
 
+//初始化一下这个界面
+void ReportLook::init()
+{
+
+	//给输入框加个按钮
+	ui->condition->setMinimumHeight(30);
+	ui->condition->setTextMargins(0, 0, 30, 0);
+	//ui->condition->setPlaceholderText(QString::fromLocal8Bit("请输入用户名"));
+
+	QToolButton *find = new QToolButton();
+	find->setMaximumSize(40, 40);
+	find->setCursor(Qt::PointingHandCursor);
+	find->setIcon(QIcon("Resource/ion/lookReport.png"));
+	find->setIconSize(QSize(20, 20));//根据实际调整图片大小
+	find->setStyleSheet("border:none");
+
+	QSpacerItem *spaceItem1 = new QSpacerItem(150, 40, QSizePolicy::Expanding);
+	QHBoxLayout *editLayout1 = new QHBoxLayout();
+	editLayout1->setContentsMargins(1, 0, 1, 0);
+	editLayout1->addSpacerItem(spaceItem1);
+	editLayout1->addWidget(find);
+	ui->condition->setLayout(editLayout1);
+	connect(find, SIGNAL(clicked()), this, SLOT(ClickFindButton()));
+	
+}
 //设置表头以及一些属性
 void ReportLook::initModel()
 {
@@ -63,6 +90,52 @@ void ReportLook::initModel()
 	ui->tableView->horizontalHeader()->setSectionResizeMode(8, QHeaderView::Fixed);
 }
 
+//插入周数的选择
+void ReportLook::insertWeekComboBox(int index)
+{
+	//选择的是第三行，默认为2
+	if (!isWeekCombox) 
+	{
+		WeekComboBox = new QComboBox();
+		WeekComboBox->addItem(QString::fromLocal8Bit("all"));
+		//二十周
+		for (int i = 1;i <= 20;i++)
+		{
+			WeekComboBox->addItem(QString::number(i,10));
+		}
+		ui->comboboxLayout->addWidget(WeekComboBox);
+		isWeekCombox = true;
+	}
+}
+
+void ReportLook::insertTermComboBox(int index)
+{	
+	//如果选择的是学期，且学期combox还没插入到layout
+	if (index == 2 && !isTermCombox)
+	{
+		TermComboBox = new QComboBox();
+		TermComboBox->insertItems(0, QStringList()
+			<< QApplication::translate("ReportLook", "\347\240\224\344\270\200\344\270\212", Q_NULLPTR)
+			<< QApplication::translate("ReportLook", "\347\240\224\344\270\200\344\270\213", Q_NULLPTR)
+			<< QApplication::translate("ReportLook", "\347\240\224\344\272\214\344\270\212", Q_NULLPTR)
+			<< QApplication::translate("ReportLook", "\347\240\224\344\272\214\344\270\213", Q_NULLPTR)
+			<< QApplication::translate("ReportLook", "\347\240\224\344\270\211\344\270\212", Q_NULLPTR)
+			<< QApplication::translate("ReportLook", "\347\240\224\344\270\211\344\270\213", Q_NULLPTR)
+		);
+		ui->comboboxLayout->addWidget(TermComboBox);
+		isTermCombox = true;
+		connect(TermComboBox, SIGNAL(activated(int)), this, SLOT(insertWeekComboBox(int)));
+	}
+	//如果已经打开了但是后面又选了其他的，则要删除
+	else if (index != 2 && isTermCombox)
+	{
+		TermComboBox->deleteLater();
+		WeekComboBox->deleteLater();
+		//ui->comboboxLayout->removeWidget(WeekComboBox);
+		isTermCombox = false;
+		isWeekCombox = false;
+	}
+}
 void ReportLook::showToolTip(const QModelIndex &index) {
 	if (!index.isValid()) {
 		qDebug() << "Invalid index";
@@ -89,7 +162,7 @@ void ReportLook::showReportList()
 	initModel();
 	QByteArray dataread = tcp->tcpSocket->readAll();
 	QString data = QString::fromUtf8(dataread);
-	qDebug() << "the data from client: " << dataread;
+	qDebug() << "show report the data from client: " << dataread;
 	QStringList listNumber = data.split("$");
 
 	QList<ReportInfo> reportInfo;
@@ -132,21 +205,24 @@ void ReportLook::showReportList()
 		model->setItem(i, 6, new QStandardItem(reportInfo.at(i).reportName));
 
 		//为这个第五列添加按钮
-		m_look = new QPushButton();
+		m_look = new QToolButton();
 		QIcon lookReport("Resource/ion/lookReport.png"); //创建QIcon对象
 		m_look->setIcon(lookReport); //将图片设置到按钮上
 		m_look->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_look->setStyleSheet("border:none");
 
-		m_delete = new QPushButton();
+		m_look->setCursor(Qt::PointingHandCursor);
+
+		m_delete = new QToolButton();
 		QIcon deleteReport("Resource/ion/deleteFile.png"); //创建QIcon对象
 		m_delete->setIcon(deleteReport); //将图片设置到按钮上
 		m_delete->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_delete->setStyleSheet("border:none");
+		m_delete->setCursor(Qt::PointingHandCursor);
 
 		//触发下载按钮的槽函数
 		connect(m_look, SIGNAL(clicked(bool)), this, SLOT(ClickLookReportButton()));
-		connect(m_delete, SIGNAL(clicked(bool)), this, SLOT(ClickDeleteButton()));
+		//connect(m_delete, SIGNAL(clicked(bool)), this, SLOT(ClickDeleteButton()));
 		//直接把文件名发给row得了！
 
 		m_look->setProperty("row", i);  //为按钮设置row属性
@@ -210,5 +286,82 @@ void ReportLook::ClickLookMyReportButton()
 
 void ReportLook::ClickFindButton()
 {
+	//这个是输入框的值
+	QString condition = ui->condition->text();
+	QString data = "";
+
+	
+	bool WeekIsAll = true;
+	//如果周数选择的是ALL则为真
+	if (isWeekCombox)
+	{
+		WeekIsAll = (QString::compare(WeekComboBox->currentText(), "all") == 0);
+		qDebug() << "the WeekIsAll :" << WeekIsAll;
+		qDebug() << "the week :" << WeekComboBox->currentText();
+	}
+	
+	//如果这学期和周数都打开了则代表要选周数
+	if (isTermCombox && isWeekCombox)
+	{
+		if (condition.isEmpty() && !WeekIsAll)
+			//学期和周数
+		{
+			data += "TW#";
+			data += TermComboBox->currentText() + "#" + WeekComboBox->currentText();
+		}
+		else if (!condition.isEmpty() && !WeekIsAll)
+		{
+			//学期周数条件
+			data += "TWC#";
+			data += TermComboBox->currentText() + "#" + WeekComboBox->currentText() +
+				"#" + condition;
+		}
+		else if (condition.isEmpty() && WeekIsAll)
+		{
+			qDebug() << "the condition" << condition;
+			//学期所有周
+			data += "TAW#";
+			data += TermComboBox->currentText();
+		}
+		else
+		{
+			//学期、所有周和条件
+			data += "TAWC#";
+			data += TermComboBox->currentText() + "#" + condition;
+		}
+		
+	}
+	//如果只弹出来了学期没有周
+	else if (isTermCombox && !isWeekCombox && condition.isEmpty())
+	{
+		data += "TAW#" + TermComboBox->currentText();
+	}
+	else if (isTermCombox && !isWeekCombox && !condition.isEmpty())
+	{
+		data += "TAWC#";
+		data += TermComboBox->currentText() + "#" + condition;
+	}
+	//如果都没有打开
+	else if (!isTermCombox && !isWeekCombox)
+	{
+		if (ui->selectcomboBox->currentText() == QString::fromLocal8Bit("姓名"))
+		{
+			//如果选中了而不输入就点查询
+			if (condition.isEmpty())
+			{
+				MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"),
+					QString::fromLocal8Bit("请输入姓名再点击查询！"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+				return;
+			}
+			else
+			{
+				data += "TrueName#" + condition;
+			}
+		}
+	}
+
+	//暂时这么多吧！
+	sendReportLook(data);
+
 	//这里要判断一下combox里的是什么值！
 }

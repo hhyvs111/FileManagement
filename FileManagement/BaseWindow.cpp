@@ -3,6 +3,7 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QPainter>
+#include<QBitmap>
 #include <QFile>
 #include <qdebug.h>
 
@@ -18,9 +19,25 @@ BaseWindow::BaseWindow(QWidget *parent)
 	/*setAttribute(Qt::WA_DeleteOnClose);*/
 	// 初始化标题栏;
 	initTitleBar();
+
+	QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect;
+	effect->setBlurRadius(15);
+	effect->setColor(Qt::black);
+	effect->setOffset(0, 0);
+	setGraphicsEffect(effect);
+
+
+	//QBitmap bmp(this->size());
+	//bmp.fill();
+	//QPainter p(&bmp);
+	//p.setPen(Qt::NoPen);
+	//p.setBrush(Qt::black);
+	//p.drawRoundedRect(bmp.rect(), 20, 20);
+	//setMask(bmp);
+	//setStyleSheet("border-radius:10px;");
 }
 
-BaseWindow::~BaseWindow()
+BaseWindow::~BaseWindow() 
 {
 
 }
@@ -44,15 +61,10 @@ void BaseWindow::initTitleBar()
 
 void BaseWindow::paintEvent(QPaintEvent* event)
 {
-	//设置背景色;
-	//QPainter painter(this);
-	//QPainterPath pathBack;
-	//pathBack.setFillRule(Qt::WindingFill);
-	//pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
-	//painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-	//painter.fillPath(pathBack, QBrush(QColor(247, 238, 214)));
 
-	//设置窗口阴影
+
+
+	//设置窗口背景色
 	QPainterPath path;
 	path.setFillRule(Qt::WindingFill);
 	path.addRect(10, 10, this->width() - 20, this->height() - 20);
@@ -61,16 +73,43 @@ void BaseWindow::paintEvent(QPaintEvent* event)
 	painter1.setRenderHint(QPainter::Antialiasing, true);
 	painter1.fillPath(path, QBrush(QColor(247, 238, 214)));
 
-	QColor color(0, 0, 0, 50);
-	for (int i = 0; i<10; i++)
-	{
-		QPainterPath path;
-		path.setFillRule(Qt::WindingFill);
-		path.addRect(10 - i, 10 - i, this->width() - (10 - i) * 2, this->height() - (10 - i) * 2);
-		color.setAlpha(150 - qSqrt(i) * 50);
-		painter1.setPen(color);
-		painter1.drawPath(path);
-	}
+
+
+
+	//QRect rect = this->rect();
+	//rect.setWidth(rect.width() - 1);
+	//rect.setHeight(rect.height() - 1);
+
+	//QColor color(0, 0, 0, 50);
+	//for (int i = 0; i<10; i++)
+	//{
+	//	QPainterPath path;
+	//	path.setFillRule(Qt::WindingFill);
+	//	path.addRect(10 - i, 10 - i, this->width() - (10 - i) * 2, this->height() - (10 - i) * 2);
+	//	color.setAlpha(150 - qSqrt(i) * 50);
+	//	painter1.setPen(color);
+	//	painter1.drawPath(path);
+	//}
+
+	//圆角处理
+	//QPainter painter2(this);
+	//painter2.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
+	//painter2.setBrush(QBrush(QColor(247, 238, 214)));
+	//painter2.setPen(Qt::transparent);
+	//QRect rect = this->rect();
+	//rect.setWidth(rect.width() - 15);
+	//rect.setHeight(rect.height() - 15);
+	////rect.setLeft(rect.height() - 10);
+	////rect.setRight(rect.height() - 10);
+	////painter2.drawRect(10, 10, this->width() - 20, this->height() - 20);
+	//painter2.drawRoundedRect(rect, 15, 15);
+	////也可用QPainterPath 绘制代替 painter.drawRoundedRect(rect, 15, 15);
+	//{
+	//	/*QPainterPath painterPath;
+	//	painterPath.addRect(10, 10, this->width() - 20, this->height() - 20);
+	//	painterPath.addRoundedRect(rect, 15, 15);
+	//	painter2.drawPath(painterPath);*/
+	//}
 
 	return QWidget::paintEvent(event);
 }

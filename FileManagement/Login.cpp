@@ -56,6 +56,8 @@ Login::Login(QWidget *parent)
 	//ÏÔÊ¾×¢²á¿ò
 	//connect(this, SIGNAL(showRegister()), &R, SLOT(receiveLogin()));
 	loadStyleSheet("Login");
+
+
 }
 
 void Login::initTitleBar()

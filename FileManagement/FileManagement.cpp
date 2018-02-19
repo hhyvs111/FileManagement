@@ -122,14 +122,14 @@ void FileManagement::init()
 	//ui.titleLabel->setStyleSheet("background-color:rgb(255, 255, 255)");//label背景颜色为白色
 	//
 
-	this->setAttribute(Qt::WA_TranslucentBackground);
-	//边框阴影效果
-	QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect;
-	effect->setBlurRadius(6);
-	effect->setColor(Qt::black);
-	effect->setOffset(0, 0);
-	this->setGraphicsEffect(effect);
-	this->update();
+	//this->setAttribute(Qt::WA_TranslucentBackground);
+	////边框阴影效果
+	//QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect;
+	//effect->setBlurRadius(6);
+	//effect->setColor(Qt::black);
+	//effect->setOffset(0, 0);
+	//this->setGraphicsEffect(effect);
+	//this->update();
 }
 //
 //void FileManagement::initTitleBar()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>589</width>
-    <height>300</height>
+    <width>618</width>
+    <height>449</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,23 +57,27 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="selectcomboBox">
+      <layout class="QHBoxLayout" name="comboboxLayout">
        <item>
-        <property name="text">
-         <string>所有</string>
-        </property>
+        <widget class="QComboBox" name="selectcomboBox">
+         <item>
+          <property name="text">
+           <string>所有</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>姓名</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>学期</string>
+          </property>
+         </item>
+        </widget>
        </item>
-       <item>
-        <property name="text">
-         <string>姓名</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>学期</string>
-        </property>
-       </item>
-      </widget>
+      </layout>
      </item>
      <item>
       <widget class="QLineEdit" name="condition"/>
@@ -94,7 +98,20 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableView" name="tableView"/>
+    <widget class="QTableView" name="tableView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>600</width>
+       <height>400</height>
+      </size>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

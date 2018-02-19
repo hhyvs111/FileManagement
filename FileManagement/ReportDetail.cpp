@@ -73,9 +73,9 @@ void ReportDetail::showReport()
 	QByteArray dataread = tcp->tcpSocket->readAll();
 	QString data = QString::fromUtf8(dataread);
 	qDebug() << "the data from client: " << data;
-
+	QStringList filter = data.split("$");
 	//有些东西是空的
-	QStringList reportInfoList = data.split("#");
+	QStringList reportInfoList = filter[1].split("#");
 	//这个就是初始化了，从服务端收到登录用户的信息
 	reportInfo.reportId = reportInfoList[0];  //ID不需要显示
 	reportInfo.reportUserName = reportInfoList[1];

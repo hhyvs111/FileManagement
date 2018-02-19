@@ -56,6 +56,7 @@ public:
         Login->resize(482, 379);
         verticalLayout = new QVBoxLayout(Login);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(10, 10, 10, 10);
         label = new QLabel(Login);
         label->setObjectName(QStringLiteral("label"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);

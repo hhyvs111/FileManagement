@@ -35,6 +35,7 @@ public:
     QPushButton *LookMyReport;
     QSpacerItem *horizontalSpacer;
     QLabel *label;
+    QHBoxLayout *comboboxLayout;
     QComboBox *selectcomboBox;
     QLineEdit *condition;
     QSpacerItem *horizontalSpacer_2;
@@ -44,7 +45,7 @@ public:
     {
         if (ReportLook->objectName().isEmpty())
             ReportLook->setObjectName(QStringLiteral("ReportLook"));
-        ReportLook->resize(589, 300);
+        ReportLook->resize(618, 449);
         verticalLayout = new QVBoxLayout(ReportLook);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -67,10 +68,15 @@ public:
 
         horizontalLayout->addWidget(label);
 
+        comboboxLayout = new QHBoxLayout();
+        comboboxLayout->setObjectName(QStringLiteral("comboboxLayout"));
         selectcomboBox = new QComboBox(ReportLook);
         selectcomboBox->setObjectName(QStringLiteral("selectcomboBox"));
 
-        horizontalLayout->addWidget(selectcomboBox);
+        comboboxLayout->addWidget(selectcomboBox);
+
+
+        horizontalLayout->addLayout(comboboxLayout);
 
         condition = new QLineEdit(ReportLook);
         condition->setObjectName(QStringLiteral("condition"));
@@ -86,6 +92,12 @@ public:
 
         tableView = new QTableView(ReportLook);
         tableView->setObjectName(QStringLiteral("tableView"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
+        tableView->setSizePolicy(sizePolicy);
+        tableView->setMinimumSize(QSize(600, 400));
 
         verticalLayout->addWidget(tableView);
 
