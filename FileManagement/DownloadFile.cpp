@@ -76,7 +76,7 @@ void DownloadFile::init()
 	QToolButton *find = new QToolButton();
 	find->setMaximumSize(40, 40);
 	find->setCursor(Qt::PointingHandCursor);
-	find->setIcon(QIcon("Resource/ion/lookReport.png"));
+	find->setIcon(QIcon(":/Resource/icon/lookReport.png"));
 	find->setIconSize(QSize(20, 20));//根据实际调整图片大小
 	find->setStyleSheet("border:none");
 
@@ -298,13 +298,13 @@ void DownloadFile::showFileInfo()
 
 		//为这个第五列添加按钮
 		m_download = new QToolButton();
-		QIcon downloadFile("Resource/ion/downloadFile.png"); //创建QIcon对象
+		QIcon downloadFile(":/Resource/icon/downloadFile.png"); //创建QIcon对象
 		m_download->setIcon(downloadFile); //将图片设置到按钮上
 		m_download->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_download->setStyleSheet("border:none");
 		m_download->setCursor(Qt::PointingHandCursor);
 		m_delete = new QToolButton(); 
-		QIcon deleteFile("Resource/ion/deleteFile.png"); //创建QIcon对象
+		QIcon deleteFile(":/Resource/icon/deleteFile.png"); //创建QIcon对象
 		m_delete->setIcon(deleteFile); //将图片设置到按钮上
 		m_delete->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_delete->setStyleSheet("border:none");
@@ -392,7 +392,7 @@ bool DownloadFile::saveFilePath(QString openFileName)
 
 void DownloadFile::loadStyleSheet(const QString &sheetName)
 {
-	QFile file("Resource/MyTitle/" + sheetName + ".css");
+	QFile file(":/Resource/qss/" + sheetName + ".qss");
 	file.open(QFile::ReadOnly);
 	if (file.isOpen())
 	{

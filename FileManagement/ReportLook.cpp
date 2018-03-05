@@ -36,7 +36,7 @@ void ReportLook::init()
 	QToolButton *find = new QToolButton();
 	find->setMaximumSize(40, 40);
 	find->setCursor(Qt::PointingHandCursor);
-	find->setIcon(QIcon("Resource/ion/lookReport.png"));
+	find->setIcon(QIcon(":/Resource/icon/lookReport.png"));
 	find->setIconSize(QSize(20, 20));//根据实际调整图片大小
 	find->setStyleSheet("border:none");
 
@@ -207,7 +207,7 @@ void ReportLook::showReportList()
 
 		//为这个第五列添加按钮
 		m_look = new QToolButton();
-		QIcon lookReport("Resource/ion/lookReport.png"); //创建QIcon对象
+		QIcon lookReport(":/Resource/icon/lookReport.png"); //创建QIcon对象
 		m_look->setIcon(lookReport); //将图片设置到按钮上
 		m_look->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_look->setStyleSheet("border:none");
@@ -215,7 +215,7 @@ void ReportLook::showReportList()
 		m_look->setCursor(Qt::PointingHandCursor);
 
 		m_delete = new QToolButton();
-		QIcon deleteReport("Resource/ion/deleteFile.png"); //创建QIcon对象
+		QIcon deleteReport(":/Resource/icon/deleteFile.png"); //创建QIcon对象
 		m_delete->setIcon(deleteReport); //将图片设置到按钮上
 		m_delete->setIconSize(QSize(20, 20));//根据实际调整图片大小
 		m_delete->setStyleSheet("border:none");

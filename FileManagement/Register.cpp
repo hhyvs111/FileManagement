@@ -9,8 +9,6 @@
 #include<qpixmap.h>
 #include<QRegExp>
 #include <QCryptographicHash>
-
-
 Register::Register(QWidget *parent)
 	: BaseWindow(parent), ui(new Ui::Register)   //这里很重要，要对构造函数初始化！
 {
@@ -43,8 +41,7 @@ Register::Register(QWidget *parent)
 	connect(ui->trueName, SIGNAL(editingFinished()), this, SLOT(checkIsOkTrueName()));
 	connect(ui->teacher, SIGNAL(editingFinished()), this, SLOT(checkIsOkTeacher()));
 
-
-	connect(tcp, SIGNAL(sendDataToRegister(QString)), this, SLOT(receiveDataFromServer(QString)));
+	connect(tcp, SIGNAL(sendDataToRegister(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
 
 Register::~Register()
@@ -79,7 +76,7 @@ void Register::init()
 	QLabel *userLogo = new QLabel(this);
 	userLogo->setMaximumSize(21, 21);
 	userLogo->setCursor(QCursor(Qt::ArrowCursor));
-	userLogo->setPixmap(QPixmap("Resource/ion/user.png"));
+	userLogo->setPixmap(QPixmap(":/Resource/icon/user.png"));
 
 	QSpacerItem *spaceItem1 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
 	QHBoxLayout *editLayout1 = new QHBoxLayout();
@@ -97,7 +94,7 @@ void Register::init()
 	QLabel *pwd = new QLabel(this);
 	pwd->setMaximumSize(21, 21);
 	pwd->setCursor(QCursor(Qt::ArrowCursor));
-	pwd->setPixmap(QPixmap("Resource/ion/pwd.png"));
+	pwd->setPixmap(QPixmap(":/Resource/icon/pwd.png"));
 
 	QSpacerItem *spaceItem2 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
 	QHBoxLayout *editLayout2 = new QHBoxLayout();
@@ -115,7 +112,7 @@ void Register::init()
 	QLabel *pwd2 = new QLabel(this);
 	pwd2->setMaximumSize(21, 21);
 	pwd2->setCursor(QCursor(Qt::ArrowCursor));
-	pwd2->setPixmap(QPixmap("Resource/ion/pwd2.png"));
+	pwd2->setPixmap(QPixmap(":/Resource/icon/pwd2.png"));
 
 	QSpacerItem *spaceItem3 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
 	QHBoxLayout *editLayout3 = new QHBoxLayout();
@@ -133,7 +130,7 @@ void Register::init()
 	QLabel *trueNameLogo = new QLabel(this);
 	trueNameLogo->setMaximumSize(21, 21);
 	trueNameLogo->setCursor(QCursor(Qt::ArrowCursor));
-	trueNameLogo->setPixmap(QPixmap("Resource/ion/truename.png"));
+	trueNameLogo->setPixmap(QPixmap(":/Resource/icon/truename.png"));
 
 	QSpacerItem *spaceItem4 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
 	QHBoxLayout *editLayout4 = new QHBoxLayout();
@@ -150,7 +147,7 @@ void Register::init()
 	QLabel *teacherLogo = new QLabel(this);
 	teacherLogo->setMaximumSize(21, 21);
 	teacherLogo->setCursor(QCursor(Qt::ArrowCursor));
-	teacherLogo->setPixmap(QPixmap("Resource/ion/teacher.png"));
+	teacherLogo->setPixmap(QPixmap(":/Resource/icon/teacher.png"));
 
 	QSpacerItem *spaceItem5 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
 	QHBoxLayout *editLayout5 = new QHBoxLayout();
@@ -167,7 +164,7 @@ void Register::init()
 	QLabel *stuIdLogo = new QLabel(this);
 	stuIdLogo->setMaximumSize(21, 21);
 	stuIdLogo->setCursor(QCursor(Qt::ArrowCursor));
-	stuIdLogo->setPixmap(QPixmap("Resource/ion/studentId.png"));
+	stuIdLogo->setPixmap(QPixmap(":/Resource/icon/studentId.png"));
 
 	QSpacerItem *spaceItem6 = new QSpacerItem(150, 20, QSizePolicy::Expanding);
 	QHBoxLayout *editLayout6 = new QHBoxLayout();
@@ -400,8 +397,9 @@ void Register::checkIsOkTeacher()
 	}
 }
 
-void Register::receiveDataFromServer(QString data)
+void Register::receiveDataFromClient(QString data)
 {
+	qDebug() << "get in receive111";
 	//注册成功
 	if (QString::compare(data, "R_T") == 0)
 	{

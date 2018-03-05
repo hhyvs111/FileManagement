@@ -19,6 +19,8 @@ Login::Login(QWidget *parent)
 	tcp = new TcpClient();  //在这里实例化的？
 	ui->setupUi(this);
 	
+
+
 	QString kk;
 	QSettings *getting = new QSettings("E:/test.ini", QSettings::IniFormat);//初始化显示上一次登录账户密码
 	ui->nameLine->setText(getting->value("uuu", "").toString());
@@ -36,7 +38,7 @@ Login::Login(QWidget *parent)
 	QByteArray tempass = QByteArray::fromBase64(kk.toLatin1());
 	ui->passwordLine->setText(tempass);
 
-	QMovie *movie = new QMovie("Resource/Logo.gif");
+	QMovie *movie = new QMovie(":/Resource/Logo.gif");
 	ui->label->setMovie(movie);
 	movie->start();
 	setFixedSize(500, 400);

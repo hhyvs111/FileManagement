@@ -98,7 +98,7 @@ public:
         Register->resize(331, 501);
         verticalLayout = new QVBoxLayout(Register);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(15, 20, 15, 20);
+        verticalLayout->setContentsMargins(10, 20, 10, 20);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer_20 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);

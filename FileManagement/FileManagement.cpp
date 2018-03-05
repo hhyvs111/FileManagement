@@ -32,7 +32,7 @@ void FileManagement::init()
 	ui->ToolButtonWidget->setPalette(Pal);
 	//ui->ToolButtonWidget->setStyleSheet("backgroud-color : black;");
 
-	QIcon personico("Resource/FunIcon/userInfo.png"); //创建QIcon对象
+	QIcon personico(":/Resource/FunIcon/userInfo.png"); //创建QIcon对象
 	ui->personButton->setIcon(personico); //将图片设置到按钮上
 	ui->personButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->personButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
@@ -45,7 +45,7 @@ void FileManagement::init()
 	//ui->personButton->setAlignment(Qt::AlignLeft);
 	//ui->personLayout->setAlignment(Qt::AlignLeft);
 	//toolbutton添加图片
-	QIcon uploadico("Resource/FunIcon/upload.png"); //创建QIcon对象
+	QIcon uploadico(":/Resource/FunIcon/upload.png"); //创建QIcon对象
 	ui->uploadButton->setIcon(uploadico); //将图片设置到按钮上
 	ui->uploadButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->uploadButton->setStyleSheet("border:none");   //隐藏button的边框线(true);
@@ -53,7 +53,7 @@ void FileManagement::init()
 
 	ui->uploadButton->setAutoExclusive(true);
 
-	QIcon downloadico("Resource/FunIcon/download.png"); //创建QIcon对象
+	QIcon downloadico(":/Resource/FunIcon/download.png"); //创建QIcon对象
 	ui->downloadButton->setIcon(downloadico); //将图片设置到按钮上
 	ui->downloadButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->downloadButton->setStyleSheet("border:none");
@@ -62,7 +62,7 @@ void FileManagement::init()
 	ui->downloadButton->setCheckable(true);
 	ui->downloadButton->setAutoExclusive(true);
 
-	QIcon chatico("Resource/FunIcon/showFile.png"); //创建QIcon对象
+	QIcon chatico(":/Resource/FunIcon/showFile.png"); //创建QIcon对象
 	ui->showFileButton->setIcon(chatico); //将图片设置到按钮上
 	ui->showFileButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->showFileButton->setStyleSheet("border:none");
@@ -70,33 +70,33 @@ void FileManagement::init()
 
 	ui->showFileButton->setAutoExclusive(true);
 
-	QIcon deleteico("Resource/FunIcon/exit.png"); //创建QIcon对象
+	QIcon deleteico(":/Resource/FunIcon/exit.png"); //创建QIcon对象
 	ui->deleteButton->setIcon(deleteico); //将图片设置到按钮上
 	ui->deleteButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->deleteButton->setStyleSheet("border:none");
 	ui->deleteButton->setCheckable(true);
 	ui->deleteButton->setAutoExclusive(true);
 
-	QIcon reportEditicon("Resource/FunIcon/reportEdit.png"); //创建QIcon对象
+	QIcon reportEditicon(":/Resource/FunIcon/reportEdit.png"); //创建QIcon对象
 	ui->reportEditButton->setIcon(reportEditicon); //将图片设置到按钮上
 	ui->reportEditButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->reportEditButton->setStyleSheet("border:none");
 	ui->reportEditButton->setCheckable(true);
 	ui->reportEditButton->setAutoExclusive(true);
 
-	QIcon reportLookicon("Resource/FunIcon/reportLook.png"); //创建QIcon对象
+	QIcon reportLookicon(":/Resource/FunIcon/reportLook.png"); //创建QIcon对象
 	ui->reportLookButton->setIcon(reportLookicon); //将图片设置到按钮上
 	ui->reportLookButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
 	ui->reportLookButton->setStyleSheet("border:none");
 	ui->reportLookButton->setCheckable(true);
 	ui->reportLookButton->setAutoExclusive(true);
 
-	//QMovie *movie = new QMovie("Resource/MainWindow.gif");//加载图片gif
+	//QMovie *movie = new QMovie(":/Resource/MainWindow.gif");//加载图片gif
 	//ui->photoLabel->setGeometry(500, 20, 200, 0);
 	//movie->setScaledSize(QSize(900, 580));//设置图片大小
 	//ui->photoLabel->setMovie(movie);
 	//	movie->start();
-	setWindowIcon(QIcon("Resource/icon1.png"));//设置窗口左上角图标
+	setWindowIcon(QIcon(":/Resource/icon1.png"));//设置窗口左上角图标
 	setFixedSize(800, 600); // 禁止改变窗口大小
 	ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
 	ui->uploadButton->setToolTip(tr("upload"));
@@ -107,7 +107,7 @@ void FileManagement::init()
 
 	////自定义退出按钮
 	//QToolButton *closeButton = new QToolButton(this);
-	//QPixmap quitPixmap = QPixmap("Resource/icon2.png");
+	//QPixmap quitPixmap = QPixmap(":/Resource/icon2.png");
 	//closeButton->setStyleSheet("QToolButton{border:none}");
 	//closeButton->setFixedSize(QSize(20, 20));
 	//closeButton->setIcon(quitPixmap);

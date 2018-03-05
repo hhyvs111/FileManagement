@@ -1,4 +1,38 @@
 <RCC>
-    <qresource prefix="FileManagement">
+    <qresource prefix="/">
+        <file>Resource/FunIcon/download.png</file>
+        <file>Resource/FunIcon/Drag-Drop.png</file>
+        <file>Resource/FunIcon/exit.png</file>
+        <file>Resource/FunIcon/reportEdit.png</file>
+        <file>Resource/FunIcon/reportLook.png</file>
+        <file>Resource/FunIcon/showFile.png</file>
+        <file>Resource/FunIcon/upload.png</file>
+        <file>Resource/FunIcon/userInfo.png</file>
+        <file>Resource/icon/correct.png</file>
+        <file>Resource/icon/deleteFile.png</file>
+        <file>Resource/icon/downloadFile.png</file>
+        <file>Resource/icon/error.png</file>
+        <file>Resource/icon/level.png</file>
+        <file>Resource/icon/lookReport.png</file>
+        <file>Resource/icon/message_delete.png</file>
+        <file>Resource/icon/message_tips.png</file>
+        <file>Resource/icon/message_warnning.png</file>
+        <file>Resource/icon/pass.png</file>
+        <file>Resource/icon/pwd.png</file>
+        <file>Resource/icon/pwd2.png</file>
+        <file>Resource/icon/studentId.png</file>
+        <file>Resource/icon/teacher.png</file>
+        <file>Resource/icon/truename.png</file>
+        <file>Resource/icon/user.png</file>
+        <file>Resource/qss/Login.qss</file>
+        <file>Resource/qss/mainWindow.qss</file>
+        <file>Resource/qss/MyMessageBox.qss</file>
+        <file>Resource/qss/Register.qss</file>
+        <file>Resource/qss/ReportDetail.qss</file>
+        <file>Resource/qss/UploadFile.qss</file>
+        <file>Resource/title/close.png</file>
+        <file>Resource/title/max.png</file>
+        <file>Resource/title/min.png</file>
+        <file>Resource/Logo.gif</file>
     </qresource>
 </RCC>

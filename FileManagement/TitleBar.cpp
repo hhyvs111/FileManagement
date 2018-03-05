@@ -73,13 +73,13 @@ void TitleBar::initControl()
 	this->setFixedHeight(TITLE_HEIGHT);
 	this->setWindowFlags(Qt::FramelessWindowHint);
 
-	QIcon close("Resource/close.png");
+	QIcon close(":/Resource/title/close.png");
 	m_pButtonClose->setIcon(close);
 	m_pButtonClose->setStyleSheet("QPushButton{background: transparent;}");
-	QIcon min("Resource/min.png");
+	QIcon min(":/Resource/title/min.png");
 	m_pButtonMin->setIcon(min);
 	m_pButtonMin->setStyleSheet("QPushButton{background: transparent;}");
-	QIcon max("Resource/max.png");
+	QIcon max(":/Resource/title/max.png");
 	m_pButtonMax->setIcon(max);
 	m_pButtonMax->setStyleSheet("QPushButton{background: transparent;}");
 }

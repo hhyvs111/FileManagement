@@ -99,13 +99,13 @@ void MyMessageBox::setMessageType(MessageType messageType)
 	switch (messageType)
 	{
 	case MESSAGE_INFORMATION:
-		ui.MessageIcon->setPixmap(QPixmap("Resource/ion/message_tips.png"));
+		ui.MessageIcon->setPixmap(QPixmap(":/Resource/icon/message_tips.png"));
 		break;
 	case MESSAGE_WARNNING:
-		ui.MessageIcon->setPixmap(QPixmap("Resource/ion/message_warnning.png"));
+		ui.MessageIcon->setPixmap(QPixmap(":/Resource/icon/message_warnning.png"));
 		break;
 	case MESSAGE_QUESTION:
-		ui.MessageIcon->setPixmap(QPixmap("Resource/ion/message_delete.png"));
+		ui.MessageIcon->setPixmap(QPixmap(":/Resource/icon/message_delete.png"));
 		break;
 	case MESSAGE_INPUT:
 		ui.MessageIcon->setVisible(false);

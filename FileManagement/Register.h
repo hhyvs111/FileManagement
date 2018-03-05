@@ -41,7 +41,8 @@ public slots:
 
 	void receiveLogin();  //接收login中发射的信号关联的槽函数
 
-	void receiveDataFromServer(QString data);  //接受从服务器返回的数据
+	void receiveDataFromClient(QString data);  //接受从服务器返回的数据
+
 signals:
 	void showMain();
 	void showLogin();
