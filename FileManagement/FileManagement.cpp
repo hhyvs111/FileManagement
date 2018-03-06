@@ -4,12 +4,14 @@
 #include <QMessageBox> 
 #include <QLabel>
 #include <QMovie>
+#include <QThread>
 extern QString globalUserName;
 FileManagement::FileManagement(QWidget *parent)
 	: BaseWindow(parent), ui(new Ui::FileManagement)
 {
 	ui->setupUi(this);
 	init();
+	StackWindow();
 	//initTitleBar();
 	loadStyleSheet("mainWindow");
 
@@ -105,6 +107,9 @@ void FileManagement::init()
 	ui->deleteButton->setToolTip(tr("退出系统"));
 
 
+
+	
+
 	////自定义退出按钮
 	//QToolButton *closeButton = new QToolButton(this);
 	//QPixmap quitPixmap = QPixmap(":/Resource/icon2.png");
@@ -143,8 +148,25 @@ void FileManagement::init()
 //	//m_titleBar->setTitleWidth(this->width());
 //}
 
+void FileManagement::StackWindow()
+{
+	m_pStackedLayout = new QStackedLayout();
+	
+	//这里主要是多个窗口切换，并把这些类都实例化
+	uploadFile = new UploadFile(this);
+	downloadFile = new DownloadFile(this);
+	userInformation = new UserInformation(this);
+	reportEdit = new ReportEdit(this);
+	reportLook = new ReportLook(this);
+	//添加类
+	m_pStackedLayout->addWidget(uploadFile);
+	m_pStackedLayout->addWidget(downloadFile);
+	m_pStackedLayout->addWidget(userInformation);
+	m_pStackedLayout->addWidget(reportEdit);
+	m_pStackedLayout->addWidget(reportLook);
+	ui->SubLayout->insertLayout(1, m_pStackedLayout);
 
-
+}
 void FileManagement::receiveLogin()
 {
 	this->show();
@@ -160,169 +182,34 @@ void FileManagement::Btn_Click()
 //点击上传文件按钮显示上传界面
 void FileManagement::ClickUploadFile()
 {
-	//检测自己
-	if (uploadFileWindowIsOpen)
-		uploadFile->show();
-	//检测其他两个
-
-	if (reportEditWindowIsOpen)
-		reportEdit->hide();
-	if (downloadFileWindowIsOpen)
-		downloadFile->hide();
-	if (userInformationWindowIsOpen)
-		userInformation->hide();
-	if (reportLookWindowIsOpen)
-		reportLook->hide();
-	if (!uploadFileWindowIsOpen)
-	{
-		uploadFile = new UploadFile(this);  //将指针实例化
-		ui->SubLayout->insertWidget(1, uploadFile);
-		uploadFile->show();
-		
-		uploadFileWindowIsOpen = true;
-	}
-	else
-	{
-		qDebug() << "uploadFileWindowIsOpen!";
-	}
+	m_pStackedLayout->setCurrentWidget(uploadFile);
 
 }
 
 //点击下载文件按钮显示下载界面
 void FileManagement::ClickDownloadFile()
 {
-
-	//点击显示文件信息
-	if (downloadFileWindowIsOpen)
-	{
-		downloadFile->show();
-		downloadFile->sendFileInfo();
-	}
-
-	if (reportEditWindowIsOpen)
-	{
-		reportEdit->hide();
-	}
-
-	if (userInformationWindowIsOpen)
-		userInformation->hide();
-	if (uploadFileWindowIsOpen)
-		uploadFile->hide();
-	if (reportLookWindowIsOpen)
-		reportLook->hide();
-	if (!downloadFileWindowIsOpen)
-	{
-		downloadFile = new DownloadFile(this);  //将指针实例化
-		downloadFile->sendFileInfo();
-		ui->SubLayout->insertWidget(1, downloadFile);
-		downloadFile->show();
-		downloadFileWindowIsOpen = true;
-	}
-	else
-	{
-		qDebug() << "uploadFileWindowIsOpen!";
-	}
-	//emit showUploadFile();
+	m_pStackedLayout->setCurrentWidget(downloadFile);
+	downloadFile->sendFileInfo();
 }
 
 void FileManagement::ClickUserInformation()
 {
-	if (userInformationWindowIsOpen)
-	{
-		userInformation->show();
-		userInformation->sendUserInfo();
-	}
-
-	if (reportEditWindowIsOpen)
-	{
-		reportEdit->hide();
-	}
-
-	if (downloadFileWindowIsOpen)
-		downloadFile->hide();
-	if (uploadFileWindowIsOpen)
-		uploadFile->hide();
-
-	if (reportLookWindowIsOpen)
-		reportLook->hide();
-	if (!userInformationWindowIsOpen)
-	{
-		userInformation = new UserInformation(this);
-		//调用了发送用户信息
-		userInformation->sendUserInfo();
-		ui->SubLayout->insertWidget(1, userInformation);
-		userInformation->show();
-		userInformationWindowIsOpen = true;
-	}
-	else
-		qDebug() << "userInformationWindowIsOpen!";
-
+	m_pStackedLayout->setCurrentWidget(userInformation);
+	userInformation->sendUserInfo();
 }
 
 //点击ReportEdit
 void FileManagement::ClickReportEdit()
 {
-	if (reportEditWindowIsOpen)
-	{
-		reportEdit->show();
-		reportEdit->sendReportEdit();
-	}
-
-	if (userInformationWindowIsOpen)
-		userInformation->hide();
-
-	if (downloadFileWindowIsOpen)
-		downloadFile->hide();
-	if (uploadFileWindowIsOpen)
-		uploadFile->hide();
-
-	if (reportLookWindowIsOpen)
-		reportLook->hide();
-
-	if (!reportEditWindowIsOpen)
-	{
-		reportEdit = new ReportEdit(this);
-		//调用了发送用户信息
-		reportEdit->sendReportEdit();
-		ui->SubLayout->insertWidget(1, reportEdit);
-		reportEdit->show();
-		reportEditWindowIsOpen = true;
-	}
-	else
-		qDebug() << "reportEditWindowIsOpen!";
+	m_pStackedLayout->setCurrentWidget(reportEdit);
+	reportEdit->sendReportEdit();
 }
 
 void FileManagement::ClickReportLook()
 {
-	if (reportLookWindowIsOpen)
-	{
-		reportLook->show();
-		reportLook->sendReportLook();
-	}
-
-	if (userInformationWindowIsOpen)
-		userInformation->hide();
-
-	if (downloadFileWindowIsOpen)
-		downloadFile->hide();
-
-	if (uploadFileWindowIsOpen)
-		uploadFile->hide();
-
-	if (reportEditWindowIsOpen)
-		reportEdit->hide();
-
-	if (!reportLookWindowIsOpen)
-	{
-		reportLook = new ReportLook(this);
-		//调用了发送用户信息
-		reportLook->sendReportLook();
-		ui->SubLayout->insertWidget(1, reportLook);
-		reportLook->show();
-		reportLookWindowIsOpen = true;
-	}
-	else
-		qDebug() << "reportLookWindowIsOpen!";
+	m_pStackedLayout->setCurrentWidget(reportLook);
+	reportLook->sendReportLook();
 }
 
 void FileManagement::ClickReturn()

@@ -96,5 +96,30 @@ signals:
 	//void sendDisconnect(QString);  //ÕâÊÇÊ²Ã´
 
 };
-#endif // !DOWNLOADFILE_H_
+
+inline QDataStream &operator>>(QDataStream &in, FileInfo &fileInfo)
+{
+	int fileId;
+	QString fileName;
+	QString fileSize;
+	QString fileType;
+	QString fileTime;
+	QString fileUser;
+	int userId;
+
+	in >> fileId >> fileName >> fileSize
+		>> fileTime >> fileType >> fileUser >> userId;
+
+
+	fileInfo.fileId = fileId;
+	fileInfo.fileName = fileName;
+	fileInfo.fileSize = fileSize;
+	fileInfo.fileType = fileType;
+	fileInfo.fileTime = fileTime;
+	fileInfo.fileUser = fileUser;
+	fileInfo.userId = userId;
+
+	return in;
+}
+#endif // !DOWNLOADFILE_H_ 
 

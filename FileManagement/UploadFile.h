@@ -7,12 +7,13 @@
 #include <QTime>
 #include <QTGui>
 #include <string>  
-
 #include "ui_UploadFile.h"
 
 
-extern TcpClient * tcp;
+//extern TcpClient * tcp;
 extern QString globalUserName;
+extern QString ip;
+extern int port;
 class UploadFile : public QWidget
 {
 	Q_OBJECT
@@ -24,7 +25,8 @@ public:
 private:
 	Ui::UploadFile *ui;
 
-	//QTcpSocket *tcpClient;
+	QTcpSocket *tcpSocket;
+	QThread *uploadThread;
 
 	QFile *localFile;
 	QString fileName;  //ÎÄ¼þÃû  

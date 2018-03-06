@@ -28,6 +28,7 @@ class Ui_UploadFile
 {
 public:
     QVBoxLayout *verticalLayout;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_6;
     QSpacerItem *horizontalSpacer;
     QLabel *Drag;
@@ -35,9 +36,10 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer_11;
     QHBoxLayout *horizontalLayout_3;
+    QWidget *horizontalWidget;
+    QHBoxLayout *horizontalLayout_7;
     QLabel *mFileIcon;
     QLabel *mFileName;
-    QHBoxLayout *horizontalLayout_2;
     QProgressBar *sendProgressBar;
     QSpacerItem *horizontalSpacer_12;
     QHBoxLayout *horizontalLayout_4;
@@ -50,6 +52,7 @@ public:
     QPushButton *sendBtn;
     QPushButton *cancelBtn;
     QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *verticalSpacer_2;
 
     void setupUi(QWidget *UploadFile)
     {
@@ -59,6 +62,10 @@ public:
         UploadFile->setMinimumSize(QSize(100, 100));
         verticalLayout = new QVBoxLayout(UploadFile);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
+
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -85,29 +92,31 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        mFileIcon = new QLabel(UploadFile);
+        horizontalWidget = new QWidget(UploadFile);
+        horizontalWidget->setObjectName(QStringLiteral("horizontalWidget"));
+        horizontalLayout_7 = new QHBoxLayout(horizontalWidget);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        mFileIcon = new QLabel(horizontalWidget);
         mFileIcon->setObjectName(QStringLiteral("mFileIcon"));
 
-        horizontalLayout_3->addWidget(mFileIcon);
+        horizontalLayout_7->addWidget(mFileIcon);
 
-        mFileName = new QLabel(UploadFile);
+        mFileName = new QLabel(horizontalWidget);
         mFileName->setObjectName(QStringLiteral("mFileName"));
 
-        horizontalLayout_3->addWidget(mFileName);
+        horizontalLayout_7->addWidget(mFileName);
 
 
-        horizontalLayout_5->addLayout(horizontalLayout_3);
+        horizontalLayout_3->addWidget(horizontalWidget);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         sendProgressBar = new QProgressBar(UploadFile);
         sendProgressBar->setObjectName(QStringLiteral("sendProgressBar"));
         sendProgressBar->setValue(0);
 
-        horizontalLayout_2->addWidget(sendProgressBar);
+        horizontalLayout_3->addWidget(sendProgressBar);
 
 
-        horizontalLayout_5->addLayout(horizontalLayout_2);
+        horizontalLayout_5->addLayout(horizontalLayout_3);
 
         horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -174,6 +183,10 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_2);
 
 
         retranslateUi(UploadFile);

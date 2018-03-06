@@ -8,6 +8,7 @@
 #include <Qtime>
 #include <QtWin>
 #include <QFileIconProvider>
+#include <QStackedLayout>
 #include "MyMessageBox.h"
 
 
@@ -19,11 +20,7 @@ UploadFile::UploadFile(QWidget *parent) :
 	ui(new Ui::UploadFile)
 {
 	ui->setupUi(this);
-	//ui->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
-	//ui->progressLabel->hide();
 	init();  //初始化
-
-	
 }
 
 UploadFile::~UploadFile()
@@ -33,16 +30,25 @@ UploadFile::~UploadFile()
 
 void UploadFile::init()
 {
+	QStackedLayout *stackLayout = new QStackedLayout();
+	//stackLayout->addWidget(ui->mFileIcon);
+	//stackLayout->addWidget(ui->mFileName);
+	//重叠显示
+	stackLayout->addWidget(ui->horizontalWidget);
+	stackLayout->addWidget(ui->sendProgressBar);
+	ui->sendProgressBar->setTextVisible(false);   //不显示百分比
+	stackLayout->setStackingMode(QStackedLayout::StackAll);
+	ui->horizontalLayout_3->addLayout(stackLayout);
+
 	//速度啊，标签什么的都先隐藏起来
 	ui->uploadSpeedLabel->hide();
 	ui->mFileIcon->hide();
 	ui->mFileName->hide();
-
 	ui->sendProgressBar->hide();
-	
+
 
 	setAcceptDrops(true);
-	QPixmap DragDrop("Resource/Drag-Drop");  //用来放文件的图标
+	QPixmap DragDrop(":/Resource/FunIcon/Drag-Drop.png");  //用来放文件的图标
 											 //Drag = fil.scaled(QSize(50, 60), Qt::KeepAspectRatio);
 	ui->Drag->setPixmap(DragDrop);
 	//ui->Drag->setAlignment(Qt::AlignCenter);
@@ -80,7 +86,6 @@ void UploadFile::dropEvent(QDropEvent *event)
 	QList<QUrl> urls = event->mimeData()->urls();
 	if (urls.isEmpty())
 		return;
-
 	//往文本框中追加文件名
 	foreach(QUrl url, urls) {
 		 fileName = url.toLocalFile();
@@ -93,9 +98,19 @@ void UploadFile::dropEvent(QDropEvent *event)
 		//ui->sendStatusLabel->setText(QString::fromLocal8Bit("已打开文件 %1").arg(fileName));
 	}
 }
+
 void UploadFile::initFile()
 {
-	tcp->tcpSocket->write("uploadFile");
+	//准备发文件的时候把这个类放进线程
+	uploadThread = new QThread();
+	this->moveToThread(uploadThread);
+	uploadThread->start();
+
+	tcpSocket = new QTcpSocket();
+	tcpSocket->abort();   //取消已有的连接
+	tcpSocket->connectToHost(ip, port);  //将这个socket连接到服务器
+
+	tcpSocket->write("uploadFile");
 	qDebug() << globalUserName << " will send a file to server";
 	loadSize = 0;
 	byteToWrite = 0;
@@ -107,9 +122,7 @@ void UploadFile::initFile()
 void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）  
 {
 	//ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在打开文件..."));
-
-
-									   //告诉服务器，我要发送文件了
+	//告诉服务器，我要发送文件了
 	
 	//点击打开按钮的时候初始化数据
 	
@@ -129,7 +142,7 @@ void UploadFile::send()  //发送文件头信息
 	if (!fileName.isNull())
 	{
 		//第一次发送的时候建立连接
-		connect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
+		connect(tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 		byteToWrite = localFile->size();  //剩余数据的大小  
 		qDebug() << "the file bytetowrite: " << byteToWrite;
 		totalSize = localFile->size();
@@ -137,7 +150,6 @@ void UploadFile::send()  //发送文件头信息
 		loadSize = 4 * 1024;  //每次发送数据的大小  
 
 		QDataStream out(&outBlock, QIODevice::WriteOnly);
-
 		//获取文件名字
 		QString currentFileName = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1);
 		//占位符,这里必须要先这样占位，然后后续读算出整体长度后在插入
@@ -150,7 +162,7 @@ void UploadFile::send()  //发送文件头信息
 		out.device()->seek(0);  //回到字节流起点来写好前面连个qint64，分别为总大小和文件名等信息大小  
 		out << totalSize << qint64(outBlock.size());   //这个就是对应前面的qint64？
 		qDebug() << "the file head:" << outBlock;
-		tcp->tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字  
+		tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字  
 
 		sendTime.start();  //发送时间开始计时
 						   //UI信息
@@ -178,7 +190,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 	byteToWrite -= numBytes;  //剩余数据大小  
 	outBlock = localFile->read(qMin(byteToWrite, loadSize));   //如果剩余数据比每次发送的小则发送剩余的
 
-	tcp->tcpSocket->write(outBlock);    //将这个信息写入socket
+	tcpSocket->write(outBlock);    //将这个信息写入socket
 	
 	//qDebug() << "information:" <<outBlock;
 
@@ -208,8 +220,12 @@ void UploadFile::goOnSend(qint64 numBytes)
 		}
 		//ui->sendStatusLabel->setText(QString::fromLocal8Bit("文件发送完毕!"));
 		//发送完毕就断开这个写字节的槽函数。
-		disconnect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
+		disconnect(tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 		sendtimes = 0;
+
+		//发送完后取消连接，把线程退出？
+		uploadThread->quit();
+		tcpSocket->abort();
 		qDebug() << "the file had send";
 	}
 }
@@ -217,9 +233,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 
 void UploadFile::ClickSendButton()
 {
-	
 	send();  //第一次发送的时候是由connectToHost出发connect信号才能调用send，第二次之后就需要调用send了  
-
 	ui->sendBtn->setEnabled(false);
 	//connect(tcp->tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 	//ui->sendStatusLabel->setText(QString::fromLocal8Bit("正在发送文件 %1").arg(fileName));
@@ -303,3 +317,10 @@ QString UploadFile::fileType(const QString &extension) const
 
 	return strType;
 }
+
+
+////画图，发送一个总数和当前的进度
+//void UploadFile::drawProgress(qint64 total, qint64 now)
+//{
+//
+//}

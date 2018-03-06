@@ -263,32 +263,58 @@ void DownloadFile::showFileInfo()
 {
 	initModel();
 	QByteArray dataread = tcp->tcpSocket->readAll();
-	QString data = QString::fromUtf8(dataread);
-	qDebug() << "the data from client: " << dataread;
-	QStringList listNumber = data.split("$");
+	//QDataStream in(tcp->tcpSocket);
 
+	qDebug() << dataread;
+
+	QBuffer buf(&dataread);
+	buf.open(QIODevice::ReadOnly);
+	QDataStream in(&buf);
+	int FileListSize;
+	in >> FileListSize;  //读入文件个数
+
+	//设置一个fileInfo的Qlist
 	QList<FileInfo> fileInfo;
-	//在这里就要加入到表里去
-	//把数据都放到QList里去！
-	//listNumber[0] 是文件个数
-	for (int i = 1;i <= listNumber[0].toInt();i++)
+	//讲二进制流依次写入
+	for (int i = 0;i < FileListSize;i++)
 	{
-		FileInfo littleFile;
-		QStringList fileList = listNumber[i].split("^");
-		littleFile.fileId = fileList[0].toInt();
-		littleFile.fileName = fileList[1];
-		littleFile.fileSize = fileList[2];
-		littleFile.fileType = fileList[3];
-		littleFile.fileTime = fileList[4];
-		littleFile.fileUser = fileList[5];
-		littleFile.userId = fileList[6].toInt();
-		qDebug() << littleFile.fileId<<" " << littleFile.fileName << " " <<
-			littleFile.fileSize << " " << littleFile.fileType << " " 
-			<< littleFile.fileTime << " " << littleFile.fileUser << " " << littleFile.userId;
-		fileInfo.append(littleFile);
+		FileInfo f1;
+		in >> f1;
+		fileInfo.append(f1);
+		qDebug() << f1.fileId << " " << f1.fileName << " " <<
+			f1.fileSize << " " << f1.fileType << " " 
+			<< f1.fileTime << " " << f1.fileUser << " " << f1.userId;
 	}
+	buf.close();
+	//FileInfo f2;
+
+
+	////QString data = QString::fromUtf8(dataread);
+	////qDebug() << "the data from client: " << dataread;
+	////QStringList listNumber = data.split("$");
+
+	//QList<FileInfo> fileInfo;
+	////在这里就要加入到表里去
+	////把数据都放到QList里去！
+	////listNumber[0] 是文件个数
+	//for (int i = 1;i <= listNumber[0].toInt();i++)
+	//{
+	//	FileInfo littleFile;
+	//	QStringList fileList = listNumber[i].split("^");
+	//	littleFile.fileId = fileList[0].toInt();
+	//	littleFile.fileName = fileList[1];
+	//	littleFile.fileSize = fileList[2];
+	//	littleFile.fileType = fileList[3];
+	//	littleFile.fileTime = fileList[4];
+	//	littleFile.fileUser = fileList[5];
+	//	littleFile.userId = fileList[6].toInt();
+	//	qDebug() << littleFile.fileId<<" " << littleFile.fileName << " " <<
+	//		littleFile.fileSize << " " << littleFile.fileType << " " 
+	//		<< littleFile.fileTime << " " << littleFile.fileUser << " " << littleFile.userId;
+	//	fileInfo.append(littleFile);
+	//}
 	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-	for (int i = 0; i < listNumber[0].toInt(); i++)
+	for (int i = 0; i < fileInfo.size(); i++)
 	{
 		//设置前四列的数据
 		model->setItem(i, 1, new QStandardItem(fileInfo.at(i).fileName));
@@ -464,3 +490,4 @@ void DownloadFile::ClickFindButton()
 		sendFileInfo(condition);
 	}
 }
+

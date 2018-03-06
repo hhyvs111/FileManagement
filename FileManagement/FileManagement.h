@@ -9,6 +9,7 @@
 #include "ReportLook.h"
 #include "BaseWindow.h"
 #include "ui_FileManagement.h"
+#include <QStackedLayout>
 
 extern QString globalUserName;
 class FileManagement : public BaseWindow
@@ -35,6 +36,10 @@ private:
 		reportEditWindowIsOpen = false,
 		reportLookWindowIsOpen = false;
 
+	QStackedLayout *m_pStackedLayout; 
+	//窗口切换
+	void StackWindow();
+
 	//初始化界面
 	void init();
 
@@ -46,10 +51,11 @@ private slots:
 	void ClickUserInformation();
 	void ClickUploadFile();
 	void ClickDownloadFile();
-
 	void ClickReportEdit();
 	void ClickReportLook();
 	void ClickReturn();
+
+
 	void receiveLogin();
 signals:
 	void showUploadFile();
