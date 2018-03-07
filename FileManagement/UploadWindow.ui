@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>UploadFile</class>
- <widget class="QWidget" name="UploadFile">
+ <class>UploadWindow</class>
+ <widget class="QWidget" name="UploadWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -86,35 +86,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QWidget" name="horizontalWidget" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <item>
-           <widget class="QLabel" name="mFileIcon">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="mFileName">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QProgressBar" name="sendProgressBar">
-         <property name="value">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="FileListLayout"/>
      </item>
      <item>
       <spacer name="horizontalSpacer_12">
@@ -287,7 +259,7 @@
   <connection>
    <sender>selectBtn</sender>
    <signal>clicked()</signal>
-   <receiver>UploadFile</receiver>
+   <receiver>UploadWindow</receiver>
    <slot>ClickOpenButton()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -303,7 +275,7 @@
   <connection>
    <sender>sendBtn</sender>
    <signal>clicked()</signal>
-   <receiver>UploadFile</receiver>
+   <receiver>UploadWindow</receiver>
    <slot>ClickSendButton()</slot>
    <hints>
     <hint type="sourcelabel">

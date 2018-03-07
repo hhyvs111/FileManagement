@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'UploadFile.ui'
+** Form generated from reading UI file 'UploadWindow.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_UPLOADFILE_H
-#define UI_UPLOADFILE_H
+#ifndef UI_UPLOADWINDOW_H
+#define UI_UPLOADWINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -16,7 +16,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -24,7 +23,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_UploadFile
+class Ui_UploadWindow
 {
 public:
     QVBoxLayout *verticalLayout;
@@ -35,12 +34,7 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer_11;
-    QHBoxLayout *horizontalLayout_3;
-    QWidget *horizontalWidget;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *mFileIcon;
-    QLabel *mFileName;
-    QProgressBar *sendProgressBar;
+    QVBoxLayout *FileListLayout;
     QSpacerItem *horizontalSpacer_12;
     QHBoxLayout *horizontalLayout_4;
     QSpacerItem *horizontalSpacer_9;
@@ -54,13 +48,13 @@ public:
     QSpacerItem *horizontalSpacer_4;
     QSpacerItem *verticalSpacer_2;
 
-    void setupUi(QWidget *UploadFile)
+    void setupUi(QWidget *UploadWindow)
     {
-        if (UploadFile->objectName().isEmpty())
-            UploadFile->setObjectName(QStringLiteral("UploadFile"));
-        UploadFile->resize(580, 458);
-        UploadFile->setMinimumSize(QSize(100, 100));
-        verticalLayout = new QVBoxLayout(UploadFile);
+        if (UploadWindow->objectName().isEmpty())
+            UploadWindow->setObjectName(QStringLiteral("UploadWindow"));
+        UploadWindow->resize(580, 458);
+        UploadWindow->setMinimumSize(QSize(100, 100));
+        verticalLayout = new QVBoxLayout(UploadWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -72,7 +66,7 @@ public:
 
         horizontalLayout_6->addItem(horizontalSpacer);
 
-        Drag = new QLabel(UploadFile);
+        Drag = new QLabel(UploadWindow);
         Drag->setObjectName(QStringLiteral("Drag"));
 
         horizontalLayout_6->addWidget(Drag);
@@ -90,33 +84,10 @@ public:
 
         horizontalLayout_5->addItem(horizontalSpacer_11);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalWidget = new QWidget(UploadFile);
-        horizontalWidget->setObjectName(QStringLiteral("horizontalWidget"));
-        horizontalLayout_7 = new QHBoxLayout(horizontalWidget);
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        mFileIcon = new QLabel(horizontalWidget);
-        mFileIcon->setObjectName(QStringLiteral("mFileIcon"));
+        FileListLayout = new QVBoxLayout();
+        FileListLayout->setObjectName(QStringLiteral("FileListLayout"));
 
-        horizontalLayout_7->addWidget(mFileIcon);
-
-        mFileName = new QLabel(horizontalWidget);
-        mFileName->setObjectName(QStringLiteral("mFileName"));
-
-        horizontalLayout_7->addWidget(mFileName);
-
-
-        horizontalLayout_3->addWidget(horizontalWidget);
-
-        sendProgressBar = new QProgressBar(UploadFile);
-        sendProgressBar->setObjectName(QStringLiteral("sendProgressBar"));
-        sendProgressBar->setValue(0);
-
-        horizontalLayout_3->addWidget(sendProgressBar);
-
-
-        horizontalLayout_5->addLayout(horizontalLayout_3);
+        horizontalLayout_5->addLayout(FileListLayout);
 
         horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -131,7 +102,7 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer_9);
 
-        uploadSpeedLabel = new QLabel(UploadFile);
+        uploadSpeedLabel = new QLabel(UploadWindow);
         uploadSpeedLabel->setObjectName(QStringLiteral("uploadSpeedLabel"));
 
         horizontalLayout_4->addWidget(uploadSpeedLabel);
@@ -149,7 +120,7 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer_3);
 
-        selectBtn = new QPushButton(UploadFile);
+        selectBtn = new QPushButton(UploadWindow);
         selectBtn->setObjectName(QStringLiteral("selectBtn"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
@@ -161,7 +132,7 @@ public:
 
         horizontalLayout->addWidget(selectBtn);
 
-        sendBtn = new QPushButton(UploadFile);
+        sendBtn = new QPushButton(UploadWindow);
         sendBtn->setObjectName(QStringLiteral("sendBtn"));
         sizePolicy.setHeightForWidth(sendBtn->sizePolicy().hasHeightForWidth());
         sendBtn->setSizePolicy(sizePolicy);
@@ -170,7 +141,7 @@ public:
 
         horizontalLayout->addWidget(sendBtn);
 
-        cancelBtn = new QPushButton(UploadFile);
+        cancelBtn = new QPushButton(UploadWindow);
         cancelBtn->setObjectName(QStringLiteral("cancelBtn"));
         cancelBtn->setMinimumSize(QSize(80, 30));
         cancelBtn->setMaximumSize(QSize(80, 30));
@@ -189,31 +160,29 @@ public:
         verticalLayout->addItem(verticalSpacer_2);
 
 
-        retranslateUi(UploadFile);
-        QObject::connect(selectBtn, SIGNAL(clicked()), UploadFile, SLOT(ClickOpenButton()));
-        QObject::connect(sendBtn, SIGNAL(clicked()), UploadFile, SLOT(ClickSendButton()));
+        retranslateUi(UploadWindow);
+        QObject::connect(selectBtn, SIGNAL(clicked()), UploadWindow, SLOT(ClickOpenButton()));
+        QObject::connect(sendBtn, SIGNAL(clicked()), UploadWindow, SLOT(ClickSendButton()));
 
-        QMetaObject::connectSlotsByName(UploadFile);
+        QMetaObject::connectSlotsByName(UploadWindow);
     } // setupUi
 
-    void retranslateUi(QWidget *UploadFile)
+    void retranslateUi(QWidget *UploadWindow)
     {
-        UploadFile->setWindowTitle(QApplication::translate("UploadFile", "Form", Q_NULLPTR));
-        Drag->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
-        mFileIcon->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
-        mFileName->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
-        uploadSpeedLabel->setText(QApplication::translate("UploadFile", "TextLabel", Q_NULLPTR));
-        selectBtn->setText(QApplication::translate("UploadFile", "\346\211\223\345\274\200\346\226\207\344\273\266", Q_NULLPTR));
-        sendBtn->setText(QApplication::translate("UploadFile", "\345\217\221\351\200\201\346\226\207\344\273\266", Q_NULLPTR));
-        cancelBtn->setText(QApplication::translate("UploadFile", "\345\217\226\346\266\210\345\217\221\351\200\201", Q_NULLPTR));
+        UploadWindow->setWindowTitle(QApplication::translate("UploadWindow", "Form", Q_NULLPTR));
+        Drag->setText(QApplication::translate("UploadWindow", "TextLabel", Q_NULLPTR));
+        uploadSpeedLabel->setText(QApplication::translate("UploadWindow", "TextLabel", Q_NULLPTR));
+        selectBtn->setText(QApplication::translate("UploadWindow", "\346\211\223\345\274\200\346\226\207\344\273\266", Q_NULLPTR));
+        sendBtn->setText(QApplication::translate("UploadWindow", "\345\217\221\351\200\201\346\226\207\344\273\266", Q_NULLPTR));
+        cancelBtn->setText(QApplication::translate("UploadWindow", "\345\217\226\346\266\210\345\217\221\351\200\201", Q_NULLPTR));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class UploadFile: public Ui_UploadFile {};
+    class UploadWindow: public Ui_UploadWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_UPLOADFILE_H
+#endif // UI_UPLOADWINDOW_H

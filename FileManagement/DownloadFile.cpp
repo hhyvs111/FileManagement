@@ -286,33 +286,7 @@ void DownloadFile::showFileInfo()
 			<< f1.fileTime << " " << f1.fileUser << " " << f1.userId;
 	}
 	buf.close();
-	//FileInfo f2;
 
-
-	////QString data = QString::fromUtf8(dataread);
-	////qDebug() << "the data from client: " << dataread;
-	////QStringList listNumber = data.split("$");
-
-	//QList<FileInfo> fileInfo;
-	////在这里就要加入到表里去
-	////把数据都放到QList里去！
-	////listNumber[0] 是文件个数
-	//for (int i = 1;i <= listNumber[0].toInt();i++)
-	//{
-	//	FileInfo littleFile;
-	//	QStringList fileList = listNumber[i].split("^");
-	//	littleFile.fileId = fileList[0].toInt();
-	//	littleFile.fileName = fileList[1];
-	//	littleFile.fileSize = fileList[2];
-	//	littleFile.fileType = fileList[3];
-	//	littleFile.fileTime = fileList[4];
-	//	littleFile.fileUser = fileList[5];
-	//	littleFile.userId = fileList[6].toInt();
-	//	qDebug() << littleFile.fileId<<" " << littleFile.fileName << " " <<
-	//		littleFile.fileSize << " " << littleFile.fileType << " " 
-	//		<< littleFile.fileTime << " " << littleFile.fileUser << " " << littleFile.userId;
-	//	fileInfo.append(littleFile);
-	//}
 	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	for (int i = 0; i < fileInfo.size(); i++)
 	{
@@ -347,7 +321,6 @@ void DownloadFile::showFileInfo()
 		m_delete->setProperty("deleteFileId", fileInfo.at(i).fileId);
 		m_delete->setProperty("deleteFileName", fileInfo.at(i).fileName);
 
-		
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_download);
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 6), m_delete);
 

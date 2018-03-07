@@ -153,13 +153,13 @@ void FileManagement::StackWindow()
 	m_pStackedLayout = new QStackedLayout();
 	
 	//这里主要是多个窗口切换，并把这些类都实例化
-	uploadFile = new UploadFile(this);
-	downloadFile = new DownloadFile(this);
-	userInformation = new UserInformation(this);
-	reportEdit = new ReportEdit(this);
-	reportLook = new ReportLook(this);
+	uploadWindow = new UploadWindow();
+	downloadFile = new DownloadFile();
+	userInformation = new UserInformation();
+	reportEdit = new ReportEdit();
+	reportLook = new ReportLook();
 	//添加类
-	m_pStackedLayout->addWidget(uploadFile);
+	m_pStackedLayout->addWidget(uploadWindow);
 	m_pStackedLayout->addWidget(downloadFile);
 	m_pStackedLayout->addWidget(userInformation);
 	m_pStackedLayout->addWidget(reportEdit);
@@ -182,7 +182,12 @@ void FileManagement::Btn_Click()
 //点击上传文件按钮显示上传界面
 void FileManagement::ClickUploadFile()
 {
-	m_pStackedLayout->setCurrentWidget(uploadFile);
+	//准备发文件的时候把这个类放进线程
+	//QThread *uploadThread = new QThread();
+	//uploadFile->moveToThread(uploadThread);
+	//uploadThread->start();
+
+	m_pStackedLayout->setCurrentWidget(uploadWindow);
 
 }
 

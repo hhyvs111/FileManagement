@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include <QtWidgets/QMainWindow>
-#include "UploadFile.h"
+#include "UploadWindow.h"
 #include "DownloadFile.h"
 #include "UserInformation.h"
 #include "ReportEdit.h"
@@ -24,7 +24,7 @@ private:
 	Ui::FileManagement *ui;
 
 
-	UploadFile *uploadFile;  // 创建上传文件的指针
+	UploadWindow *uploadWindow;  // 创建上传文件的指针
 	DownloadFile *downloadFile;
 	UserInformation *userInformation; 
 	ReportEdit *reportEdit;
