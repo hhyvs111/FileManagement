@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef UPLOADWINDOW_H_
+#define UPLOADWINDOW_H_
 #include "stdafx.h"
 #include <QWidget>  
 #include <QFile>  
@@ -8,10 +11,9 @@
 #include <QStackedLayout>
 #include <QFileDialog>
 #include <QProgressBar>
+#include "UploadFile.h"
 #include "ui_UploadWindow.h"
-#ifndef UPLOADWINDOW_H_
-#define UPLOADWINDOW_H_
-
+#include "UploadThread.h"
 //界面库
 
 extern QString globalUserName;
@@ -29,9 +31,13 @@ public:
 private:
 	Ui::UploadWindow *ui;
 
+	QMap<int, UploadFile*> *uploadFileMap;  //定义一个新的UploadFileMap
+	QMap<int, QString> fileNameMap;
 	//这里主要是要循环显示
-	QMap<QString,QProgressBar*> *fileProgressBarMap;  //QString是关键字？
-
+	QMap<int,QProgressBar*> *fileProgressBarMap;  //QString是关键字？
+	//QMap<int, QThread*> *uploadQThreadMap;
+	QMap<int, UploadThread*> *uploadQThreadMap;
+	int index;
 	//QProgressBar fileProgressBar[6];  //最多上传5个，进度条是单独的
 	QStackedLayout *stackLayout;	//  这个放fileWidget和fileLayout
 	QHBoxLayout *fileInfoLayout;	//用来存放文件信息
@@ -40,23 +46,11 @@ private:
 	QLabel *mFileName;
 	QLabel *mFileIcon;  //文件名和图标的label
 	QStringList fileNameList;
-	QFileDialog *fileDialog;	//打开文件对话框
 	QFile *localFile;
 
 
 	//QTcpSocket *tcpSocket;
 	//QThread *uploadThread;
-
-
-	
-
-
-	//QStringList fileNameList;  //文件名列表
-	//QTime sendTime;  //发送时间
-	//QByteArray outBlock;  //分次传  
-	//qint64 loadSize;  //每次发送数据的大小  
-	//qint64 byteToWrite;  //剩余数据大小  
-	//qint64 totalSize;  //文件总大小  
 
 					   //获取文件的图标
 	QIcon fileIcon(const QString &extension) const;
@@ -84,9 +78,11 @@ private slots:
 	void ClickOpenButton();
 	void ClickSendButton();
 	void receiveMainwindow();
-
+	void updataProgressBar(int, qint64, qint64);
+	void checkSendOver();
 signals:
-	void sendFileSignal();
+	void sendFileSignal();	//发送信号
+	
 
 };
 #endif // !UPLOADWINDOW_H_

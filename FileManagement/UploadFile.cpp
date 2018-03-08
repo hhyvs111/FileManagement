@@ -13,45 +13,46 @@
 //问题1： 用户拖曳了文件但是没有点击发送的话，服务器已经接收了“接收文件”的信号。这个时候
 //就会出问题，服务器不能正常接收常规的命令。
 
-UploadFile::UploadFile(QFile file) 
+UploadFile::UploadFile(QString m_fileName,int num) 
 {
-
-	init();  //初始化
+	index = num; //记录这个Id
+	fileName = m_fileName;
+	initFile();  //初始化，直接新建一个TCP类
 }
 
 UploadFile::~UploadFile()
 {
-	
+	delete tcpSocket;
 }
 
-void UploadFile::init()
-{
-	//QStackedLayout *stackLayout = new QStackedLayout();
-	////stackLayout->addWidget(ui->mFileIcon);
-	////stackLayout->addWidget(ui->mFileName);
-	////重叠显示
-	//stackLayout->addWidget(ui->horizontalWidget);
-	//stackLayout->addWidget(ui->sendProgressBar);
-	//ui->sendProgressBar->setTextVisible(false);   //不显示百分比
-	//stackLayout->setStackingMode(QStackedLayout::StackAll);
-	//ui->horizontalLayout_3->addLayout(stackLayout);
-	////速度啊，标签什么的都先隐藏起来
-	//ui->uploadSpeedLabel->hide();
-	//ui->mFileIcon->hide();
-	//ui->mFileName->hide();
-	//ui->sendProgressBar->hide();
-
-
-	//setAcceptDrops(true);
-	//QPixmap DragDrop(":/Resource/FunIcon/Drag-Drop.png");  //用来放文件的图标
-	//										 //Drag = fil.scaled(QSize(50, 60), Qt::KeepAspectRatio);
-	//ui->Drag->setPixmap(DragDrop);
-	////ui->Drag->setAlignment(Qt::AlignCenter);
-	////connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
-
-	//loadStyleSheet("UploadFile");  //
-
-}
+//void UploadFile::init(QString fileName)
+//{
+//	//QStackedLayout *stackLayout = new QStackedLayout();
+//	////stackLayout->addWidget(ui->mFileIcon);
+//	////stackLayout->addWidget(ui->mFileName);
+//	////重叠显示
+//	//stackLayout->addWidget(ui->horizontalWidget);
+//	//stackLayout->addWidget(ui->sendProgressBar);
+//	//ui->sendProgressBar->setTextVisible(false);   //不显示百分比
+//	//stackLayout->setStackingMode(QStackedLayout::StackAll);
+//	//ui->horizontalLayout_3->addLayout(stackLayout);
+//	////速度啊，标签什么的都先隐藏起来
+//	//ui->uploadSpeedLabel->hide();
+//	//ui->mFileIcon->hide();
+//	//ui->mFileName->hide();
+//	//ui->sendProgressBar->hide();
+//
+//
+//	//setAcceptDrops(true);
+//	//QPixmap DragDrop(":/Resource/FunIcon/Drag-Drop.png");  //用来放文件的图标
+//	//										 //Drag = fil.scaled(QSize(50, 60), Qt::KeepAspectRatio);
+//	//ui->Drag->setPixmap(DragDrop);
+//	////ui->Drag->setAlignment(Qt::AlignCenter);
+//	////connect(tcp, SIGNAL(connected()), this, SLOT(send()));  //当连接成功时，就开始传送文件 
+//
+//	//loadStyleSheet("UploadFile");  //
+//
+//}
 //void UploadFile::loadStyleSheet(const QString &sheetName)
 //{
 //	QFile file("Resource/qss/" + sheetName + ".qss");
@@ -107,8 +108,19 @@ void UploadFile::initFile()
 	byteToWrite = 0;
 	totalSize = 0;
 	sendTimes = 0;
-	//ui->sendProgressBar->setValue(0);  //非第一次发送  
 	outBlock.clear();
+	if (!fileName.isNull())
+	{
+		localFile = new QFile(fileName);
+		if (!localFile->open(QFile::ReadOnly))
+		{
+			qDebug() << "this file is not exits: " << fileName;
+		}
+	}
+
+	//代码暂停一秒
+
+	/*send();*/
 }
 //void UploadFile::ClickOpenButton()  //打开文件并获取文件名（包括路径）  
 //{
@@ -153,6 +165,7 @@ void UploadFile::send()  //发送文件头信息
 		out << totalSize << qint64(outBlock.size());   //这个就是对应前面的qint64？
 		qDebug() << "the file head:" << outBlock;
 		tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字  
+		emit updateProgress(index, byteToWrite,totalSize );
 
 		sendTime.start();  //发送时间开始计时
 						   //UI信息
@@ -199,7 +212,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 	//设置UI的进度条，这个可以考虑隐藏起来
 	//ui->sendProgressBar->setMaximum(totalSize);
 	//ui->sendProgressBar->setValue(totalSize - byteToWrite);
-
+	emit updateProgress(index, byteToWrite, totalSize);
 	if (byteToWrite == 0)  //发送完毕  
 	{
 		////发送完毕且点击了点击了确定按钮。
@@ -212,12 +225,19 @@ void UploadFile::goOnSend(qint64 numBytes)
 		//发送完毕就断开这个写字节的槽函数。
 		disconnect(tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 		sendTimes = 0;
-
+		emit sendOver();
+		isOver = true;   //发送完毕
 		//发送完后取消连接，把线程退出？
 		//uploadThread->quit();
 		tcpSocket->abort();
-		qDebug() << "the file had send";
+		qDebug() << "the file had sended!";
 	}
+}
+//接收到发送的信号
+void UploadFile::receiveSendSignal()
+{
+	qDebug() << "receive the send signal";
+	send();
 }
 
 
@@ -258,10 +278,10 @@ void UploadFile::goOnSend(qint64 numBytes)
 //}
 
 //发送文件信号
-void UploadFile::receiveSendSignal()
-{
-	send();
-}
+//void UploadFile::receiveSendSignal()
+//{
+//	send();
+//}
 
 
 

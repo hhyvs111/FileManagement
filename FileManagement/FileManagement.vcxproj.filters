@@ -213,6 +213,21 @@
     <ClCompile Include="GeneratedFiles\Release\moc_UploadWindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_UploadFile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_UploadFile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_UploadThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_UploadThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UploadThread.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -298,6 +313,9 @@
     </CustomBuild>
     <CustomBuild Include="UploadWindow.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UploadThread.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

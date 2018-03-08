@@ -1,5 +1,5 @@
 #pragma once
-#ifndef UPLOADFILE_H  
+#ifndef UPLOADFILE_H   
 #define UPLOADFILE_H   
 #include "stdafx.h"
 #include <QObject>  
@@ -13,10 +13,11 @@ extern QString ip;
 extern int port;
 class UploadFile : public QObject
 {
+	Q_OBJECT
 public:
-	explicit UploadFile(QFile);
+	explicit UploadFile(QString,int);
 	~UploadFile();
-
+	bool isOver = false;
 private:
 
 	QTcpSocket *tcpSocket;
@@ -31,19 +32,23 @@ private:
 	qint64 totalSize;  //文件总大小  
 	
 
-	void init();
+	//void init(QString);
 	int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  
 
 	void initFile();
 
-
+	int index;  //该类的ID值
 	
 private slots:
 	void send();  //传送文件头信息  
 	void goOnSend(qint64);  //传送文件内容  
+	void receiveSendSignal();  //发送信号
 
-	void receiveSendSignal();
-
+	//void receiveSendSignal();
+signals:
+	//发送当前数据和总数据
+	void updateProgress(int,qint64, qint64);
+	void sendOver();  //发送结束
 };
 
 #endif // UPLOADFILE_H  
