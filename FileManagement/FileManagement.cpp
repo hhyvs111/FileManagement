@@ -148,22 +148,26 @@ void FileManagement::init()
 //	//m_titleBar->setTitleWidth(this->width());
 //}
 
+//窗口重叠
 void FileManagement::StackWindow()
 {
 	m_pStackedLayout = new QStackedLayout();
 	
 	//这里主要是多个窗口切换，并把这些类都实例化
 	uploadWindow = new UploadWindow();
-	downloadFile = new DownloadFile();
+	downloadWindow = new DownloadWindow();
+	downloadManage = new DownloadManage();
 	userInformation = new UserInformation();
 	reportEdit = new ReportEdit();
 	reportLook = new ReportLook();
 	//添加类
 	m_pStackedLayout->addWidget(uploadWindow);
-	m_pStackedLayout->addWidget(downloadFile);
+	m_pStackedLayout->addWidget(downloadWindow);
+	m_pStackedLayout->addWidget(downloadManage);
 	m_pStackedLayout->addWidget(userInformation);
 	m_pStackedLayout->addWidget(reportEdit);
 	m_pStackedLayout->addWidget(reportLook);
+
 	ui->SubLayout->insertLayout(1, m_pStackedLayout);
 
 }
@@ -180,7 +184,7 @@ void FileManagement::Btn_Click()
 
 
 //点击上传文件按钮显示上传界面
-void FileManagement::ClickUploadFile()
+void FileManagement::ClickUploadWindow()
 {
 	//准备发文件的时候把这个类放进线程
 	//QThread *uploadThread = new QThread();
@@ -192,10 +196,16 @@ void FileManagement::ClickUploadFile()
 }
 
 //点击下载文件按钮显示下载界面
-void FileManagement::ClickDownloadFile()
+void FileManagement::ClickDownloadWindow()
 {
-	m_pStackedLayout->setCurrentWidget(downloadFile);
-	downloadFile->sendFileInfo();
+	m_pStackedLayout->setCurrentWidget(downloadWindow);
+	downloadWindow->sendFileInfo();
+}
+
+void FileManagement::ClickDownloadManage()
+{
+	m_pStackedLayout->setCurrentWidget(downloadManage);
+	
 }
 
 void FileManagement::ClickUserInformation()
@@ -219,6 +229,6 @@ void FileManagement::ClickReportLook()
 
 void FileManagement::ClickReturn()
 {
-	this->hide();
+	this->close();
 	emit showLogin();
 }

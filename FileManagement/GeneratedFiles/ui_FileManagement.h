@@ -213,9 +213,9 @@ public:
         QObject::connect(personButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUserInformation()));
         QObject::connect(reportEditButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReportEdit()));
         QObject::connect(reportLookButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReportLook()));
-        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
-        QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadFile()));
-        QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadFile()));
+        QObject::connect(showFileButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadWindow()));
+        QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadWindow()));
+        QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadManage()));
         QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
 
         QMetaObject::connectSlotsByName(FileManagement);

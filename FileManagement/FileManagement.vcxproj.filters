@@ -228,6 +228,33 @@
     <ClCompile Include="UploadThread.cpp">
       <Filter>Source Files\QTUI\File</Filter>
     </ClCompile>
+    <ClCompile Include="DownloadWindow.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DownloadWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DownloadWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DownloadThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DownloadThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DownloadThread.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DownloadManage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DownloadManage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DownloadManage.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -265,9 +292,6 @@
     </CustomBuild>
     <CustomBuild Include="tcpclient.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DownloadFile.ui">
-      <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="UserInformation.ui">
       <Filter>Form Files</Filter>
@@ -317,6 +341,21 @@
     <CustomBuild Include="UploadThread.h">
       <Filter>Header Files\H_QTUI\FileFunction</Filter>
     </CustomBuild>
+    <CustomBuild Include="DownloadWindow.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DownloadWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DownloadThread.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DownlaodManage.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DownloadManage.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -343,9 +382,6 @@
     <ClInclude Include="AesHelper.h">
       <Filter>Header Files\H_QTUI\Base</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_DownloadFile.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_UserInformation.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -361,14 +397,20 @@
     <ClInclude Include="GeneratedFiles\ui_ReportDetail.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="DownloadManage.h">
-      <Filter>Header Files\H_QTUI\FileFunction</Filter>
-    </ClInclude>
     <ClInclude Include="Report.h">
       <Filter>Header Files\H_QTUI\ReportFunction</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_UploadWindow.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_DownloadWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_DownlaodManage.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileInfo.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

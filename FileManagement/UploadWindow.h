@@ -49,6 +49,8 @@ private:
 	QFile *localFile;
 
 
+	UploadThread *fileThread;
+
 	//QTcpSocket *tcpSocket;
 	//QThread *uploadThread;
 
@@ -58,6 +60,7 @@ private:
 	QString fileType(const QString &extension) const;
 
 	void init();
+	void initWindow();
 	//int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  
 
 	void initFile();
@@ -80,6 +83,8 @@ private slots:
 	void receiveMainwindow();
 	void updataProgressBar(int, qint64, qint64);
 	void checkSendOver();
+
+	void beginToSend(int);
 signals:
 	void sendFileSignal();	//发送信号
 	

@@ -98,12 +98,14 @@ UploadFile::~UploadFile()
 //这个类主要是用这里，实现多线程下载，来一个类new一个对象
 void UploadFile::initFile()
 {
+	
 	tcpSocket = new QTcpSocket();
+	qDebug() <<"the tcp thread"<< QThread::currentThreadId();
 	tcpSocket->abort();   //取消已有的连接
 	tcpSocket->connectToHost(ip, port);  //将这个socket连接到服务器
 
 	tcpSocket->write("uploadFile");
-	qDebug() << globalUserName << " will send a file to server";
+	//qDebug() << globalUserName << " will send a file to server";
 	loadSize = 0;
 	byteToWrite = 0;
 	totalSize = 0;
@@ -141,6 +143,7 @@ void UploadFile::initFile()
 
 void UploadFile::send()  //发送文件头信息  
 {
+	qDebug() << "the send thread" << QThread::currentThreadId();
 	if (!fileName.isNull())
 	{
 		//第一次发送的时候建立连接
@@ -164,7 +167,9 @@ void UploadFile::send()  //发送文件头信息
 		out.device()->seek(0);  //回到字节流起点来写好前面连个qint64，分别为总大小和文件名等信息大小  
 		out << totalSize << qint64(outBlock.size());   //这个就是对应前面的qint64？
 		qDebug() << "the file head:" << outBlock;
-		tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字  
+		tcpSocket->write(outBlock);  //将读到的文件信息发送到套接字 
+
+		//更新进度条
 		emit updateProgress(index, byteToWrite,totalSize );
 
 		sendTime.start();  //发送时间开始计时
@@ -185,44 +190,30 @@ void UploadFile::send()  //发送文件头信息
 //继续发送
 void UploadFile::goOnSend(qint64 numBytes)  
 {
+	
 	sendTimes++;  
 	qDebug() << sendTimes<<" get in goOnSend";
 		qDebug() << "the numBytes: " << numBytes <<"the loadSize:" <<loadSize
 			<< "the " << sendTimes << "  left byteTowrite: " << byteToWrite;
-
 	byteToWrite -= numBytes;  //剩余数据大小  
+		
 	outBlock = localFile->read(qMin(byteToWrite, loadSize));   //如果剩余数据比每次发送的小则发送剩余的
-
-	tcpSocket->write(outBlock);    //将这个信息写入socket
 	
-	//qDebug() << "information:" <<outBlock;
+	/*qDebug() << "byteToWrite:" << byteToWrite;*/
+	tcpSocket->write(outBlock);    //将这个信息写入socket
 
 	//这里是速度处理，显示速度和已下载
 	float useTime = sendTime.elapsed();
 	double speed = (totalSize - byteToWrite) / useTime;
-	//ui->uploadSpeedLabel->show();
 	//ui->uploadSpeedLabel->setText(QString::fromLocal8Bit("已发送 %1MB (%2MB/s) 共%3MB 已用时:%4秒\n估计剩余时间：%5秒")
 	//	.arg((totalSize - byteToWrite) / (1024 * 1024))//已接收
 	//	.arg(speed * 1000 / (1024 * 1024), 0, 'f', 2)//速度
 	//	.arg(totalSize / (1024 * 1024))//总大小
 	//	.arg(useTime / 1000, 0, 'f', 0)//用时
 	//	.arg(totalSize / speed / 1000 - useTime / 1000, 0, 'f', 0));//剩余时间
-
-
-	//设置UI的进度条，这个可以考虑隐藏起来
-	//ui->sendProgressBar->setMaximum(totalSize);
-	//ui->sendProgressBar->setValue(totalSize - byteToWrite);
 	emit updateProgress(index, byteToWrite, totalSize);
 	if (byteToWrite == 0)  //发送完毕  
 	{
-		////发送完毕且点击了点击了确定按钮。
-		//if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), 
-		//	QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK, true))
-		//{
-		//	ui->sendBtn->setEnabled(true);
-		//}
-		//ui->sendStatusLabel->setText(QString::fromLocal8Bit("文件发送完毕!"));
-		//发送完毕就断开这个写字节的槽函数。
 		disconnect(tcpSocket, SIGNAL(bytesWritten(qint64)), this, SLOT(goOnSend(qint64)));
 		sendTimes = 0;
 		emit sendOver();

@@ -419,7 +419,7 @@
    <sender>showFileButton</sender>
    <signal>clicked()</signal>
    <receiver>FileManagement</receiver>
-   <slot>ClickDownloadFile()</slot>
+   <slot>ClickDownloadWindow()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>123</x>
@@ -435,7 +435,7 @@
    <sender>uploadButton</sender>
    <signal>clicked()</signal>
    <receiver>FileManagement</receiver>
-   <slot>ClickUploadFile()</slot>
+   <slot>ClickUploadWindow()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>76</x>
@@ -451,7 +451,7 @@
    <sender>downloadButton</sender>
    <signal>clicked()</signal>
    <receiver>FileManagement</receiver>
-   <slot>ClickDownloadFile()</slot>
+   <slot>ClickDownloadManage()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>139</x>
@@ -482,10 +482,11 @@
  </connections>
  <slots>
   <slot>ClickUserInformation()</slot>
-  <slot>ClickUploadFile()</slot>
-  <slot>ClickDownloadFile()</slot>
+  <slot>ClickUploadWindow()</slot>
+  <slot>ClickDownloadWindow()</slot>
   <slot>ClickReportEdit()</slot>
   <slot>ClickReturn()</slot>
   <slot>ClickReportLook()</slot>
+  <slot>ClickDownloadManage()</slot>
  </slots>
 </ui>

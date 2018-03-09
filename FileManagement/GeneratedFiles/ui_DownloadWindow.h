@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'DownloadFile.ui'
+** Form generated from reading UI file 'DownloadWindow.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_DOWNLOADFILE_H
-#define UI_DOWNLOADFILE_H
+#ifndef UI_DOWNLOADWINDOW_H
+#define UI_DOWNLOADWINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -25,7 +25,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_DownloadFile
+class Ui_DownloadWindow
 {
 public:
     QVBoxLayout *verticalLayout;
@@ -41,14 +41,14 @@ public:
     QVBoxLayout *verticalLayout_2;
     QProgressBar *progressBar;
     QLabel *downloadSpeedLabel;
-    QSpacerItem *horizontalSpacer_4; 
+    QSpacerItem *horizontalSpacer_4;
 
-    void setupUi(QWidget *DownloadFile)
+    void setupUi(QWidget *DownloadWindow)
     {
-        if (DownloadFile->objectName().isEmpty())
-            DownloadFile->setObjectName(QStringLiteral("DownloadFile"));
-        DownloadFile->resize(811, 504);
-        verticalLayout = new QVBoxLayout(DownloadFile);
+        if (DownloadWindow->objectName().isEmpty())
+            DownloadWindow->setObjectName(QStringLiteral("DownloadWindow"));
+        DownloadWindow->resize(811, 504);
+        verticalLayout = new QVBoxLayout(DownloadWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -56,12 +56,12 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        label = new QLabel(DownloadFile);
+        label = new QLabel(DownloadWindow);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
-        condition = new QLineEdit(DownloadFile);
+        condition = new QLineEdit(DownloadWindow);
         condition->setObjectName(QStringLiteral("condition"));
 
         horizontalLayout->addWidget(condition);
@@ -75,7 +75,7 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        downloadTable = new QTableView(DownloadFile);
+        downloadTable = new QTableView(DownloadWindow);
         downloadTable->setObjectName(QStringLiteral("downloadTable"));
         downloadTable->setMinimumSize(QSize(600, 400));
 
@@ -92,13 +92,13 @@ public:
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        progressBar = new QProgressBar(DownloadFile);
+        progressBar = new QProgressBar(DownloadWindow);
         progressBar->setObjectName(QStringLiteral("progressBar"));
         progressBar->setValue(0);
 
         verticalLayout_2->addWidget(progressBar);
 
-        downloadSpeedLabel = new QLabel(DownloadFile);
+        downloadSpeedLabel = new QLabel(DownloadWindow);
         downloadSpeedLabel->setObjectName(QStringLiteral("downloadSpeedLabel"));
 
         verticalLayout_2->addWidget(downloadSpeedLabel);
@@ -114,24 +114,24 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
 
-        retranslateUi(DownloadFile);
+        retranslateUi(DownloadWindow);
 
-        QMetaObject::connectSlotsByName(DownloadFile);
+        QMetaObject::connectSlotsByName(DownloadWindow);
     } // setupUi
 
-    void retranslateUi(QWidget *DownloadFile)
+    void retranslateUi(QWidget *DownloadWindow)
     {
-        DownloadFile->setWindowTitle(QApplication::translate("DownloadFile", "Form", Q_NULLPTR));
-        label->setText(QApplication::translate("DownloadFile", "\346\226\207\344\273\266\345\220\215\357\274\232", Q_NULLPTR));
-        downloadSpeedLabel->setText(QApplication::translate("DownloadFile", "TextLabel", Q_NULLPTR));
+        DownloadWindow->setWindowTitle(QApplication::translate("DownloadWindow", "Form", Q_NULLPTR));
+        label->setText(QApplication::translate("DownloadWindow", "\346\226\207\344\273\266\345\220\215\357\274\232", Q_NULLPTR));
+        downloadSpeedLabel->setText(QApplication::translate("DownloadWindow", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class DownloadFile: public Ui_DownloadFile {};
+    class DownloadWindow: public Ui_DownloadWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_DOWNLOADFILE_H
+#endif // UI_DOWNLOADWINDOW_H

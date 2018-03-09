@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
 	QResource::registerResource("FileManagement.rcc");
 	QApplication a(argc, argv);
 	QApplication::addLibraryPath("./plugins");
-	FileManagement F;
-	//这里出个BUG，不能先初始化R，要先初始化L
 	Login L;
 	Register R;
+	FileManagement F;
+	//这里出个BUG，不能先初始化R，要先初始化L
 
 	L.show();
 	//槽函数，实现跳转

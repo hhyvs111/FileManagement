@@ -3,7 +3,8 @@
 #include "stdafx.h"
 #include <QtWidgets/QMainWindow>
 #include "UploadWindow.h"
-#include "DownloadFile.h"
+#include "DownloadWindow.h"
+#include "DownloadManage.h"
 #include "UserInformation.h"
 #include "ReportEdit.h"
 #include "ReportLook.h"
@@ -25,17 +26,12 @@ private:
 
 
 	UploadWindow *uploadWindow;  // 创建上传文件的指针
-	DownloadFile *downloadFile;
+	DownloadWindow *downloadWindow;
+	DownloadManage *downloadManage; 
 	UserInformation *userInformation; 
 	ReportEdit *reportEdit;
 	ReportLook *reportLook;
-
-	bool uploadFileWindowIsOpen = false,
-		downloadFileWindowIsOpen = false,
-		userInformationWindowIsOpen = false,
-		reportEditWindowIsOpen = false,
-		reportLookWindowIsOpen = false;
-
+	
 	QStackedLayout *m_pStackedLayout; 
 	//窗口切换
 	void StackWindow();
@@ -49,8 +45,9 @@ private:
 private slots:
 	void Btn_Click();
 	void ClickUserInformation();
-	void ClickUploadFile();
-	void ClickDownloadFile();
+	void ClickUploadWindow();
+	void ClickDownloadWindow();
+	void ClickDownloadManage();
 	void ClickReportEdit();
 	void ClickReportLook();
 	void ClickReturn();

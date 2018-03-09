@@ -18,6 +18,8 @@ public:
 	explicit UploadFile(QString,int);
 	~UploadFile();
 	bool isOver = false;
+
+	void send();  //传送文件头信息  
 private:
 
 	QTcpSocket *tcpSocket;
@@ -40,7 +42,7 @@ private:
 	int index;  //该类的ID值
 	
 private slots:
-	void send();  //传送文件头信息  
+	
 	void goOnSend(qint64);  //传送文件内容  
 	void receiveSendSignal();  //发送信号
 
