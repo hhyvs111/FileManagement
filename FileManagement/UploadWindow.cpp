@@ -44,31 +44,80 @@ void UploadWindow::init()
 	uploadFileMap = new QMap<int, UploadFile*>;
 	uploadQThreadMap = new QMap<int, UploadThread*>;
 	fileNameMap.clear();  //初始化这个，不是*不用NEW吧
+	row = 0;
+	column = 0;
 }
+
+
 
 //重要操作，插入文件，新建线程
 void UploadWindow::insertFile(QString m_fileName)
 {
+	//先定义第一层，总框架
+	QVBoxLayout *fileSumLayout = new QVBoxLayout(this);
+	//第二层
+	QHBoxLayout *fileInfoLayout = new QHBoxLayout();
+	{
+		mFileIcon = new QLabel();
+		
+		QVBoxLayout *fileNameSizeLayout = new QVBoxLayout();
+		
+		fileInfoLayout->insertWidget(0, mFileIcon);
+		fileInfoLayout->insertLayout(1, fileNameSizeLayout);
+
+		 mFileName = new QLabel();
+		 mFileSize = new QLabel();
+		 setFileIcon(m_fileName);	//设置该文件的名字和图标
+		fileNameSizeLayout->insertWidget(0, mFileName);
+		fileNameSizeLayout->insertWidget(1, mFileSize);
+	}
 	QProgressBar *fileProgressBar = new QProgressBar(this);
-	fileProgressBar->setTextVisible(false);   //不显示百分比
+	fileProgressBar->setTextVisible(false);
 	fileProgressBarMap->insert(index, fileProgressBar);  //将这个进度条放入map
-	stackLayout = new QStackedLayout();
-	fileWidget = new QWidget(this);
-	 //fileWidget->setLayout(fileInfoLayout);  //设置水平layout
-	 //插入文件和名字
-	 fileInfoLayout = new QHBoxLayout(fileWidget);
-	 mFileIcon = new QLabel(fileWidget);
-	 mFileName = new QLabel(fileWidget);
-	 fileInfoLayout->addWidget(mFileIcon);
-	 fileInfoLayout->addWidget(mFileName);
+
+	QHBoxLayout *fileStatusLayout = new QHBoxLayout();
+	{
+		mFileSpeed = new QLabel();
+		mButtonWait = new QPushButton();
+		mButtonCancel = new QPushButton();
+
+		mButtonWait->setText("wait");
+		mButtonCancel->setText("cancel");
+
+		fileStatusLayout->insertWidget(0, mFileSpeed);
+		fileStatusLayout->insertWidget(1, mButtonWait);
+		fileStatusLayout->insertWidget(2, mButtonCancel);
+	}
 	
-	 setFileIcon(m_fileName);	//设置该文件的名字和图标
-	
-	 stackLayout->addWidget(fileWidget);
-	 stackLayout->addWidget(fileProgressBar);
-	 fileProgressBar->setTextVisible(false);
-	 stackLayout->setStackingMode(QStackedLayout::StackAll);
-	 ui->FileListLayout->addLayout(stackLayout);  //垂直的放置多个文件
+	fileSumLayout->insertLayout(0, fileInfoLayout);
+	fileSumLayout->insertWidget(1, fileProgressBar);
+	fileSumLayout->insertLayout(2, fileStatusLayout);
+	QWidget *fileWindow = new QWidget(this);
+	fileWindow->setLayout(fileSumLayout);
+
+	ui->UploadGridLayout->addWidget(fileWindow,row/2,column%2);
+	//ui->FileListLayout->addWidget(fileWindow);
+
+	//QProgressBar *fileProgressBar = new QProgressBar(this);
+	//fileProgressBar->setTextVisible(false);   //不显示百分比
+	//fileProgressBarMap->insert(index, fileProgressBar);  //将这个进度条放入map
+	//stackLayout = new QStackedLayout();
+	//fileWidget = new QWidget(this);
+	// //fileWidget->setLayout(fileInfoLayout);  //设置水平layout
+	// //插入文件和名字
+	// fileInfoLayout = new QHBoxLayout(fileWidget);
+	// mFileIcon = new QLabel(fileWidget);
+	// mFileName = new QLabel(fileWidget);
+	// fileInfoLayout->addWidget(mFileIcon);
+	// fileInfoLayout->addWidget(mFileName);
+	//
+	// setFileIcon(m_fileName);	//设置该文件的名字和图标
+	//
+	// stackLayout->addWidget(fileWidget);
+	// stackLayout->addWidget(fileProgressBar);
+	// fileProgressBar->setTextVisible(false);
+	// stackLayout->setStackingMode(QStackedLayout::StackAll);
+	// ui->FileListLayout->addLayout(stackLayout);  //垂直的放置多个文件
 
 	 //这个时候已经建立了套接字了，那就不行，因为是在主线程建立的。所以要先移动进线程？
 	 //UploadFile *uploadFile = new UploadFile(m_fileName,index);
@@ -82,8 +131,12 @@ void UploadWindow::insertFile(QString m_fileName)
 	 fileThread->start();
 	 
 	 index++;
+	 row++;
+	 column++;
 }
 
+
+//根据index的值来绑定信号槽
 void UploadWindow::beginToSend(int num)
 {
 	//依次绑定信号槽
@@ -166,28 +219,27 @@ void UploadWindow::ClickSendButton()
 }
 void UploadWindow::checkSendOver()
 {
-	QMap<int, UploadFile*>::iterator it;
-	for (it = uploadFileMap->begin(); it != uploadFileMap->end(); it++)
+	QMap<int, UploadThread*>::iterator it;
+	for (it = uploadQThreadMap->begin(); it != uploadQThreadMap->end(); it++)
 	{
 		//如果有一个没发完则返回
-		if (it.value()->isOver == false)
+		if (it.value()->uploadFile->isOver == false)
 		{
 			/*qDebug() << it.value()->;*/
 			return;
 		}
 	}
-	//QMap<int, UploadThread*>::iterator it1;
-	//for (it1 = uploadQThreadMap->begin(); it1 != uploadQThreadMap->end(); it1++)
-	//{
-	//	it1.value()->~UploadThread();
-	//}
 	//所有的都发送完毕
 	if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"),
 			QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK, true))
 		{
 			ui->sendBtn->setEnabled(true);
 		}
+	//直接初始化这些map
+	init();
+	ui->retranslateUi(this);
 }
+
 //更新进度条
 void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize)
 {
@@ -196,6 +248,7 @@ void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize
 	it.value()->setMaximum(totalSize);// 取出该值设置大小
 	it.value()->setValue(totalSize - byteToWrite);  //设置当前值
 }
+
 void UploadWindow::setFileIcon(QString fileName)
 {
 
@@ -211,8 +264,8 @@ void UploadWindow::setFileIcon(QString fileName)
 	//fileIcon = fileIcon.scaled(QSize(30, 40), Qt::KeepAspectRatio);
 	mFileIcon->setPixmap(pixmap);
 	mFileIcon->setAlignment(Qt::AlignCenter);
-	
 	mFileName->setText(allName);
+
 	mFileIcon->show();
 	mFileName->show();
 }

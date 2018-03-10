@@ -43,13 +43,21 @@ private:
 	QHBoxLayout *fileInfoLayout;	//用来存放文件信息
 	QWidget *fileWidget;  //用来存放文件名和图标
 	QString fileName;  //文件名  
-	QLabel *mFileName;
-	QLabel *mFileIcon;  //文件名和图标的label
+
 	QStringList fileNameList;
 	QFile *localFile;
 
+	
+	QLabel *mFileName;
+	QLabel *mFileIcon;  //文件名和图标的label
+	QLabel *mFileSpeed;
+	QLabel *mFileSize;
+	QPushButton *mButtonWait;
+	QPushButton *mButtonCancel;
+	int row, column;
 
-	UploadThread *fileThread;
+
+	UploadThread *fileThread;  //文件线程
 
 	//QTcpSocket *tcpSocket;
 	//QThread *uploadThread;

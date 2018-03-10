@@ -24,7 +24,7 @@ TcpClient::~TcpClient()
 
 void TcpClient::init()
 {
-    tcpSocket=new QTcpSocket(this);
+    tcpSocket = new QTcpSocket(this);
     connect(tcpSocket,SIGNAL(error(QAbstractSocket::SocketError)),
             this,SLOT(displayError(QAbstractSocket::SocketError)));   //发生错误时执行displayError函数
 }

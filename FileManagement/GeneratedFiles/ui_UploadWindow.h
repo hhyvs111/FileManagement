@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -36,15 +37,11 @@ public:
     QSpacerItem *horizontalSpacer_11;
     QVBoxLayout *FileListLayout;
     QSpacerItem *horizontalSpacer_12;
-    QHBoxLayout *horizontalLayout_4;
-    QSpacerItem *horizontalSpacer_9;
-    QLabel *uploadSpeedLabel;
-    QSpacerItem *horizontalSpacer_10;
+    QGridLayout *UploadGridLayout;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer_3;
     QPushButton *selectBtn;
     QPushButton *sendBtn;
-    QPushButton *cancelBtn;
     QSpacerItem *horizontalSpacer_4;
     QSpacerItem *verticalSpacer_2;
 
@@ -96,23 +93,10 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_5);
 
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        UploadGridLayout = new QGridLayout();
+        UploadGridLayout->setObjectName(QStringLiteral("UploadGridLayout"));
 
-        horizontalLayout_4->addItem(horizontalSpacer_9);
-
-        uploadSpeedLabel = new QLabel(UploadWindow);
-        uploadSpeedLabel->setObjectName(QStringLiteral("uploadSpeedLabel"));
-
-        horizontalLayout_4->addWidget(uploadSpeedLabel);
-
-        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer_10);
-
-
-        verticalLayout->addLayout(horizontalLayout_4);
+        verticalLayout->addLayout(UploadGridLayout);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -141,13 +125,6 @@ public:
 
         horizontalLayout->addWidget(sendBtn);
 
-        cancelBtn = new QPushButton(UploadWindow);
-        cancelBtn->setObjectName(QStringLiteral("cancelBtn"));
-        cancelBtn->setMinimumSize(QSize(80, 30));
-        cancelBtn->setMaximumSize(QSize(80, 30));
-
-        horizontalLayout->addWidget(cancelBtn);
-
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_4);
@@ -171,10 +148,8 @@ public:
     {
         UploadWindow->setWindowTitle(QApplication::translate("UploadWindow", "Form", Q_NULLPTR));
         Drag->setText(QApplication::translate("UploadWindow", "TextLabel", Q_NULLPTR));
-        uploadSpeedLabel->setText(QApplication::translate("UploadWindow", "TextLabel", Q_NULLPTR));
         selectBtn->setText(QApplication::translate("UploadWindow", "\346\211\223\345\274\200\346\226\207\344\273\266", Q_NULLPTR));
         sendBtn->setText(QApplication::translate("UploadWindow", "\345\217\221\351\200\201\346\226\207\344\273\266", Q_NULLPTR));
-        cancelBtn->setText(QApplication::translate("UploadWindow", "\345\217\226\346\266\210\345\217\221\351\200\201", Q_NULLPTR));
     } // retranslateUi
 
 };

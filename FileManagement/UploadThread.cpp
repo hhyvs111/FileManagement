@@ -15,7 +15,7 @@ UploadThread::~UploadThread()
 	//requestInterruption();
 	quit();
 	wait();
-	//qDebug() << "the uploadThread has closed,the id is: " << currentThreadId();
+	qDebug() << "the uploadThread has closed,the id is: " << currentThreadId();
 }
 
 void UploadThread::run()
