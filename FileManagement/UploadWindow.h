@@ -37,17 +37,25 @@ private:
 	QMap<int,QProgressBar*> *fileProgressBarMap;  //QString是关键字？
 	//QMap<int, QThread*> *uploadQThreadMap;
 	QMap<int, UploadThread*> *uploadQThreadMap;
+	QMap<int, QLabel*> *fileSpeedMap;
+	QMap<int, QHBoxLayout*> *fileStatusLayoutMap;
+	//QMap<int, QLabel*> *uploadSuccessMap;
 	int index;
 	//QProgressBar fileProgressBar[6];  //最多上传5个，进度条是单独的
-	QStackedLayout *stackLayout;	//  这个放fileWidget和fileLayout
-	QHBoxLayout *fileInfoLayout;	//用来存放文件信息
+	//QStackedLayout *stackLayout;	//  这个放fileWidget和fileLayout
+	//QHBoxLayout *fileInfoLayout;	//用来存放文件信息
 	QWidget *fileWidget;  //用来存放文件名和图标
 	QString fileName;  //文件名  
 
 	QStringList fileNameList;
-	QFile *localFile;
+	QFile *localFile;  //用
 
-	
+	QVBoxLayout *fileSumLayout;
+	QHBoxLayout *fileInfoLayout;
+	QVBoxLayout *fileNameSizeLayout;
+	QProgressBar *fileProgressBar;
+	QHBoxLayout *fileStatusLayout;
+	QWidget *fileWindow;
 	QLabel *mFileName;
 	QLabel *mFileIcon;  //文件名和图标的label
 	QLabel *mFileSpeed;
@@ -66,6 +74,7 @@ private:
 	QIcon fileIcon(const QString &extension) const;
 	//获取文件的类型？
 	QString fileType(const QString &extension) const;
+	QString countFileSize(QString);
 
 	void init();
 	void initWindow();
@@ -89,8 +98,8 @@ private slots:
 	void ClickOpenButton();
 	void ClickSendButton();
 	void receiveMainwindow();
-	void updataProgressBar(int, qint64, qint64);
-	void checkSendOver();
+	void updataProgressBar(int, qint64, qint64,double);
+	void checkSendOver(int);
 
 	void beginToSend(int);
 signals:
@@ -98,7 +107,7 @@ signals:
 	
 
 };
-#endif // !UPLOADWINDOW_H_
+#endif // !UPLOADWINDOW_H_ 
 
 
 

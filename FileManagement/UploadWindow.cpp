@@ -43,6 +43,9 @@ void UploadWindow::init()
 	fileProgressBarMap = new QMap<int, QProgressBar*>;   //需要初始化
 	uploadFileMap = new QMap<int, UploadFile*>;
 	uploadQThreadMap = new QMap<int, UploadThread*>;
+	fileSpeedMap = new QMap<int, QLabel*>;
+	fileStatusLayoutMap = new QMap<int, QHBoxLayout*>;
+	//fileSizeMap = new QMap<int, QLabel*>;
 	fileNameMap.clear();  //初始化这个，不是*不用NEW吧
 	row = 0;
 	column = 0;
@@ -54,47 +57,63 @@ void UploadWindow::init()
 void UploadWindow::insertFile(QString m_fileName)
 {
 	//先定义第一层，总框架
-	QVBoxLayout *fileSumLayout = new QVBoxLayout(this);
+	fileSumLayout = new QVBoxLayout(this);
+	fileWindow = new QWidget(this);
+	fileWindow->setObjectName("widgetMain");
+	fileWindow->setStyleSheet("QWidget#widgetMain{border: 1px solid black; border-radius: 5px;};");
+	
+	fileWindow->setGeometry(0, 0, 250, 100);
 	//第二层
-	QHBoxLayout *fileInfoLayout = new QHBoxLayout();
+	fileInfoLayout = new QHBoxLayout();
+	fileSumLayout->insertLayout(0, fileInfoLayout);
 	{
 		mFileIcon = new QLabel();
-		
-		QVBoxLayout *fileNameSizeLayout = new QVBoxLayout();
+		//mFileIcon->setGeometry(0, 0, 30, 40);
+		mFileIcon->setMaximumSize(30, 40);
+		fileNameSizeLayout = new QVBoxLayout();
 		
 		fileInfoLayout->insertWidget(0, mFileIcon);
 		fileInfoLayout->insertLayout(1, fileNameSizeLayout);
 
-		 mFileName = new QLabel();
-		 mFileSize = new QLabel();
-		 setFileIcon(m_fileName);	//设置该文件的名字和图标
-		fileNameSizeLayout->insertWidget(0, mFileName);
-		fileNameSizeLayout->insertWidget(1, mFileSize);
+		mFileName = new QLabel();
+		mFileSize = new QLabel();
+		localFile = new QFile(m_fileName);
+		localFile->open(QFile::ReadOnly);
+		mFileSize->setText(countFileSize(QString::number(localFile->size(), 10)));
+
+		localFile->close();
+		 //fileSizeMap->insert(index, mFileSize);
+		setFileIcon(m_fileName);	//设置该文件的名字和图标
+		 //fileInfoLayout->insertSpacerItem(2,Spacer);
+		fileNameSizeLayout->addWidget(mFileName, Qt::AlignLeft);
+		fileNameSizeLayout->addWidget(mFileSize, Qt::AlignLeft);
 	}
-	QProgressBar *fileProgressBar = new QProgressBar(this);
+	fileProgressBar = new QProgressBar(this);
+	fileSumLayout->insertWidget(1, fileProgressBar);
+	fileProgressBar->setMaximumHeight(10);
 	fileProgressBar->setTextVisible(false);
 	fileProgressBarMap->insert(index, fileProgressBar);  //将这个进度条放入map
 
-	QHBoxLayout *fileStatusLayout = new QHBoxLayout();
+	fileStatusLayout = new QHBoxLayout();
+	fileStatusLayoutMap->insert(index, fileStatusLayout);
+	fileSumLayout->insertLayout(2, fileStatusLayout);
 	{
 		mFileSpeed = new QLabel();
 		mButtonWait = new QPushButton();
 		mButtonCancel = new QPushButton();
 
+		fileSpeedMap->insert(index, mFileSpeed);
 		mButtonWait->setText("wait");
 		mButtonCancel->setText("cancel");
 
 		fileStatusLayout->insertWidget(0, mFileSpeed);
 		fileStatusLayout->insertWidget(1, mButtonWait);
 		fileStatusLayout->insertWidget(2, mButtonCancel);
-	}
-	
-	fileSumLayout->insertLayout(0, fileInfoLayout);
-	fileSumLayout->insertWidget(1, fileProgressBar);
-	fileSumLayout->insertLayout(2, fileStatusLayout);
-	QWidget *fileWindow = new QWidget(this);
-	fileWindow->setLayout(fileSumLayout);
 
+		/*mFileSpeed->setText("sudu");*/
+	}
+
+	fileWindow->setLayout(fileSumLayout);
 	ui->UploadGridLayout->addWidget(fileWindow,row/2,column%2);
 	//ui->FileListLayout->addWidget(fileWindow);
 
@@ -142,9 +161,9 @@ void UploadWindow::beginToSend(int num)
 	//依次绑定信号槽
 	QMap<int, UploadThread*>::iterator it = uploadQThreadMap->find(num);;
 	//这些就是更新UI，以及是否发送完毕
-	connect(it.value()->uploadFile, SIGNAL(sendOver()), this, SLOT(checkSendOver()));
-	connect(it.value()->uploadFile, SIGNAL(updateProgress(int, qint64, qint64)),
-		this, SLOT(updataProgressBar(int, qint64, qint64)),Qt::BlockingQueuedConnection);
+	connect(it.value()->uploadFile, SIGNAL(sendOver(int)), this, SLOT(checkSendOver(int)), Qt::BlockingQueuedConnection);
+	connect(it.value()->uploadFile, SIGNAL(updateProgress(int, qint64, qint64,double)),
+		this, SLOT(updataProgressBar(int, qint64, qint64,double)),Qt::BlockingQueuedConnection);
 	connect(this, SIGNAL(sendFileSignal()), it.value()->uploadFile, SLOT(receiveSendSignal()));
 	
 }
@@ -217,36 +236,69 @@ void UploadWindow::ClickSendButton()
 	emit sendFileSignal();
 	ui->sendBtn->setEnabled(false); //按钮失效
 }
-void UploadWindow::checkSendOver()
+void UploadWindow::checkSendOver(int num)
 {
-	QMap<int, UploadThread*>::iterator it;
-	for (it = uploadQThreadMap->begin(); it != uploadQThreadMap->end(); it++)
+
+	QMap<int, UploadThread*>::iterator it = uploadQThreadMap->find(num);
+	//设置一下图片
+	//qDebug() << num << "is send over";
+	if (it.value()->uploadFile->isOver == true)
 	{
-		//如果有一个没发完则返回
-		if (it.value()->uploadFile->isOver == false)
-		{
-			/*qDebug() << it.value()->;*/
-			return;
-		}
+		qDebug() << num << "is send over";
+		QMap<int, QHBoxLayout*>::iterator it1 = fileStatusLayoutMap->find(num);
+		QLabel *successLogo = new QLabel();
+		successLogo->setPixmap(QPixmap(":/Resource/icon/correct.png"));
+		QLabel *successMessage = new QLabel(QString::fromLocal8Bit("上传成功"));
+
+		it1.value()->insertWidget(0,successLogo);
+		it1.value()->insertWidget(1,successMessage);
+		QMap<int, QLabel*>::iterator it2 = fileSpeedMap->find(num);
+		it2.value()->hide();
 	}
-	//所有的都发送完毕
-	if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"),
-			QString::fromLocal8Bit("上传完成!"), MESSAGE_INFORMATION, BUTTON_OK, true))
-		{
-			ui->sendBtn->setEnabled(true);
-		}
 	//直接初始化这些map
-	init();
-	ui->retranslateUi(this);
+	//init();
+	//ui->retranslateUi(this);
 }
 
 //更新进度条
-void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize)
+void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize,double speed)
 {
-	QMap<int, QProgressBar*>::iterator it = fileProgressBarMap->find(num);
-	//qDebug() << byteToWrite << " " << totalSize;
-	it.value()->setMaximum(totalSize);// 取出该值设置大小
-	it.value()->setValue(totalSize - byteToWrite);  //设置当前值
+	QMap<int, QProgressBar*>::iterator itP = fileProgressBarMap->find(num);
+	QMap<int, QLabel*>::iterator it1 = fileSpeedMap->find(num);
+	//mFileSize->setText(countFileSize(QString::number(totalSize, 10)));  //计算文件大小，显示在界面上 
+	//qDebug() <<"index "<<num <<" value"<< byteToWrite << " " << totalSize;
+	
+	//为什么会崩溃啊尼玛
+	itP.value()->setMaximum(totalSize);// 取出该值设置大小
+	itP.value()->setValue(totalSize - byteToWrite);  //设置当前值
+	speed = (speed) / 1024 * 1024;
+	//如果速度大于MB则显示MB否则显示KB
+	if (speed > 1024)
+	{
+		speed /= 1024;
+		it1.value()->setText(QString::fromLocal8Bit("%1M/S").arg(speed, 0, 'f', 2));
+	}
+	else
+	{
+		it1.value()->setText(QString::fromLocal8Bit("%1KB/S").arg(speed, 0, 'f', 2));
+	}
+	
+}
+QString UploadWindow::countFileSize(QString fileSize)
+{
+	float floatSize;
+	floatSize = fileSize.toFloat() / 1024;   //先是计算KB？
+											 //如果floatSize大于1024KB则输出MB,且保留2位小数
+	if (floatSize > 1024)
+	{
+		return QString::fromLocal8Bit("%1MB").arg(QString::number(fileSize.toFloat() / (1024 * 1024), 'f', 2)); //返回一个QString
+	}
+	else
+	{
+		return QString::fromLocal8Bit("%1KB").arg(QString::number(fileSize.toFloat() / (1024), 'f', 2)); //返回一个QString
+	}
+
+	//QString::number(fileSize.toFloat() / (1024 * 1024), 'f', 2);  //先转换为浮点数。
 }
 
 void UploadWindow::setFileIcon(QString fileName)

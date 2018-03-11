@@ -293,7 +293,7 @@ void Register::checkIsAvailablePassword()
 		//ui->passwordMessage2->hide();
 		ui->passwordMessage2->setText(QString::fromLocal8Bit("密码一致！"));
 		ui->passwordMessage2->setStyleSheet("color:green;");
-		QPixmap Pix("Resource/ion/correct.png");
+		QPixmap Pix(":/Resource/icon/correct.png");
 		ui->passLogo2->setPixmap(Pix);
 		ui->passLogo2->show();
 	}
@@ -304,7 +304,7 @@ void Register::checkIsAvailablePassword()
 		//在textlabel上显示错误信息
 		ui->passwordMessage2->setText(QString::fromLocal8Bit("两次密码不一致！"));
 		ui->passwordMessage2->setStyleSheet("color:red;");
-		QPixmap Pix("Resource/ion/error.png");
+		QPixmap Pix(":/Resource/icon/error.png");
 		ui->passLogo2->setPixmap(Pix);
 		ui->passLogo2->show();
 	}
@@ -325,7 +325,7 @@ void Register::checkIsokPassword()
 		ui->passwordMessage->setStyleSheet("color:green;");
 		ui->passwordMessage->show();
 
-		QPixmap Pix("Resource/ion/correct.png");
+		QPixmap Pix(":/Resource/icon/correct.png");
 		ui->passLogo->setPixmap(Pix);
 		ui->passLogo->show();
 	}
@@ -336,7 +336,7 @@ void Register::checkIsokPassword()
 		ui->passwordMessage->setStyleSheet("color:red;");
 		ui->passwordMessage->show();
 
-		QPixmap Pix("Resource/ion/error.png");
+		QPixmap Pix(":/Resource/icon/error.png");
 		ui->passLogo->setPixmap(Pix);
 		ui->passLogo->show();
 	}
@@ -353,7 +353,7 @@ void Register::checkIsOkTrueName()
 		ui->trueNameLabel->setStyleSheet("color:red;");
 		ui->trueNameLabel->show();
 
-		QPixmap Pix("Resource/ion/error.png");
+		QPixmap Pix(":/Resource/icon/error.png");
 		ui->trueNameLogo->setPixmap(Pix);
 		ui->trueNameLogo->show();
 
@@ -364,7 +364,7 @@ void Register::checkIsOkTrueName()
 		ui->trueNameLabel->setText(QString::fromLocal8Bit("天将降大任于%1也！").arg(name));
 		ui->trueNameLabel->setStyleSheet("color:green;");
 		ui->trueNameLabel->show();
-		QPixmap Pix("Resource/ion/correct.png");
+		QPixmap Pix(":/Resource/icon/correct.png");
 		ui->trueNameLogo->setPixmap(Pix);
 		ui->trueNameLogo->show();
 	}
@@ -380,7 +380,7 @@ void Register::checkIsOkTeacher()
 		ui->teacherLabel->setStyleSheet("color:red;");
 		ui->teacherLabel->show();
 
-		QPixmap Pix("Resource/ion/error.png");
+		QPixmap Pix(":/Resource/icon/error.png");
 		ui->teacherLogo->setPixmap(Pix);
 		ui->teacherLogo->show();
 
@@ -391,7 +391,7 @@ void Register::checkIsOkTeacher()
 		ui->teacherLabel->setText(QString::fromLocal8Bit("著名的%1老师！").arg(name));
 		ui->teacherLabel->setStyleSheet("color:green;");
 		ui->teacherLabel->show();
-		QPixmap Pix("Resource/ion/correct.png");
+		QPixmap Pix(":/Resource/icon/correct.png");
 		ui->teacherLogo->setPixmap(Pix);
 		ui->teacherLogo->show();
 	}
@@ -424,7 +424,7 @@ void Register::receiveDataFromClient(QString data)
 		ui->userMessage->show();
 
 		//设置错误图片
-		QPixmap Pix("Resource/ion/error.png");
+		QPixmap Pix(":/Resource/icon/error.png");
 		ui->userLogo->setPixmap(Pix);
 		ui->userLogo->show();
 
@@ -441,7 +441,7 @@ void Register::receiveDataFromClient(QString data)
 		////唤醒UI显示用户名可用！
 
 		//设置图标
-		QPixmap Pix("Resource/ion/correct.png");
+		QPixmap Pix(":/Resource/icon/correct.png");
 		ui->userLogo->setPixmap(Pix);
 		ui->userLogo->show();
 	}
@@ -455,7 +455,7 @@ void Register::receiveDataFromClient(QString data)
 		////唤醒UI显示用户名可用！
 
 		//设置图标
-		QPixmap Pix("Resource/ion/correct.png");
+		QPixmap Pix(":/Resource/icon/correct.png");
 		ui->studentIdLogo->setPixmap(Pix);
 		ui->studentIdLogo->show();
 	}
@@ -469,7 +469,7 @@ void Register::receiveDataFromClient(QString data)
 		////唤醒UI显示用户名可用！
 
 		//设置图标
-		QPixmap Pix("Resource/ion/error.png");
+		QPixmap Pix(":/Resource/icon/error.png");
 		ui->studentIdLogo->setPixmap(Pix);
 		ui->studentIdLogo->show();
 	}

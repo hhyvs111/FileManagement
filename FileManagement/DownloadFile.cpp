@@ -136,6 +136,8 @@ void DownloadFile::receiveFile()
 
 			float useTime = downloadTime.elapsed();
 			double speed = (byteReceived) / useTime;
+			speed = (speed * 1000 / (1024 * 1024));
+
 			//ui->downloadSpeedLabel->show();
 			//ui->downloadSpeedLabel->setText(QString::fromLocal8Bit("已下载 %1MB (%2MB/s) 共%3MB 已用时:%4秒\n估计剩余时间：%5秒")
 			//	.arg((byteReceived) / (1024 * 1024))//已接收

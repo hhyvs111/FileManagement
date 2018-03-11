@@ -356,6 +356,9 @@
     <CustomBuild Include="DownloadManage.h">
       <Filter>Header Files\H_QTUI\FileFunction</Filter>
     </CustomBuild>
+    <CustomBuild Include="C:\Users\44562\Desktop\untitled.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -411,6 +414,9 @@
     </ClInclude>
     <ClInclude Include="FileInfo.h">
       <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_untitled.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
