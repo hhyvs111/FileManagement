@@ -15,6 +15,7 @@ DownloadWindow::DownloadWindow(QWidget *parent) :
 	initModel();
 	initWindow();
 	init();
+	
 	//从客户端处理得到的数据
 	connect(tcp, SIGNAL(sendDataToDownload(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
@@ -88,7 +89,7 @@ void DownloadWindow::initWindow()
 void DownloadWindow::init()
 {
 	index = 0;
-	downloadFileMap = new QMap<int, DownloadFile*>;
+	//downloadFileMap = new QMap<int, DownloadFile*>;
 	
 }
 
@@ -177,28 +178,32 @@ void DownloadWindow::showToolTip(const QModelIndex &index) {
 //	}
 //}
 
-void DownloadWindow::addDownloadFile(QString mFileName, QString mFilePath, int num)
-{
-	//传送一个下载项目去下载管理
-	//。。。。
-
-	//插入一条下载记录到数据库
-
-	DownloadThread *downloadThread = new DownloadThread(mFileName, mFilePath, num,this);
-	connect(downloadThread, SIGNAL(finished()), downloadThread, SLOT(deleteLater()));
-	//线程关闭的时候触发信号，map池里的delete
-	connect(downloadThread, SIGNAL(ThreadClosed(int)), this, SLOT(receiveThreadClosed(int)));
-
-	downloadThreadMap->insert(index, downloadThread); //插入map里
-	downloadThread->start();	//开启线程
-}
+//void DownloadWindow::addDownloadFile(QString mFileName, QString mFilePath)
+//{
+//	//传送一个下载项目去下载管理，这个window应该不用管线程的事情。
+//	//。。。。
+//
+//
+//	qDebug() << "the file want to be download " << mFileName << mFilePath;
+//	//插入一条下载记录到数据库
+//	
+//	//这个窗口不需要开线程，给downloadManage开线程
+//
+//	//DownloadThread *downloadThread = new DownloadThread(mFileName, mFilePath,this);
+//	//connect(downloadThread, SIGNAL(finished()), downloadThread, SLOT(deleteLater()));
+//	////线程关闭的时候触发信号，map池里的delete
+//	//connect(downloadThread, SIGNAL(ThreadClosed(int)), this, SLOT(receiveThreadClosed(int)));
+//
+//	//downloadThreadMap->insert(index, downloadThread); //插入map里
+//	//downloadThread->start();	//开启线程
+//}
 
 //删除map里的线程池
 void DownloadWindow::receiveThreadClosed(int num)
 {
-	QMap<int, DownloadThread*>::iterator it = downloadThreadMap->find(num);
-	downloadThreadMap->erase(it);
-	qDebug() << "delete the Thread: " << num;
+	//QMap<int, DownloadThread*>::iterator it = downloadThreadMap->find(num);
+	//downloadThreadMap->erase(it);
+	//qDebug() << "delete the Thread: " << num;
 }
 
 //点击下载按钮，这里要做一个功能，把这个加入下载管理里面去
@@ -210,6 +215,9 @@ void DownloadWindow::ClickDownloadButton()
 
 	openFileName = btn->property("fileName").toString();	//获取按钮的名字
 	
+	emit addDownloadFile(openFileName, saveFileName);  //只要发送文件名和路径给线程就好了
+	
+
 	//发送下载信息，先注释掉
 	//QString bs = "DownloadWindow";
 	//QString data = bs + "#" + openFileName;
@@ -357,7 +365,7 @@ void DownloadWindow::showFileInfo()
 		m_delete->setProperty("row", i);
 		m_delete->setProperty("deleteFileId", fileInfo.at(i).fileId);
 		m_delete->setProperty("deleteFileName", fileInfo.at(i).fileName);
-
+		qDebug() << "now row:" << model->rowCount() << fileInfo.at(i).fileName;
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_download);
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 6), m_delete);
 

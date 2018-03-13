@@ -111,6 +111,9 @@ void UploadFile::initFile()
 	totalSize = 0;
 	sendTimes = 0;
 	outBlock.clear();
+
+
+
 	if (!fileName.isNull())
 	{
 		localFile = new QFile(fileName);
@@ -128,6 +131,10 @@ void UploadFile::initFile()
 
 void UploadFile::send()  //发送文件头信息  
 {
+	QTimer *timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(updateSpeed())); // ***就是你所说的响应函数
+	timer->start(1000); // 每隔1s更新速度标签
+
 	qDebug() << "the send thread" << QThread::currentThreadId();
 	if (!fileName.isNull())
 	{
@@ -168,8 +175,8 @@ void UploadFile::goOnSend(qint64 numBytes)
 {
 	
 	sendTimes++;  
-		//qDebug() << currentFileName <<" threadId:"<< QThread::currentThreadId()<< "the " << sendTimes<<"the numBytes: " << numBytes <<"the loadSize:" <<loadSize
-		//	 << "  left byteTowrite: " << byteToWrite;
+		qDebug()  <<" threadId:"<< QThread::currentThreadId() << currentFileName << "the " << sendTimes<<"the numBytes: " << numBytes <<"the loadSize:" <<loadSize
+			 << "  left byteTowrite: " << byteToWrite;
 	byteToWrite -= numBytes;  //剩余数据大小  
 		
 	outBlock = localFile->read(qMin(byteToWrite, loadSize));   //如果剩余数据比每次发送的小则发送剩余的
@@ -179,7 +186,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 
 	//这里是速度处理，显示速度和已下载
 	float useTime = sendTime.elapsed();
-	double speed = (totalSize - byteToWrite) / useTime;
+	 speed = (totalSize - byteToWrite) / useTime;
 	//speed = (speed * 1000 / (1024 * 1024));
 	//ui->uploadSpeedLabel->setText(QString::fromLocal8Bit("已发送 %1MB (%2MB/s) 共%3MB 已用时:%4秒\n估计剩余时间：%5秒")
 	//	.arg((totalSize - byteToWrite) / (1024 * 1024))//已接收
@@ -187,7 +194,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 	//	.arg(totalSize / (1024 * 1024))//总大小
 	//	.arg(useTime / 1000, 0, 'f', 0)//用时
 	//	.arg(totalSize / speed / 1000 - useTime / 1000, 0, 'f', 0));//剩余时间
-	emit updateProgress(index, byteToWrite, totalSize, speed);
+	emit updateProgress(index, byteToWrite, totalSize);
 	//
 	if (byteToWrite == 0)  //发送完毕  
 	{
@@ -211,6 +218,11 @@ void UploadFile::receiveSendSignal()
 	send();
 }
 
+//每隔一秒更新一下速度
+void UploadFile::updateSpeed()
+{
+	emit updateSpeedLabel(index,speed);
+}
 //void UploadFile::sendOver(int)
 //{
 //}

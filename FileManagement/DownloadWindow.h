@@ -41,6 +41,8 @@ public:
 
 	// 计算文件的大小，看情况返回MB或者KB
 	QString countFileSize(QString);
+	void initModel(); // 初始化qtableview，就是初始化model
+	bool saveFilePath(QString);   //选择下载路径
 private:
 	Ui::DownloadWindow *ui;
 
@@ -53,7 +55,7 @@ private:
 	QByteArray inBlock;
 	QByteArray buffer;  //用来缓存的
 	QString fileName;
-	QString saveFileName;   //这个是路径
+	QString saveFileName;   //这个是路径，只是路径没有文件名
 	QString openFileName;  //点击按钮所得的下载名
 
 
@@ -75,7 +77,7 @@ private:
 	void initWindow();
 	void init();
 
-	void addDownloadFile(QString, QString, int); //点击按钮后新增一个下载线程
+	
 private slots:
 
 	//void receiveFile();  //从服务器下载文件到本地。
@@ -83,9 +85,9 @@ private slots:
 	//					 //void goOnSend(qint64);  //传送文件内容 
 	void ClickDownloadButton();
 	void ClickDeleteButton();  // 删除按钮
-	bool saveFilePath(QString);   //选择下载路径
+
 	void showFileInfo();
-	void initModel(); // 初始化qtableview，就是初始化model
+
 	void receiveDataFromClient(QString);
 	void showToolTip(const QModelIndex &index);
 	//点击条件查询按钮
@@ -96,6 +98,7 @@ private slots:
 signals:
 	//void sendDisconnect(QString);  //这是什么
 	void newDownloadFile(QString, QString, int);  //发送一个新的信号，在下载管理增加一个新的
+	void addDownloadFile(QString, QString); //点击按钮后新增一个下载线程
 
 };
 

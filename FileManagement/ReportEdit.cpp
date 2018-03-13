@@ -51,7 +51,9 @@ void ReportEdit::showReporter()
 	reportInfo.reportNumber = reportInfoList[1];
 	reportInfo.reportLevel = reportInfoList[2];
 	reportInfo.reportTeacher = reportInfoList[3];
-	reportInfo.reportUserId = reportInfoList[4];
+
+	reportInfo.reportUserId = reportInfoList[4].toInt();
+
 	//reportInfo.reportTerm = reportInfoList[4];
 	//reportInfo.reportWeek = reportInfoList[5];
 	//reportInfo.reportMain = reportInfoList[6];
@@ -170,7 +172,7 @@ void ReportEdit::ClickSubmit()
 void ReportEdit::sendReport()
 {
 
-	QString bs = "sendReport";
+	QString bs = "sendReport#";
 
 	//获取当前界面设置的学期和周数
 	reportInfo.reportTerm = ui->reportTerm->currentText();
@@ -181,16 +183,37 @@ void ReportEdit::sendReport()
 	reportInfo.reportQuestionHasSolved = ui->reportQuestionHasSolved->toPlainText();
 	reportInfo.reportYourGet = ui->reportYourGet->toPlainText();
 
-	QString data = bs + "#" + reportInfo.reportUserId + "#" + 
+	//qDebug() << reportInfo.reportTerm << reportInfo.reportQuestionForSolve;
+	//QByteArray reportSum;
+	//reportSum.resize(sizeof(ReportInfo));   //设置大小
+	//QBuffer buffer(&reportSum);
+	//buffer.open(QIODevice::WriteOnly);
+	//QDataStream out(&buffer);
+
+	//out << reportInfo;   //写入字节流
+
+	//ReportInfo reportInfo;
+	
+	//reportInfo.
+
+	//reportInfo.reportName = reportInfoList[0];
+	//reportInfo.reportNumber = reportInfoList[1];
+	//reportInfo.reportLevel = reportInfoList[2];
+	//reportInfo.reportTeacher = reportInfoList[3];
+
+	//reportInfo.reportUserId = reportInfoList[4].toInt();
+
+	QString data = bs + "#" + QString::number(reportInfo.reportUserId) + "#" + 
 		reportInfo.reportTerm + "#" + reportInfo.reportWeek + "#" + reportInfo.reportMain
 		+ "#"+ reportInfo.reportQuestionForSolve
 		+ "#"+ reportInfo.reportQuestionFromLastWeek + "#" + reportInfo.reportQuestionHasSolved
 		+ "#"+ reportInfo.reportYourGet;
 
 	QByteArray datasend = data.toUtf8();
+
 	if (tcp->tcpSocket->write(datasend))
 	{
-		qDebug() << "send data to server: " << data;
+		qDebug() << "send data to server: " << datasend;
 		/*MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("提交成功!"),
 			MESSAGE_QUESTION, BUTTON_OK_AND_CANCEL, true);*/
 	}

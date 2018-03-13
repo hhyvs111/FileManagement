@@ -6,6 +6,7 @@ DownloadThread::DownloadThread(QString mFileName,QString mFilePath ,int num, QOb
 	fileName = mFileName;
 	filePath = mFilePath;
 	index = num;
+	qDebug() << "download Thread gou zao :" << currentThreadId();
 }
 
 
@@ -20,5 +21,22 @@ DownloadThread::~DownloadThread()
 
 void DownloadThread::run()
 {
-	downloadFile = new DownloadFile(fileName,filePath,index);
+	while (!isInterruptionRequested())
+	{
+		qDebug() << "download Thread run :" << currentThreadId();
+		downloadFile = new DownloadFile(fileName, filePath, index);
+		emit downloadAvailable(index);  //给window发送一个线程已经开启的信号
+		exec();
+	}
+}
+
+void DownloadThread::quitThread()
+{
+	//exit();
+	//qDebug() << "this Thread is closed!";
+	//if (this->wait())
+	//{
+	//	qDebug() << "this Thread is closed!";
+	//}
+	this->~DownloadThread();
 }

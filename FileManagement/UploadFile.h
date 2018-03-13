@@ -33,7 +33,7 @@ private:
 	qint64 byteToWrite;  //剩余数据大小  
 	qint64 totalSize;  //文件总大小  
 	QString currentFileName;
-
+	double speed;  //速度
 	//void init(QString);
 	int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  
 
@@ -45,12 +45,14 @@ private slots:
 	
 	void goOnSend(qint64);  //传送文件内容  
 	void receiveSendSignal();  //发送信号
+	void updateSpeed();
 
 	//void receiveSendSignal();
 signals:
 	//发送当前数据和总数据
 	void sendOver(int);  //发送结束
-	void updateProgress(int,qint64, qint64,double);
+	void updateProgress(int,qint64, qint64);
+	void updateSpeedLabel(int,double);
 
 	
 };

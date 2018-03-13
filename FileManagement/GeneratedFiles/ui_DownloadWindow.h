@@ -20,6 +20,7 @@
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -34,6 +35,7 @@ public:
     QLabel *label;
     QLineEdit *condition;
     QSpacerItem *horizontalSpacer_2;
+    QToolButton *settingButton;
     QHBoxLayout *horizontalLayout_3;
     QTableView *downloadTable;
     QHBoxLayout *horizontalLayout_2;
@@ -69,6 +71,11 @@ public:
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_2);
+
+        settingButton = new QToolButton(DownloadWindow);
+        settingButton->setObjectName(QStringLiteral("settingButton"));
+
+        horizontalLayout->addWidget(settingButton);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -123,6 +130,7 @@ public:
     {
         DownloadWindow->setWindowTitle(QApplication::translate("DownloadWindow", "Form", Q_NULLPTR));
         label->setText(QApplication::translate("DownloadWindow", "\346\226\207\344\273\266\345\220\215\357\274\232", Q_NULLPTR));
+        settingButton->setText(QApplication::translate("DownloadWindow", "\350\256\276\347\275\256", Q_NULLPTR));
         downloadSpeedLabel->setText(QApplication::translate("DownloadWindow", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 

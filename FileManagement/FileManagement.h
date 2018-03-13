@@ -39,6 +39,8 @@ private:
 	//初始化界面
 	void init();
 
+	//绑定窗口之间的信号槽
+	void WindowSlotBind();  
 	//初始化标题栏
 	//void initTitleBar();
 	

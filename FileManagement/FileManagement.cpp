@@ -160,6 +160,8 @@ void FileManagement::StackWindow()
 	userInformation = new UserInformation();
 	reportEdit = new ReportEdit();
 	reportLook = new ReportLook();
+
+	WindowSlotBind();
 	//添加类
 	m_pStackedLayout->addWidget(uploadWindow);
 	m_pStackedLayout->addWidget(downloadWindow);
@@ -170,6 +172,13 @@ void FileManagement::StackWindow()
 
 	ui->SubLayout->insertLayout(1, m_pStackedLayout);
 
+}
+
+void FileManagement::WindowSlotBind()
+{
+	//发送信号槽
+	connect(downloadWindow, SIGNAL(addDownloadFile(QString, QString))
+		, downloadManage, SLOT(insertDownloadFile(QString, QString)));
 }
 void FileManagement::receiveLogin()
 {

@@ -26,7 +26,23 @@ class UploadWindow : public QWidget
 public:
 	explicit UploadWindow(QWidget *parent = 0);
 	~UploadWindow();
-	
+	void init();
+	void initWindow();
+	//int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  
+	void initFile();
+	// 加载样式文件;
+	void loadStyleSheet(const QString &sheetName);
+	// 文件拖放功能实现
+	void dragEnterEvent(QDragEnterEvent* event = NULL);
+	void dropEvent(QDropEvent* event = NULL);
+	void setFileIcon(QString);  //将后缀放进去
+	void insertFile(QString);  //插入文件名？
+							   //获取文件的图标
+	QIcon fileIcon(const QString &extension) const;
+	//获取文件的类型？
+	QString fileType(const QString &extension) const;
+	QString countFileSize(QString);
+
 
 private:
 	Ui::UploadWindow *ui;
@@ -63,34 +79,9 @@ private:
 	QPushButton *mButtonWait;
 	QPushButton *mButtonCancel;
 	int row, column;
-
-
 	UploadThread *fileThread;  //文件线程
-
 	//QTcpSocket *tcpSocket;
 	//QThread *uploadThread;
-
-					   //获取文件的图标
-	QIcon fileIcon(const QString &extension) const;
-	//获取文件的类型？
-	QString fileType(const QString &extension) const;
-	QString countFileSize(QString);
-
-	void init();
-	void initWindow();
-	//int sendTimes;  //用来标记是否为第一次发送，第一次以后连接信号触发，后面的则手动调用  
-
-	void initFile();
-	// 加载样式文件;
-	void loadStyleSheet(const QString &sheetName);
-	// 文件拖放功能实现
-	void dragEnterEvent(QDragEnterEvent* event = NULL);
-	void dropEvent(QDropEvent* event = NULL);
-
-	void setFileIcon(QString);  //将后缀放进去
-
-	void insertFile(QString);  //插入文件名？
-
 
 private slots:
 	//void send();  //传送文件头信息  
@@ -98,7 +89,8 @@ private slots:
 	void ClickOpenButton();
 	void ClickSendButton();
 	void receiveMainwindow();
-	void updataProgressBar(int, qint64, qint64,double);
+	void updataProgressBar(int, qint64, qint64);
+	void updateSpeedLabel(int,double);  //更新速度
 	void checkSendOver(int);
 
 	void beginToSend(int);

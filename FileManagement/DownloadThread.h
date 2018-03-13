@@ -20,8 +20,12 @@ private:
 	int index;
 	QString filePath;  //文件路径
 
+	private slots:
+	void quitThread();   //退出线程
+
 signals:
 	void ThreadClosed(int);  //给主窗口发送线程关闭信号
+	void downloadAvailable(int);
 };
 
 #endif // !DOWNLOADTHREAD_H_

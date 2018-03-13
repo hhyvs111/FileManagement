@@ -7,30 +7,18 @@
 #include <QString> 
 #include "FileInfo.h"
 //extern TcpClient * tcp;
+extern QString ip;
+extern int port;
 extern QString globalUserName;
 
 
-//友元吗？
-class TableModel;
-class ButtonDelegate;
-
-//struct FileInfo
-//{
-//	int fileId;
-//	QString fileName;
-//	QString fileSize;
-//	QString fileType;
-//	QString fileTime;
-//	QString fileUser;
-//	int userId;
-//};
 //只负责下载就行了
-class DownloadFile : public QWidget
+class DownloadFile : public QObject
 {
 	Q_OBJECT
 
 public:
-	explicit DownloadFile(QString,QString,int,QWidget *parent = 0);
+	explicit DownloadFile(QString,QString,int);
 	~DownloadFile();
 
 	//发送查看该用户所上传文件的信息给服务器
@@ -48,27 +36,33 @@ public:
 
 private:
 	//Ui::DownloadFile *ui;
-
+	int index;  //序号
 	QTcpSocket *tcpSocket;   //连接服务器的socket
 	QTime downloadTime;
 	QFile *newFile;
 	QByteArray inBlock;
 	QByteArray buffer;  //用来缓存的
 	QString fileName;
-	QString saveFileName;   //这个是路径？？还是直接是文件名？保存路径
-
+	QString saveFileName;   //文件路径加文件名
+	QString filePath;
 	QString openFileName;  //直接打开的文件名
+
 	qint64 RtotalSize;  //总共需要发送的文件大小（文件内容&文件名信息）  
 	qint64 byteReceived;  //已经接收的大小  
 	int receiveTime;	//接受的次数
+	double speed;
+
+	QString leftTime;  //剩余时间
 
 	void init();
+	void countLeftTime(float);
 
 private slots:
 
 	void receiveFile();  //从服务器下载文件到本地。
 						 //void send();  //传送文件头信息  
 						 //void goOnSend(qint64);  //传送文件内容 
+	void updateSpeed();
 
 	//void ClickDownloadButton();
 	//void ClickDeleteButton();  // 删除按钮
@@ -89,6 +83,9 @@ private slots:
 
 signals:
 	//void sendDisconnect(QString);  //这是什么
+	void downloadOver(int);
+	void updateProgress(int, qint64, qint64);
+	void updateSpeedLabel(int, double,QString);
 
 };
 

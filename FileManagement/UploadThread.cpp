@@ -28,11 +28,8 @@ void UploadThread::run()
 		emit sendAvailable(index);
 		exec();
 	}
-	
-	
 	//uploadFile->sender();
 	//// ºÄÊ±²Ù×÷
-
 }
 
 

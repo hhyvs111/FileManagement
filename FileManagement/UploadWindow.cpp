@@ -64,6 +64,7 @@ void UploadWindow::insertFile(QString m_fileName)
 	
 	fileWindow->setGeometry(0, 0, 250, 100);
 	//第二层
+	//文件名，大小，图标
 	fileInfoLayout = new QHBoxLayout();
 	fileSumLayout->insertLayout(0, fileInfoLayout);
 	{
@@ -88,12 +89,15 @@ void UploadWindow::insertFile(QString m_fileName)
 		fileNameSizeLayout->addWidget(mFileName, Qt::AlignLeft);
 		fileNameSizeLayout->addWidget(mFileSize, Qt::AlignLeft);
 	}
+
+	//进度条
 	fileProgressBar = new QProgressBar(this);
 	fileSumLayout->insertWidget(1, fileProgressBar);
 	fileProgressBar->setMaximumHeight(10);
 	fileProgressBar->setTextVisible(false);
 	fileProgressBarMap->insert(index, fileProgressBar);  //将这个进度条放入map
-
+	
+	//文件状态界面
 	fileStatusLayout = new QHBoxLayout();
 	fileStatusLayoutMap->insert(index, fileStatusLayout);
 	fileSumLayout->insertLayout(2, fileStatusLayout);
@@ -162,8 +166,10 @@ void UploadWindow::beginToSend(int num)
 	QMap<int, UploadThread*>::iterator it = uploadQThreadMap->find(num);;
 	//这些就是更新UI，以及是否发送完毕
 	connect(it.value()->uploadFile, SIGNAL(sendOver(int)), this, SLOT(checkSendOver(int)), Qt::BlockingQueuedConnection);
-	connect(it.value()->uploadFile, SIGNAL(updateProgress(int, qint64, qint64,double)),
-		this, SLOT(updataProgressBar(int, qint64, qint64,double)),Qt::BlockingQueuedConnection);
+	connect(it.value()->uploadFile, SIGNAL(updateProgress(int, qint64, qint64)),
+		this, SLOT(updataProgressBar(int, qint64, qint64)),Qt::BlockingQueuedConnection);
+	connect(it.value()->uploadFile, SIGNAL(updateSpeedLabel(int, double)), 
+		this, SLOT(updateSpeedLabel(int, double)), Qt::BlockingQueuedConnection);
 	connect(this, SIGNAL(sendFileSignal()), it.value()->uploadFile, SLOT(receiveSendSignal()));
 	
 }
@@ -222,6 +228,7 @@ void UploadWindow::ClickOpenButton()  //打开文件并获取文件名（包括路径）
 	{
 		for (int i = 0; i < List.size(); i++)
 		{
+			fileName = List.at(i);
 			qDebug() << "the file list:" << List.at(i);
 			insertFile(List.at(i));
 		}
@@ -261,16 +268,22 @@ void UploadWindow::checkSendOver(int num)
 }
 
 //更新进度条
-void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize,double speed)
+void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize)
 {
 	QMap<int, QProgressBar*>::iterator itP = fileProgressBarMap->find(num);
-	QMap<int, QLabel*>::iterator it1 = fileSpeedMap->find(num);
+	
 	//mFileSize->setText(countFileSize(QString::number(totalSize, 10)));  //计算文件大小，显示在界面上 
 	//qDebug() <<"index "<<num <<" value"<< byteToWrite << " " << totalSize;
 	
 	//为什么会崩溃啊尼玛
 	itP.value()->setMaximum(totalSize);// 取出该值设置大小
 	itP.value()->setValue(totalSize - byteToWrite);  //设置当前值
+
+	
+}
+void UploadWindow::updateSpeedLabel(int num, double speed)
+{
+	QMap<int, QLabel*>::iterator it1 = fileSpeedMap->find(num);
 	speed = (speed) / 1024 * 1024;
 	//如果速度大于MB则显示MB否则显示KB
 	if (speed > 1024)
@@ -282,7 +295,6 @@ void UploadWindow::updataProgressBar(int num,qint64 byteToWrite,qint64 totalSize
 	{
 		it1.value()->setText(QString::fromLocal8Bit("%1KB/S").arg(speed, 0, 'f', 2));
 	}
-	
 }
 QString UploadWindow::countFileSize(QString fileSize)
 {
@@ -338,8 +350,9 @@ QIcon UploadWindow::fileIcon(const QString &extension) const
 
 	if (tmpFile.open())
 	{
+		
+		icon = provider.icon(QFileInfo(strTemplateName));
 		tmpFile.close();
-		icon = provider.icon(QFileInfo(fileName));
 		// tmpFile.remove();
 	}
 	else
