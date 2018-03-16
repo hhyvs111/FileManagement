@@ -148,7 +148,7 @@ void ReportLook::showToolTip(const QModelIndex &index) {
 void ReportLook::sendReportLook(QString condition)
 {
 	//每次打开该页面则发查询信息发过去
-	QString data = "lookReport#" + condition;   //查询所有的文件
+	QString data = "lookReport#" + condition;   //查询所有的报告
 	QByteArray datasend = data.toUtf8();
 	qDebug() << datasend;
 	tcp->tcpSocket->write(datasend);

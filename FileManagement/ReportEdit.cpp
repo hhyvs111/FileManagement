@@ -172,7 +172,7 @@ void ReportEdit::ClickSubmit()
 void ReportEdit::sendReport()
 {
 
-	QString bs = "sendReport#";
+	QString bs = "sendReport";
 
 	//获取当前界面设置的学期和周数
 	reportInfo.reportTerm = ui->reportTerm->currentText();

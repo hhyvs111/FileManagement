@@ -30,7 +30,7 @@ void DownloadManage::initModel()
 	ui->tableView->setShowGrid(false);
 	ui->tableView->verticalHeader()->setVisible(false);// 垂直不可见
 														   //ui->tableView->horizontalHeader()->setVisible(false);// 水平不可见
-	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit("状态"));
+	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit(""));
 	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("文件名"));
 	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("文件大小"));
 	model->setHeaderData(3, Qt::Horizontal, QString::fromLocal8Bit("进度"));
@@ -84,30 +84,53 @@ void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
 {
 	qDebug() << "insert download file" << m_FileName << m_FilePath;
 	//插入界面到tableView
-	//状态，先不搞吧
-	model->setItem(index, 0, new QStandardItem(m_FileName));
+
+	//这个得放在前面，不然第一个不能直接插入，没有rowcount
+	model->setItem(index, 1, new QStandardItem(m_FileName));
+
+	mFileIcon = new QLabel();
+	mFileName = new QLabel();
+	mFileIcon->setMinimumSize(30, 35);
+	setFileIcon(m_FileName);
+
+	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 0), mFileIcon);
+
 
 	//实现图标和文件名在同一格放在第二列
-	QHBoxLayout *fileInfoLayout = new QHBoxLayout();
-	mFileIcon = new QLabel();
-	//mFileIcon->setMinimumSize(10, 10);
-	//mFileIcon->setMaximumSize(10, 10);
-	mFileName = new QLabel();
-	setFileIcon(m_FileName);
-	fileInfoLayout->insertWidget(0, mFileIcon);
-	fileInfoLayout->insertWidget(1, mFileName);
-	IconName = new QWidget();
-	IconName->setLayout(fileInfoLayout);
-	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 1), IconName);
+	//IconName = new QWidget();
+	//QHBoxLayout *fileInfoLayout = new QHBoxLayout();
+	//IconName->setLayout(fileInfoLayout);
+	//mFileIcon = new QLabel(IconName);
+	//mFileName = new QLabel(IconName);
+	//setFileIcon(m_FileName);
+	//QHBoxLayout *fileInfoLayout = new QHBoxLayout();
+	//fileInfoLayout->setMargin(0);
+	//mFileIcon = new QLabel();
+	//mFileIcon->setMinimumSize(30, 35);
+	////mFileIcon->setMaximumSize(10, 10);
+	//mFileName = new QLabel();
+	////mFileName->setMinimumSize(20, 25);
+	//setFileIcon(m_FileName);
+	//fileInfoLayout->insertWidget(0, mFileIcon);
+	//fileInfoLayout->insertWidget(1, mFileName);
+	//IconName = new QWidget();
+	//IconName->setLayout(fileInfoLayout);
+	//fileInfoLayout->setAlignment(mFileIcon, Qt::AlignLeft);
+	//fileInfoLayout->setAlignment(mFileName, Qt::AlignLeft);
+	//ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 1), IconName);
 	//ui->horizontalLayout->insertWidget(0, IconName);
 	
 
-	//放文件大小
-	//model->setItem(index, 0, new QStandardItem());
 	mFileSize = new QLabel();
+	QWidget *sizeWidget = new QWidget();
+	QHBoxLayout *SizeLayout = new QHBoxLayout();
+	SizeLayout->addWidget(mFileSize);
+	SizeLayout->setAlignment(mFileSize, Qt::AlignLeft);
+	sizeWidget->setLayout(SizeLayout);
 	fileSizeMap->insert(index, mFileSize);
-	ui->tableView->setIndexWidget(model->index(model->rowCount()-1, 2), mFileSize);
-	
+	ui->tableView->setIndexWidget(model->index(model->rowCount()-1, 2), sizeWidget);
+
+
 	//放进度条
 	QProgressBar *downloadProgressBar = new QProgressBar(this);
 	//downloadProgressBar->hide();
@@ -118,13 +141,21 @@ void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
 
 	//放速度条
 	mFileSpeed = new QLabel();
+	QWidget *widgetSpeed = new QWidget();
+	QHBoxLayout *SpeedLayout = new QHBoxLayout();
+	SpeedLayout->addWidget(mFileSpeed);
+	SpeedLayout->setAlignment(mFileSpeed, Qt::AlignLeft);
+	widgetSpeed->setLayout(SpeedLayout);
+
 	downloadSpeedMap->insert(index, mFileSpeed);
-	ui->tableView->setIndexWidget(model->index(model->rowCount() -1, 4), mFileSpeed);
+	ui->tableView->setIndexWidget(model->index(model->rowCount() -1, 4), widgetSpeed);
+	//model->item(model->rowCount() - 1, 4)->setTextAlignment(Qt::AlignCenter);  //居中
 
 	//放剩余时间
 	mLeftTime = new QLabel();
 	downloadLeftTimeMap->insert(index, mLeftTime);
 	ui->tableView->setIndexWidget(model->index(model->rowCount() -1 , 5), mLeftTime);
+	//model->item(model->rowCount() - 1, 5)->setTextAlignment(Qt::AlignCenter); //居中
 	
 
 	
