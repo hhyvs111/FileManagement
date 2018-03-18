@@ -23,6 +23,7 @@ private:
 
 private slots:
 //void receiveSendSignal();
+void shutDown();
 
 signals:
 	void sendAvailable(int);

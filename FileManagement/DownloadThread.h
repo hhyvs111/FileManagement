@@ -11,7 +11,8 @@ class DownloadThread : public QThread
 {
 	Q_OBJECT
 public:
-	DownloadThread(QString,QString,int, QObject *parent = 0);
+	DownloadThread(QString,QString,int,bool, QObject *parent = 0);
+	DownloadThread(int,QString,QString, qint64, qint64,int, bool, QObject *parent = 0);
 	~DownloadThread();
 	void run();
 	DownloadFile *downloadFile;  // 先定义一个DownloadFile
@@ -19,7 +20,10 @@ private:
 	QString fileName;
 	int index;
 	QString filePath;  //文件路径
-
+	int fileId;
+	qint64 breakPoint;
+	bool keepOn;  //断点下载还是初始下载
+	qint64 recordId;
 	private slots:
 	void quitThread();   //退出线程
 

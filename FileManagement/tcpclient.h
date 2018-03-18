@@ -7,7 +7,9 @@
 #include <QMessageBox>
 #include <QFile>  
 #include <string>  
-
+#include "stdafx.h"
+extern QString ip;
+extern int port;
 namespace Ui {
 class TcpClient;
 }

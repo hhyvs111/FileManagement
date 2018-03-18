@@ -5,7 +5,7 @@
 #include "Register.h"
 #include "UploadFile.h"
 #include "MyMessageBox.h"
-
+#include "Database.h"
 #include <QtWidgets/QApplication>
 #include <qApplication.h>
 #include <QResource>
@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	QResource::registerResource("FileManagement.rcc");
 	QApplication a(argc, argv);
 	QApplication::addLibraryPath("./plugins");
+	Database myDB;
 	Login L;
 	Register R;
 	FileManagement F;

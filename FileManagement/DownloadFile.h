@@ -19,8 +19,11 @@ class DownloadFile : public QObject
 
 public:
 	explicit DownloadFile(QString,QString,int);
+	//这个构造函数是下载断点文件，第一个是总数据，第二个是断点位置
+	DownloadFile(int,QString,QString, qint64 ,qint64 ,int );
 	~DownloadFile();
-
+	bool insertRecord();
+	bool updateRecord();
 	//发送查看该用户所上传文件的信息给服务器
 	//void sendFileInfo(QString condition = "all");
 	// 加载样式文件;
@@ -41,6 +44,7 @@ private:
 	QTime downloadTime;
 	QFile *newFile;
 	QByteArray inBlock;
+	QByteArray outBlock;  //发数据给服务器
 	QByteArray buffer;  //用来缓存的
 	QString fileName;
 	QString saveFileName;   //文件路径加文件名
@@ -48,30 +52,36 @@ private:
 	QString openFileName;  //直接打开的文件名
 
 	qint64 RtotalSize;  //总共需要发送的文件大小（文件内容&文件名信息）  
-	qint64 byteReceived;  //已经接收的大小  
+	qint64 byteReceived;  //已经接收的大小  ‘’
+
+	qint64 receiveStatus = -1;  //默认为继续发送
+	qint64 sumBlock;
+	qint64 breakPoint;
+	qint64 cbreakPoint;
+	qint64 recordId;
+	int breakFileId;
+	QString breakFileName;
+	QString breakFilePath;
+
+	int fileId;
 	int receiveTime;	//接受的次数
 	double speed;
 
 	QString leftTime;  //剩余时间
-
+	bool isBreakFile = false;
 	void init();
+
+	bool keepOn;
 	void countLeftTime(float);
+	
 
 private slots:
 
 	void receiveFile();  //从服务器下载文件到本地。
-						 //void send();  //传送文件头信息  
-						 //void goOnSend(qint64);  //传送文件内容 
+	void receiveBreakFile();
 	void updateSpeed();
-
-	//void ClickDownloadButton();
-	//void ClickDeleteButton();  // 删除按钮
-	//bool saveFilePath(QString);   //选择下载路径
-	//void showFileInfo();
-
-	//void initModel(); // 初始化qtableview，就是初始化model
-
-	//void receiveDataFromClient(QString);
+	void stopReceive(int);
+	
 
 	
 	//void showToolTip(const QModelIndex &index);

@@ -15,6 +15,7 @@
 #include <QDataStream>
 #include <QGraphicsDropShadowEffect>
 #include <algorithm>
+#include <QAction>
 #include"tcpclient.h"
 
 using namespace std;

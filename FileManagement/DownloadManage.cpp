@@ -1,9 +1,11 @@
 #include "DownloadManage.h"
 #include "MyMessageBox.h"
+#include "Database.h"
 #include <QFileDialog>
 #include <QToolTip>
 #include <QtWin>
 #include <QToolButton>
+#include<QActionGroup>
 #include <QFileIconProvider>
 
 DownloadManage::DownloadManage(QWidget *parent) :
@@ -24,12 +26,22 @@ void DownloadManage::initModel()
 {
 	connect(ui->tableView, SIGNAL(entered(QModelIndex)),
 		this, SLOT(showToolTip(QModelIndex)));
+
+	connect(ui->tableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));            //添加右键菜单
 	ui->tableView->setMouseTracking(true);   //设置鼠标追踪
 	model = new QStandardItemModel();  //初始化model
 	model->setColumnCount(8);
 	ui->tableView->setShowGrid(false);
 	ui->tableView->verticalHeader()->setVisible(false);// 垂直不可见
-														   //ui->tableView->horizontalHeader()->setVisible(false);// 水平不可见
+	//ui->tableView->horizontalHeader()->setVisible(false);// 水平不可见
+	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+	ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+	ui->tableView->setContextMenuPolicy(Qt::CustomContextMenu);
+
+
+
 	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit(""));
 	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("文件名"));
 	model->setHeaderData(2, Qt::Horizontal, QString::fromLocal8Bit("文件大小"));
@@ -55,10 +67,78 @@ void DownloadManage::initModel()
 	ui->tableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Fixed);
-	ui->tableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(5, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(6, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(7, QHeaderView::Fixed);
+	//设置右键菜单
+	setMenuEvent();
+}
+void DownloadManage::setMenuEvent()
+{
+	//右键菜单 
+	actionWait = new QAction(this);
+	actionWait->setText(QStringLiteral("暂停"));
+	actionBegin = new QAction(this);
+	actionBegin->setText(QStringLiteral("开始"));
+	actionDelete = new QAction(this);
+	actionDelete->setText(QStringLiteral("删除"));
+	actionOpenFile = new QAction(this);
+	actionOpenFile->setText(QStringLiteral("打开文件"));
+	actionOpenFolder = new QAction(this);
+	actionOpenFolder->setText(QStringLiteral("打开文件夹"));
+
+	connect(actionWait, SIGNAL(triggered()), this, SLOT(CallWaitDownload()));
+	connect(actionBegin, SIGNAL(triggered()), this, SLOT(CallKeepOnDownload()));
+	//QActionGroup *actionGroup = new QActionGroup(this);
+	//actionGroup->addAction(actionBegin);
+	//actionGroup->addAction(actionWait);
+	//actionBegin->setChecked(true);
+	//actionGroup->setExclusive(true);
+
+	popMenu = new QMenu(ui->tableView);
+	popMenu->addAction(actionBegin);
+	popMenu->addAction(actionWait);
+	popMenu->addSeparator();   //加一条横线
+	popMenu->addAction(actionDelete);
+	popMenu->addSeparator();   //加一条横线
+	popMenu->addAction(actionOpenFile);
+	popMenu->addAction(actionOpenFolder);
+
+	//actionBegin->setEnabled(false);
+}
+
+void DownloadManage::CallWaitDownload()
+{
+	//当暂停按钮触发的时候，
+	//actionBegin->setEnabled(true);
+	QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
+	QModelIndexList indexsSelected = selectionModel->selectedIndexes();
+	QModelIndex indexSelected = indexsSelected.at(0);
+	qDebug() << "waitRow" << indexSelected.row();
+
+	//选中的行数发出暂停的操作
+	emit stopDownload(indexSelected.row());
+}
+
+void DownloadManage::CallKeepOnDownload()
+{
+	QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
+	QModelIndexList indexsSelected = selectionModel->selectedIndexes();
+	QModelIndex indexSelected = indexsSelected.at(0);
+
+	QMap<int, BreakFile>::iterator it = breakFileMap->find(indexSelected.row());
+
+	downloadThread = new DownloadThread(it.value().fileId,it.value().fileName,it.value().filePath, it.value().breakPoint,it.value().recordId, indexSelected.row(),true); //这里new了一个线程
+	qDebug() << "new download , main ThreadId :" << QThread::currentThreadId();
+	downloadThreadMap->insert(indexSelected.row(), downloadThread);
+	//fileStatusMap->insert(index, 0); //插入正在下载状态
+	//insertDownloadRecord(m_FileName, m_FilePath, "-1", -1, -1);
+	connect(downloadThread, SIGNAL(finished()), downloadThread, SLOT(deleteLater()));
+	connect(downloadThread, SIGNAL(downloadAvailable(int)), this, SLOT(beginToDownload(int)));
+	//对了要发送一个下载请求到服务器！ 
+	downloadThread->start();
+
+	
 }
 void DownloadManage::showToolTip(const QModelIndex &index) {
 	if (!index.isValid()) {
@@ -75,16 +155,22 @@ void DownloadManage::initMap()
 	downloadSpeedMap = new QMap<int, QLabel*>;
 	downloadLeftTimeMap = new QMap<int, QLabel*>;
 	fileSizeMap = new QMap<int, QLabel*>;
+	fileStatusMap = new QMap<int, int>; 
+	//fileIdMap = new QMap<int, int>;
+	//fileNameMap = new QMap<int, QString>;
+	breakFileMap = new QMap<int, BreakFile>;
 	index = 0;
+	queryLocalCache();
 	
 }
 
-//当downloadWindow有下载请求的时候，插入一条下载记录到downloadManage，开启线程？
-void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
+//-1代表还未下载
+void DownloadManage::insertDownloadRecord(QString m_FileName, QString m_FilePath,QString m_FileSize,qint64 max,qint64 now)
 {
 	qDebug() << "insert download file" << m_FileName << m_FilePath;
 	//插入界面到tableView
 
+	
 	//这个得放在前面，不然第一个不能直接插入，没有rowcount
 	model->setItem(index, 1, new QStandardItem(m_FileName));
 
@@ -119,7 +205,7 @@ void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
 	//fileInfoLayout->setAlignment(mFileName, Qt::AlignLeft);
 	//ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 1), IconName);
 	//ui->horizontalLayout->insertWidget(0, IconName);
-	
+
 
 	mFileSize = new QLabel();
 	QWidget *sizeWidget = new QWidget();
@@ -128,7 +214,9 @@ void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
 	SizeLayout->setAlignment(mFileSize, Qt::AlignLeft);
 	sizeWidget->setLayout(SizeLayout);
 	fileSizeMap->insert(index, mFileSize);
-	ui->tableView->setIndexWidget(model->index(model->rowCount()-1, 2), sizeWidget);
+	if (m_FileSize != "-1")
+		mFileSize->setText(m_FileSize);
+	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 2), sizeWidget);
 
 
 	//放进度条
@@ -136,8 +224,20 @@ void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
 	//downloadProgressBar->hide();
 	//downloadProgressBar->setMaximumHeight(20);
 	downloadProgressBar->setTextVisible(false);
-	downloadProgressBarMap->insert(index, downloadProgressBar);  //将这个进度条放入map
-	ui->tableView->setIndexWidget(model->index(model->rowCount()-1 , 3), downloadProgressBar);
+	
+	if (max == -1)
+	{
+		downloadProgressBarMap->insert(index, downloadProgressBar);  //将这个进度条放入map
+	}
+	else
+	{
+		qDebug() << "max :" << max << "now: " << now;
+		downloadProgressBar->setMaximum(max);
+		downloadProgressBar->setValue(now);
+		downloadProgressBarMap->insert(index, downloadProgressBar);  //将这个进度条放入map
+		downloadProgressBar->show();
+	}
+	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 3), downloadProgressBar);
 
 	//放速度条
 	mFileSpeed = new QLabel();
@@ -148,30 +248,34 @@ void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
 	widgetSpeed->setLayout(SpeedLayout);
 
 	downloadSpeedMap->insert(index, mFileSpeed);
-	ui->tableView->setIndexWidget(model->index(model->rowCount() -1, 4), widgetSpeed);
+	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 4), widgetSpeed);
 	//model->item(model->rowCount() - 1, 4)->setTextAlignment(Qt::AlignCenter);  //居中
 
 	//放剩余时间
 	mLeftTime = new QLabel();
 	downloadLeftTimeMap->insert(index, mLeftTime);
-	ui->tableView->setIndexWidget(model->index(model->rowCount() -1 , 5), mLeftTime);
-	//model->item(model->rowCount() - 1, 5)->setTextAlignment(Qt::AlignCenter); //居中
-	
-
-	
-
-	//model->setItem(index, 0, new QStandardItem(fileInfo.at(i).fileName));
-
+	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 5), mLeftTime);
 	ui->tableView->setModel(model);
+	index++;
+	
+}
+//当downloadWindow有下载请求的时候，插入一条下载记录到downloadManage，开启线程？
+void DownloadManage::insertDownloadFile(QString m_FileName, QString m_FilePath)
+{
+	
 	//开启一个新的线程
-	downloadThread = new DownloadThread(m_FileName, m_FilePath,index); //这里new了一个线程
+	QString downloadName = checkRename(m_FileName, m_FilePath);
+	downloadThread = new DownloadThread(m_FileName,m_FilePath,index,false); //这里new了一个线程
 	qDebug() << "new download , main ThreadId :" <<QThread::currentThreadId();
 	downloadThreadMap->insert(index, downloadThread);
+	fileStatusMap->insert(index, 0); //插入正在下载状态
+	qDebug() << "downloadName:" << downloadName;
+	insertDownloadRecord(downloadName, m_FilePath,"-1", -1, -1);
 	connect(downloadThread, SIGNAL(finished()), downloadThread, SLOT(deleteLater()));
 	connect(downloadThread, SIGNAL(downloadAvailable(int)), this, SLOT(beginToDownload(int)));
 	//对了要发送一个下载请求到服务器！ 
 	downloadThread->start();
-	index++;
+	
 }
 
 //绑定信号槽
@@ -179,18 +283,22 @@ void DownloadManage::beginToDownload(int num)
 {
 	//依次绑定信号槽
 	qDebug() << num << "bind signal ";
-	QMap<int, DownloadThread*>::iterator it = downloadThreadMap->find(num);;
+	QMap<int, DownloadThread*>::iterator it = downloadThreadMap->find(num);
 	//这些就是更新UI，以及是否发送完毕
 	connect(it.value()->downloadFile, SIGNAL(downloadOver(int)), this, SLOT(checkDownloadOver(int)), Qt::BlockingQueuedConnection);
 	connect(it.value()->downloadFile, SIGNAL(updateProgress(int, qint64, qint64)),
 		this, SLOT(updateProgressBar(int, qint64, qint64)), Qt::BlockingQueuedConnection);
 	connect(it.value()->downloadFile, SIGNAL(updateSpeedLabel(int, double,QString)),
 		this, SLOT(updateSpeedLabel(int, double,QString)), Qt::BlockingQueuedConnection);
+	connect(this, SIGNAL(stopDownload(int)), it.value()->downloadFile, SLOT(stopReceive(int)));
 	//connect(this, SIGNAL(sendFileSignal()), it.value()->downloadFile, SLOT(receiveSendSignal()));
 
 }
 void DownloadManage::checkDownloadOver(int num)
 {
+	//下载完毕
+	QMap<int, int>::iterator it = fileStatusMap->find(num);
+	it.value() = 1;
 
 	//QMap<int, DownloadThread*>::iterator it = downloadQThreadMap->find(num);
 	//设置一下图片
@@ -316,5 +424,105 @@ QString DownloadManage::countFileSize(QString fileSize)
 	else
 	{
 		return QString::fromLocal8Bit("%1KB").arg(QString::number(fileSize.toFloat() / (1024), 'f', 2)); //返回一个QString
+	}
+}
+
+//把文件路径和文件名发过来
+QString DownloadManage::checkRename(QString mFileName,QString mFilePath)
+{
+	QString suffix = mFileName.right(mFileName.size() - mFileName.lastIndexOf('.') - 1); //获取文件后缀;
+																					  //这里和服务器的不一样
+	QString fullName = mFileName.left(mFileName.size() - (mFileName.size() - mFileName.lastIndexOf('.'))); //获取文件名
+	
+	int i = 0;																											   //查询文件名是否重复
+	while (1)
+	{
+		QFile *existFile = new QFile(mFilePath + mFileName);  //就是判断是否重复
+		qDebug() << "exitsFile" << mFilePath + mFileName;
+		if (existFile->exists())   //如果文件存在
+		{
+			i++;
+			mFileName = fullName + "(" + QString::number(i, 10) + ")." + suffix;
+
+			qDebug() << "the fileName :" << mFileName;
+		}
+		else
+			break;
+	}
+	return mFileName;
+}
+
+//查询本地的下载记录
+void DownloadManage::queryLocalCache()
+{
+	QString sql = "select * from DownloadRecord;";
+	QList<QStringList> record = Database::queryDB(sql, 7);
+	//得到本地下载记录
+	qDebug() << "cache size:" << record.size();
+
+	for (int i = 0; i < record.size(); i++)
+	{
+		qDebug() << "cache :"<<record.at(i).at(1);
+		qDebug() << "sum: " << record.at(i).at(4).toInt();
+		qDebug() << "break: " << record.at(i).at(5).toInt();
+		
+		QString cFileName = record.at(i).at(1);
+		QString cFilePath = record.at(i).at(2);
+		QString cFileSize = countFileSize(record.at(i).at(3));
+
+		qint64 cSumBlock = record.at(i).at(4).toInt() ;
+		qint64 cbreakPoint = record.at(i).at(5).toInt() ;
+		int cfileId = record.at(i).at(6).toInt();
+		//插入界面
+		//如果已经下载完毕
+		if (cSumBlock == cbreakPoint)
+		{
+			fileStatusMap->insert(index, 1);
+		}
+		else
+		{
+
+			fileStatusMap->insert(index, 2);
+		}
+		BreakFile breakfile;
+		breakfile.recordId = record.at(i).at(0).toInt();
+		breakfile.fileId = cfileId;
+		breakfile.fileName = cFileName;
+		breakfile.filePath = cFilePath;
+		breakfile.breakPoint = cbreakPoint;
+		breakFileMap->insert(index, breakfile);
+		insertDownloadRecord(cFileName, cFilePath, cFileSize, cSumBlock, cbreakPoint);
+	}
+}
+void DownloadManage::slotContextMenu(QPoint pos) {
+
+	QModelIndex current_index = ui->tableView->indexAt(pos);
+
+	qDebug() << current_index;
+	if (current_index.isValid())
+	{
+		//找到选中的文件状态
+		QMap<int, int>::iterator it = fileStatusMap->find(current_index.row());
+		//如果下载中
+		if (it.value() == 0)
+		{
+			actionBegin->setEnabled(false);
+			actionWait->setEnabled(true);
+			actionOpenFile->setEnabled(false);
+		}
+		//下载完毕
+		else if (it.value() == 1)
+		{
+			actionBegin->setEnabled(false);
+			actionWait->setEnabled(false);
+			actionOpenFile->setEnabled(true);
+		}
+		else if (it.value() == 2)
+		{
+			actionBegin->setEnabled(true);
+			actionWait->setEnabled(false);
+			actionOpenFile->setEnabled(false);
+		}
+		popMenu->exec(QCursor::pos()); // 菜单出现的位置为当前鼠标的位置
 	}
 }

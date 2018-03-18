@@ -61,6 +61,18 @@
     <Filter Include="Source Files\QTUI\Report">
       <UniqueIdentifier>{403485c8-5375-4b5b-8668-087fc36faa88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\H_QTUI\User">
+      <UniqueIdentifier>{d82a0396-66c1-4bb6-a587-7ae167b3ba94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\H_QTUI\Window">
+      <UniqueIdentifier>{0e2a555f-1ee1-4a71-9b1e-05cf325f8db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\User">
+      <UniqueIdentifier>{08ac55cc-2cef-4291-ab6b-b0c1e4295deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\Window">
+      <UniqueIdentifier>{40867bde-ede2-444c-b594-5a54d47c42cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,20 +90,11 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Login.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Login.cpp">
-      <Filter>Source Files\QTUI</Filter>
-    </ClCompile>
-    <ClCompile Include="FileManagement.cpp">
-      <Filter>Source Files\QTUI</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_Register.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_Register.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Register.cpp">
-      <Filter>Source Files\QTUI</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TitleBar.cpp">
       <Filter>Generated Files</Filter>
@@ -135,9 +138,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Taes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_DownloadFile.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -149,9 +149,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_UserInformation.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInformation.cpp">
-      <Filter>Source Files\QTUI</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_ButtonDelegate.cpp">
       <Filter>Generated Files</Filter>
@@ -255,6 +252,24 @@
     <ClCompile Include="DownloadManage.cpp">
       <Filter>Source Files\QTUI\File</Filter>
     </ClCompile>
+    <ClCompile Include="UserInformation.cpp">
+      <Filter>Source Files\QTUI\User</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManagement.cpp">
+      <Filter>Source Files\QTUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Source Files\QTUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Register.cpp">
+      <Filter>Source Files\QTUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Taes.cpp">
+      <Filter>Source Files\QTUI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -263,20 +278,11 @@
     <CustomBuild Include="FileManagement.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="FileManagement.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Login.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </CustomBuild>
     <CustomBuild Include="Login.h">
       <Filter>Header Files\Login</Filter>
     </CustomBuild>
     <CustomBuild Include="Register.ui">
       <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Register.h">
-      <Filter>Header Files\H_QTUI</Filter>
     </CustomBuild>
     <CustomBuild Include="BaseWindow.h">
       <Filter>Header Files\H_QTUI\Base</Filter>
@@ -295,9 +301,6 @@
     </CustomBuild>
     <CustomBuild Include="UserInformation.ui">
       <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="UserInformation.h">
-      <Filter>Header Files\H_QTUI</Filter>
     </CustomBuild>
     <CustomBuild Include="ButtonDelegate.h">
       <Filter>Header Files\H_QTUI\Base</Filter>
@@ -359,6 +362,18 @@
     <CustomBuild Include="C:\Users\44562\Desktop\untitled.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="UserInformation.h">
+      <Filter>Header Files\H_QTUI\User</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Login.h">
+      <Filter>Header Files\H_QTUI\Window</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FileManagement.h">
+      <Filter>Header Files\H_QTUI\Window</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Register.h">
+      <Filter>Header Files\H_QTUI\Window</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -417,6 +432,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_untitled.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

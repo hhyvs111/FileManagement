@@ -52,6 +52,9 @@ void  DownloadWindow::initModel()
 	ui->downloadTable->setColumnWidth(5, 40);
 	ui->downloadTable->setColumnWidth(6, 40);
 
+	ui->downloadTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->downloadTable->setSelectionMode(QAbstractItemView::SingleSelection);
+	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	//设置列宽不可变 
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
@@ -215,7 +218,7 @@ void DownloadWindow::ClickDownloadButton()
 
 	openFileName = btn->property("fileName").toString();	//获取按钮的名字
 	
-	emit addDownloadFile(openFileName, saveFileName);  //只要发送文件名和路径给线程就好了
+	emit addDownloadFile(openFileName, "files/");  //只要发送文件名和路径给线程就好了
 	
 
 	//发送下载信息，先注释掉
@@ -365,7 +368,7 @@ void DownloadWindow::showFileInfo()
 		m_delete->setProperty("row", i);
 		m_delete->setProperty("deleteFileId", fileInfo.at(i).fileId);
 		m_delete->setProperty("deleteFileName", fileInfo.at(i).fileName);
-		qDebug() << "now row:" << model->rowCount() << fileInfo.at(i).fileName;
+		//qDebug() << "now row:" << model->rowCount() << fileInfo.at(i).fileName;
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_download);
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 6), m_delete);
 
