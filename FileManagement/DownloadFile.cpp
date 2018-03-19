@@ -52,6 +52,7 @@ void DownloadFile::init()
 	{
 
 		 bs = "downloadBreakFile";
+		 //cbreakPoint断点处，因为等于sumblock的值
 		 data = bs + "#" + QString::number(breakFileId) + "#" + QString::number(cbreakPoint) + "#" + globalUserName ;
 	}
 
@@ -114,6 +115,9 @@ void DownloadFile::receiveFile()
 			}
 			newFile = new QFile(filePath + fileName);  //新建一个文件，写入
 			newFile->open(QFile::WriteOnly);
+			//
+			//qint64 fileWrited = newFile->size();
+
 			breakPoint = receiveTime;
 		}
 		//如果是写断点，则直接打开不要新建
@@ -121,10 +125,12 @@ void DownloadFile::receiveFile()
 		{
 			qDebug() << "gogon!!!!!!!!!!!!!";
 			newFile = new QFile(breakFilePath + breakFileName);  
-			newFile->open(QFile::WriteOnly);
-			receiveTime = cbreakPoint;
-			byteReceived += cbreakPoint * 4 * 1024;
-			breakPoint = cbreakPoint;
+			//append模式，在文件的后面
+			newFile->open(QFile::WriteOnly| QFile::Append);
+			newFile->atEnd();
+			receiveTime = cbreakPoint - 1;
+			byteReceived += (cbreakPoint-1) * 4 * 1024;
+			breakPoint = cbreakPoint - 1;
 		}
 
 		
@@ -223,7 +229,7 @@ void DownloadFile::receiveFile()
 		}
 		else
 		{
-
+			updateRecord();
 		}
 
 		emit downloadOver(index);
@@ -425,8 +431,30 @@ bool DownloadFile::insertRecord()
 	if (insert.isActive())
 	{
 		qDebug() << sql;
+		//查询最新的downloadRecord记录
+		QString sql1 = "select * from DownloadRecord order by r_Id desc limit 0,1";
+		QSqlQuery query;
+		query.exec(sql1);
+		BreakFile breakFile;
+		if (query.next())
+		{
+			breakFile.recordId = query.value(0).toInt();
+		}
+		
+		breakFile.fileId = fileId;
+		breakFile.fileName = fileName;
+		breakFile.breakPoint = breakPoint;
+		breakFile.filePath = filePath;
+		////将这个breakFile传送过去
+		//qint64 recordId, int fileId,
+		//	QString fileName, QString filePath,
+		//	qint64 breakPoint
+		emit addToBreakFile(index, breakFile.recordId, breakFile.fileId,
+			breakFile.fileName, breakFile.filePath, breakFile.breakPoint);
+
 		return true;
 	}
+
 	return false;
 }
 

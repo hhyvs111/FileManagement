@@ -12,14 +12,7 @@
 extern TcpClient * tcp;
 extern QString globalUserName;
 
-struct BreakFile
-{
-	qint64 recordId;
-	int fileId;
-	QString fileName;
-	QString filePath;
-	qint64 breakPoint;
-};
+
 class DownloadManage : public QWidget
 {
 	Q_OBJECT
@@ -93,6 +86,12 @@ private slots:
 	//ÓÒ¼ü²Ëµ¥
 	void CallWaitDownload();
 	void CallKeepOnDownload();
+	void CallOpenFile();
+	void CallOpenFolder();
+	//void CallDelete();
+	void addBreakFile(int, qint64 recordId, int fileId,
+		QString fileName, QString filePath,
+		qint64 breakPoint);
 
 signals:
 	void stopDownload(int);

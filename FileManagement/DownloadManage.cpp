@@ -7,7 +7,7 @@
 #include <QToolButton>
 #include<QActionGroup>
 #include <QFileIconProvider>
-
+#include <QDesktopServices>
 DownloadManage::DownloadManage(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::DownloadManage)
@@ -89,6 +89,8 @@ void DownloadManage::setMenuEvent()
 
 	connect(actionWait, SIGNAL(triggered()), this, SLOT(CallWaitDownload()));
 	connect(actionBegin, SIGNAL(triggered()), this, SLOT(CallKeepOnDownload()));
+	connect(actionOpenFile, SIGNAL(triggered()), this, SLOT(CallOpenFile()));
+	connect(actionOpenFile, SIGNAL(triggered()), this, SLOT(CallOpenFolder()));
 	//QActionGroup *actionGroup = new QActionGroup(this);
 	//actionGroup->addAction(actionBegin);
 	//actionGroup->addAction(actionWait);
@@ -107,6 +109,18 @@ void DownloadManage::setMenuEvent()
 	//actionBegin->setEnabled(false);
 }
 
+void DownloadManage::addBreakFile(int num, qint64 recordId, int fileId,
+	QString fileName, QString filePath,
+	qint64 breakPoint)
+{
+	BreakFile breakFile;
+	breakFile.recordId = recordId;
+	breakFile.fileId = fileId;
+	breakFile.fileName = fileName;
+	breakFile.breakPoint = breakPoint;
+	breakFile.filePath = filePath;
+	breakFileMap->insert(num,breakFile);
+}
 void DownloadManage::CallWaitDownload()
 {
 	//当暂停按钮触发的时候，
@@ -116,7 +130,13 @@ void DownloadManage::CallWaitDownload()
 	QModelIndex indexSelected = indexsSelected.at(0);
 	qDebug() << "waitRow" << indexSelected.row();
 
+	QMap<int, int>::iterator it = fileStatusMap->find(indexSelected.row());
+	it.value() = 2;
+	downloadThreadMap->remove(indexSelected.row());
+	
+
 	//选中的行数发出暂停的操作
+	
 	emit stopDownload(indexSelected.row());
 }
 
@@ -138,7 +158,39 @@ void DownloadManage::CallKeepOnDownload()
 	//对了要发送一个下载请求到服务器！ 
 	downloadThread->start();
 
+	//更改文件状态
+	QMap<int, int>::iterator it1 = fileStatusMap->find(indexSelected.row());
+	it1.value() = 1;
+
 	
+}
+
+void DownloadManage::CallOpenFile()
+{
+	QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
+	QModelIndexList indexsSelected = selectionModel->selectedIndexes();
+	QModelIndex indexSelected = indexsSelected.at(0);
+	QMap<int, BreakFile>::iterator it = breakFileMap->find(indexSelected.row());
+
+	//QFileInfo fi = QFileInfo(fileFull);
+	//QString filePath;
+	//filePath = fi.absolutePath();
+
+	QDesktopServices::openUrl(QUrl(it.value().filePath + it.value().fileName, QUrl::TolerantMode));
+}
+
+void DownloadManage::CallOpenFolder()
+{
+	QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
+	QModelIndexList indexsSelected = selectionModel->selectedIndexes();
+	QModelIndex indexSelected = indexsSelected.at(0);
+	QMap<int, BreakFile>::iterator it = breakFileMap->find(indexSelected.row());
+
+	//QFileInfo fi = QFileInfo(fileFull);
+	//QString filePath;
+	//filePath = fi.absolutePath();
+
+	QDesktopServices::openUrl(QUrl(it.value().filePath, QUrl::TolerantMode));
 }
 void DownloadManage::showToolTip(const QModelIndex &index) {
 	if (!index.isValid()) {
@@ -163,6 +215,8 @@ void DownloadManage::initMap()
 	queryLocalCache();
 	
 }
+
+
 
 //-1代表还未下载
 void DownloadManage::insertDownloadRecord(QString m_FileName, QString m_FilePath,QString m_FileSize,qint64 max,qint64 now)
@@ -291,6 +345,7 @@ void DownloadManage::beginToDownload(int num)
 	connect(it.value()->downloadFile, SIGNAL(updateSpeedLabel(int, double,QString)),
 		this, SLOT(updateSpeedLabel(int, double,QString)), Qt::BlockingQueuedConnection);
 	connect(this, SIGNAL(stopDownload(int)), it.value()->downloadFile, SLOT(stopReceive(int)));
+	connect(it.value()->downloadFile, SIGNAL(addToBreakFile(int, qint64,int,QString,QString,qint64)), this, SLOT(addBreakFile(int, qint64, int, QString, QString, qint64)));
 	//connect(this, SIGNAL(sendFileSignal()), it.value()->downloadFile, SLOT(receiveSendSignal()));
 
 }

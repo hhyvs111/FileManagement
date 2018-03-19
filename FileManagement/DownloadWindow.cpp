@@ -218,7 +218,7 @@ void DownloadWindow::ClickDownloadButton()
 
 	openFileName = btn->property("fileName").toString();	//获取按钮的名字
 	
-	emit addDownloadFile(openFileName, "files/");  //只要发送文件名和路径给线程就好了
+	emit addDownloadFile(openFileName, "I:/workspace/FileManagement/FileManagement/files/");  //只要发送文件名和路径给线程就好了
 	
 
 	//发送下载信息，先注释掉

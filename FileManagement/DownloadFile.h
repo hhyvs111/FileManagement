@@ -63,7 +63,7 @@ private:
 	QString breakFileName;
 	QString breakFilePath;
 
-	int fileId;
+	qint64 fileId;
 	int receiveTime;	//接受的次数
 	double speed;
 
@@ -96,6 +96,10 @@ signals:
 	void downloadOver(int);
 	void updateProgress(int, qint64, qint64);
 	void updateSpeedLabel(int, double,QString);
+
+	void addToBreakFile(int, qint64 recordId,int fileId,
+		QString fileName,QString filePath,
+	qint64 breakPoint);
 
 };
 

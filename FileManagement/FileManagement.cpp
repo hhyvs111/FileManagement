@@ -93,6 +93,13 @@ void FileManagement::init()
 	ui->reportLookButton->setCheckable(true);
 	ui->reportLookButton->setAutoExclusive(true);
 
+	QIcon moneyManageicon(":/Resource/FunIcon/moneyManage.png"); //创建QIcon对象
+	ui->moneyButton->setIcon(moneyManageicon); //将图片设置到按钮上
+	ui->moneyButton->setIconSize(QSize(80, 20));//根据实际调整图片大小
+	ui->moneyButton->setStyleSheet("border:none");
+	ui->moneyButton->setCheckable(true);
+	ui->moneyButton->setAutoExclusive(true);
+
 	//QMovie *movie = new QMovie(":/Resource/MainWindow.gif");//加载图片gif
 	//ui->photoLabel->setGeometry(500, 20, 200, 0);
 	//movie->setScaledSize(QSize(900, 580));//设置图片大小
