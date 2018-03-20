@@ -77,7 +77,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy1);
-        tableView->setMinimumSize(QSize(400, 50));
+        tableView->setMinimumSize(QSize(500, 100));
         tableView->setMaximumSize(QSize(16777215, 16777215));
 
         horizontalLayout->addWidget(tableView);
@@ -115,6 +115,7 @@ public:
 
 
         retranslateUi(MoneyManage);
+        QObject::connect(RecordButton, SIGNAL(clicked()), MoneyManage, SLOT(clickAccountingButton()));
 
         QMetaObject::connectSlotsByName(MoneyManage);
     } // setupUi

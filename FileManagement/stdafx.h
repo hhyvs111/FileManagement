@@ -16,6 +16,8 @@
 #include <QGraphicsDropShadowEffect>
 #include <algorithm>
 #include <QAction>
+#include <QStandardItemModel>
+#include <QToolTip>
 #include"tcpclient.h"
 
 using namespace std;

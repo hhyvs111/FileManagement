@@ -76,7 +76,7 @@ void DownloadFile::receiveFile()
 	QDataStream out(&outBlock, QIODevice::WriteOnly);
 	if (byteReceived == 0)  //才刚开始接收数据，此数据为文件信息  
 	{
-		QTimer *timer = new QTimer(this);
+		timer = new QTimer(this);
 		connect(timer, SIGNAL(timeout()), this, SLOT(updateSpeed())); // ***就是你所说的响应函数
 		timer->start(1000); // 每隔1s更新速度标签
  
@@ -142,7 +142,7 @@ void DownloadFile::receiveFile()
 		out << receiveStatus << sumBlock << breakPoint;
 		//qDebug() << outBlock;
 		tcpSocket->write(outBlock);
-		tcpSocket->waitForBytesWritten();
+		//tcpSocket->waitForBytesWritten();
 
 	}
 	else  //正式读取文件内容  
@@ -232,17 +232,20 @@ void DownloadFile::receiveFile()
 			updateRecord();
 		}
 
-		emit downloadOver(index);
+
 		inBlock.clear();
 		byteReceived = 0;
 		RtotalSize = 0;
 		receiveTime = 0;
 		newFile->close();
+		timer->stop();
+		disconnect(timer, SIGNAL(timeout()), this, SLOT(updateSpeed())); // ***就是你所说的响应函数
 		//receiveStatus = -3;
 		//out << receiveStatus << sumBlock << breakPoint;
 		//tcpSocket->write(outBlock);  //写数据给服务器,说发送完毕
 		disconnect(tcpSocket, SIGNAL(readyRead()), this, SLOT(receiveFile()));
 		//connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(receiveBreak()));
+		emit downloadOver(index);
 	}
 }
 

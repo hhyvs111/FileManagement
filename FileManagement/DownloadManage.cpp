@@ -90,7 +90,7 @@ void DownloadManage::setMenuEvent()
 	connect(actionWait, SIGNAL(triggered()), this, SLOT(CallWaitDownload()));
 	connect(actionBegin, SIGNAL(triggered()), this, SLOT(CallKeepOnDownload()));
 	connect(actionOpenFile, SIGNAL(triggered()), this, SLOT(CallOpenFile()));
-	connect(actionOpenFile, SIGNAL(triggered()), this, SLOT(CallOpenFolder()));
+	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(CallOpenFolder()));
 	//QActionGroup *actionGroup = new QActionGroup(this);
 	//actionGroup->addAction(actionBegin);
 	//actionGroup->addAction(actionWait);
@@ -130,10 +130,19 @@ void DownloadManage::CallWaitDownload()
 	QModelIndex indexSelected = indexsSelected.at(0);
 	qDebug() << "waitRow" << indexSelected.row();
 
-	QMap<int, int>::iterator it = fileStatusMap->find(indexSelected.row());
-	it.value() = 2;
+	//取消那个速度绑定
+	QMap<int, DownloadThread*>::iterator it = downloadThreadMap->find(indexSelected.row());
+
+	disconnect(it.value()->downloadFile, SIGNAL(updateSpeedLabel(int, double, QString)),
+		this, SLOT(updateSpeedLabel(int, double, QString)));
+
+	QMap<int, QLabel*>::iterator it1 = downloadSpeedMap->find(indexSelected.row());
+	it1.value()->setText("");
+
+	QMap<int, int>::iterator it2 = fileStatusMap->find(indexSelected.row());
+	it2.value() = 2;
 	downloadThreadMap->remove(indexSelected.row());
-	
+
 
 	//选中的行数发出暂停的操作
 	
@@ -158,9 +167,9 @@ void DownloadManage::CallKeepOnDownload()
 	//对了要发送一个下载请求到服务器！ 
 	downloadThread->start();
 
-	//更改文件状态
+	//更改文件状态,，改为下载中
 	QMap<int, int>::iterator it1 = fileStatusMap->find(indexSelected.row());
-	it1.value() = 1;
+	it1.value() = 0;
 
 	
 }

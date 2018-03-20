@@ -7,6 +7,7 @@
 #include <QToolButton>
 #include <QFileIconProvider>
 #include "MyMessageBox.h"
+#include "SetFilePath.h"
 DownloadWindow::DownloadWindow(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::DownloadWindow)
@@ -218,7 +219,7 @@ void DownloadWindow::ClickDownloadButton()
 
 	openFileName = btn->property("fileName").toString();	//获取按钮的名字
 	
-	emit addDownloadFile(openFileName, "I:/workspace/FileManagement/FileManagement/files/");  //只要发送文件名和路径给线程就好了
+	emit addDownloadFile(openFileName, filePath);  //只要发送文件名和路径给线程就好了
 	
 
 	//发送下载信息，先注释掉
@@ -513,5 +514,18 @@ void DownloadWindow::ClickFindButton()
 	{
 		sendFileInfo(condition);
 	}
+}
+
+
+void DownloadWindow::setFilePath()
+{
+	SetFilePath *setPath = new SetFilePath(this);
+	setPath->show();
+	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
+}
+
+void DownloadWindow::receiveFilePath(QString mFilePath)
+{
+	filePath = mFilePath;
 }
 

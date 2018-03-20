@@ -167,6 +167,13 @@ void TcpClient::readMessages()
 			emit sendDataToReportLook("delete_F");
 		}
 	}
+	else if (list[0] == "accounting")
+	{
+		if (list[1] == "true")
+			emit sendDataToAccounting("account_T");
+		else
+			emit sendDataToAccounting("account_F");
+	}
 
     else
         return ;

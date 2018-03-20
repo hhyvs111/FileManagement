@@ -42,6 +42,7 @@ private:
 	int index;  //序号
 	QTcpSocket *tcpSocket;   //连接服务器的socket
 	QTime downloadTime;
+	QTimer *timer;
 	QFile *newFile;
 	QByteArray inBlock;
 	QByteArray outBlock;  //发数据给服务器

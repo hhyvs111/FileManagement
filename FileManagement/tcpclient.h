@@ -46,6 +46,7 @@ signals:
 	void sendDataToDownload(QString);
 	void sendDataToReportEdit(QString);
 	void sendDataToReportLook(QString);
+	void sendDataToAccounting(QString);
 };
 
 #endif // TCPCLIENT_H

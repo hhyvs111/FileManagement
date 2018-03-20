@@ -6,22 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
-    <height>470</height>
+    <width>411</width>
+    <height>286</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="adas">
+     <widget class="QWidget" name="outcome">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>支出</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -30,7 +42,7 @@
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <property name="spacing">
-          <number>0</number>
+          <number>10</number>
          </property>
          <item row="3" column="3">
           <spacer name="horizontalSpacer_13">
@@ -78,7 +90,7 @@
           </spacer>
          </item>
          <item row="0" column="2">
-          <widget class="QComboBox" name="TypeBox_2">
+          <widget class="QComboBox" name="outcomeType">
            <property name="maximumSize">
             <size>
              <width>150</width>
@@ -220,7 +232,7 @@
           </spacer>
          </item>
          <item row="3" column="2">
-          <widget class="QPlainTextEdit" name="remarks_2"/>
+          <widget class="QPlainTextEdit" name="outcomeRemark"/>
          </item>
          <item row="0" column="1">
           <widget class="QLabel" name="TypeLabel_2">
@@ -242,10 +254,10 @@
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QDateEdit" name="dateEdit_2"/>
+          <widget class="QDateEdit" name="outcomeDate"/>
          </item>
          <item row="1" column="2">
-          <widget class="QLineEdit" name="oucomeNumber_2"/>
+          <widget class="QLineEdit" name="outcomeNumber"/>
          </item>
          <item row="4" column="2">
           <widget class="QPushButton" name="SaveButton_2">
@@ -274,9 +286,9 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_4">
+     <widget class="QWidget" name="income">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>收入</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -285,7 +297,7 @@
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <property name="spacing">
-          <number>0</number>
+          <number>10</number>
          </property>
          <item row="2" column="1">
           <widget class="QLabel" name="DateLabel_3">
@@ -406,7 +418,7 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QComboBox" name="TypeBox_3">
+          <widget class="QComboBox" name="incomeType">
            <property name="maximumSize">
             <size>
              <width>150</width>
@@ -497,7 +509,7 @@
           </spacer>
          </item>
          <item row="3" column="2">
-          <widget class="QPlainTextEdit" name="remarks_3"/>
+          <widget class="QPlainTextEdit" name="incomeRemark"/>
          </item>
          <item row="1" column="2">
           <widget class="QLineEdit" name="incomeNumber"/>
@@ -518,5 +530,42 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>SaveButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Accounting</receiver>
+   <slot>clickOutcomeButton()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>270</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SaveButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Accounting</receiver>
+   <slot>clickIncomeButton()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>235</x>
+     <y>242</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>clickIncomeButton()</slot>
+  <slot>clickOutcomeButton()</slot>
+ </slots>
 </ui>

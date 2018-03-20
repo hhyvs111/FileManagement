@@ -348,6 +348,15 @@
     <ClCompile Include="Echarts.cpp">
       <Filter>Source Files\QTUI\Echarts</Filter>
     </ClCompile>
+    <ClCompile Include="SetFilePath.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SetFilePath.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SetFilePath.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -485,6 +494,12 @@
     <CustomBuild Include="Echarts.h">
       <Filter>Header Files\H_QTUI\Echarts</Filter>
     </CustomBuild>
+    <CustomBuild Include="SetFilePath.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SetFilePath.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -552,6 +567,12 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_Echarts.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_SetFilePath.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountInfo.h">
+      <Filter>Header Files\H_QTUI\Account</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
