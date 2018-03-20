@@ -444,6 +444,12 @@
     <None Include="Resource\qss\ReportDetail.qss">
       <Filter>Resource\CSS</Filter>
     </None>
+    <None Include="ReportEdit.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
+    <None Include="Resource\qss\ReportLook.qss">
+      <Filter>Resource\CSS</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\chat.png">

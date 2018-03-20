@@ -6,169 +6,74 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>651</width>
-    <height>511</height>
+    <width>639</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <property name="leftMargin">
+    <number>13</number>
+   </property>
+   <property name="topMargin">
+    <number>13</number>
+   </property>
+   <property name="rightMargin">
+    <number>13</number>
+   </property>
+   <property name="bottomMargin">
+    <number>13</number>
+   </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="LName">
-       <property name="text">
-        <string>姓名</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="reportName"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="LNumber">
-       <property name="text">
-        <string>学号</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="reportNumber"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="LLevel">
-       <property name="text">
-        <string>年级</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="reportLevel"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="1" column="3">
       <widget class="QLabel" name="LTeacher">
        <property name="text">
         <string>导师</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="LNumber">
+       <property name="text">
+        <string>学号</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
       <widget class="QLineEdit" name="reportTeacher"/>
      </item>
-     <item>
-      <spacer name="horizontalSpacer_8">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+     <item row="2" column="6">
+      <widget class="QComboBox" name="reportWeek">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="sizeHint" stdset="0">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="maxVisibleItems">
+        <number>8</number>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+       </property>
+       <property name="minimumContentsLength">
+        <number>15</number>
+       </property>
+       <property name="iconSize">
         <size>
-         <width>40</width>
-         <height>20</height>
+         <width>70</width>
+         <height>24</height>
         </size>
        </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="LTerm">
-       <property name="text">
-        <string>学期</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="reportTerm">
-       <property name="cursor">
-        <cursorShape>ArrowCursor</cursorShape>
-       </property>
-       <item>
-        <property name="text">
-         <string>研一上</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>研一下</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>研二上</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>研二下</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>研三上</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>研三下</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="LWeek">
-       <property name="text">
-        <string>周数</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="reportWeek">
        <item>
         <property name="text">
          <string>1</string>
@@ -271,14 +176,163 @@
        </item>
       </widget>
      </item>
-     <item>
-      <spacer name="horizontalSpacer_9">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="reportName">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255,240,255,120);
+focus background-color: rgb(255,255,255)；
+</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="reportTerm">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"> border: 1px solid gray;
+    border-radius: 3px;
+    padding: 1px 2px 1px 2px; 
+    min-width: 10em; 
+ subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 50px;
+ 
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;</string>
+       </property>
+       <property name="maxVisibleItems">
+        <number>8</number>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>60</width>
+         <height>30</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>研一上</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>研一下</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>研二上</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>研二下</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>研三上</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>研三下</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="LName">
+       <property name="text">
+        <string>姓名</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QLabel" name="LWeek">
+       <property name="text">
+        <string>周数</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="LLevel">
+       <property name="text">
+        <string>年级</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QLineEdit" name="reportNumber">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="reportLevel"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="LTerm">
+       <property name="text">
+        <string>学期</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="2">
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -288,10 +342,16 @@
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QLabel" name="LMain">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(192,192, 192);</string>
+       </property>
        <property name="text">
-        <string>本周学习内容</string>
+        <string> 本周学习内容</string>
        </property>
       </widget>
      </item>
@@ -301,49 +361,99 @@
     </layout>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
       <widget class="QLabel" name="LQuestionForSolve">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(192,192, 192);</string>
+       </property>
        <property name="text">
-        <string>本周遇到的问题</string>
+        <string> 本周遇到的问题</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item>
       <widget class="QPlainTextEdit" name="reportQuestionForSolve"/>
      </item>
     </layout>
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="1">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="1" column="2">
       <widget class="QPlainTextEdit" name="reportQuestionHasSolved"/>
      </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="LQuestionForSolved">
-       <property name="text">
-        <string>解决方法</string>
+     <item row="1" column="0">
+      <widget class="QPlainTextEdit" name="reportQuestionFromLastWeek">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="LQuestionFromLastWeek">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(192,192, 192);</string>
+       </property>
        <property name="text">
-        <string>上周的问题</string>
+        <string> 上周的问题</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QPlainTextEdit" name="reportQuestionFromLastWeek"/>
+     <item row="0" column="2">
+      <widget class="QLabel" name="LQuestionForSolved">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(192,192, 192);</string>
+       </property>
+       <property name="text">
+        <string> 解决方法</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>42</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QLabel" name="LYourGet">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);</string>
+       </property>
        <property name="text">
-        <string>学习心得与体会</string>
+        <string> 学习心得与体会</string>
        </property>
       </widget>
      </item>
@@ -354,6 +464,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -369,13 +482,43 @@
      </item>
      <item>
       <widget class="QPushButton" name="resetButton">
+       <property name="styleSheet">
+        <string notr="true"> background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+       </property>
        <property name="text">
         <string>重置</string>
        </property>
       </widget>
      </item>
      <item>
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="submitButton">
+       <property name="styleSheet">
+        <string notr="true"> background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+       </property>
        <property name="text">
         <string>提交</string>
        </property>

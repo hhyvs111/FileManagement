@@ -49,7 +49,7 @@ public:
     {
         if (DownloadWindow->objectName().isEmpty())
             DownloadWindow->setObjectName(QStringLiteral("DownloadWindow"));
-        DownloadWindow->resize(811, 504);
+        DownloadWindow->resize(811, 537);
         verticalLayout = new QVBoxLayout(DownloadWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -74,6 +74,15 @@ public:
 
         settingButton = new QToolButton(DownloadWindow);
         settingButton->setObjectName(QStringLiteral("settingButton"));
+        settingButton->setStyleSheet(QLatin1String("\n"
+"    border: 2px solid #8f8f91;\n"
+"    border-radius: 6px;\n"
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"    \n"
+"\n"
+"\n"
+""));
 
         horizontalLayout->addWidget(settingButton);
 

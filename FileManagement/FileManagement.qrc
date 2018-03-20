@@ -34,5 +34,9 @@
         <file>Resource/title/max.png</file>
         <file>Resource/title/min.png</file>
         <file>Resource/Logo.gif</file>
+        <file>Resource/qss/ReportEdit.qss</file>
+        <file>Resource/title/mi.jpg</file>
+        <file>Resource/qss/ReportLook.qss</file>
+        <file>Resource/title/gray1.jpg</file>
     </qresource>
 </RCC>

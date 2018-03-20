@@ -89,6 +89,7 @@ void ReportLook::initModel()
 	ui->tableView->horizontalHeader()->setSectionResizeMode(6, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(7, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(8, QHeaderView::Fixed);
+	ui->tableView->setAlternatingRowColors(true);//设置换行改变颜色
 }
 
 //插入周数的选择
