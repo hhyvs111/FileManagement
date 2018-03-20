@@ -1,12 +1,12 @@
 #pragma once
+
+#ifndef REPORTLOOK_H_
+#define REPORTLOOK_H_
 #include "stdafx.h"
 #include "Report.h"
 #include "ui_ReportLook.h"
 #include <QStandardItemModel>
 #include <qtoolbutton.h>
-#ifndef REPORTLOOK_H_
-#define REPORTLOOK_H_
-
 extern TcpClient * tcp;    //全局变量，TCP 长连接
 extern QString globalUserName;
 

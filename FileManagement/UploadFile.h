@@ -53,6 +53,7 @@ signals:
 	void sendOver(int);  //·¢ËÍ½áÊø
 	void updateProgress(int,qint64, qint64);
 	void updateSpeedLabel(int,double);
+	void shutDownThread();
 
 	
 };

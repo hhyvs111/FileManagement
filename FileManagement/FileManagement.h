@@ -9,6 +9,7 @@
 #include "ReportEdit.h"
 #include "ReportLook.h"
 #include "BaseWindow.h"
+#include "MoneyManage.h"
 #include "ui_FileManagement.h"
 #include <QStackedLayout>
 
@@ -31,6 +32,7 @@ private:
 	UserInformation *userInformation; 
 	ReportEdit *reportEdit;
 	ReportLook *reportLook;
+	MoneyManage *moneyManage;
 	
 	QStackedLayout *m_pStackedLayout; 
 	//´°¿ÚÇÐ»»
@@ -53,6 +55,7 @@ private slots:
 	void ClickReportEdit();
 	void ClickReportLook();
 	void ClickReturn();
+	void ClickMoneyManage();
 
 
 	void receiveLogin();

@@ -7,7 +7,7 @@ ReportEdit::ReportEdit(QWidget *parent) :
 {
 	ui->setupUi(this);
 	connect(tcp, SIGNAL(sendDataToReportEdit(QString)), this, SLOT(receiveDataFromClient(QString)));
-
+	connect(ui->reportWeek, SIGNAL(activated(int)), this, SLOT(sendLastWeek()));
 	//setFixedSize(500, 500);
 	init();
 }
@@ -21,6 +21,16 @@ void ReportEdit::init()
 {
 	//初始化，现在还没想好放点什么，就放点数据吧。
 
+}
+
+void ReportEdit::sendLastWeek()
+{
+	QString data = "QueryLastWeek#" +globalUserName +"#" + ui->reportTerm->currentText() + "#" + ui->reportWeek->currentText();
+	QByteArray datasend = data.toUtf8();
+	qDebug() << datasend;
+	tcp->tcpSocket->write(datasend);
+	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
+	connect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showLastWeek()));
 }
 
 void ReportEdit::sendReportEdit()
@@ -97,6 +107,27 @@ void ReportEdit::showReporter()
 	connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
 }
 
+void ReportEdit::showLastWeek()
+{
+	QByteArray dataread = tcp->tcpSocket->readAll();
+	QString data = QString::fromUtf8(dataread);
+	qDebug() << "the data from client: " << data;
+	ui->reportQuestionFromLastWeek->setReadOnly(true);
+	if (data == "null")
+	{
+		ui->reportQuestionFromLastWeek->document()->setPlainText(QStringLiteral("你上周没有提交周报"));
+	}
+	else if (data == "newTerm")
+	{
+		ui->reportQuestionFromLastWeek->document()->setPlainText(QStringLiteral("新学期暂时没有问题"));
+	}
+	else
+	{
+		ui->reportQuestionFromLastWeek->document()->setPlainText(data);
+	}
+	connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
+	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showLastWeek()));
+}
 //就是判断服务器给的数据，就是一个槽函数？
 void ReportEdit::receiveDataFromClient(QString data)
 {

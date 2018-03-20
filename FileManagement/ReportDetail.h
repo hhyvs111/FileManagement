@@ -1,13 +1,11 @@
 
 #pragma once
+#ifndef REPORTDETAIL_H_
+#define REPORTDETAIL_H_
 #include "stdafx.h"
 #include "Report.h"
 #include "BaseWindow.h"
 #include"ui_ReportDetail.h"
-
-#ifndef REPORTDETAIL_H_
-#define REPORTDETAIL_H_
-
 extern TcpClient * tcp;    //全局变量，TCP 长连接
 extern QString globalUserName;
 

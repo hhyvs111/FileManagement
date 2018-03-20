@@ -7,7 +7,9 @@
 #include <QMessageBox>
 #include <QFile>  
 #include <string>  
-
+#include "stdafx.h"
+extern QString ip;
+extern int port;
 namespace Ui {
 class TcpClient;
 }
@@ -44,6 +46,7 @@ signals:
 	void sendDataToDownload(QString);
 	void sendDataToReportEdit(QString);
 	void sendDataToReportLook(QString);
+	void sendDataToAccounting(QString);
 };
 
 #endif // TCPCLIENT_H

@@ -35,7 +35,10 @@ public:
     QSpacerItem *verticalSpacer_4;
     QLabel *label_3;
     QToolButton *personButton;
-    QSpacerItem *verticalSpacer_3;
+    QSpacerItem *verticalSpacer_6;
+    QLabel *label_4;
+    QToolButton *moneyButton;
+    QSpacerItem *verticalSpacer_5;
     QLabel *label_2;
     QToolButton *reportEditButton;
     QToolButton *reportLookButton;
@@ -108,9 +111,26 @@ public:
 
         ToolButtonLayout->addWidget(personButton);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        ToolButtonLayout->addItem(verticalSpacer_3);
+        ToolButtonLayout->addItem(verticalSpacer_6);
+
+        label_4 = new QLabel(ToolButtonWidget);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        ToolButtonLayout->addWidget(label_4);
+
+        moneyButton = new QToolButton(ToolButtonWidget);
+        moneyButton->setObjectName(QStringLiteral("moneyButton"));
+        sizePolicy.setHeightForWidth(moneyButton->sizePolicy().hasHeightForWidth());
+        moneyButton->setSizePolicy(sizePolicy);
+        moneyButton->setMinimumSize(QSize(150, 30));
+
+        ToolButtonLayout->addWidget(moneyButton);
+
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        ToolButtonLayout->addItem(verticalSpacer_5);
 
         label_2 = new QLabel(ToolButtonWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
@@ -210,6 +230,7 @@ public:
         QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadWindow()));
         QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadManage()));
         QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
+        QObject::connect(moneyButton, SIGNAL(clicked()), FileManagement, SLOT(ClickMoneyManage()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi
@@ -220,6 +241,8 @@ public:
         titleLabel->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\"> \346\254\242\350\277\216\346\235\245\345\210\260\345\256\236\351\252\214\345\256\244\346\226\207\346\241\243\347\256\241\347\220\206\347\263\273\347\273\237</span></p></body></html>", Q_NULLPTR));
         label_3->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\210\221\347\232\204</span></p></body></html>", Q_NULLPTR));
         personButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
+        label_4->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\350\264\242\345\212\241</span></p></body></html>", Q_NULLPTR));
+        moneyButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         label_2->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\345\221\250\346\212\245</span></p></body></html>", Q_NULLPTR));
         reportEditButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         reportLookButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));

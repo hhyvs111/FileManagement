@@ -130,7 +130,46 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer_3">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;财务&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="moneyButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_5">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -370,8 +409,8 @@
    <slot>ClickReportEdit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>205</y>
+     <x>141</x>
+     <y>266</y>
     </hint>
     <hint type="destinationlabel">
      <x>324</x>
@@ -386,8 +425,8 @@
    <slot>ClickReportLook()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>234</y>
+     <x>155</x>
+     <y>296</y>
     </hint>
     <hint type="destinationlabel">
      <x>696</x>
@@ -402,8 +441,8 @@
    <slot>ClickDownloadWindow()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>321</y>
+     <x>135</x>
+     <y>365</y>
     </hint>
     <hint type="destinationlabel">
      <x>690</x>
@@ -418,8 +457,8 @@
    <slot>ClickUploadWindow()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>76</x>
-     <y>353</y>
+     <x>88</x>
+     <y>395</y>
     </hint>
     <hint type="destinationlabel">
      <x>699</x>
@@ -434,8 +473,8 @@
    <slot>ClickDownloadManage()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>139</x>
-     <y>384</y>
+     <x>151</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
      <x>722</x>
@@ -450,12 +489,28 @@
    <slot>ClickReturn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>410</y>
+     <x>145</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
      <x>689</x>
      <y>454</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>moneyButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileManagement</receiver>
+   <slot>ClickMoneyManage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>179</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-60</x>
+     <y>44</y>
     </hint>
    </hints>
   </connection>
@@ -468,5 +523,6 @@
   <slot>ClickReturn()</slot>
   <slot>ClickReportLook()</slot>
   <slot>ClickDownloadManage()</slot>
+  <slot>ClickMoneyManage()</slot>
  </slots>
 </ui>

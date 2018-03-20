@@ -3,8 +3,8 @@
 //#include "ui_tcpclient.h"
 //
 //主线程
-#define ip "47.100.160.51"
-#define port 3389
+//#define ip "47.100.160.51"
+//#define port 3389
 //#define ip "127.0.0.1"
 //#define port 3389
 
@@ -166,6 +166,13 @@ void TcpClient::readMessages()
 		{
 			emit sendDataToReportLook("delete_F");
 		}
+	}
+	else if (list[0] == "accounting")
+	{
+		if (list[1] == "true")
+			emit sendDataToAccounting("account_T");
+		else
+			emit sendDataToAccounting("account_F");
 	}
 
     else

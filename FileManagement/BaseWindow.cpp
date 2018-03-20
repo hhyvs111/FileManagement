@@ -55,7 +55,7 @@ BaseWindow::~BaseWindow()
 void BaseWindow::initTitleBar()
 {
 	m_titleBar = new TitleBar(this);
-	m_titleBar->move(-5, 10);
+	m_titleBar->move(-8, 10);
 	m_titleBar->raise();
 	m_titleBar->setWindowBorderWidth(2);
 	//m_titleBar->setBackgroundColor(255, 255, 255);

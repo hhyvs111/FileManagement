@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <link rel="stylesheet" type="text/css" href="qrc:/chart/web/css/chart.css">
+    <script src="qrc:/chart/web/js/echarts.min.js"></script>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main">BDChart</div>
+    <script>
+        window.onload = function() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: 'Demo'
+                },
+                tooltip: {},
+                legend: {
+                    data: []
+                },
+                xAxis: {
+                    data: [],
+                    axisLabel: {
+                        interval: 1
+                    }
+                },
+                yAxis: [{
+                    positon: 'left'
+                }],
+                series: []
+            };
+            var option1 = {
+                title: {
+                    text: 'Demo1'
+                },
+                tooltip: {
+                    show: true,
+                    // backgroundColor: rgba(50,50,50,0.7),
+                    borderColor: '#333',
+                },
+                legend: {
+                    type: 'scroll',
+                    orient: 'vertical',
+                    left: 'right',
+                    top: 'auto',
+                    show: true,
+                    data: ['1']
+                },
+                grid: {
+                    show: true,
+                    left: 100
+                },
+                xAxis: {
+                    type: 'category',
+                    axisLabel: {
+                        interval: 'auto',
+                        rotate: 90.0
+                    },
+                    data: ['2month','3month','4month', '5month']
+                },
+                yAxis: {
+                    positon: 'left',
+                    type: 'value',
+                    name: '',
+                    min: null,
+                    max: null 
+                },
+                series: [
+                    {
+                        name: '1',
+                        type: 'bar',
+                        data: [2,3,4]
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);  
+            new QWebChannel(qt.webChannelTransport, function(channel) {
+                var chartManager = channel.objects.chartManager;
+                chartManager.signalTest.connect(function(message){
+                    var temp = eval("("+message+")");
+                    option1.title = temp.Title;
+                    option1.legend.data = temp.legend;
+                    option1.xAxis.data = temp.xData;
+                    option1.series[0].data = temp.yData;
+                    myChart.setOption(option1);
+                });
+            })
+        }
+    </script>
+</body>
+</html>

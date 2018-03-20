@@ -7,6 +7,7 @@
 #include <QToolButton>
 #include <QFileIconProvider>
 #include "MyMessageBox.h"
+#include "SetFilePath.h"
 DownloadWindow::DownloadWindow(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::DownloadWindow)
@@ -52,6 +53,9 @@ void  DownloadWindow::initModel()
 	ui->downloadTable->setColumnWidth(5, 40);
 	ui->downloadTable->setColumnWidth(6, 40);
 
+	ui->downloadTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->downloadTable->setSelectionMode(QAbstractItemView::SingleSelection);
+	ui->downloadTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	//设置列宽不可变 
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
@@ -215,7 +219,7 @@ void DownloadWindow::ClickDownloadButton()
 
 	openFileName = btn->property("fileName").toString();	//获取按钮的名字
 	
-	emit addDownloadFile(openFileName, saveFileName);  //只要发送文件名和路径给线程就好了
+	emit addDownloadFile(openFileName, filePath);  //只要发送文件名和路径给线程就好了
 	
 
 	//发送下载信息，先注释掉
@@ -365,7 +369,7 @@ void DownloadWindow::showFileInfo()
 		m_delete->setProperty("row", i);
 		m_delete->setProperty("deleteFileId", fileInfo.at(i).fileId);
 		m_delete->setProperty("deleteFileName", fileInfo.at(i).fileName);
-		qDebug() << "now row:" << model->rowCount() << fileInfo.at(i).fileName;
+		//qDebug() << "now row:" << model->rowCount() << fileInfo.at(i).fileName;
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 5), m_download);
 		ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 6), m_delete);
 
@@ -510,5 +514,18 @@ void DownloadWindow::ClickFindButton()
 	{
 		sendFileInfo(condition);
 	}
+}
+
+
+void DownloadWindow::setFilePath()
+{
+	SetFilePath *setPath = new SetFilePath(this);
+	setPath->show();
+	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
+}
+
+void DownloadWindow::receiveFilePath(QString mFilePath)
+{
+	filePath = mFilePath;
 }
 

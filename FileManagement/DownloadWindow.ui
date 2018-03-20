@@ -137,8 +137,26 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>settingButton</sender>
+   <signal>clicked()</signal>
+   <receiver>DownloadWindow</receiver>
+   <slot>setFilePath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>780</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>921</x>
+     <y>42</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>ClickDownloadButton()</slot>
+  <slot>setFilePath()</slot>
  </slots>
 </ui>

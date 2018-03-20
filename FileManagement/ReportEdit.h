@@ -29,7 +29,8 @@ private:
 private slots:
 	void receiveDataFromClient(QString);
 	void showReporter();  //显示报告人的信息
-
+	void showLastWeek();
+	void sendLastWeek();  //发送
 	void sendReport();  //发送报告
 	void ClickSubmit(); 
 	//void ClickReset();

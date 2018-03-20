@@ -20,16 +20,21 @@ UploadThread::~UploadThread()
 
 void UploadThread::run()
 {
-	while (!isInterruptionRequested())
+	//while (!isInterruptionRequested())
 	{
 		//msleep(50);
 		uploadFile = new UploadFile(fileName, index);
+		connect(uploadFile, SIGNAL(shutDownThread()), this, SLOT(shutDown()));
 		//qDebug() << index << "run Worker Thread : " << QThread::currentThreadId();
 		emit sendAvailable(index);
 		exec();
 	}
 	//uploadFile->sender();
 	//// ºÄÊ±²Ù×÷
+}
+void UploadThread::shutDown()
+{
+	this->~UploadThread();
 }
 
 

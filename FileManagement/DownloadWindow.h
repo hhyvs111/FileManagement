@@ -58,6 +58,8 @@ private:
 	QString saveFileName;   //这个是路径，只是路径没有文件名
 	QString openFileName;  //点击按钮所得的下载名
 
+	QString filePath;
+
 
 	
 	//qint64 RtotalSize;  //总共需要发送的文件大小（文件内容&文件名信息）  
@@ -94,6 +96,10 @@ private slots:
 	void ClickFindButton();
 
 	void receiveThreadClosed(int);
+
+	void setFilePath();
+
+	void receiveFilePath(QString);
 
 signals:
 	//void sendDisconnect(QString);  //这是什么

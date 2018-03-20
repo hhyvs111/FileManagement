@@ -57,6 +57,7 @@ private:
 	QMap<int, QHBoxLayout*> *fileStatusLayoutMap;
 	//QMap<int, QLabel*> *uploadSuccessMap;
 	int index;
+	int cnt;
 	//QProgressBar fileProgressBar[6];  //最多上传5个，进度条是单独的
 	//QStackedLayout *stackLayout;	//  这个放fileWidget和fileLayout
 	//QHBoxLayout *fileInfoLayout;	//用来存放文件信息

@@ -1,5 +1,5 @@
 #pragma once
-#ifndef FILEINFO_H_
+#ifndef FILEINFO_H_ 
 #define FILEINFO_H_
 #include "stdafx.h"
 
@@ -12,6 +12,14 @@ struct FileInfo
 	QString fileTime;
 	QString fileUser;
 	int userId;
+};
+struct BreakFile
+{
+	qint64 recordId;
+	int fileId;
+	QString fileName;
+	QString filePath;
+	qint64 breakPoint;
 };
 
 inline QDataStream &operator>>(QDataStream &in, FileInfo &fileInfo)

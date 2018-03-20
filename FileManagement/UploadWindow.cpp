@@ -49,6 +49,7 @@ void UploadWindow::init()
 	fileNameMap.clear();  //初始化这个，不是*不用NEW吧
 	row = 0;
 	column = 0;
+	cnt = 0;
 }
 
 
@@ -241,6 +242,8 @@ void UploadWindow::ClickOpenButton()  //打开文件并获取文件名（包括路径）
 void UploadWindow::ClickSendButton()
 {
 	emit sendFileSignal();
+	//QTcpSocket *tcp = new QTcpSocket();
+	//tcp->connectToHost(ip, port);  //将这个socket连接到服务器
 	ui->sendBtn->setEnabled(false); //按钮失效
 }
 void UploadWindow::checkSendOver(int num)
@@ -261,6 +264,12 @@ void UploadWindow::checkSendOver(int num)
 		it1.value()->insertWidget(1,successMessage);
 		QMap<int, QLabel*>::iterator it2 = fileSpeedMap->find(num);
 		it2.value()->hide();
+		//it.value()->~UploadThread();  //直接析构吧
+		cnt++;
+	}
+	if (cnt == index)
+	{
+		ui->sendBtn->setEnabled(true);
 	}
 	//直接初始化这些map
 	//init();

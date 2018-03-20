@@ -131,6 +131,7 @@ public:
 
 
         retranslateUi(DownloadWindow);
+        QObject::connect(settingButton, SIGNAL(clicked()), DownloadWindow, SLOT(setFilePath()));
 
         QMetaObject::connectSlotsByName(DownloadWindow);
     } // setupUi

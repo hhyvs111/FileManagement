@@ -111,9 +111,6 @@ void UploadFile::initFile()
 	totalSize = 0;
 	sendTimes = 0;
 	outBlock.clear();
-
-
-
 	if (!fileName.isNull())
 	{
 		localFile = new QFile(fileName);
@@ -147,6 +144,8 @@ void UploadFile::send()  //发送文件头信息
 		loadSize = 4 * 1024;  //每次发送数据的大小  
 
 		QDataStream out(&outBlock, QIODevice::WriteOnly);
+		//out.setVersion(QDataStream::Qt_4_8);
+
 		//获取文件名字
 		currentFileName = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1);
 		//占位符,这里必须要先这样占位，然后后续读算出整体长度后在插入
@@ -180,7 +179,6 @@ void UploadFile::goOnSend(qint64 numBytes)
 	byteToWrite -= numBytes;  //剩余数据大小  
 		
 	outBlock = localFile->read(qMin(byteToWrite, loadSize));   //如果剩余数据比每次发送的小则发送剩余的
-	
 	/*qDebug() << "byteToWrite:" << byteToWrite;*/
 	tcpSocket->write(outBlock);    //将这个信息写入socket
 
@@ -204,6 +202,7 @@ void UploadFile::goOnSend(qint64 numBytes)
 		sendTimes = 0;
 		isOver = true;   //发送完毕
 		emit sendOver(index);
+		emit shutDownThread();
 		qDebug() <<"ThreadId"<<QThread::currentThreadId<< " send index " << index;
 		//发送完后取消连接，把线程退出？
 		//uploadThread->quit();

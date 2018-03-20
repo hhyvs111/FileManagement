@@ -61,6 +61,30 @@
     <Filter Include="Source Files\QTUI\Report">
       <UniqueIdentifier>{403485c8-5375-4b5b-8668-087fc36faa88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\H_QTUI\User">
+      <UniqueIdentifier>{d82a0396-66c1-4bb6-a587-7ae167b3ba94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\H_QTUI\Window">
+      <UniqueIdentifier>{0e2a555f-1ee1-4a71-9b1e-05cf325f8db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\User">
+      <UniqueIdentifier>{08ac55cc-2cef-4291-ab6b-b0c1e4295deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\Window">
+      <UniqueIdentifier>{40867bde-ede2-444c-b594-5a54d47c42cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\H_QTUI\Account">
+      <UniqueIdentifier>{4fc1da89-6557-45e2-a881-98b96a69b435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\Account">
+      <UniqueIdentifier>{5f2c2548-f258-46d8-ad0c-864f1e11a152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\H_QTUI\Echarts">
+      <UniqueIdentifier>{7b30c8b3-a34b-4a91-8738-9546b41e05e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QTUI\Echarts">
+      <UniqueIdentifier>{35a30415-80b8-4616-aad0-a3159d778238}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,20 +102,11 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Login.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Login.cpp">
-      <Filter>Source Files\QTUI</Filter>
-    </ClCompile>
-    <ClCompile Include="FileManagement.cpp">
-      <Filter>Source Files\QTUI</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_Register.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_Register.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Register.cpp">
-      <Filter>Source Files\QTUI</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TitleBar.cpp">
       <Filter>Generated Files</Filter>
@@ -135,9 +150,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Taes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_DownloadFile.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -149,9 +161,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_UserInformation.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInformation.cpp">
-      <Filter>Source Files\QTUI</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_ButtonDelegate.cpp">
       <Filter>Generated Files</Filter>
@@ -255,6 +264,99 @@
     <ClCompile Include="DownloadManage.cpp">
       <Filter>Source Files\QTUI\File</Filter>
     </ClCompile>
+    <ClCompile Include="UserInformation.cpp">
+      <Filter>Source Files\QTUI\User</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManagement.cpp">
+      <Filter>Source Files\QTUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Source Files\QTUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Register.cpp">
+      <Filter>Source Files\QTUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Taes.cpp">
+      <Filter>Source Files\QTUI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyManage.cpp">
+      <Filter>Source Files\QTUI\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MoneyManage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MoneyManage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Accounting.cpp">
+      <Filter>Source Files\QTUI\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Accounting.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Accounting.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_bdchart.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_bdchart.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_previewpage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_previewpage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_websocketclientwrapper.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_websocketclientwrapper.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_websockettransport.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_websockettransport.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdchart.cpp">
+      <Filter>Source Files\QTUI\Echarts</Filter>
+    </ClCompile>
+    <ClCompile Include="previewpage.cpp">
+      <Filter>Source Files\QTUI\Echarts</Filter>
+    </ClCompile>
+    <ClCompile Include="websocketclientwrapper.cpp">
+      <Filter>Source Files\QTUI\Echarts</Filter>
+    </ClCompile>
+    <ClCompile Include="websockettransport.cpp">
+      <Filter>Source Files\QTUI\Echarts</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_json.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_web.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Echarts.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Echarts.cpp">
+      <Filter>Source Files\QTUI\Echarts</Filter>
+    </ClCompile>
+    <ClCompile Include="SetFilePath.cpp">
+      <Filter>Source Files\QTUI\File</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SetFilePath.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SetFilePath.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -263,20 +365,8 @@
     <CustomBuild Include="FileManagement.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="FileManagement.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Login.h">
-      <Filter>Header Files\H_QTUI</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Login.h">
-      <Filter>Header Files\Login</Filter>
-    </CustomBuild>
     <CustomBuild Include="Register.ui">
       <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Register.h">
-      <Filter>Header Files\H_QTUI</Filter>
     </CustomBuild>
     <CustomBuild Include="BaseWindow.h">
       <Filter>Header Files\H_QTUI\Base</Filter>
@@ -295,9 +385,6 @@
     </CustomBuild>
     <CustomBuild Include="UserInformation.ui">
       <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="UserInformation.h">
-      <Filter>Header Files\H_QTUI</Filter>
     </CustomBuild>
     <CustomBuild Include="ButtonDelegate.h">
       <Filter>Header Files\H_QTUI\Base</Filter>
@@ -356,7 +443,61 @@
     <CustomBuild Include="DownloadManage.h">
       <Filter>Header Files\H_QTUI\FileFunction</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\44562\Desktop\untitled.ui">
+    <CustomBuild Include="UserInformation.h">
+      <Filter>Header Files\H_QTUI\User</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Login.h">
+      <Filter>Header Files\H_QTUI\Window</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FileManagement.h">
+      <Filter>Header Files\H_QTUI\Window</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Register.h">
+      <Filter>Header Files\H_QTUI\Window</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Login.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MoneyManage.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Accounting.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MoneyManage.h">
+      <Filter>Header Files\H_QTUI\Account</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Accounting.h">
+      <Filter>Header Files\H_QTUI\Account</Filter>
+    </CustomBuild>
+    <CustomBuild Include="bdchart.h">
+      <Filter>Header Files\H_QTUI\Echarts</Filter>
+    </CustomBuild>
+    <CustomBuild Include="previewpage.h">
+      <Filter>Header Files\H_QTUI\Echarts</Filter>
+    </CustomBuild>
+    <CustomBuild Include="websocketclientwrapper.h">
+      <Filter>Header Files\H_QTUI\Echarts</Filter>
+    </CustomBuild>
+    <CustomBuild Include="websockettransport.h">
+      <Filter>Header Files\H_QTUI\Echarts</Filter>
+    </CustomBuild>
+    <CustomBuild Include="json.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="web.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Echarts.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Echarts.h">
+      <Filter>Header Files\H_QTUI\Echarts</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SetFilePath.h">
+      <Filter>Header Files\H_QTUI\FileFunction</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SetFilePath.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -415,8 +556,23 @@
     <ClInclude Include="FileInfo.h">
       <Filter>Header Files\H_QTUI\FileFunction</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_untitled.h">
+    <ClInclude Include="Database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_MoneyManage.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Accounting.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Echarts.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_SetFilePath.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountInfo.h">
+      <Filter>Header Files\H_QTUI\Account</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -444,11 +600,23 @@
     <None Include="Resource\qss\ReportDetail.qss">
       <Filter>Resource\CSS</Filter>
     </None>
-    <None Include="ReportEdit.qss">
-      <Filter>Resource\CSS</Filter>
+    <None Include="json\chartConfig.json">
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resource\qss\ReportLook.qss">
-      <Filter>Resource\CSS</Filter>
+    <None Include="json\chartData.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="web\js\echarts.min.js">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="web\css\chart.css">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="web\html\index.html">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="web\js\bdchart.js">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
