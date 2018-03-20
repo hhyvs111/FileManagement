@@ -106,7 +106,7 @@ void FileManagement::init()
 	//ui->photoLabel->setMovie(movie);
 	//	movie->start();
 	setWindowIcon(QIcon(":/Resource/icon1.png"));//设置窗口左上角图标
-	setFixedSize(800, 600); // 禁止改变窗口大小
+	setFixedSize(1000, 700); // 禁止改变窗口大小
 	ui->personButton->setToolTip(tr("upload your photo"));//点击按钮提示相应信息
 	ui->uploadButton->setToolTip(tr("upload"));
 	ui->downloadButton->setToolTip(tr("download"));
@@ -167,6 +167,7 @@ void FileManagement::StackWindow()
 	userInformation = new UserInformation();
 	reportEdit = new ReportEdit();
 	reportLook = new ReportLook();
+	moneyManage = new MoneyManage();
 
 	WindowSlotBind();
 	//添加类
@@ -176,6 +177,7 @@ void FileManagement::StackWindow()
 	m_pStackedLayout->addWidget(userInformation);
 	m_pStackedLayout->addWidget(reportEdit);
 	m_pStackedLayout->addWidget(reportLook);
+	m_pStackedLayout->addWidget(moneyManage);
 
 	ui->SubLayout->insertLayout(1, m_pStackedLayout);
 
@@ -241,6 +243,12 @@ void FileManagement::ClickReportLook()
 {
 	m_pStackedLayout->setCurrentWidget(reportLook);
 	reportLook->sendReportLook();
+}
+
+void FileManagement::ClickMoneyManage()
+{
+	m_pStackedLayout->setCurrentWidget(moneyManage);
+	moneyManage->sendAccountLook();
 }
 
 void FileManagement::ClickReturn()

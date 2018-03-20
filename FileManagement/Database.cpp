@@ -19,7 +19,7 @@ void Database::connDB()
 		database = QSqlDatabase::addDatabase("QSQLITE");
 		database.setDatabaseName("MyDataBase.db");
 		database.setUserName("fileManagement");
-		database.setPassword("123456");
+		database.setPassword("a13007351861");
 	}
 
 	if (!database.open())

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>json/chartConfig.json</file>
+        <file>json/chartData.json</file>
+    </qresource>
+</RCC>

@@ -429,8 +429,8 @@
    <slot>ClickReportEdit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>205</y>
+     <x>141</x>
+     <y>266</y>
     </hint>
     <hint type="destinationlabel">
      <x>324</x>
@@ -445,8 +445,8 @@
    <slot>ClickReportLook()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>234</y>
+     <x>155</x>
+     <y>296</y>
     </hint>
     <hint type="destinationlabel">
      <x>696</x>
@@ -461,8 +461,8 @@
    <slot>ClickDownloadWindow()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>321</y>
+     <x>135</x>
+     <y>365</y>
     </hint>
     <hint type="destinationlabel">
      <x>690</x>
@@ -477,8 +477,8 @@
    <slot>ClickUploadWindow()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>76</x>
-     <y>353</y>
+     <x>88</x>
+     <y>395</y>
     </hint>
     <hint type="destinationlabel">
      <x>699</x>
@@ -493,8 +493,8 @@
    <slot>ClickDownloadManage()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>139</x>
-     <y>384</y>
+     <x>151</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
      <x>722</x>
@@ -509,12 +509,28 @@
    <slot>ClickReturn()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>410</y>
+     <x>145</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
      <x>689</x>
      <y>454</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>moneyButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileManagement</receiver>
+   <slot>ClickMoneyManage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>179</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-60</x>
+     <y>44</y>
     </hint>
    </hints>
   </connection>
@@ -527,5 +543,6 @@
   <slot>ClickReturn()</slot>
   <slot>ClickReportLook()</slot>
   <slot>ClickDownloadManage()</slot>
+  <slot>ClickMoneyManage()</slot>
  </slots>
 </ui>

@@ -35,5 +35,6 @@
         <file>Resource/title/min.png</file>
         <file>Resource/Logo.gif</file>
         <file>Resource/FunIcon/moneyManage.png</file>
+        <file>Resource/moneyBackground.jpg</file>
     </qresource>
 </RCC>

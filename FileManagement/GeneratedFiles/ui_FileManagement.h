@@ -237,6 +237,7 @@ public:
         QObject::connect(uploadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickUploadWindow()));
         QObject::connect(downloadButton, SIGNAL(clicked()), FileManagement, SLOT(ClickDownloadManage()));
         QObject::connect(deleteButton, SIGNAL(clicked()), FileManagement, SLOT(ClickReturn()));
+        QObject::connect(moneyButton, SIGNAL(clicked()), FileManagement, SLOT(ClickMoneyManage()));
 
         QMetaObject::connectSlotsByName(FileManagement);
     } // setupUi
