@@ -5,6 +5,11 @@
 #include <QLabel>
 #include <QMovie>
 #include <QThread>
+#include "MyMessageBox.h"
+#include "SignShow.h"
+#include <QIcon>
+#include <QPixmap>
+#include "Sign.h"
 extern QString globalUserName;
 FileManagement::FileManagement(QWidget *parent)
 	: BaseWindow(parent), ui(new Ui::FileManagement)
@@ -14,12 +19,59 @@ FileManagement::FileManagement(QWidget *parent)
 	StackWindow();
 	//initTitleBar();
 	loadStyleSheet("mainWindow");
-
+	connect(ui->SignButton, SIGNAL(clicked()), this, SLOT(sendSignToServer()));
+	connect(ui->LookSignButton, SIGNAL(clicked()), this, SLOT(showSignList()));
+	connect(ui->LookMySignButton, SIGNAL(clicked()), this, SLOT(showMySign()));
+	connect(tcp, SIGNAL(sendDataToSign(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
 
 FileManagement::~FileManagement()
 {
 	delete ui;
+}
+void FileManagement::sendSignToServer()
+{
+	QString data = "InsertSign#" + globalUserName;
+	QByteArray datasend = data.toUtf8();
+	qDebug() << datasend;
+	tcp->tcpSocket->write(datasend);
+
+
+}
+
+void FileManagement::showSignList()
+{
+	Sign *sign = new Sign(this);
+	sign->move(300, 300);
+	sign->show();
+}
+
+void FileManagement::showMySign()
+{
+	SignShow *sign = new SignShow();
+	sign->move(300, 300);
+	sign->show();
+
+}
+void FileManagement::receiveDataFromClient(QString data)
+{
+	if (QString::compare(data, "sign_T") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("签到成功!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+
+	}
+	else if (QString::compare(data, "repeat") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("今天已经签到,请勿重复签到!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else if (QString::compare(data, "notInLab") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("请回实验室签到!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else if (QString::compare(data, "sign_F") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("签到失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
 }
 
 void FileManagement::init()

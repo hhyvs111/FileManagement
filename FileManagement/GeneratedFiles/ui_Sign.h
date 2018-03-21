@@ -33,6 +33,7 @@ public:
         Sign->resize(400, 296);
         verticalLayout = new QVBoxLayout(Sign);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(30, 40, 30, 30);
         tableView = new QTableView(Sign);
         tableView->setObjectName(QStringLiteral("tableView"));
 

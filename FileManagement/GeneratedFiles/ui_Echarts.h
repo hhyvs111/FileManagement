@@ -52,6 +52,11 @@ public:
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         send = new QPushButton(Echarts);
         send->setObjectName(QStringLiteral("send"));
+        send->setStyleSheet(QLatin1String("background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
 
         horizontalLayout_3->addWidget(send);
 
@@ -66,6 +71,11 @@ public:
 
         pushButton = new QPushButton(Echarts);
         pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setStyleSheet(QLatin1String("background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
 
         horizontalLayout_3->addWidget(pushButton);
 
@@ -75,6 +85,11 @@ public:
 
         importexcel = new QPushButton(Echarts);
         importexcel->setObjectName(QStringLiteral("importexcel"));
+        importexcel->setStyleSheet(QLatin1String("background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
 
         horizontalLayout_3->addWidget(importexcel);
 
@@ -84,6 +99,11 @@ public:
 
         pushButton_2 = new QPushButton(Echarts);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setStyleSheet(QLatin1String("background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
 
         horizontalLayout_3->addWidget(pushButton_2);
 

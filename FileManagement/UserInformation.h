@@ -34,9 +34,11 @@ public:
 
 	void showUserInfo();
 
-	void sendSignToServer();
-	void showSignList();
-	void receiveDataFromClient(QString data);
+	//void sendSignToServer();
+	//void showSignList();
+	//void receiveDataFromClient(QString data);
+
+	//void showMySign();
 
 	
 private:

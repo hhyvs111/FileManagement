@@ -20,6 +20,13 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="send">
+         <property name="styleSheet">
+          <string notr="true">background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+         </property>
          <property name="text">
           <string>显示图表</string>
          </property>
@@ -43,6 +50,13 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton">
+         <property name="styleSheet">
+          <string notr="true">background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+         </property>
          <property name="text">
           <string>选择excel文件</string>
          </property>
@@ -63,6 +77,13 @@
        </item>
        <item>
         <widget class="QPushButton" name="importexcel">
+         <property name="styleSheet">
+          <string notr="true">background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+         </property>
          <property name="text">
           <string>导入excel</string>
          </property>
@@ -83,6 +104,13 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_2">
+         <property name="styleSheet">
+          <string notr="true">background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+         </property>
          <property name="text">
           <string>导出excel</string>
          </property>

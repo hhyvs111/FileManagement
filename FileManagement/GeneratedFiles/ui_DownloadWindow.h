@@ -17,7 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QToolButton>
@@ -38,12 +37,6 @@ public:
     QToolButton *settingButton;
     QHBoxLayout *horizontalLayout_3;
     QTableView *downloadTable;
-    QHBoxLayout *horizontalLayout_2;
-    QSpacerItem *horizontalSpacer_3;
-    QVBoxLayout *verticalLayout_2;
-    QProgressBar *progressBar;
-    QLabel *downloadSpeedLabel;
-    QSpacerItem *horizontalSpacer_4;
 
     void setupUi(QWidget *DownloadWindow)
     {
@@ -74,12 +67,11 @@ public:
 
         settingButton = new QToolButton(DownloadWindow);
         settingButton->setObjectName(QStringLiteral("settingButton"));
-        settingButton->setStyleSheet(QLatin1String("\n"
-"    border: 2px solid #8f8f91;\n"
-"    border-radius: 6px;\n"
-"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                      stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"    \n"
+        settingButton->setStyleSheet(QLatin1String(" background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;\n"
 "\n"
 "\n"
 ""));
@@ -100,35 +92,6 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_3);
-
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        progressBar = new QProgressBar(DownloadWindow);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setValue(0);
-
-        verticalLayout_2->addWidget(progressBar);
-
-        downloadSpeedLabel = new QLabel(DownloadWindow);
-        downloadSpeedLabel->setObjectName(QStringLiteral("downloadSpeedLabel"));
-
-        verticalLayout_2->addWidget(downloadSpeedLabel);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_2);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_4);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
-
 
         retranslateUi(DownloadWindow);
         QObject::connect(settingButton, SIGNAL(clicked()), DownloadWindow, SLOT(setFilePath()));
@@ -141,7 +104,6 @@ public:
         DownloadWindow->setWindowTitle(QApplication::translate("DownloadWindow", "Form", Q_NULLPTR));
         label->setText(QApplication::translate("DownloadWindow", "\346\226\207\344\273\266\345\220\215\357\274\232", Q_NULLPTR));
         settingButton->setText(QApplication::translate("DownloadWindow", "\350\256\276\347\275\256", Q_NULLPTR));
-        downloadSpeedLabel->setText(QApplication::translate("DownloadWindow", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };

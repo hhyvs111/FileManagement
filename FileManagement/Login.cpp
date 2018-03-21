@@ -19,8 +19,6 @@ Login::Login(QWidget *parent)
 	tcp = new TcpClient();  //在这里实例化的？
 	ui->setupUi(this);
 	
-
-
 	QString kk;
 	QSettings *getting = new QSettings("E:/test.ini", QSettings::IniFormat);//初始化显示上一次登录账户密码
 	ui->nameLine->setText(getting->value("uuu", "").toString());

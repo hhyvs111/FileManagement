@@ -36,5 +36,15 @@
         <file>Resource/Logo.gif</file>
         <file>Resource/FunIcon/moneyManage.png</file>
         <file>Resource/moneyBackground.jpg</file>
+        <file>Resource/qss/ReportEdit.qss</file>
+        <file>Resource/qss/ReportLook.qss</file>
+        <file>web/index.html</file>
+        <file>web/images/qiandao_con.jpg</file>
+        <file>web/images/qiandao_day.png</file>
+        <file>web/images/qiandao_icon.png</file>
+        <file>web/images/qiandao_sprits.png</file>
+        <file>web/js/qiandao_js.js</file>
+        <file>web/js/qwebchannel.js</file>
+        <file>web/css/qiandao_style.css</file>
     </qresource>
 </RCC>
