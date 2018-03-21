@@ -99,6 +99,9 @@ public:
 
 
         retranslateUi(Echarts);
+        QObject::connect(pushButton, SIGNAL(clicked()), Echarts, SLOT(choosefilepath()));
+        QObject::connect(importexcel, SIGNAL(clicked()), Echarts, SLOT(import_excel()));
+        QObject::connect(pushButton_2, SIGNAL(clicked()), Echarts, SLOT(export_excel()));
 
         QMetaObject::connectSlotsByName(Echarts);
     } // setupUi

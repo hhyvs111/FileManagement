@@ -108,5 +108,59 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Echarts</receiver>
+   <slot>choosefilepath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>593</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>importexcel</sender>
+   <signal>clicked()</signal>
+   <receiver>Echarts</receiver>
+   <slot>import_excel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>606</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Echarts</receiver>
+   <slot>export_excel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>528</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>600</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>choosefilepath()</slot>
+  <slot>import_excel()</slot>
+  <slot>export_excel()</slot>
+ </slots>
 </ui>

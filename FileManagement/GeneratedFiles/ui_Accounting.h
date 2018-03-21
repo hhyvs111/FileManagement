@@ -305,8 +305,8 @@ public:
         DateLabel_2->setText(QApplication::translate("Accounting", "   \346\227\245\346\234\237\357\274\232", Q_NULLPTR));
         outcomeType->clear();
         outcomeType->insertItems(0, QStringList()
-         << QApplication::translate("Accounting", "\346\227\245\345\270\270\347\224\250\345\223\201", Q_NULLPTR)
-         << QApplication::translate("Accounting", "\345\212\236\345\205\254\347\224\250\345\223\201", Q_NULLPTR)
+         << QApplication::translate("Accounting", "daily", Q_NULLPTR)
+         << QApplication::translate("Accounting", "office", Q_NULLPTR)
         );
         MoneyLabel_2->setText(QApplication::translate("Accounting", " \346\224\257\345\207\272\351\207\221\351\242\235\357\274\232", Q_NULLPTR));
         BeizhuLabel_2->setText(QApplication::translate("Accounting", "   \345\244\207\346\263\250\357\274\232", Q_NULLPTR));
@@ -319,8 +319,8 @@ public:
         BeizhuLabel_3->setText(QApplication::translate("Accounting", "   \345\244\207\346\263\250\357\274\232", Q_NULLPTR));
         incomeType->clear();
         incomeType->insertItems(0, QStringList()
-         << QApplication::translate("Accounting", "\351\241\271\347\233\256\347\273\217\350\264\271", Q_NULLPTR)
-         << QApplication::translate("Accounting", "\344\270\252\344\272\272\346\211\200\344\272\244", Q_NULLPTR)
+         << QApplication::translate("Accounting", "funds", Q_NULLPTR)
+         << QApplication::translate("Accounting", "salary", Q_NULLPTR)
         );
         SaveButton_3->setText(QApplication::translate("Accounting", "\344\277\235\345\255\230\350\256\260\345\275\225", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(income), QApplication::translate("Accounting", "\346\224\266\345\205\245", Q_NULLPTR));
