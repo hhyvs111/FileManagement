@@ -58,6 +58,7 @@ public:
     QVBoxLayout *SignLayout;
     QHBoxLayout *horizontalLayout;
     QPushButton *LookSignButton;
+    QPushButton *LookMySignButton;
     QPushButton *SignButton;
 
     void setupUi(QWidget *UserInformation)
@@ -223,6 +224,11 @@ public:
 
         horizontalLayout->addWidget(LookSignButton);
 
+        LookMySignButton = new QPushButton(UserInformation);
+        LookMySignButton->setObjectName(QStringLiteral("LookMySignButton"));
+
+        horizontalLayout->addWidget(LookMySignButton);
+
         SignButton = new QPushButton(UserInformation);
         SignButton->setObjectName(QStringLiteral("SignButton"));
 
@@ -263,6 +269,7 @@ public:
         confirmButton->setText(QApplication::translate("UserInformation", "\344\277\235\345\255\230\344\277\241\346\201\257", Q_NULLPTR));
         cancelButton->setText(QApplication::translate("UserInformation", "\345\217\226\346\266\210", Q_NULLPTR));
         LookSignButton->setText(QApplication::translate("UserInformation", "\346\237\245\347\234\213\347\255\276\345\210\260", Q_NULLPTR));
+        LookMySignButton->setText(QApplication::translate("UserInformation", "\346\237\245\347\234\213\346\210\221\347\232\204\347\255\276\345\210\260", Q_NULLPTR));
         SignButton->setText(QApplication::translate("UserInformation", "\347\202\271\345\207\273\347\255\276\345\210\260", Q_NULLPTR));
     } // retranslateUi
 

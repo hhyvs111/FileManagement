@@ -1,6 +1,7 @@
 #include "UserInformation.h"
 #include "MyMessageBox.h"
 #include "ui_UserInformation.h"
+#include "SignShow.h"
 #include <QIcon>
 #include <QPixmap>
 #include "Sign.h"
@@ -34,6 +35,8 @@ UserInformation::UserInformation(QWidget *parent) :
 
 	   connect(ui->SignButton, SIGNAL(clicked()), this, SLOT(sendSignToServer()));
 	   connect(ui->LookSignButton, SIGNAL(clicked()), this, SLOT(showSignList()));
+	   connect(ui->LookMySignButton, SIGNAL(clicked()), this, SLOT(showMySign()));
+	   
 	   connect(tcp, SIGNAL(sendDataToSign(QString)), this, SLOT(receiveDataFromClient(QString)));
 
 }
@@ -194,6 +197,13 @@ void UserInformation::showSignList()
 	Sign *sign = new Sign(this);
 	ui->SignLayout->addWidget(sign);
 	sign->show();
+}
+
+void UserInformation::showMySign()
+{
+	SignShow *sign = new SignShow();
+	sign->show();
+
 }
 
 void UserInformation::receiveDataFromClient(QString data)

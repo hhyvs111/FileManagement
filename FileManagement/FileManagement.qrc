@@ -36,5 +36,8 @@
         <file>Resource/Logo.gif</file>
         <file>Resource/FunIcon/moneyManage.png</file>
         <file>Resource/moneyBackground.jpg</file>
+        <file>Resource/qss/ReportEdit.qss</file>
+        <file>Resource/qss/ReportLook.qss</file>
+        <file>web/index.html</file>
     </qresource>
 </RCC>

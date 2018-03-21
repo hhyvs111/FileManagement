@@ -38,6 +38,8 @@ public:
 	void showSignList();
 	void receiveDataFromClient(QString data);
 
+	void showMySign();
+
 	
 private:
     Ui::UserInformation *ui;

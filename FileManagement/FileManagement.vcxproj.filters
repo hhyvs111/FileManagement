@@ -88,6 +88,9 @@
     <Filter Include="Header Files\H_QTUI\Sign">
       <UniqueIdentifier>{290b2b74-fc2d-423f-ba85-dd3d5482fd0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\QTUI\Sign">
+      <UniqueIdentifier>{b82331e7-e79b-488d-81d8-0964718bd880}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -360,13 +363,28 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SetFilePath.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sign.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_Sign.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_Sign.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sign.cpp">
+      <Filter>Source Files\QTUI\Sign</Filter>
+    </ClCompile>
+    <ClCompile Include="SignShow.cpp">
+      <Filter>Source Files\QTUI\Sign</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SignCalender.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SignCalender.cpp">
+      <Filter>Source Files\QTUI\Sign</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SignShow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SignShow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -518,6 +536,15 @@
     <CustomBuild Include="Sign.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="SignCalender.h">
+      <Filter>Header Files\H_QTUI\Sign</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SignShow.h">
+      <Filter>Header Files\H_QTUI\Sign</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SignShow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -593,6 +620,9 @@
       <Filter>Header Files\H_QTUI\Account</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_Sign.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_SignShow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

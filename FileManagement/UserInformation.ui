@@ -269,6 +269,13 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="LookMySignButton">
+         <property name="text">
+          <string>查看我的签到</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="SignButton">
          <property name="text">
           <string>点击签到</string>
