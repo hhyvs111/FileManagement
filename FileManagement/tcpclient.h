@@ -37,6 +37,7 @@ private slots:
     //void on_signBtn_clicked();
 	//void sendMeggages();  //·¢ËÍÊý¾Ý
 	void displayError1();
+	void reConnectToServer();
 	/*void receiveSignalFromDown(QString);*/
 
 
@@ -47,6 +48,7 @@ signals:
 	void sendDataToReportEdit(QString);
 	void sendDataToReportLook(QString);
 	void sendDataToAccounting(QString);
+	void sendDataToSign(QString);
 };
 
 #endif // TCPCLIENT_H

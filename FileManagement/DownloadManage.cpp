@@ -184,8 +184,8 @@ void DownloadManage::CallOpenFile()
 	//QFileInfo fi = QFileInfo(fileFull);
 	//QString filePath;
 	//filePath = fi.absolutePath();
-
-	QDesktopServices::openUrl(QUrl(it.value().filePath + it.value().fileName, QUrl::TolerantMode));
+	QString fullFile = it.value().filePath + it.value().fileName;
+	QDesktopServices::openUrl(QUrl::fromLocalFile(fullFile));
 }
 
 void DownloadManage::CallOpenFolder()

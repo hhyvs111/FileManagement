@@ -34,6 +34,10 @@ public:
 
 	void showUserInfo();
 
+	void sendSignToServer();
+	void showSignList();
+	void receiveDataFromClient(QString data);
+
 	
 private:
     Ui::UserInformation *ui;

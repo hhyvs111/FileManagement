@@ -85,6 +85,9 @@
     <Filter Include="Source Files\QTUI\Echarts">
       <UniqueIdentifier>{35a30415-80b8-4616-aad0-a3159d778238}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\H_QTUI\Sign">
+      <UniqueIdentifier>{290b2b74-fc2d-423f-ba85-dd3d5482fd0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -357,6 +360,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SetFilePath.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sign.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Sign.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Sign.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileManagement.ui">
@@ -500,6 +512,12 @@
     <CustomBuild Include="SetFilePath.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="Sign.h">
+      <Filter>Header Files\H_QTUI\Sign</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Sign.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_FileManagement.h">
@@ -573,6 +591,9 @@
     </ClInclude>
     <ClInclude Include="AccountInfo.h">
       <Filter>Header Files\H_QTUI\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Sign.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

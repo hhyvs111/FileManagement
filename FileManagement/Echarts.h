@@ -20,12 +20,13 @@ public:
 	explicit Echarts(QWidget *parent = 0);
 	~Echarts();
 	void onimportexcel();
+	BDChart *mChartManager;
 	public slots:
 	//void importexcel();
 	void choosefilepath();
 	void exportexcel();
 
-	BDChart *mChartManager;
+
 signals:
 	void signalTest(const QByteArray &message);
 private:
