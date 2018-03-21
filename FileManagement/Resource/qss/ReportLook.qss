@@ -1,0 +1,14 @@
+* {
+    font-family: Microsoft YaHei;
+}
+
+QTableView#tableView{  
+    color: rgb(0, 0, 0);   
+    background-color: rgb(20, 20, 20);  
+    alternate-background-color: rgb(200, 200, 200); /*行交替颜色*/  
+    selection-background-color: rgb(130, 190, 100); /*选中行背景颜色*/  
+}  
+  
+QTableView#tableView::item:!alternate:!selected{  
+    background-color: rgb(220, 220, 220);    /*交替行的另一颜色*/  
+}  

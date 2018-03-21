@@ -20,6 +20,11 @@ QToolButton:pressed {
         border: 1px solid rgb(11, 137, 234);
 }
 QToolButton:checked {
-		background-color: rgb(0, 255, 255);
+		-color: rgb(0, 255, 255);
         border: 1px solid rgb(11, 137, 234);
+}
+QLabel#titleLabel {
+background-image: url(:/Resource/title/gray1.jpg);
+
+
 }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>811</width>
-    <height>504</height>
+    <height>530</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,6 +54,17 @@
      </item>
      <item>
       <widget class="QToolButton" name="settingButton">
+       <property name="styleSheet">
+        <string notr="true">
+    border: 2px solid #8f8f91;
+    border-radius: 6px;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+    
+
+
+</string>
+       </property>
        <property name="text">
         <string>设置</string>
        </property>

@@ -45,6 +45,7 @@ MoneyManage::~MoneyManage()
 {
 	delete ui;
 }
+
 void MoneyManage::showToolTip(const QModelIndex &index) {
 	if (!index.isValid()) {
 		qDebug() << "Invalid index";
@@ -52,6 +53,7 @@ void MoneyManage::showToolTip(const QModelIndex &index) {
 	}
 	QToolTip::showText(QCursor::pos(), index.data().toString());
 }
+
 void MoneyManage::sendAccountLook(QString condition )
 {
 	QString data = "QueryAccount#" + condition;
@@ -67,7 +69,7 @@ void MoneyManage::showAccount()
 	qDebug() << "show account the data from client: " << data;
 	emit sendToCharts(data);
 	QStringList listNumber = data.split("$");
-	qDebug() << "adsadas" << listNumber[0].toInt();
+	//qDebug() << "adsadas" << listNumber[0].toInt();
 	
 	QList<AccountInfo> accountInfo;
 	for (int i = 1; i <= listNumber[0].toInt(); i++)

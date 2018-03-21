@@ -45,7 +45,7 @@ public:
     {
         if (ReportLook->objectName().isEmpty())
             ReportLook->setObjectName(QStringLiteral("ReportLook"));
-        ReportLook->resize(618, 449);
+        ReportLook->resize(626, 471);
         verticalLayout = new QVBoxLayout(ReportLook);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -98,6 +98,7 @@ public:
         sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy);
         tableView->setMinimumSize(QSize(600, 400));
+        tableView->setStyleSheet(QStringLiteral(""));
 
         verticalLayout->addWidget(tableView);
 

@@ -33,9 +33,27 @@ void TcpClient::connectServer()
 {
     tcpSocket->abort();   //取消已有的连接
 	tcpSocket->connectToHost(ip, port);
+	/*if (!tcpSocket->waitForConnected(100))
+		reConnectToServer();*/
 	connect(tcpSocket, SIGNAL(connected()), this, SLOT(displayError1()));
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessages()));
+	//connect(tcpSocket, SIGNAL(disconnect()), this, SLOT(reConnectServer()));
 }
+
+void TcpClient::reConnectToServer()
+{
+	tcpSocket->connectToHost(ip, port);
+	if (tcpSocket->waitForConnected(3000))
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("网络连接成功"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("网络连接失败,请联系管理员"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	
+}
+
 
 //void TcpClient::receiveSignalFromDown(QString msg)
 //{
@@ -52,7 +70,12 @@ void TcpClient::displayError1()
 void TcpClient::displayError(QAbstractSocket::SocketError)
 {
     qDebug()<<tcpSocket->errorString();   //输出出错信息
-	MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("网络连接失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+
+	if (!MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("网络连接失败!是否重连?"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL, true))
+	{
+
+		reConnectToServer();
+	}
 }
 
 
@@ -173,6 +196,17 @@ void TcpClient::readMessages()
 			emit sendDataToAccounting("account_T");
 		else
 			emit sendDataToAccounting("account_F");
+	}
+	else if (list[0] == "sign")
+	{
+		if (list[1] == "true")
+			emit sendDataToSign("sign_T");
+		else if (list[1] == "notInLab")
+			emit sendDataToSign("notInLab");
+		else if (list[1] == "repeat")
+			emit sendDataToSign("repeat");
+		else
+			emit sendDataToSign("sign_F");
 	}
 
     else

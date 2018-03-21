@@ -63,6 +63,8 @@ void  DownloadWindow::initModel()
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Fixed);
 	ui->downloadTable->horizontalHeader()->setSectionResizeMode(5, QHeaderView::Fixed);
+	ui->downloadTable->setAlternatingRowColors(true);//设置换行改变颜色
+	
 }
 
 //初始化界面

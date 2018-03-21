@@ -1,7 +1,9 @@
 #include "UserInformation.h"
+#include "MyMessageBox.h"
 #include "ui_UserInformation.h"
 #include <QIcon>
 #include <QPixmap>
+#include "Sign.h"
 
 
 UserInformation::UserInformation(QWidget *parent) :
@@ -30,9 +32,9 @@ UserInformation::UserInformation(QWidget *parent) :
        ui->QQlineEdit->setStyleSheet("border-style:outset");
        ui->addressLineEdit->setStyleSheet("border-style:outset");
 
-   //    this->setStyleSheet("background:gray");
-   //    name = "abc";
-   //    ui->nameLineEdit->setText(name);
+	   connect(ui->SignButton, SIGNAL(clicked()), this, SLOT(sendSignToServer()));
+	   connect(ui->LookSignButton, SIGNAL(clicked()), this, SLOT(showSignList()));
+	   connect(tcp, SIGNAL(sendDataToSign(QString)), this, SLOT(receiveDataFromClient(QString)));
 
 }
 
@@ -175,4 +177,42 @@ void UserInformation::showUserInfo()
 	//用完后把连接断开
 	connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
 	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showUserInfo()));
+}
+
+void UserInformation::sendSignToServer()
+{
+	QString data = "InsertSign#" + globalUserName;
+	QByteArray datasend = data.toUtf8();
+	qDebug() << datasend;
+	tcp->tcpSocket->write(datasend);
+
+
+}
+
+void UserInformation::showSignList()
+{
+	Sign *sign = new Sign(this);
+	ui->SignLayout->addWidget(sign);
+	sign->show();
+}
+
+void UserInformation::receiveDataFromClient(QString data)
+{
+	if (QString::compare(data, "sign_T") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("签到成功!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+
+	}
+	else if (QString::compare(data, "repeat") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("今天已经签到,请勿重复签到!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else if (QString::compare(data, "notInLab") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("请回实验室签到!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
+	else if (QString::compare(data, "sign_F") == 0)
+	{
+		MyMessageBox::showMyMessageBox(NULL, QString::fromUtf8("提示"), QString::fromUtf8("签到失败!"), MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+	}
 }
