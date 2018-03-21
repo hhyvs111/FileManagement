@@ -7,6 +7,7 @@
 #include <QMap>
 #include <QFile>
 #include <QMenu>
+#include <QProgressBar>
 #include "FileInfo.h"
 #include "DownloadThread.h"
 extern TcpClient * tcp;

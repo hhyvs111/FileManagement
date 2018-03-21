@@ -46,10 +46,10 @@ void  DownloadWindow::initModel()
 	ui->downloadTable->setModel(model);
 	ui->downloadTable->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 	ui->downloadTable->setColumnWidth(0, 30);
-	ui->downloadTable->setColumnWidth(1, 240);
-	ui->downloadTable->setColumnWidth(2, 70);
-	ui->downloadTable->setColumnWidth(3, 110);
-	ui->downloadTable->setColumnWidth(4, 70);
+	ui->downloadTable->setColumnWidth(1, 280);
+	ui->downloadTable->setColumnWidth(2, 100);
+	ui->downloadTable->setColumnWidth(3, 200);
+	ui->downloadTable->setColumnWidth(4, 80);
 	ui->downloadTable->setColumnWidth(5, 40);
 	ui->downloadTable->setColumnWidth(6, 40);
 
@@ -522,6 +522,7 @@ void DownloadWindow::ClickFindButton()
 void DownloadWindow::setFilePath()
 {
 	SetFilePath *setPath = new SetFilePath(this);
+	setPath->move(150, 150);
 	setPath->show();
 	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
 }

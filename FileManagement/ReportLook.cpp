@@ -70,12 +70,12 @@ void ReportLook::initModel()
 	ui->tableView->setModel(model);
 	ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 	ui->tableView->setColumnWidth(0, 30);
-	ui->tableView->setColumnWidth(1, 80);
-	ui->tableView->setColumnWidth(2, 50);
-	ui->tableView->setColumnWidth(3, 30);
-	ui->tableView->setColumnWidth(4, 120);
-	ui->tableView->setColumnWidth(5, 120);
-	ui->tableView->setColumnWidth(6, 50);
+	ui->tableView->setColumnWidth(1, 100);
+	ui->tableView->setColumnWidth(2, 80);
+	ui->tableView->setColumnWidth(3, 50);
+	ui->tableView->setColumnWidth(4, 220);
+	ui->tableView->setColumnWidth(5, 150);
+	ui->tableView->setColumnWidth(6, 80);
 	ui->tableView->setColumnWidth(7, 40);
 	ui->tableView->setColumnWidth(8, 40);
 
@@ -248,7 +248,7 @@ void ReportLook::showReportList()
 		//ui->downloadTable->setIndexWidget(model->index(model->rowCount() - 1, 0), fIcon);
 
 		//设置数据居中
-		for (int j = 2;j < 7;j++)
+		for (int j = 1;j < 7;j++)
 			model->item(i, j)->setTextAlignment(Qt::AlignCenter);
 	}
 	//m_model->setData(data);

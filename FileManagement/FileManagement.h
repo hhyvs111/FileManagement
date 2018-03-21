@@ -59,6 +59,13 @@ private slots:
 
 
 	void receiveLogin();
+
+	void sendSignToServer();
+	void showSignList();
+	void receiveDataFromClient(QString data);
+
+	void showMySign();
+
 signals:
 	void showUploadFile();
 	void showLogin();

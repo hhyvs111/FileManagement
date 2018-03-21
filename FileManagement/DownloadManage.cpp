@@ -54,11 +54,11 @@ void DownloadManage::initModel()
 	ui->tableView->setModel(model);
 	ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 	ui->tableView->setColumnWidth(0, 30);
-	ui->tableView->setColumnWidth(1, 240);
-	ui->tableView->setColumnWidth(2, 70);
-	ui->tableView->setColumnWidth(3, 110);
-	ui->tableView->setColumnWidth(4, 70);
-	ui->tableView->setColumnWidth(5, 60);
+	ui->tableView->setColumnWidth(1, 280);
+	ui->tableView->setColumnWidth(2, 100);
+	ui->tableView->setColumnWidth(3, 200);
+	ui->tableView->setColumnWidth(4, 100);
+	ui->tableView->setColumnWidth(5, 80);
 	ui->tableView->setColumnWidth(6, 40);
 	ui->tableView->setColumnWidth(7, 40);
 

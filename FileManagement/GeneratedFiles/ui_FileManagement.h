@@ -16,6 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
@@ -29,6 +30,11 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *TitleLayout;
     QLabel *titleLabel;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *LookSignButton;
+    QPushButton *LookMySignButton;
+    QPushButton *SignButton;
+    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *FunctionLayout;
     QWidget *ToolButtonWidget;
     QVBoxLayout *ToolButtonLayout;
@@ -75,6 +81,44 @@ public:
         titleLabel->setStyleSheet(QStringLiteral(""));
 
         TitleLayout->addWidget(titleLabel);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        TitleLayout->addItem(horizontalSpacer);
+
+        LookSignButton = new QPushButton(FileManagement);
+        LookSignButton->setObjectName(QStringLiteral("LookSignButton"));
+        LookSignButton->setStyleSheet(QLatin1String(" background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
+
+        TitleLayout->addWidget(LookSignButton);
+
+        LookMySignButton = new QPushButton(FileManagement);
+        LookMySignButton->setObjectName(QStringLiteral("LookMySignButton"));
+        LookMySignButton->setStyleSheet(QLatin1String(" background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
+
+        TitleLayout->addWidget(LookMySignButton);
+
+        SignButton = new QPushButton(FileManagement);
+        SignButton->setObjectName(QStringLiteral("SignButton"));
+        SignButton->setStyleSheet(QLatin1String(" background:transparent;\n"
+"border:1px solid rgb(89, 153, 48);\n"
+"border-radius:10px;\n"
+"padding:10px 12px;\n"
+"color: blue;"));
+
+        TitleLayout->addWidget(SignButton);
+
+        horizontalSpacer_2 = new QSpacerItem(60, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        TitleLayout->addItem(horizontalSpacer_2);
 
 
         verticalLayout->addLayout(TitleLayout);
@@ -238,7 +282,10 @@ public:
     void retranslateUi(QWidget *FileManagement)
     {
         FileManagement->setWindowTitle(QApplication::translate("FileManagement", "Form", Q_NULLPTR));
-        titleLabel->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\"> \346\254\242\350\277\216\346\235\245\345\210\260\345\256\236\351\252\214\345\256\244\346\226\207\346\241\243\347\256\241\347\220\206\347\263\273\347\273\237</span></p></body></html>", Q_NULLPTR));
+        titleLabel->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\254\242\350\277\216\346\235\245\345\210\260\345\256\236\351\252\214\345\256\244\347\256\241\347\220\206\347\263\273\347\273\237</span></p></body></html>", Q_NULLPTR));
+        LookSignButton->setText(QApplication::translate("FileManagement", "\346\237\245\347\234\213\347\255\276\345\210\260", Q_NULLPTR));
+        LookMySignButton->setText(QApplication::translate("FileManagement", "\346\237\245\347\234\213\346\210\221\347\232\204\347\255\276\345\210\260", Q_NULLPTR));
+        SignButton->setText(QApplication::translate("FileManagement", "\347\202\271\345\207\273\347\255\276\345\210\260", Q_NULLPTR));
         label_3->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\346\210\221\347\232\204</span></p></body></html>", Q_NULLPTR));
         personButton->setText(QApplication::translate("FileManagement", "...", Q_NULLPTR));
         label_4->setText(QApplication::translate("FileManagement", "<html><head/><body><p><span style=\" font-size:14pt;\">\350\264\242\345\212\241</span></p></body></html>", Q_NULLPTR));

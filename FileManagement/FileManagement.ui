@@ -49,9 +49,80 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt; 欢迎来到实验室文档管理系统&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;欢迎来到实验室管理系统&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="LookSignButton">
+       <property name="styleSheet">
+        <string notr="true"> background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+       </property>
+       <property name="text">
+        <string>查看签到</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="LookMySignButton">
+       <property name="styleSheet">
+        <string notr="true"> background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+       </property>
+       <property name="text">
+        <string>查看我的签到</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="SignButton">
+       <property name="styleSheet">
+        <string notr="true"> background:transparent;
+border:1px solid rgb(89, 153, 48);
+border-radius:10px;
+padding:10px 12px;
+color: blue;</string>
+       </property>
+       <property name="text">
+        <string>点击签到</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>60</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
