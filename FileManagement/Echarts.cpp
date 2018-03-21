@@ -190,7 +190,7 @@ void Echarts::export_excel()
 
 		//…Ë÷√±ÍÃ‚
 		
-		int cellrow = accountInfo.size();
+		int cellrow =1;
 		qDebug() << accountInfo.size();
 
 
