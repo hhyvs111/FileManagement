@@ -39,6 +39,7 @@ void MoneyManage::initModel()
 	ui->tableView->setColumnWidth(2, 100);
 	ui->tableView->setColumnWidth(3, 150);
 	ui->tableView->setColumnWidth(4, 50);
+	ui->tableView->setAlternatingRowColors(true);//设置换行改变颜色
 }
 
 MoneyManage::~MoneyManage()
@@ -64,6 +65,7 @@ void MoneyManage::sendAccountLook(QString condition )
 
 void MoneyManage::showAccount()
 {
+	initModel();
 	QByteArray dataread = tcp->tcpSocket->readAll();
 	QString data = QString::fromUtf8(dataread);
 	qDebug() << "show account the data from client: " << data;
@@ -88,7 +90,7 @@ void MoneyManage::showAccount()
 	qDebug() << "test";
 
 	ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
+	QModelIndex vIndex;
 	for (int i = 0; i < listNumber[0].toInt() ; i++)
 	{
 		//设置前四列的数据
@@ -97,7 +99,20 @@ void MoneyManage::showAccount()
 		model->setItem(i, 2, new QStandardItem(accountInfo.at(i).time));
 		model->setItem(i, 3, new QStandardItem(accountInfo.at(i).remark));
 		model->setItem(i, 4, new QStandardItem(accountInfo.at(i).name));
+		if (accountInfo.at(i).money > 0)
+		{
+			
+			vIndex = model->index(i, 1);
+			model->setData(vIndex, QBrush(Qt::green), Qt::ForegroundRole);
+		}
+		else
+		{
+			vIndex = model->index(i, 1);
+			model->setData(vIndex, QBrush(Qt::red), Qt::ForegroundRole);
+		}
 	}
+	
+	
 	connect(tcp->tcpSocket, SIGNAL(readyRead()), tcp, SLOT(readMessages()));
 	disconnect(tcp->tcpSocket, SIGNAL(readyRead()), this, SLOT(showAccount()));
 }

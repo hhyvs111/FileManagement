@@ -52,7 +52,7 @@ void BDChart::slot1(QString  data)
 		{	
 			sum2 = sum2 + accountInfo.at(i).money;
 		}
-		else
+		if(accountInfo.at(i).type == "salary")
 		{
 			sum3 = sum3 + accountInfo.at(i).money;
 		}
