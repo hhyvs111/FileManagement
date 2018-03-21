@@ -49,7 +49,7 @@ public:
     {
         if (DownloadWindow->objectName().isEmpty())
             DownloadWindow->setObjectName(QStringLiteral("DownloadWindow"));
-        DownloadWindow->resize(811, 537);
+        DownloadWindow->resize(811, 530);
         verticalLayout = new QVBoxLayout(DownloadWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();

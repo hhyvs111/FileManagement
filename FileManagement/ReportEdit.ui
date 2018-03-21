@@ -450,7 +450,8 @@ focus background-color: rgb(255,255,255)；
      <item>
       <widget class="QLabel" name="LYourGet">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255);</string>
+        <string notr="true">background-color: rgb(85, 170, 255);
+</string>
        </property>
        <property name="text">
         <string> 学习心得与体会</string>

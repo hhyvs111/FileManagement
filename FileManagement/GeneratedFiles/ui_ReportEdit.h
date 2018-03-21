@@ -263,7 +263,8 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         LYourGet = new QLabel(ReportEdit);
         LYourGet->setObjectName(QStringLiteral("LYourGet"));
-        LYourGet->setStyleSheet(QStringLiteral("background-color: rgb(85, 170, 255);"));
+        LYourGet->setStyleSheet(QLatin1String("background-color: rgb(85, 170, 255);\n"
+""));
 
         verticalLayout_3->addWidget(LYourGet);
 

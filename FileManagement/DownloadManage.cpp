@@ -243,7 +243,7 @@ void DownloadManage::insertDownloadRecord(QString m_FileName, QString m_FilePath
 	setFileIcon(m_FileName);
 
 	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 0), mFileIcon);
-
+	ui->tableView->setAlternatingRowColors(true);//设置换行改变颜色
 
 	//实现图标和文件名在同一格放在第二列
 	//IconName = new QWidget();
