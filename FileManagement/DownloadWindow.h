@@ -58,7 +58,7 @@ private:
 	QString saveFileName;   //这个是路径，只是路径没有文件名
 	QString openFileName;  //点击按钮所得的下载名
 
-	QString filePath;
+	QString filePath = "files/";
 
 
 	

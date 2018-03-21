@@ -8,6 +8,7 @@ SetFilePath::SetFilePath(QWidget *parent) :
 	ui(new Ui::SetFilePath)
 {
 	ui->setupUi(this);
+	ui->filePathLine->setText(filePath);
 }
 
 
