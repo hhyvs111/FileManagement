@@ -23,6 +23,7 @@ public:
 
 signals:
 	void sendToCharts(QString);
+	void sendToexcel(QString);
 private:
 	Ui::MoneyManage *ui;
 	QStandardItemModel *model;

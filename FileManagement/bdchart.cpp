@@ -61,7 +61,7 @@ void BDChart::slot1(QString  data)
 
 
 	QJsonArray array;
-	array.insert(0, QJsonValue(QString("²ÄÁÏ")));
+	array.insert(0, QJsonValue(QString("daily")));
 	array.insert(1, QJsonValue(QString("office")));
 	array.insert(2, QJsonValue(QString("funds")));
 	array.insert(3, QJsonValue(QString("salary")));
