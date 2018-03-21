@@ -208,7 +208,7 @@ void Echarts::export_excel()
 		cellD->dynamicCall("SetValue(const QVariant&)", QVariant("remark"));
 		cellrow++;
 
-		int rows = 10;
+		int rows = accountInfo.size();
 		for (int i = 0; i<rows; i++) {
 			QString A = "A" + QString::number(cellrow);//设置要操作的单元格，如A1
 			QString B = "B" + QString::number(cellrow);
@@ -232,5 +232,6 @@ void Echarts::export_excel()
 		delete excel;
 		excel = NULL;
 	}
+	
 	
 }
