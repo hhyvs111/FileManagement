@@ -69,6 +69,7 @@ Echarts::~Echarts()
 //	//int intCols = columns->property("Count").toInt();
 //	//int intRows = rows->property("Count").toInt();
 //
+
 //	//for (int i = intRowStart; i < intRowStart + intRows; i++) //行 
 //	//{
 //	//	for (int j = intColStart; j < intColStart + intCols; j++) //列
@@ -116,6 +117,7 @@ Echarts::~Echarts()
 //	//excel->dynamicCall("Quit (void)");
 //	delete excel;//一定要记得删除，要不线程中会一直打开excel.exe
 //}
+
 
 void Echarts::choosefilepath() //选择文件路径
 {

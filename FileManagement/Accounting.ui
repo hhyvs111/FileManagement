@@ -99,12 +99,12 @@
            </property>
            <item>
             <property name="text">
-             <string>日常用品</string>
+             <string>daily</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>办公用品</string>
+             <string>office</string>
             </property>
            </item>
           </widget>
@@ -427,12 +427,12 @@
            </property>
            <item>
             <property name="text">
-             <string>项目经费</string>
+             <string>funds</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>个人所交</string>
+             <string>salary</string>
             </property>
            </item>
           </widget>

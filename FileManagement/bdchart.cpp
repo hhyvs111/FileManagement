@@ -3,14 +3,39 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include "AccountInfo.h"
 
 BDChart::BDChart(QObject *parent) : QObject(parent)
 {
 
 }
 
-void BDChart::slot1()
+void BDChart::slot1(QString  data)
 {
+
+	QStringList listNumber = data.split("$");
+	qDebug() << "adsadas" << listNumber[0].toInt();
+	//插入数据到结构体
+	QList<AccountInfo> accountInfo;
+	for (int i = 1; i <= listNumber[0].toInt(); i++)
+	{
+		AccountInfo account;
+		QStringList accountList = listNumber[i].split("#");
+		qDebug() << accountList;
+		account.accountId = accountList[0].toInt();
+		account.money = accountList[1].toInt();
+		account.type = accountList[2];
+		account.time = accountList[3];
+		account.remark = accountList[4];
+		account.name = accountList[5];
+		accountInfo.append(account);
+	}
+	int sum;
+	for (int i = 0; i < accountInfo.size();i++)
+	{
+
+	}
+
 
 	QJsonArray array;
 	array.insert(0, QJsonValue(QString("materials")));

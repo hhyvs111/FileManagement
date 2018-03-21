@@ -15,7 +15,7 @@ signals:
 
 	public slots:
 	void slotTest();
-	void slot1();
+	void slot1(QString);
 	void slotBack();
 };
 

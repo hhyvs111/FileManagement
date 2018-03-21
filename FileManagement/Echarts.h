@@ -24,6 +24,8 @@ public:
 	//void importexcel();
 	void choosefilepath();
 	void exportexcel();
+
+	BDChart *mChartManager;
 signals:
 	void signalTest(const QByteArray &message);
 private:
@@ -32,7 +34,7 @@ private:
 private:
 	Ui::Echarts *ui;
 	QWebEngineView *mWebView;
-	BDChart *mChartManager;
+	
 	WebSocketClientWrapper *mWebSocketClientWrapper;
 	QWebChannel *channel;
 	QWebSocketServer* mServer;

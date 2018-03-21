@@ -21,7 +21,8 @@ public:
 	void showAccount();
 	void showToolTip(const QModelIndex &index);
 
-	
+signals:
+	void sendToCharts(QString);
 private:
 	Ui::MoneyManage *ui;
 	QStandardItemModel *model;
