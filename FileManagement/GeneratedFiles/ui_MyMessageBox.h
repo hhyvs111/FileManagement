@@ -84,7 +84,7 @@ public:
         pButtonOk->setSizePolicy(sizePolicy1);
         pButtonOk->setMinimumSize(QSize(70, 20));
         pButtonOk->setMaximumSize(QSize(70, 30));
-
+        pButtonOk->setStyleSheet(QStringLiteral(""));
 
         horizontalLayout_2->addWidget(pButtonOk);
 
@@ -94,6 +94,7 @@ public:
         pButtonCancel->setSizePolicy(sizePolicy1);
         pButtonCancel->setMinimumSize(QSize(70, 20));
         pButtonCancel->setMaximumSize(QSize(70, 30));
+        pButtonCancel->setStyleSheet(QStringLiteral(""));
 
         horizontalLayout_2->addWidget(pButtonCancel);
 

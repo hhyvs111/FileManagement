@@ -89,6 +89,7 @@ void ReportLook::initModel()
 	ui->tableView->horizontalHeader()->setSectionResizeMode(6, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(7, QHeaderView::Fixed);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(8, QHeaderView::Fixed);
+	ui->tableView->setAlternatingRowColors(true);//设置换行改变颜色
 }
 
 //插入周数的选择
@@ -167,7 +168,7 @@ void ReportLook::showReportList()
 	QStringList listNumber = data.split("$");
 
 	QList<ReportInfo> reportInfo;
-	//在这里就要加入到表里去
+	//在这里就要加入到表里1
 	//把数据都放到QList里去！
 	//listNumber[0] 是文件个数
 	for (int i = 1;i <= listNumber[0].toInt();i++)
@@ -237,7 +238,7 @@ void ReportLook::showReportList()
 
 		ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 7), m_look);
 		ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 8), m_delete);
-
+		
 		//这里设置一下头像，暂时没有
 
 		//QIcon icon = fileIcon(fileInfo.at(i).fileType);

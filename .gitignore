@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /FileManagement/files
+/FileManagement/GeneratedFiles/ui_Outcome.h
+/FileManagement/GeneratedFiles/ui_Income.h
