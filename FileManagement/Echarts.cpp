@@ -16,6 +16,8 @@
 #include <QFileDialog>
 #include <ActiveQt/QAxBase>
 #include "previewpage.h"
+#include "AccountInfo.h"
+
 
 Echarts::Echarts(QWidget *parent) :
 	QWidget(parent),
@@ -39,6 +41,7 @@ Echarts::Echarts(QWidget *parent) :
 	//this->setCentralWidget(mWebView);
 	//this->resize(1000,600);
 	// connects();
+	
 	connect(ui->send, SIGNAL(clicked()), mChartManager, SLOT(slot1())); //槽函数与网页链接 
 }
 
@@ -52,7 +55,10 @@ Echarts::~Echarts()
 // connect(ui->actionSend, SIGNAL(triggered(bool)), mChartManager, SLOT(slotTest()));
 //}
 
-
+void Echarts::receiveDataFromMoney(QString data)
+{
+	dataToExcel = data;
+}
 void  Echarts::import_excel()
 {
 
@@ -148,70 +154,84 @@ void Echarts::choosefilepath() //选择文件路径
 //}
 void Echarts::export_excel()
 {
-	QAxObject excel("Excel.Application");
-	excel.setProperty("Visible", true);
-	QAxObject *work_books = excel.querySubObject("WorkBooks");
-	work_books->dynamicCall("Open(const QString&)", "E:\\test121.xlsx");
-	excel.setProperty("Caption", "Qt Excel");
-	QAxObject *work_book = excel.querySubObject("ActiveWorkBook");
-	QAxObject *work_sheets = work_book->querySubObject("Sheets");  //Sheets也可换用WorkSheets  
+	/*receiveDataFromMoney(QString data);*/
+	//QMessageBox::information(NULL, "Title", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+	
+	QStringList listNumber = dataToExcel.split("$");
+	QList<AccountInfo> accountInfo;		//容器中插入同样类型的结构体
+	for (int i = 1; i <= listNumber[0].toInt(); i++)
+	{
+		AccountInfo account;
+		QStringList accountList = listNumber[i].split("#");
+		qDebug() << accountList;
+		account.accountId = accountList[0].toInt();
+		account.money = accountList[1].toInt();
+		account.type = accountList[2];
+		account.time = accountList[3];
+		account.remark = accountList[4];
+		account.name = accountList[5];
+		accountInfo.append(account);
+	}
+	qDebug() << accountInfo.size()+121312;
+	QString filepath = QFileDialog::getSaveFileName(this, tr("Save orbit"), ".", tr("Microsoft Office 2007 (*.xlsx)"));//获取保存路径
+	if (!filepath.isEmpty()) {
+		QAxObject *excel = new QAxObject(this);
+		excel->setControl("Excel.Application");//连接Excel控件
+		excel->dynamicCall("SetVisible (bool Visible)", "false");//不显示窗体
+		excel->setProperty("DisplayAlerts", false);//不显示任何警告信息。如果为true那么在关闭是会出现类似“文件已修改，是否保存”的提示
 
-																   //删除工作表（删除第一个）  
-	QAxObject *first_sheet = work_sheets->querySubObject("Item(int)", 1);
-	first_sheet->dynamicCall("delete");
+		QAxObject *workbooks = excel->querySubObject("WorkBooks");//获取工作簿集合
+		workbooks->dynamicCall("Add");//新建一个工作簿
+		QAxObject *workbook = excel->querySubObject("ActiveWorkBook");//获取当前工作簿
+		QAxObject *worksheets = workbook->querySubObject("Sheets");//获取工作表集合
+		QAxObject *worksheet = worksheets->querySubObject("Item(int)", 1);//获取工作表集合的工作表1，即sheet1
 
-	//插入工作表（插入至最后一行）  
-	int sheet_count = work_sheets->property("Count").toInt();  //获取工作表数目  
-	QAxObject *last_sheet = work_sheets->querySubObject("Item(int)", sheet_count);
-	QAxObject *work_sheet = work_sheets->querySubObject("Add(QVariant)", last_sheet->asVariant());
-	last_sheet->dynamicCall("Move(QVariant)", work_sheet->asVariant());
+		QAxObject *cellA, *cellB, *cellC, *cellD;
 
-	work_sheet->setProperty("Name", "Qt Sheet");  //设置工作表名称  
+		//设置标题
+		
+		int cellrow = accountInfo.size();
+		qDebug() << accountInfo.size();
 
-												  //操作单元格（第2行第2列）  
-	QAxObject *cell = work_sheet->querySubObject("Cells(int,int)", 2, 2);
-	cell->setProperty("Value", "Java C++ C# PHP Perl Python Delphi Ruby");  //设置单元格值  
-	cell->setProperty("RowHeight", 50);  //设置单元格行高  
-	cell->setProperty("ColumnWidth", 30);  //设置单元格列宽  
-	cell->setProperty("HorizontalAlignment", -4108); //左对齐（xlLeft）：-4131  居中（xlCenter）：-4108  右对齐（xlRight）：-4152  
-	cell->setProperty("VerticalAlignment", -4108);  //上对齐（xlTop）-4160 居中（xlCenter）：-4108  下对齐（xlBottom）：-4107  
-	cell->setProperty("WrapText", true);  //内容过多，自动换行  
-										  //cell->dynamicCall("ClearContents()");  //清空单元格内容  
 
-	QAxObject* interior = cell->querySubObject("Interior");
-	interior->setProperty("Color", QColor(0, 255, 0));   //设置单元格背景色（绿色）  
+		QString A = "A" + QString::number(cellrow);//设置要操作的单元格，如A1
+		QString B = "B" + QString::number(cellrow);
+		QString C = "C" + QString::number(cellrow);
+		QString D = "D" + QString::number(cellrow);
+		cellA = worksheet->querySubObject("Range(QVariant, QVariant)", A);//获取单元格
+		cellB = worksheet->querySubObject("Range(QVariant, QVariant)", B);
+		cellC = worksheet->querySubObject("Range(QVariant, QVariant)", C);
+		cellD = worksheet->querySubObject("Range(QVariant, QVariant)", D);
+		cellA->dynamicCall("SetValue(const QVariant&)", QVariant("type"));//设置单元格的值
+		cellB->dynamicCall("SetValue(const QVariant&)", QVariant("money"));
+		cellC->dynamicCall("SetValue(const QVariant&)", QVariant("time"));
+		cellD->dynamicCall("SetValue(const QVariant&)", QVariant("remark"));
+		cellrow++;
 
-	QAxObject* border = cell->querySubObject("Borders");
-	border->setProperty("Color", QColor(0, 0, 255));   //设置单元格边框色（蓝色）  
-
-	QAxObject *font = cell->querySubObject("Font");  //获取单元格字体  
-	font->setProperty("Name", QStringLiteral("华文彩云"));  //设置单元格字体  
-	font->setProperty("Bold", true);  //设置单元格字体加粗  
-	font->setProperty("Size", 20);  //设置单元格字体大小  
-	font->setProperty("Italic", true);  //设置单元格字体斜体  
-	font->setProperty("Underline", 2);  //设置单元格下划线  
-	font->setProperty("Color", QColor(255, 0, 0));  //设置单元格字体颜色（红色）  
-
-													//设置单元格内容，并合并单元格（第5行第3列-第8行第5列）  
-	QAxObject *cell_5_6 = work_sheet->querySubObject("Cells(int,int)", 5, 3);
-	cell_5_6->setProperty("Value", "Java");  //设置单元格值  
-	QAxObject *cell_8_5 = work_sheet->querySubObject("Cells(int,int)", 8, 5);
-	cell_8_5->setProperty("Value", "C++");
-
-	QString merge_cell;
-	merge_cell.append(QChar(3 - 1 + 'A'));  //初始列  
-	merge_cell.append(QString::number(5));  //初始行  
-	merge_cell.append(":");
-	merge_cell.append(QChar(5 - 1 + 'A'));  //终止列  
-	merge_cell.append(QString::number(8));  //终止行  
-	QAxObject *merge_range = work_sheet->querySubObject("Range(const QString&)", merge_cell);
-	merge_range->setProperty("HorizontalAlignment", -4108);
-	merge_range->setProperty("VerticalAlignment", -4108);
-	merge_range->setProperty("WrapText", true);
-	merge_range->setProperty("MergeCells", true);  //合并单元格  
-												   //merge_range->setProperty("MergeCells", false);  //拆分单元格  
-
-												   //work_book->dynamicCall("Save()");  //保存文件（为了对比test与下面的test2文件，这里不做保存操作） work_book->dynamicCall("SaveAs(const QString&)", "E:\\test2.xlsx");  //另存为另一个文件   
-	work_book->dynamicCall("Close(Boolean)", false);  //关闭文件  
-	excel.dynamicCall("Quit(void)");  //退出  
+		int rows = accountInfo.size();
+		for (int i = 0; i<rows; i++) {
+			QString A = "A" + QString::number(cellrow);//设置要操作的单元格，如A1
+			QString B = "B" + QString::number(cellrow);
+			QString C = "C" + QString::number(cellrow);
+			QString D = "D" + QString::number(cellrow);
+			cellA = worksheet->querySubObject("Range(QVariant, QVariant)", A);//获取单元格
+			cellB = worksheet->querySubObject("Range(QVariant, QVariant)", B);
+			cellC = worksheet->querySubObject("Range(QVariant, QVariant)", C);
+			cellD = worksheet->querySubObject("Range(QVariant, QVariant)", D);
+			cellA->dynamicCall("SetValue(const QVariant&)", QVariant(accountInfo.at(i).type));//设置单元格的值
+			cellB->dynamicCall("SetValue(const QVariant&)", QVariant(accountInfo.at(i).money));
+			cellC->dynamicCall("SetValue(const QVariant&)", QVariant(accountInfo.at(i).time));
+			cellD->dynamicCall("SetValue(const QVariant&)", QVariant(accountInfo.at(i).remark));
+			qDebug() << accountInfo.at(i).type;
+			cellrow++;
+		}
+		
+		workbook->dynamicCall("SaveAs(const QString&)", QDir::toNativeSeparators(filepath));//保存至filepath，注意一定要用QDir::toNativeSeparators将路径中的"/"转换为"\"，不然一定保存不了。
+		workbook->dynamicCall("Close()");//关闭工作簿
+		excel->dynamicCall("Quit()");//关闭excel
+		delete excel;
+		excel = NULL;
+	}
+	
+	
 }

@@ -12,9 +12,11 @@ MoneyManage::MoneyManage(QWidget *parent) :
 	Echarts *echarts = new Echarts();
 	//发送数据到图表
 	connect(this, SIGNAL(sendToCharts(QString)), echarts->mChartManager, SLOT(slot1(QString)));
+	
+	connect(this, SIGNAL(sendToexcel(QString)), echarts, SLOT(receiveDataFromMoney(QString)));
+
 	ui->verticalLayout->addWidget(echarts);
-	connect(ui->tableView, SIGNAL(entered(QModelIndex)),
-		this, SLOT(showToolTip(QModelIndex)));
+	connect(ui->tableView, SIGNAL(entered(QModelIndex)),this, SLOT(showToolTip(QModelIndex)));
 }
 
 
@@ -70,6 +72,7 @@ void MoneyManage::showAccount()
 	QString data = QString::fromUtf8(dataread);
 	qDebug() << "show account the data from client: " << data;
 	emit sendToCharts(data);
+	emit sendToexcel(data);
 	QStringList listNumber = data.split("$");
 	//qDebug() << "adsadas" << listNumber[0].toInt();
 	

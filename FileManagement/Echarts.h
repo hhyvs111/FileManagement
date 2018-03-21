@@ -31,6 +31,7 @@ public slots:
 	//void exportexcel();
 	void import_excel();
 	void export_excel();
+	void receiveDataFromMoney(QString);
 
 signals:
 	void signalTest(const QByteArray &message);
@@ -44,6 +45,7 @@ private:
 	WebSocketClientWrapper *mWebSocketClientWrapper;
 	QWebChannel *channel;
 	QWebSocketServer* mServer;
+	QString dataToExcel;
 };
 
 #endif // Echarts_H
