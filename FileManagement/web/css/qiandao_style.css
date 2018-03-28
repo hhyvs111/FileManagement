@@ -1,4 +1,4 @@
-*{margin:0;padding:0}
+﻿*{margin:0;padding:0}
 li{list-style:none}
 img{vertical-align:top}
 /* 浠ヤ笂鍙悎骞� */
@@ -13,7 +13,7 @@ img{vertical-align:top}
 }
 .clear:after{clear:both;display:table;content:''}
 .qiandao-sprits {
-    background-image: url(:/web/images/qiandao_sprits.png);
+    background-image: url(..images/qiandao_sprits.png);
     background-repeat: no-repeat
 }
 .qiandao-tran{-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;-ms-transition:all .3s ease-out}
@@ -23,7 +23,7 @@ img{vertical-align:top}
     margin: 0 auto;
     width: 680px;
     height: 684px;
-    background-image: url(:/web/images/qiandao_con.jpg)
+    background-image: url(..images/qiandao_con.jpg)
 }
 .qiandao-left{float:left;padding:20px 42px 0 39px;width:603px}
 .qiandao-right{float:right;padding:0 20px;width:290px}
@@ -44,7 +44,7 @@ img{vertical-align:top}
         margin: 0 1px 1px 0;
         width: 85px;
         height: 85px;
-        background-image: url(:/web/images/qiandao_day.png);
+        background-image: url(..images/qiandao_day.png);
         background-position: 0 0
     }
 .qiandao-list li.date1{background-position:-430px 0}
@@ -86,7 +86,7 @@ img{vertical-align:top}
         display: none;
         width: 85px;
         height: 85px;
-        background: url(:/web/images/qiandao_icon.png) no-repeat center center
+        background: url(..images/qiandao_icon.png) no-repeat center center
     }
 .qiandao-list li.qiandao .qiandao-icon{display:block}
 .qiandao-layer{position:fixed;top:0;bottom:0;left:0;z-index:888;display:none;width:100%}

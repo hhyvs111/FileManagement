@@ -46,5 +46,6 @@
         <file>web/js/qiandao_js.js</file>
         <file>web/js/qwebchannel.js</file>
         <file>web/css/qiandao_style.css</file>
+        <file>Resource/Logo.png</file>
     </qresource>
 </RCC>

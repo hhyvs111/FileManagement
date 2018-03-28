@@ -1,6 +1,6 @@
-#ifndef OBJECT_H
-#define OBJECT_H
-
+#ifndef SIGNCALENDER_H_
+#define SIGNCALENDER_H_
+#include"stdafx.h"
 #include <QObject>
 #include <QStringList>
 

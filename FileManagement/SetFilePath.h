@@ -14,6 +14,7 @@ public:
 public slots:
 	void selectFilePath();
 	void ClickSaveButton();
+	void defaultPath();
 signals:
 	void sendFilePath(QString);
 
@@ -21,6 +22,7 @@ signals:
 private:
 	Ui::SetFilePath *ui;
 	QString filePath;
+	bool isDefualt = false;
 };
 
 #endif // !SETFILEPATH_H_

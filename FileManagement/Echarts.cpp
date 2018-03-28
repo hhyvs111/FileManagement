@@ -17,6 +17,7 @@
 #include <ActiveQt/QAxBase>
 #include "previewpage.h"
 #include "AccountInfo.h"
+#include "MyMessageBox.h"
 
 
 Echarts::Echarts(QWidget *parent) :
@@ -130,6 +131,9 @@ void  Echarts::import_excel()
 	//tcp->tcpSocket->write(outdata.toUtf8());
 	tcp->tcpSocket->write(indata.toUtf8());
 
+	MyMessageBox::showMyMessageBox(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("导入成功!"),
+		MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
+
 	workbook->dynamicCall("Close (Boolean)", false);
 	//同样，设置值，也用dynamimcCall("SetValue(const QVariant&)", QVariant(QString("Help!")))这样才成功的。。
 	//excel->dynamicCall("Quit (void)");
@@ -230,6 +234,8 @@ void Echarts::export_excel()
 		workbook->dynamicCall("Close()");//关闭工作簿
 		excel->dynamicCall("Quit()");//关闭excel
 		delete excel;
+		MyMessageBox::showMyMessageBox(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("导出成功!"),
+			MESSAGE_INFORMATION, BUTTON_OK_AND_CANCEL);
 		excel = NULL;
 	}
 	

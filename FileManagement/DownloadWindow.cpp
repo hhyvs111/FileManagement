@@ -522,9 +522,11 @@ void DownloadWindow::ClickFindButton()
 void DownloadWindow::setFilePath()
 {
 	SetFilePath *setPath = new SetFilePath(this);
+	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
+	setPath->defaultPath();
 	setPath->move(150, 150);
 	setPath->show();
-	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
+	
 }
 
 void DownloadWindow::receiveFilePath(QString mFilePath)

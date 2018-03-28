@@ -24,21 +24,8 @@ public:
 	~DownloadFile();
 	bool insertRecord();
 	bool updateRecord();
-	//发送查看该用户所上传文件的信息给服务器
-	//void sendFileInfo(QString condition = "all");
-	// 加载样式文件;
-	//void loadStyleSheet(const QString &sheetName);
-
-	//获取文件的图标
-	//QIcon fileIcon(const QString &extension) const;
-	//获取文件的类型？
-	//QString fileType(const QString &extension) const;
-
-	// 计算文件的大小，看情况返回MB或者KB
-	//QString countFileSize(QString);   
 
 private:
-	//Ui::DownloadFile *ui;
 	int index;  //序号
 	QTcpSocket *tcpSocket;   //连接服务器的socket
 	QTime downloadTime;
@@ -56,6 +43,7 @@ private:
 	qint64 byteReceived;  //已经接收的大小  ‘’
 
 	qint64 receiveStatus = -1;  //默认为继续发送
+
 	qint64 sumBlock;
 	qint64 breakPoint;
 	qint64 cbreakPoint;
@@ -79,7 +67,7 @@ private:
 private slots:
 
 	void receiveFile();  //从服务器下载文件到本地。
-	void receiveBreakFile();
+	//void receiveBreakFile();
 	void updateSpeed();
 	void stopReceive(int);
 	

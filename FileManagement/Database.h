@@ -19,6 +19,8 @@ public:
 	//≤Â»Î
 	static bool insertDB(const QString &Sql);
 
+	void createTable();
+
 	//static bool deleteDB()
 };
 

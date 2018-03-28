@@ -91,6 +91,7 @@ void DownloadManage::setMenuEvent()
 	connect(actionBegin, SIGNAL(triggered()), this, SLOT(CallKeepOnDownload()));
 	connect(actionOpenFile, SIGNAL(triggered()), this, SLOT(CallOpenFile()));
 	connect(actionOpenFolder, SIGNAL(triggered()), this, SLOT(CallOpenFolder()));
+	connect(actionDelete, SIGNAL(triggered()), this, SLOT(CallDelete()));
 	//QActionGroup *actionGroup = new QActionGroup(this);
 	//actionGroup->addAction(actionBegin);
 	//actionGroup->addAction(actionWait);
@@ -187,7 +188,32 @@ void DownloadManage::CallOpenFile()
 	QString fullFile = it.value().filePath + it.value().fileName;
 	QDesktopServices::openUrl(QUrl::fromLocalFile(fullFile));
 }
+void DownloadManage::CallDelete()
+{
+	QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
+	QModelIndexList indexsSelected = selectionModel->selectedIndexes();
+	QModelIndex indexSelected = indexsSelected.at(0);
+	QMap<int, BreakFile>::iterator it = breakFileMap->find(indexSelected.row());
 
+	if (!MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("确定要删除%1吗？").arg(it.value().fileName),
+		MESSAGE_QUESTION, BUTTON_OK_AND_CANCEL, true))
+	{
+		QString sql = "delete from downloadrecord where r_Id = " + QString::number(it.value().recordId) + ";";
+		if (Database::insertDB(sql))
+		{
+			MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("删除%1成功").arg(it.value().fileName),
+				MESSAGE_QUESTION, BUTTON_OK_AND_CANCEL);
+			initModel();
+			initMap();
+			
+		}
+		else
+		{
+			MyMessageBox::showMyMessageBox(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("删除%1失败").arg(it.value().fileName),
+				MESSAGE_QUESTION, BUTTON_OK_AND_CANCEL);
+		}
+	}
+}
 void DownloadManage::CallOpenFolder()
 {
 	QItemSelectionModel *selectionModel = ui->tableView->selectionModel();
@@ -277,6 +303,7 @@ void DownloadManage::insertDownloadRecord(QString m_FileName, QString m_FilePath
 	SizeLayout->setAlignment(mFileSize, Qt::AlignLeft);
 	sizeWidget->setLayout(SizeLayout);
 	fileSizeMap->insert(index, mFileSize);
+	//新建的
 	if (m_FileSize != "-1")
 		mFileSize->setText(m_FileSize);
 	ui->tableView->setIndexWidget(model->index(model->rowCount() - 1, 2), sizeWidget);
@@ -509,9 +536,14 @@ QString DownloadManage::checkRename(QString mFileName,QString mFilePath)
 			mFileName = fullName + "(" + QString::number(i, 10) + ")." + suffix;
 
 			qDebug() << "the fileName :" << mFileName;
+			existFile->close();
+
 		}
 		else
+		{
+			existFile->close();
 			break;
+		}
 	}
 	return mFileName;
 }

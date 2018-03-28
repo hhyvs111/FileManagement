@@ -351,9 +351,6 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_Echarts.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Echarts.cpp">
-      <Filter>Source Files\QTUI\Echarts</Filter>
-    </ClCompile>
     <ClCompile Include="SetFilePath.cpp">
       <Filter>Source Files\QTUI\File</Filter>
     </ClCompile>
@@ -378,13 +375,22 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_SignCalender.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="SignCalender.cpp">
-      <Filter>Source Files\QTUI\Sign</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SignShow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_SignShow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SignCalender.cpp">
+      <Filter>Source Files\QTUI\Sign</Filter>
+    </ClCompile>
+    <ClCompile Include="Echarts.cpp">
+      <Filter>Source Files\QTUI\Echarts</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SignCalender.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Echarts.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -755,5 +761,6 @@
     <Image Include="Resource\fileIcon\zip.png">
       <Filter>Resource\Icon</Filter>
     </Image>
+    <Image Include="Resource\Logo.ico" />
   </ItemGroup>
 </Project>

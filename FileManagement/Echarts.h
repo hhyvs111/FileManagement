@@ -1,10 +1,11 @@
 #ifndef Echarts_H
 #define Echarts_H
 
-#include"stdafx.h"
+
 #include <QWidget>
 #include<QHBoxLayout>
 #include "bdchart.h"
+#include"stdafx.h"
 extern TcpClient * tcp;    //全局变量，TCP 长连接
 extern QString globalUserName;
 
@@ -23,7 +24,7 @@ class Echarts : public QWidget
 public:
 	explicit Echarts(QWidget *parent = 0);
 	~Echarts();
-	void onimportexcel();
+	//void onimportexcel();
 	BDChart *mChartManager;
 public slots:
 	//void importexcel();
@@ -36,7 +37,7 @@ public slots:
 signals:
 	void signalTest(const QByteArray &message);
 private:
-	void connects();
+	//void connects();
 
 private:
 	Ui::Echarts *ui;

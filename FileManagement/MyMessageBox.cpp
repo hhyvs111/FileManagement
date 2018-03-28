@@ -163,6 +163,7 @@ int MyMessageBox::showMyMessageBox(QWidget* parent, const QString &title, const 
 	else
 	{
 		myMessageBox->show();
+		myMessageBox->raise();
 	}
 
 	return 0;

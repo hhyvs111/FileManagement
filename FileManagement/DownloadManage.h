@@ -89,6 +89,7 @@ private slots:
 	void CallKeepOnDownload();
 	void CallOpenFile();
 	void CallOpenFolder();
+	void CallDelete();
 	//void CallDelete();
 	void addBreakFile(int, qint64 recordId, int fileId,
 		QString fileName, QString filePath,

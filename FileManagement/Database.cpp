@@ -4,11 +4,14 @@
 
 Database::Database()
 {
+	
+
 	connDB();
 }
 
 void Database::connDB()
 {
+	qDebug() << QSqlDatabase::drivers();
 	QSqlDatabase database;
 	if (QSqlDatabase::contains("qt_sql_default_connection"))
 	{
@@ -29,11 +32,30 @@ void Database::connDB()
 	else
 	{
 		qDebug() << "database open success!";
+		createTable();
 		// do something
 	}
 }
 Database::~Database()
 {
+
+}
+
+void Database::createTable()
+{
+
+
+	QSqlQuery sql_query;
+	QString create_sql = "	CREATE TABLE DownloadRecord (r_Id  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,r_fileName  TEXT,r_filePath  TEXT,r_fileSize  TEXT,r_sumBlock  INTEGER,r_breakPoint  INTEGER,r_fileId  INTEGER); ";
+	sql_query.prepare(create_sql);
+	if (!sql_query.exec())
+	{
+		qDebug() << "Error: Fail to create table." << sql_query.lastError();
+	}
+	else
+	{
+		qDebug() << "Table created!";
+	}
 }
 
 QList<QStringList> Database::queryDB(const QString &Sql,int size)
@@ -65,6 +87,7 @@ QList<QStringList> Database::queryDB(const QString &Sql,int size)
 }
 bool Database::insertDB(const QString &Sql)
 {
+	qDebug() << Sql;
 	QSqlQuery insert;
 	insert.exec(Sql);
 	if (insert.isActive())
