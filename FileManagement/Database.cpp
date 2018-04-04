@@ -46,7 +46,7 @@ void Database::createTable()
 
 
 	QSqlQuery sql_query;
-	QString create_sql = "	CREATE TABLE DownloadRecord (r_Id  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,r_fileName  TEXT,r_filePath  TEXT,r_fileSize  TEXT,r_sumBlock  INTEGER,r_breakPoint  INTEGER,r_fileId  INTEGER); ";
+	QString create_sql = "CREATE TABLE DownloadRecord (r_Id  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,r_fileName  TEXT,r_filePath  TEXT,r_fileSize  TEXT,r_sumBlock  INTEGER,r_breakPoint  INTEGER,r_fileId  INTEGER); ";
 	sql_query.prepare(create_sql);
 	if (!sql_query.exec())
 	{

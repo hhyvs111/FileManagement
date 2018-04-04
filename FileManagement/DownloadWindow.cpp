@@ -16,7 +16,9 @@ DownloadWindow::DownloadWindow(QWidget *parent) :
 	initModel();
 	initWindow();
 	init();
-	
+	setPath = new SetFilePath(this);
+	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
+	setPath->defaultPath();
 	//从客户端处理得到的数据
 	connect(tcp, SIGNAL(sendDataToDownload(QString)), this, SLOT(receiveDataFromClient(QString)));
 }
@@ -521,12 +523,8 @@ void DownloadWindow::ClickFindButton()
 
 void DownloadWindow::setFilePath()
 {
-	SetFilePath *setPath = new SetFilePath(this);
-	connect(setPath, SIGNAL(sendFilePath(QString)), this, SLOT(receiveFilePath(QString)));
-	setPath->defaultPath();
 	setPath->move(150, 150);
 	setPath->show();
-	
 }
 
 void DownloadWindow::receiveFilePath(QString mFilePath)

@@ -168,6 +168,7 @@ void DownloadFile::receiveFile()
 				qDebug() << "stop receive!";
 				outBlock.clear();
 				out << receiveStatus<<sumBlock<<breakPoint;
+				newFile->close();
 				if (insertRecord())
 				{
 					qDebug() << "insert downloadRecord success!";
@@ -200,6 +201,7 @@ void DownloadFile::receiveFile()
 					qDebug() << "write fail!";
 					receiveStatus = -2;
 					outBlock.clear();
+					newFile->close();
 					qDebug() << "the status:" << receiveStatus << "the sumBlock:" << sumBlock << "the breakPoint:" << breakPoint;
 					out << receiveStatus << sumBlock << breakPoint;
 				}
@@ -270,8 +272,9 @@ void DownloadFile::countLeftTime(float mleftTime)
 
 
 //接收到停止发送的信号
-void DownloadFile::stopReceive(int)
+void DownloadFile::stopReceive(int num)
 {
+	if(num == index)
 	receiveStatus = receiveTime;
 }
 
@@ -287,7 +290,7 @@ bool DownloadFile::insertRecord()
 	if (insert.isActive())
 	{
 		qDebug() << sql;
-		//查询最新的downloadRecord记录
+		//查询最新的downloadRecord记录，把最新的发给下载管理并显示
 		QString sql1 = "select * from DownloadRecord order by r_Id desc limit 0,1";
 		QSqlQuery query;
 		query.exec(sql1);
@@ -301,10 +304,6 @@ bool DownloadFile::insertRecord()
 		breakFile.fileName = fileName;
 		breakFile.breakPoint = breakPoint;
 		breakFile.filePath = filePath;
-		////将这个breakFile传送过去
-		//qint64 recordId, int fileId,
-		//	QString fileName, QString filePath,
-		//	qint64 breakPoint
 		emit addToBreakFile(index, breakFile.recordId, breakFile.fileId,
 			breakFile.fileName, breakFile.filePath, breakFile.breakPoint);
 

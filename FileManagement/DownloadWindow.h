@@ -10,6 +10,7 @@
 #include "DownloadFile.h"
 #include "DownloadThread.h"
 #include "FileInfo.h"
+#include "SetFilePath.h"
 extern TcpClient * tcp;
 extern QString globalUserName;
 
@@ -59,6 +60,7 @@ private:
 	QString openFileName;  //点击按钮所得的下载名
 
 	QString filePath = "files/";
+	SetFilePath *setPath;
 
 
 	
