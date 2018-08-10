@@ -4,31 +4,110 @@
 
 TEMPLATE = app
 TARGET = FileManagement
-DESTDIR = ../x64/Debug
-QT += core sql script scripttools uitools widgets gui websockets
-CONFIG += debug
-DEFINES += _UNICODE WIN64 QT_DLL QT_SCRIPT_LIB QT_SCRIPTTOOLS_LIB QT_UITOOLS_LIB QT_WEBSOCKETS_LIB QT_WIDGETS_LIB QT_SQL_LIB
+DESTDIR = ../x64/Release
+QT += core sql network gui axserver axcontainer script scripttools uitools widgets webchannel websockets winextras webengine webenginewidgets
+CONFIG += release
+DEFINES += _UNICODE WIN64 QT_DLL QT_SCRIPT_LIB QT_SCRIPTTOOLS_LIB QT_UITOOLS_LIB QT_WEBSOCKETS_LIB QT_WIDGETS_LIB QT_NETWORK_LIB QT_WINEXTRAS_LIB QT_WEBENGINE_LIB QT_WEBENGINECORE_LIB QT_WEBENGINEWIDGETS_LIB QT_WEBCHANNEL_LIB QT_SQL_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
-    ./GeneratedFiles/Debug
+    ./GeneratedFiles/$(ConfigurationName)
 DEPENDPATH += .
-MOC_DIR += ./GeneratedFiles/debug
-OBJECTS_DIR += debug
+MOC_DIR += ./GeneratedFiles/$(ConfigurationName)
+OBJECTS_DIR += release
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-HEADERS += ./stdafx.h \
+win32:RC_FILE = FileManagement.rc
+HEADERS += ./Database.h \
+    ./resource.h \
+    ./stdafx.h \
+    ./tcpclient.h \
+    ./aes.h \
+    ./AesHelper.h \
+    ./TableModel.h \
+    ./BaseWindow.h \
+    ./ButtonDelegate.h \
+    ./MyMessageBox.h \
+    ./TitleBar.h \
+    ./FileInfo.h \
+    ./UploadThread.h \
+    ./UploadWindow.h \
+    ./DownloadFile.h \
+    ./DownloadManage.h \
+    ./DownloadWindow.h \
+    ./DownloadThread.h \
+    ./SetFilePath.h \
+    ./UploadFile.h \
+    ./Report.h \
+    ./ReportEdit.h \
+    ./ReportLook.h \
+    ./ReportDetail.h \
+    ./UserInformation.h \
     ./FileManagement.h \
     ./Login.h \
     ./Register.h \
-    ./User.h \
-    ./Database.h
-SOURCES += ./main.cpp \
+    ./AccountInfo.h \
+    ./Accounting.h \
+    ./MoneyManage.h \
+    ./websockettransport.h \
+    ./websocketclientwrapper.h \
+    ./bdchart.h \
+    ./Echarts.h \
+    ./previewpage.h \
+    ./SignCalender.h \
+    ./Sign.h \
+    ./SignShow.h
+SOURCES += ./Database.cpp \
+    ./main.cpp \
+    ./stdafx.cpp \
+    ./tcpclient.cpp \
+    ./BaseWindow.cpp \
+    ./ButtonDelegate.cpp \
+    ./MyMessageBox.cpp \
+    ./TableModel.cpp \
+    ./Taes.cpp \
+    ./TitleBar.cpp \
+    ./DownloadFile.cpp \
+    ./DownloadManage.cpp \
+    ./DownloadThread.cpp \
+    ./DownloadWindow.cpp \
+    ./SetFilePath.cpp \
+    ./UploadFile.cpp \
+    ./UploadThread.cpp \
+    ./UploadWindow.cpp \
+    ./ReportDetail.cpp \
+    ./ReportEdit.cpp \
+    ./ReportLook.cpp \
+    ./UserInformation.cpp \
     ./FileManagement.cpp \
     ./Login.cpp \
     ./Register.cpp \
-    ./User.cpp \
-    ./Database.cpp
+    ./Accounting.cpp \
+    ./MoneyManage.cpp \
+    ./bdchart.cpp \
+    ./Echarts.cpp \
+    ./previewpage.cpp \
+    ./websocketclientwrapper.cpp \
+    ./websockettransport.cpp \
+    ./Sign.cpp \
+    ./SignCalender.cpp \
+    ./SignShow.cpp
 FORMS += ./FileManagement.ui \
+    ./Register.ui \
+    ./MyMessageBox.ui \
+    ./DownloadWindow.ui \
+    ./DownlaodManage.ui \
+    ./Accounting.ui \
+    ./Echarts.ui \
     ./Login.ui \
-    ./Register.ui
-RESOURCES += FileManagement.qrc
+    ./UploadWindow.ui \
+    ./UserInformation.ui \
+    ./ReportEdit.ui \
+    ./ReportLook.ui \
+    ./ReportDetail.ui \
+    ./MoneyManage.ui \
+    ./SetFilePath.ui \
+    ./Sign.ui \
+    ./SignShow.ui
+RESOURCES += FileManagement.qrc \
+    json.qrc \
+    web.qrc
