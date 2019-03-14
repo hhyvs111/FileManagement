@@ -1,7 +1,3 @@
----
-typora-root-url: ./images
----
-
 #   实验室管理系统
 
 > 本来之前是做一个文件管理系统，后面发展了很多功能就叫实验室管理系统了。
@@ -39,6 +35,34 @@ typora-root-url: ./images
 ![login](https://github.com/hhyvs111/FileManagement/blob/master/images/login.png)
 
 
+
+#### 注册界面
+支持正则表达式有效性检验。
+![rigitser](https://github.com/hhyvs111/FileManagement/blob/master/images/register.png)
+
+#### 上传文件界面
+支持拖拽文件直接上传
+![uplaod](https://github.com/hhyvs111/FileManagement/blob/master/images/upload.png)
+
+#### 查看文件界面
+查看服务上所存有的文件。
+![look](https://github.com/hhyvs111/FileManagement/blob/master/images/lookfile.png)
+
+#### 下载文件界面
+![download](https://github.com/hhyvs111/FileManagement/blob/master/images/download.png)
+
+
+#### 周报界面
+查看周报
+![1](https://github.com/hhyvs111/FileManagement/blob/master/images/lookweek.png)
+
+提交周报
+![2](https://github.com/hhyvs111/FileManagement/blob/master/images/writeweek.png)
+
+
+#### 财务管理界面
+支持导出Excel
+![3](https://github.com/hhyvs111/FileManagement/blob/master/images/money.png)
 
 
 
