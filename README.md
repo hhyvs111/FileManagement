@@ -1,3 +1,7 @@
+---
+typora-root-url: ./images
+---
+
 #   实验室管理系统
 
 > 本来之前是做一个文件管理系统，后面发展了很多功能就叫实验室管理系统了。
@@ -23,6 +27,18 @@
   本地通过简单的Base64加密存储密码，然后解密成密码再加密为MD5进行密码验证；
 
 - 待更新。
+
+
+
+## 展示
+
+#### 登录界面
+
+仿qq界面，动图实现。
+
+![login](https://github.com/hhyvs111/FileManagement/blob/master/images/login.png)
+
+
 
 
 
